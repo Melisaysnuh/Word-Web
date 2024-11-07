@@ -6,13 +6,34 @@ function App () {
   return (
     <>
       <div id='main-container'>
-        <nav id='navigation'><img src='../public/logo.svg' alt='logo' /></nav>
+        <nav id='navigation'><img src='/logo.svg' alt='logo' /></nav>
         <div id='subhead'>
           <div id='game-container' className='block'>
-            Here is the game container
+
+            <img id='spiderweb' src='/spiderweb.svg' />
+
+              <form id="letter-form" >
+                <input type='text' id='text-input'></input>
+                <div className='gameholder'>
+
+                <button id="pos1" className='hex-button'>1</button>
+                <button id="pos2" className='hex-button'>2</button>
+                <button id="pos3" className='hex-button'>3</button>
+                <button id="pos4" className='hex-button'>4</button>
+                <button id="pos5" className='hex-button'>5</button>
+                <button id="pos6" className='hex-button'>6</button>
+                <button id="pos7" className='hex-button'>7</button>
+    </div>
+              </form>
           </div>
           <div id='word-list-container' className='block'>
-            <div id='progress-bar-container'>prog bar
+            <div id='progress-bar-container'>
+              <svg id='spider' height="450" width="50">
+                <polyline className="dotted-line" points="20,8 20,58 20,108 20,158 20,208 20,258 20, 308 20, 358 20, 408" />
+                <marker id="circle-marker" markerWidth="6" markerHeight="6" refX="3" refY="3">
+                  <circle className="foreground" cx="3" cy="3" r="2" />
+                </marker>
+              </svg>
 
             </div>
             <div id='word-list'>
