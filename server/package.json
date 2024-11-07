@@ -1,20 +1,28 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx tsx --env-file=.env --watch  server.ts"
+    "start": "npx tsx --env-file=.env --watch  server.ts",
+    "this": "tsc && concurrently \"tsc -w\" \"nodemon services/dailyget.js\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^5.0.1"
+    "express": "^5.0.1",
+    "fs": "^0.0.1-security",
+    "tsc": "^2.0.4",
+    "typescript": "^5.6.3",
+    "word-list": "^4.1.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "@types/node": "^22.9.0"
+    "@types/node": "^22.9.0",
+    "concurrently": "^9.1.0",
+    "nodemon": "^3.1.7"
   }
 }
