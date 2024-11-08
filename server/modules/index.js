@@ -19,6 +19,7 @@ const daySchema = new Schema({
     id: String,
     centerLetter: String,
     pangrams: Array,
+    totalPoints: Number,
     letters: Array,
     validWords: Array
 });

@@ -1,9 +1,11 @@
 import fs from 'fs';
-import { Daylist } from '../Daylist';
+import { Daylist } from '../types/Daylist.js';
 import { count_length } from '../utilities/count_length.js';
-import { generateAnagrams } from './generate-anagrams.js';
-import { centerFilter } from './center-filter.js';
-import { pangrams } from './get-pangrams.js';
+import { generateAnagrams } from '../utilities/generate-anagrams.js';
+import { centerFilter } from '../utilities/center-filter.js';
+import { pangrams } from '../utilities/get-pangrams.js';
+import { calculatePoints } from '../utilities/calculate-score.js';
+import { calculateTotal } from '../utilities/calculate-total.js';
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 
 // FETCH WORD LISTS
@@ -119,15 +121,18 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                 const anagrams3 = await validWordArray(anagrams2);
                 if (anagrams3) {
                     const todaysPangrams = pangrams(anagrams3, letterArray);
-
+                    const anagramObjList = anagrams3.map((word) => {
+                        return calculatePoints(word, todaysPangrams)
+                    })
                     const now = new Date(Date.now());
-                    const today = `${now.getFullYear}_${now.getMonth()}_${now.getDay}`
+                    const today = `${now.getFullYear()}_${now.getMonth()}_${now.getDay()}`
                     return {
                         id: today,
                         centerLetter: center,
                         pangrams: todaysPangrams,
                         letters: uniqueArray,
-                        validWords: anagrams3,
+                        totalPoints: calculateTotal(anagramObjList),
+                        validWords: anagramObjList
                     }
                 }
 
