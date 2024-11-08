@@ -20,4 +20,3 @@ export async function checkWord(thisWord) {
         console.log('error fetching list from your db: ', e);
     }
 }
-checkWord('bluebell');
