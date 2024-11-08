@@ -1,7 +1,10 @@
 import fs from 'fs';
 import { count_length } from '../utilities/count_length.js';
+import { generateAnagrams } from './generate-anagrams.js';
+import { centerFilter } from './center-filter.js';
+import { pangrams } from './get-pangrams.js';
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
-// * step 1, FETCH WORD LISTS
+// FETCH WORD LISTS
 const wordListPath = await import('word-list').then(module => module.default);
 const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((word) => word.length >= 4);
 let longArray = mainWordArray.filter((word) => word.length >= 7);
@@ -28,7 +31,7 @@ async function validateWord(word) {
         throw e;
     }
 }
-// * STEP 2: GET RANDOM WORD
+// GET RANDOM WORD
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
 async function getRandomWord() {
     try {
@@ -45,13 +48,7 @@ async function getRandomWord() {
         console.log('error in getRandomWord: ', e);
     }
 }
-// * STEP 3 FETCH ANAGRAMS
-function generateAnagrams(word) {
-    const regex1 = new RegExp(`^[${word}]+$`);
-    const anagrams = mainWordArray.filter((word) => regex1.test(word));
-    return anagrams;
-}
-// * STEP 4 FIND CENTER LETTER FOR GAME (MOST COMMON)
+// FIND CENTER LETTER FOR GAME (MOST COMMON)
 async function getCenter(list, word) {
     try {
         let thisResult = {};
@@ -74,19 +71,6 @@ async function getCenter(list, word) {
         console.log('error in getting center letter: ', e);
     }
 }
-// * STEP 5 FILTER ALL WORDS THAT DON'T INCLUDE CENTER LETTER
-async function centerFilter(list, letter) {
-    try {
-        const finalAnagrams = list.filter((word) => {
-            return word.includes(letter);
-        });
-        return finalAnagrams;
-    }
-    catch (e) {
-        console.log('error in center-letter filter: ', e);
-    }
-}
-// * STEP 6: NOW WITH SMALLER ARRAY, CALL MERRIAM WEBSTER API AGAIN TO VALIDATE THE REST OF THE WORDS.
 async function validWordArray(list) {
     try {
         const validWords = [];
@@ -103,43 +87,31 @@ async function validWordArray(list) {
         console.log('error validating array: ', e);
     }
 }
-// TODO CHECK PANGRAMS
-async function pangrams(list, list2) {
-    const pangramWord = list2.join('');
-    const regex = new RegExp(`${pangramWord}+`);
-    const pangrams = list.filter((word) => regex.test(word));
-    return pangrams;
-}
-// TODO ADD SCORE
-// * CONSTRUCT OUR LIST AND EXPORT
+// *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor() {
     try {
         const word = await getRandomWord();
         if (word) {
             const letterArray = word.split('');
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
-            const anagrams = generateAnagrams(word);
+            const anagrams = generateAnagrams(word, mainWordArray);
             const center = await getCenter(anagrams, word);
             if (center) {
                 const index = uniqueArray.indexOf(center);
                 letterArray.slice(index, 1).push(center);
-                const anagrams2 = await centerFilter(anagrams, center);
-                if (anagrams2) {
-                    const anagrams3 = await validWordArray(anagrams2);
-                    if (anagrams3) {
-                        const todaysPangrams = await pangrams(anagrams3, letterArray);
-                        if (todaysPangrams) {
-                            const now = new Date(Date.now());
-                            const today = `${now.getFullYear}_${now.getMonth()}_${now.getDay}`;
-                            return {
-                                id: today,
-                                centerLetter: center,
-                                pangrams: todaysPangrams,
-                                letters: uniqueArray,
-                                validWords: anagrams3,
-                            };
-                        }
-                    }
+                const anagrams2 = centerFilter(anagrams, center);
+                const anagrams3 = await validWordArray(anagrams2);
+                if (anagrams3) {
+                    const todaysPangrams = pangrams(anagrams3, letterArray);
+                    const now = new Date(Date.now());
+                    const today = `${now.getFullYear}_${now.getMonth()}_${now.getDay}`;
+                    return {
+                        id: today,
+                        centerLetter: center,
+                        pangrams: todaysPangrams,
+                        letters: uniqueArray,
+                        validWords: anagrams3,
+                    };
                 }
             }
         }

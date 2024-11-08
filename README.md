@@ -4,16 +4,16 @@
 
  Word Web is a daily word game to find anagrams for a group of seven letters.
 
-**How to play:**
+*How to play:*
 Find English words with at least 4 letters that are anagrams. Each day will have at least 1 pangram, or word with all seven letters. All words in the list must have the center letter.
 
-**Scoring**
+*Scoring*
 Four-letter words are worth one point each, five-or-more-letter words are worth one point per letter. Any pangram is worth its letters + seven bonus points.
 
 
 
 
-## **to delete and to do**
+## *to delete and to do*
 
 ### To Do (as of Nov 8):
 
@@ -43,7 +43,7 @@ Four-letter words are worth one point each, five-or-more-letter words are worth 
 			 - clear form
 		 - If not, show error / clear form
 		 -
- - FIX: Not getting all pangrams
+ ~~- FIX: Not getting all pangrams~~
 
 
 
@@ -73,10 +73,10 @@ Users should see a new group of 7 letters each day, and should be able to enter 
 ### Tech stack
 
 
-**Front End**
+*Front End*
  - React
 
-**Back End**
+*Back End*
  - Express
  - MongoDB
  - cron
