@@ -17,8 +17,8 @@ Four-letter words are worth one point each, five-or-more-letter words are worth 
 
 ### To Do (as of Nov 8):
 
- - Add point calculation
- - Create / save session
+ ~~- Add point calculation~~
+
  - Word Check Service, Routing & Controllers, Module
 	 - Needs to receive post request with word in body
 		 - needs to check word against letters
@@ -42,7 +42,7 @@ Four-letter words are worth one point each, five-or-more-letter words are worth 
 			 - add word to guessed word list
 			 - clear form
 		 - If not, show error / clear form
-		 -
+ - Create / save session
  ~~- FIX: Not getting all pangrams~~
 
 

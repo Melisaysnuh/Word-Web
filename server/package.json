@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx tsx --env-file=.env --watch  server.ts",
-    "this": "tsc && concurrently \"tsc -w\" \"nodemon utilities/calculate-total.js\""
+    "this": "tsc && concurrently \"tsc -w\" \"nodemon modules/check-word.js\""
   },
   "keywords": [],
   "author": "",

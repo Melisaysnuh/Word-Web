@@ -1,5 +1,6 @@
 import { dayModel } from "./index.js"
 
+
 export async function fetchList () {
     try {
         const thisList = await dayModel.find();

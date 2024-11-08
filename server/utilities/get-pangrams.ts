@@ -1,6 +1,3 @@
-import { devMock } from "../utilities/devmock.js";
-
-
 export function pangrams (wordList: string[], letterList: string[]) {
     const reg1 = `(?=.*`;
     const reg2 = `)`;

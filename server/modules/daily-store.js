@@ -1,5 +1,5 @@
 import { dayModel } from './index.js';
-import { finalConstructor } from './daily-get.js';
+import { finalConstructor } from '../utilities/daylist-constructor.js';
 import { error } from 'console';
 import { CronJob } from 'cron';
 export const job = new CronJob('0 0 0 * * *', // cronTime

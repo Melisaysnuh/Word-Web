@@ -1,10 +1,10 @@
 import fs from 'fs';
-import { count_length } from '../utilities/count_length.js';
-import { generateAnagrams } from '../utilities/generate-anagrams.js';
-import { centerFilter } from '../utilities/center-filter.js';
-import { pangrams } from '../utilities/get-pangrams.js';
-import { calculatePoints } from '../utilities/calculate-score.js';
-import { calculateTotal } from '../utilities/calculate-total.js';
+import { count_length } from './count_length.js';
+import { generateAnagrams } from './generate-anagrams.js';
+import { centerFilter } from './center-filter.js';
+import { pangrams } from './get-pangrams.js';
+import { calculatePoints } from './calculate-score.js';
+import { calculateTotal } from './calculate-total.js';
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 // FETCH WORD LISTS
 const wordListPath = await import('word-list').then(module => module.default);
