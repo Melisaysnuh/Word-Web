@@ -1,9 +1,11 @@
 import { checkWord } from '../modules/check-word.js';
 import { Request, Response } from 'express';
-export async function submitWord (req: Request, res: Response) {
+
+export async function submitWordController (req: Request, res: Response) {
     console.log('in submitword function....')
     try {
-        const wordToCheck = req.body.word
+        const wordToCheck = req.body.word.toLowerCase();
+
 
         console.log('here is word to check: ', wordToCheck);
          const answer =  await checkWord(wordToCheck);

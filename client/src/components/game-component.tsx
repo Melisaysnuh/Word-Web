@@ -1,6 +1,6 @@
 import './game-component.css';
 import React, { useState, useEffect } from 'react';
-import { getDailyList } from '../services/api-client-service.tsx';
+import { getDailyLetters, checkWord } from '../services/api-client-service.tsx';
 
 
 function GameComponent () {
@@ -10,9 +10,9 @@ function GameComponent () {
 
     async function fetchDailyLetters () {
         try {
-            const letters = await getDailyList();
+            const letters = await getDailyLetters();
             if (letters) {
-                return letters.letters;
+                return letters;
             } else console.log('you are not yet fetching letters')
         }
         catch (e) {
@@ -47,8 +47,16 @@ function GameComponent () {
 
     }
     const handleShuffle = (event: React.MouseEvent<HTMLSpanElement>) => {
-       const shuffled = generateRandomIndices(dailyLetters);
+        event.preventDefault();
+        const shuffled = generateRandomIndices(dailyLetters);
        setDailyLetters(shuffled);
+    }
+
+    const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        const word = guess;
+        checkWord(word);
+        console.log('client sending ', word)
     }
    /*  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         return guess + event;
@@ -109,6 +117,7 @@ function GameComponent () {
                         </span>
                         <button key='submit'
                             className='other-button'
+                            onClick={handleSubmit}
                         >SUBMIT</button>
                   </div>
                 </form>

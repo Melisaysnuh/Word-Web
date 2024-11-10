@@ -1,19 +1,43 @@
 export const base_URL = 'http://localhost:3000'
 
-const fetchRequest = async (url: string) => {
-    try {
-        const res = await fetch(`${base_URL}${url}`)
-        if (res) {
 
+
+export const getDailyLetters = async () => {
+    try {
+        const res = await fetch(`${base_URL}/`)
+        if (res) {
             const data = await res.json();
-            console.log('here is what you fetched in api client', data)
-            return data;
+
+           return data.letters;
 
         }
+    }
+    catch (e) {
+        console.error('error getting your letters in api client', e)
 
-    } catch (err: unknown) {
-        console.log(`${err} while fetching /${url}`)
     }
 }
 
-export const getDailyList = () => fetchRequest('/')
+export const checkWord = async (word: string) => {
+    const wordObj = `{"word" : "${word}"}`
+    try {
+        console.log('parsed word', word)
+        const res = await fetch(`${base_URL}/submit`, {
+            method: 'POST',
+            body: wordObj,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+        if (res) {
+            const data = await res.json();
+            console.log('result from checkword in api client', data);
+            return data
+
+        }
+    }
+    catch (e) {
+        console.error('error checking word in api client. Error:', e)
+
+    }
+}

@@ -24,7 +24,8 @@ function WordListComponent () {
                     <ul>
                        {
                         guessedWords.map((word) => (
-                            <li>{word}</li>
+                            <li
+                            key={Math.floor(Math.random() * 1000)}>{word}</li>
                         )
 
                         )
