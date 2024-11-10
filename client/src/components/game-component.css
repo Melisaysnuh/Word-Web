@@ -19,7 +19,7 @@ margin-right: 15px;
   width: 100%;
   height: auto;
   z-index: 1;
-  opacity: 0.5;
+  opacity: 0.3;
 
 }
 
@@ -97,16 +97,40 @@ align-items: center;
 }
 
 #text-input {
-  width: 240px;
+  width: fit-content;
   height: 75px;
   text-align: center;
   z-index: 3;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-radius: 0;
-  border-color: orange;
+ border: 0;
+  font-family: 'Nunito';
+  font-weight:400;
+  font-size: 3.2rem;
+  background: none;
+  color: orange;
 
 
+
+}
+#button-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 70%;
+  z-index: 3;
+}
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+.other-button {
+  border-radius: 25px;
+  width: 80px;
+  border: 0;
+  font-family: 'NTR';
+  font-weight: 800;
+  font-size: 1rem;
 
 }

@@ -1,5 +1,5 @@
 import './game-component.css';
-import React, { useState, useEffect, ButtonHTMLAttributes } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getDailyList } from '../services/api-client-service.tsx';
 
 
@@ -34,12 +34,25 @@ function GameComponent () {
 
     };
     const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setGuess(event.target.value)
+        setGuess(event.target.value.toUpperCase())
     }
     const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault();
-        setGuess(`${guess}${event.target.value }`)
+        setGuess(`${guess}${event.target.value.toUpperCase() }`)
     }
+    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) =>{
+        event.preventDefault();
+
+         setGuess('');
+
+    }
+    const handleShuffle = (event: React.MouseEvent<HTMLSpanElement>) => {
+       const shuffled = generateRandomIndices(dailyLetters);
+       setDailyLetters(shuffled);
+    }
+   /*  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        return guess + event;
+    } */
 
 
 
@@ -85,6 +98,19 @@ function GameComponent () {
                             )
                         }
                     </div>
+                  <div id='button-holder'>
+                        <button key='clear'
+                            className='other-button'
+                            onClick={handleClear}
+                        >CLEAR</button>
+                        <span className="material-symbols-outlined"
+                        onClick={handleShuffle}>
+                            shuffle
+                        </span>
+                        <button key='submit'
+                            className='other-button'
+                        >SUBMIT</button>
+                  </div>
                 </form>
             </div>
 

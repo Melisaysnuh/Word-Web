@@ -1,14 +1,13 @@
-.block {
-  background: radial-gradient(#381d75, #180a37);
-  width: 500px;
-  height: 550px;
-  border-radius: 20px;
-}
+
 #word-list-container {
   display: flex;
   flex-direction: row;
   gap: 10px;
-  padding: 20px;
+  padding: 30px;
+   background: radial-gradient(#381d75, #180a37);
+  width: 500px;
+  height: 550px;
+  border-radius: 20px;
 }
 #progress-bar-container {
   position: relative;
@@ -37,6 +36,7 @@
   height: auto;
   display: flex;
   flex-direction: row;
+  margin-top: 20px;
 }
 ul {
     flex: 1 1 80px;
@@ -47,7 +47,10 @@ ul {
   word-wrap: break-word;
   column-count: 3;
   column-gap: 10px;
-  font-size: 14px;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  font-family: 'NTR';
   overflow: hidden;
+
 }
 
