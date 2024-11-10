@@ -28,7 +28,7 @@ Four-letter words are worth one point each, five-or-more-letter words are worth 
 		 - needs to save the word
 		 - OR needs to return error: "not in word list"
  - Front-end
-	 - Modularize front end
+~~- Modularize front end~~
 	 - Get letters and populate buttons
 	 - Implement shuffle function
  - Configure input

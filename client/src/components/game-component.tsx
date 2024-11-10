@@ -1,29 +1,63 @@
 import './game-component.css';
+import React, { useState, useEffect } from 'react';
 
 function GameComponent () {
+    const [dailyLetters, setDailyLetters] = useState<string[]>([]);
+
+
+    const generateRandomIndices = (letters: string[]) => {
+        const remainingLetters = letters.slice(1);
+        const shuffled = [letters[0]]
+
+
+        while (remainingLetters.length) {
+            const randomIndex = Math.floor(Math.random() * remainingLetters.length);
+            shuffled.push(remainingLetters.splice(randomIndex, 1)[0]);
+        }
+
+        return shuffled;
+    };
+
+    /*     const updateState = (list) => {
+            setDailyLetters((letters) => {
+                const todaysLetters = letters;
+               return todaysLetters;)
+                return newMovies;
+            });
+        };*/
+
+    useEffect(() => {
+        const letters = ['P', 'O', 'R', 'T', 'R', 'A', 'Y'];
+        const shuffled = generateRandomIndices(letters);
+        setDailyLetters(shuffled);
+    }, []);
 
 
     return (
         <>
 
-                    <div id='game-container' className='block'>
+            <div id='game-container' className='block'>
 
-                        <img id='spiderweb' src='/spiderweb.svg' />
+                <img id='spiderweb' src='/spiderweb.svg' />
 
-                        <form id="letter-form" >
-                            <input type='text' id='text-input'></input>
-                            <div className='gameholder'>
+                <form id="letter-form" >
+                    <input type='text' id='text-input'></input>
+                    <div className='gameholder'>
+                        {
+                            dailyLetters.map(
+                                (letter, index) => (
+                                    <button
+                                        key={index}
+                                        id={`pos${index + 1}`}
+                                        className='hex-button'
+                                    >{letter}</button>
+                                )
 
-                                <button id="pos1" className='hex-button'>1</button>
-                                <button id="pos2" className='hex-button'>2</button>
-                                <button id="pos3" className='hex-button'>3</button>
-                                <button id="pos4" className='hex-button'>4</button>
-                                <button id="pos5" className='hex-button'>5</button>
-                                <button id="pos6" className='hex-button'>6</button>
-                                <button id="pos7" className='hex-button'>7</button>
-                            </div>
-                        </form>
+                            )
+                        }
                     </div>
+                </form>
+            </div>
 
 
         </>
