@@ -3,7 +3,7 @@ export async function loadLetters(req, res) {
     try {
         const list = await fetchList();
         console.log('loadletter controller working!');
-        res.status(200).json(list);
+        console.log(list);
     }
     catch {
         console.error('controller error');

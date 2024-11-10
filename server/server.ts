@@ -2,13 +2,14 @@ import express from 'express';
 const app = express();
 import { loadLetters } from './controllers/load-letters.js';
 import { submitWord } from './controllers/submit-word.js';
+import cors from 'cors';
 
-//todo:
-/* import { submitWord } from './controllers/submit-word.js'; */
-// todo add cors
+
 
 const port = process.env.PORT || 3000;
 app.use(express.json())
+app.use(
+    cors());
 
 app.get("/", loadLetters);
 //todo

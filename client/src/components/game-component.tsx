@@ -1,35 +1,56 @@
 import './game-component.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ButtonHTMLAttributes } from 'react';
+import { getDailyList } from '../services/api-client-service.tsx';
+
 
 function GameComponent () {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
+    const [guess, setGuess] = useState('');
 
 
-    const generateRandomIndices = (letters: string[]) => {
+    async function fetchDailyLetters () {
+        try {
+            const letters = await getDailyList();
+            if (letters) {
+                return letters.letters;
+            } else console.log('you are not yet fetching letters')
+        }
+        catch (e) {
+            console.log('error in fetchDaily in game component:', e)
+        }
+    }
+
+
+    function generateRandomIndices (letters: string[]) {
+
         const remainingLetters = letters.slice(1);
         const shuffled = [letters[0]]
-
-
         while (remainingLetters.length) {
             const randomIndex = Math.floor(Math.random() * remainingLetters.length);
             shuffled.push(remainingLetters.splice(randomIndex, 1)[0]);
         }
 
         return shuffled;
-    };
 
-    /*     const updateState = (list) => {
-            setDailyLetters((letters) => {
-                const todaysLetters = letters;
-               return todaysLetters;)
-                return newMovies;
-            });
-        };*/
+    };
+    const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setGuess(event.target.value)
+    }
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
+        event.preventDefault();
+        setGuess(`${guess}${event.target.value }`)
+    }
+
+
 
     useEffect(() => {
-        const letters = ['P', 'O', 'R', 'T', 'R', 'A', 'Y'];
-        const shuffled = generateRandomIndices(letters);
-        setDailyLetters(shuffled);
+        async function fetchShuffle () {
+            const letters = await fetchDailyLetters();
+            const shuffled = generateRandomIndices(letters);
+            setDailyLetters(shuffled);
+            setGuess('');
+        }
+        fetchShuffle();
     }, []);
 
 
@@ -41,7 +62,13 @@ function GameComponent () {
                 <img id='spiderweb' src='/spiderweb.svg' />
 
                 <form id="letter-form" >
-                    <input type='text' id='text-input'></input>
+
+                    <input type='text'
+                        id='text-input'
+                        value={guess}
+                        onChange={handleTextInput}
+
+                    ></input>
                     <div className='gameholder'>
                         {
                             dailyLetters.map(
@@ -50,7 +77,9 @@ function GameComponent () {
                                         key={index}
                                         id={`pos${index + 1}`}
                                         className='hex-button'
-                                    >{letter}</button>
+                                        onClick={handleClick}
+                                        value={letter}
+                                    >{letter.toUpperCase()}</button>
                                 )
 
                             )
