@@ -1,0 +1,11 @@
+#navigation {
+  width: 100%;
+  margin-bottom: 30px;
+}
+#subhead {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+

@@ -19,12 +19,12 @@ Four-letter words are worth one point each, five-or-more-letter words are worth 
 
  ~~- Add point calculation~~
 
- - Word Check Service, Routing & Controllers, Module
+ - Word Check Service, ~~Routing & Controllers, Module~~
 	 - Needs to receive post request with word in body
-		 - needs to check word against letters
-		 - needs to return response:
-			 - word
-			 - points
+		~~- needs to check word against letters~~
+		 ~~- needs to return response:~~
+			 - ~~word~~
+			 - ~~points~~
 		 - needs to save the word
 		 - OR needs to return error: "not in word list"
  - Front-end
