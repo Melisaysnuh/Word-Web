@@ -18,9 +18,9 @@ async function storeDay() {
         console.log('error storing day', e);
     }
 }, null, // onComplete
-true, // start
-'Europe/Berlin' // timeZone
+false, 'Europe/Berlin' // timeZone
 );
+job.start();
 async function storeDayTest() {
     try {
         const result = await finalConstructor();
@@ -36,3 +36,4 @@ async function storeDayTest() {
         console.log('error storing day', e);
     }
 }
+storeDayTest();

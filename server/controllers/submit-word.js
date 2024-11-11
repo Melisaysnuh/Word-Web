@@ -1,14 +1,15 @@
 import { checkWord } from '../modules/check-word.js';
-export async function submitWord(req, res) {
+export async function submitWordController(req, res) {
     console.log('in submitword function....');
     try {
-        const wordToCheck = req.body.json();
+        const wordToCheck = req.body.word.toLowerCase();
         console.log('here is word to check: ', wordToCheck);
-        const answer = checkWord(wordToCheck);
-        console.log('here is the answer: ', answer);
+        const answer = await checkWord(wordToCheck);
+        console.log('answer: ', answer);
         res.status(200).json(answer);
     }
-    catch {
-        console.error('controller error');
+    catch (e) {
+        res.status(500).json({ error: 'internal server error in submit word controller' });
+        console.error('controller error: ', e);
     }
 }

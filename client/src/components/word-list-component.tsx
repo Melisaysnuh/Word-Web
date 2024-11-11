@@ -6,6 +6,10 @@ import { useState } from 'react';
 function WordListComponent () {
     const [guessedWords, setGuessedWords] = useState(['hello', 'goodbye', 'here', 'there', 'every', 'thing', 'is', 'progressing'])
 
+    function addToList(word: string) {
+        setGuessedWords([...guessedWords, word])
+    }
+addToList('hello again');
     return (
         <>
 

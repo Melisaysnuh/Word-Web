@@ -23,10 +23,10 @@ export const job = new CronJob(
         }
     },
     null, // onComplete
-    true, // start
+    false,
     'Europe/Berlin' // timeZone
 );
-
+job.start();
 
 async function storeDayTest () {
     try {

@@ -1,16 +1,26 @@
 import { dayModel } from "./index.js"
-import { mockData } from "../utilities/dev.js";
+import { CronJob } from 'cron';
+import moment from "moment";
 
-/* let cache: object | null = null; */
-let cache = mockData;
+let cache: object | null;
+
 // won't work as expectd in dev
+const job = new CronJob(
+    '0 0 0 * * *',
+function clearCache (){
+    cache = null;
+},
+null,
+false,
+    'Europe/Berlin' );
+    job.start();
+
 export async function fetchList () {
-    const now = new Date(Date.now());
-    const today = `${now.getFullYear()}_${now.getMonth()}_${now.getDay()}`
+    const now = moment().format('YYYY_MM_DD');
     try {
         if (!cache) {
             const precache = await dayModel.findOne({
-                id: today
+                id: now
             });
             if (precache) {
                 return precache;
@@ -19,7 +29,7 @@ export async function fetchList () {
                 return cache; */
             }
             else {
-                console.log('No data found for today:', today);
+                console.log('No data found for today:', now);
                 return null;
             }
 

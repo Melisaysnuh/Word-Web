@@ -6,12 +6,14 @@ import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
 import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
+import moment from 'moment';
+moment().format();
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 
 // FETCH WORD LISTS
 const wordListPath = await import('word-list').then(module => module.default);
 const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((word: string) => word.length >= 4);
-let longArray = mainWordArray.filter((word: string) => word.length >= 7);
+const longArray = mainWordArray.filter((word: string) => word.length >= 7);
 
 // // HELPER:  async function to validate word by checking it in merriam webster api
 const base_url = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
@@ -61,7 +63,7 @@ async function getRandomWord () {
 async function getCenter (list: string[], word: string) {
     try {
 
-        let thisResult: { [key: string]: number } = {};
+        const thisResult: { [key: string]: number } = {};
         const mainArray = word.split('');
 
         Array.from(new Set(mainArray)).forEach(letter => {
@@ -124,10 +126,11 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                     const anagramObjList = anagrams3.map((word) => {
                         return calculatePoints(word, todaysPangrams)
                     })
-                    const now = new Date(Date.now());
-                    const today = `${now.getFullYear()}_${now.getMonth()}_${now.getDay()}`
+                    const now =  moment().format('YYYY_MM_DD');
+                    console.log(now)
+
                     return {
-                        id: today,
+                        id: now,
                         centerLetter: center,
                         pangrams: todaysPangrams,
                         letters: uniqueArray,

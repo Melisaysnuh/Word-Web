@@ -8,7 +8,7 @@ export const getDailyLetters = async () => {
         if (res) {
             const data = await res.json();
 
-           return data.letters;
+           return data;
 
         }
     }

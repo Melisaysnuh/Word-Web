@@ -4,12 +4,10 @@ export async function checkWord(thisWord) {
     try {
         const res = await fetchList();
         if (res) {
-            res.validWords.map((obj) => {
-                if (obj.word === thisWord) {
-                    console.log(`here's your word!`, obj);
-                    return obj;
-                }
-            });
+            const response = res.validWords.find((obj) => obj.word === thisWord);
+            if (response)
+                console.log('response: ', response);
+            return response;
         }
         else {
             console.log(console.log(`couldn't find anything!`));
