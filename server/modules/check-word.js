@@ -2,15 +2,19 @@ import { fetchList } from "./fetch-list.js";
 // todo query DB //
 export async function checkWord(thisWord) {
     try {
-        const res = await fetchList();
-        if (res) {
-            const response = res.validWords.find((obj) => obj.word === thisWord);
-            if (response)
-                console.log('response: ', response);
-            return response;
+        console.log('in db checkword function...', thisWord);
+        const list = await fetchList();
+        if (list) {
+            const check = list.validWords.find((obj) => obj.word === thisWord);
+            if (!check) {
+                return {};
+            }
+            else
+                console.log('word found: ', check);
+            return check;
         }
         else {
-            console.log(console.log(`couldn't find anything!`));
+            console.log(console.log(`error fetching list!`));
             return false;
         }
     }
@@ -18,3 +22,4 @@ export async function checkWord(thisWord) {
         console.log('error fetching list from your db: ', e);
     }
 }
+checkWord('fish');

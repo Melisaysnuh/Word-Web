@@ -1,15 +1,14 @@
 import './word-list-component.css';
-import { useState } from 'react';
+import { WordListProps } from '../types/WordList';
+import { WordObj } from '../types/WordObj';
 
 
 
-function WordListComponent () {
-    const [guessedWords, setGuessedWords] = useState(['hello', 'goodbye', 'here', 'there', 'every', 'thing', 'is', 'progressing'])
 
-    function addToList(word: string) {
-        setGuessedWords([...guessedWords, word])
-    }
-addToList('hello again');
+function WordListComponent ({ guessedWords }: WordListProps) {
+
+
+
     return (
         <>
 
@@ -26,15 +25,13 @@ addToList('hello again');
                 <div id='word-list'>
 
                     <ul>
-                       {
-                        guessedWords.map((word) => (
-                            <li
-                            key={Math.floor(Math.random() * 1000)}>{word}</li>
-                        )
-
-                        )
-
-                       }
+                        {guessedWords && guessedWords.length > 0 ? (
+                            guessedWords.map((obj: WordObj) => (
+                                <li key={obj.word}>{obj.word}</li>
+                            ))
+                        ) : (
+                            <li> </li>
+  )}
                     </ul>
 
                 </div>

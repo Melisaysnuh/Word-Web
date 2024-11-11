@@ -7,9 +7,10 @@ import cors from 'cors';
 
 
 const port = process.env.PORT || 3000;
-app.use(express.json())
 app.use(
     cors());
+app.use(express.json())
+
 
 app.get("/", loadLetters);
 //todo

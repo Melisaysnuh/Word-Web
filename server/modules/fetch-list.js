@@ -15,10 +15,9 @@ export async function fetchList() {
                 id: now
             });
             if (precache) {
-                return precache;
-                /*   cache = precache;
-                  console.log('You have cached:  ', cache);
-                  return cache; */
+                cache = precache;
+                console.log('You have cached:  ', cache);
+                return cache;
             }
             else {
                 console.log('No data found for today:', now);
@@ -34,3 +33,4 @@ export async function fetchList() {
         console.log('error fetching list from your db: ', e);
     }
 }
+fetchList();

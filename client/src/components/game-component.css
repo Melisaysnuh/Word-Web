@@ -30,7 +30,7 @@ margin-right: 15px;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 .gameholder {
@@ -133,4 +133,25 @@ align-items: center;
   font-weight: 800;
   font-size: 1rem;
 
+}
+#message {
+  font-family: 'NTR';
+  font-size: 1.2rem;
+  height: 20px;
+  margin-bottom: 20px;
+}
+.fail {
+  visibility:visible;
+  color: orange;
+  font-style: italic;
+
+}
+.pass {
+  visibility:visible;
+  color: #b3aaff;
+  text-shadow: 10;
+
+}
+.none {
+  visibility: hidden;
 }

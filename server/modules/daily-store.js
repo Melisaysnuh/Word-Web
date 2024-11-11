@@ -21,19 +21,19 @@ async function storeDay() {
 false, 'Europe/Berlin' // timeZone
 );
 job.start();
-async function storeDayTest() {
+/* async function storeDayTest () {
     try {
         const result = await finalConstructor();
         if (result) {
             const createdList = await dayModel.create(result);
-            console.log('list successfully stored like this: ', createdList);
+            console.log('list successfully stored like this: ', createdList)
+
         }
-        else
-            throw new Error('could not get day list from service');
+        else throw new Error('could not get day list from service');
         console.log(error);
     }
     catch (e) {
-        console.log('error storing day', e);
+        console.log('error storing day', e)
     }
 }
-storeDayTest();
+ */ 

@@ -1,3 +1,4 @@
+import { WordObj } from "./WordObj";
 export interface Daylist {
 
         id: string;
@@ -5,6 +6,6 @@ export interface Daylist {
         centerLetter: string;
         letters: string[];
         totalPoints: number;
-        validWords: object[];
+        validWords: WordObj[];
 
 }

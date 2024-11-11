@@ -4,8 +4,8 @@ import { loadLetters } from './controllers/load-letters.js';
 import { submitWordController } from './controllers/submit-word.js';
 import cors from 'cors';
 const port = process.env.PORT || 3000;
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 app.get("/", loadLetters);
 //todo
 app.post('/submit', submitWordController);

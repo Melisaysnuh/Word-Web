@@ -1,11 +1,20 @@
 import './game-component.css';
 import React, { useState, useEffect } from 'react';
 import { getDailyLetters, checkWord } from '../services/api-client-service.tsx';
+import { WordObj } from '../types/WordObj.ts';
 
+interface GameComponentProps {
+    guessedWords: WordObj[];
+    setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
+}
 
-function GameComponent () {
+function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
+    const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
+
+
+
 
 
     async function fetchDailyLetters () {
@@ -19,7 +28,6 @@ function GameComponent () {
             console.log('error in fetchDaily in game component:', e)
         }
     }
-
 
     function generateRandomIndices (letters: string[]) {
 
@@ -38,25 +46,51 @@ function GameComponent () {
     }
     const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault();
-        setGuess(`${guess}${event.target.value.toUpperCase() }`)
+
+        setGuess(`${guess}${event.target.value.toUpperCase()}`)
     }
     const handleClear = (event: React.MouseEvent<HTMLButtonElement>) =>{
         event.preventDefault();
 
          setGuess('');
+        setFormStatus({ success: 'none', message: '' });
 
     }
     const handleShuffle = (event: React.MouseEvent<HTMLSpanElement>) => {
         event.preventDefault();
         const shuffled = generateRandomIndices(dailyLetters);
        setDailyLetters(shuffled);
+        setFormStatus({ success: 'none', message: '' });
     }
 
-    const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+    async function handleSubmit (event: React.MouseEvent<HTMLButtonElement>) {
         event.preventDefault();
         const word = guess;
-        checkWord(word);
-        console.log('client sending ', word)
+        if (word.length < 4) {
+            setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
+
+        } else if (guessedWords.some((element:WordObj) => element.word.toUpperCase() === word)) {
+            setFormStatus({ success: 'fail', message: 'Word already found.' });
+        }
+            else {
+          try {
+              const guessedWord: WordObj | null | undefined = await checkWord(word.toLowerCase());
+              if (guessedWord) {
+
+
+                  setGuessedWords([...guessedWords, guessedWord]);
+
+              }
+
+
+          }
+          catch (e) {
+            console.log(e)
+          }
+
+
+        }
+        setGuess('');
     }
    /*  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         return guess + event;
@@ -70,6 +104,7 @@ function GameComponent () {
             const shuffled = generateRandomIndices(letters);
             setDailyLetters(shuffled);
             setGuess('');
+            setFormStatus({ success: 'none', message: '' });
         }
         fetchShuffle();
     }, []);
@@ -83,7 +118,7 @@ function GameComponent () {
                 <img id='spiderweb' src='/spiderweb.svg' />
 
                 <form id="letter-form" >
-
+<div id='message' className={formStatus.success}>{formStatus.message}</div>
                     <input type='text'
                         id='text-input'
                         value={guess}

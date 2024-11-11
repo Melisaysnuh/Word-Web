@@ -28,7 +28,7 @@ export const job = new CronJob(
 );
 job.start();
 
-async function storeDayTest () {
+/* async function storeDayTest () {
     try {
         const result = await finalConstructor();
         if (result) {
@@ -43,3 +43,4 @@ async function storeDayTest () {
         console.log('error storing day', e)
     }
 }
+ */
