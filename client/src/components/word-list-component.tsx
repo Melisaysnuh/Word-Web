@@ -43,7 +43,7 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
                 setSpiderClass('prog-spider-class-3');
                 setSpiderName('Tarantula');
             }
-            else if (prog> .4 && prog< .625) {
+            else if (prog> .5 && prog< .625) {
                 setSpiderClass('prog-spider-class-4');
                 setSpiderName('Trapdoor');
             }

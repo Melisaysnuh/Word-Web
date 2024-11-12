@@ -1,3 +1,4 @@
+
 .block {
   background: radial-gradient(#381d75, #180a37);
   width: 45vw;
@@ -151,7 +152,7 @@ align-items: center;
 .message {
 
   font-size: 0.8em;
-  height: 4vh;
+  height: 2vh;
   margin: 5% auto;
 
 }
@@ -173,4 +174,9 @@ align-items: center;
 .none {
   visibility: hidden;
 
+}
+/* ai generated*/
+.flash {
+  background-color: orange !important;
+  transition: background-color 0.2s ease;
 }

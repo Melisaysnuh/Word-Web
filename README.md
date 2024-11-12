@@ -13,45 +13,6 @@ Four-letter words are worth one point each, five-or-more-letter words are worth 
 
 
 
-## *to delete and to do*
-
-### To Do (as of Nov 8):
-
- ~~- Add point calculation~~
-
- - Word Check Service, ~~Routing & Controllers, Module~~
-	 - Needs to receive post request with word in body
-		~~- needs to check word against letters~~
-		 ~~- needs to return response:~~
-			 - ~~word~~
-			 - ~~points~~
-		 - needs to save the word
-		 - OR needs to return error: "not in word list"
- - Front-end
-~~- Modularize front end~~
-	 - ~~Get letters and populate buttons~~
-	 ~~- Implement shuffle function~~
- - Configure input
-	 - Via keyboard, react / block any letter when it's not in the web
-	 - ~~Configure buttons as input~~
-	 - handlesubmit
-		 - request to server to check word
-		 - If it's in the list
-			 - share success message
-			 - update progress bar
-			 - add word to guessed word list
-			 - clear form
-		 - If not, show error / clear form
- - Create / save session
- - Fix: overfetching in controller/module/client?
- - Fix: date not working
- - fix: cronjob not properly working
- ~~- FIX: Not getting all pangrams~~
-
-
-
-
-TODO: INSTALLATION INSTRUCTIONS
 
 ### MVP
 

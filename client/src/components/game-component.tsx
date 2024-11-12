@@ -43,8 +43,29 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
 
     };
     const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const guess = event.target.value.toLowerCase()
+        const lastKey = guess[guess.length-1]
+        console.log('last key: ', lastKey);
+        setGuess(event.target.value.toUpperCase());
+        console.log(dailyLetters)
 
-       setGuess(event.target.value.toUpperCase())
+
+        // Check if the pressed key matches any of the daily letters
+        if (dailyLetters.includes(lastKey)) {
+            console.log('yes')
+
+
+            // Find the button associated with this key
+            const button = document.querySelector(`button[value="${lastKey}"]`);
+            if (button) {
+                button.classList.add('flash');
+
+                // Remove the 'flash' class after a short period (e.g., 300ms)
+                setTimeout(() => {
+                    button.classList.remove('flash');
+                }, 300);
+            }
+        }
     }
 
 
@@ -90,6 +111,7 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
         }
         setGuess('');
     }
+
 
 
 
