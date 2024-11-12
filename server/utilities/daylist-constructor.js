@@ -1,23 +1,26 @@
 import fs from 'fs';
-import { count_length } from './count_length.js';
+import { countLength } from './count-length.js';
 import { generateAnagrams } from './generate-anagrams.js';
 import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
 import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
-import moment from 'moment';
-moment().format();
+import { configDotenv } from 'dotenv';
+configDotenv();
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 // FETCH WORD LISTS
 const wordListPath = await import('word-list').then(module => module.default);
 const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((word) => word.length >= 4);
 const longArray = mainWordArray.filter((word) => word.length >= 7);
 // // HELPER:  async function to validate word by checking it in merriam webster api
-const base_url = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
-const apiKey = '?key=c9d049a8-6724-4795-87f9-e091f2940fce';
 async function validateWord(word) {
     try {
-        const res = await fetch(`${base_url}${word}${apiKey}`);
+        const url = process.env.API_BASE_URL;
+        const apiKey = process.env.API_KEY;
+        console.log('URL after update: ', url);
+        const res = await fetch(`${url}${word}${apiKey}`);
         if (res.ok) {
             const data = await res.json();
             if (data && typeof data[0] === 'object' && data[0].meta.id === word) {
@@ -41,7 +44,7 @@ async function getRandomWord() {
     try {
         const rand = Math.floor(Math.random() * longArray.length);
         const test = longArray[rand];
-        if (count_length(test) === 7) {
+        if (countLength(test) === 7) {
             const result = await (validateWord(test));
             if (result)
                 return test;
@@ -52,15 +55,18 @@ async function getRandomWord() {
         console.log('error in getRandomWord: ', e);
     }
 }
-// FIND CENTER LETTER FOR GAME (MOST COMMON)
-async function getCenter(list, word) {
+/* // FIND CENTER LETTER FOR GAME (MOST COMMON)
+async function getCenter (list: string[], word: string) {
     try {
-        const thisResult = {};
+
+        const thisResult: { [key: string]: number } = {};
         const mainArray = word.split('');
+
         Array.from(new Set(mainArray)).forEach(letter => {
             const { length } = mainArray.filter(l => l === letter);
             thisResult[letter] = length;
         });
+
         for (const item of list) {
             const itemArray = item.split("");
             Array.from(new Set(itemArray)).forEach(letter => {
@@ -68,29 +74,32 @@ async function getCenter(list, word) {
                 thisResult[letter] += length;
             });
         }
-        const highestLetter = Object.keys(thisResult).reduce((a, b) => { return thisResult[a] > thisResult[b] ? a : b; });
-        return highestLetter;
+        const highestLetter = Object.keys(thisResult).reduce((a, b) => { return thisResult[a] > thisResult[b] ? a : b });
+        return highestLetter
     }
     catch (e) {
-        console.log('error in getting center letter: ', e);
+        console.log('error in getting center letter: ', e)
     }
 }
-async function validWordArray(list) {
+ */
+//todo fix this to remove weird words
+/* async function validWordArray (list: string[]) {
     try {
         const validWords = [];
         for (let i = 0; i < list.length; i++) {
             const item = list[i];
             const isValid = await validateWord(item);
             if (isValid) {
-                validWords.push(item);
+                validWords.push(item)
             }
         }
         return validWords;
     }
     catch (e) {
-        console.log('error validating array: ', e);
+        console.log('error validating array: ', e)
+
     }
-}
+} */
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor() {
     try {
@@ -100,29 +109,26 @@ export async function finalConstructor() {
             const letterArray = word.split('');
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
             const anagrams = generateAnagrams(word, mainWordArray);
-            const center = await getCenter(anagrams, word);
-            if (center) {
-                const index = uniqueArray.indexOf(center);
-                uniqueArray.splice(index, 1);
-                uniqueArray.unshift(center);
-                const anagrams2 = centerFilter(anagrams, center);
-                const anagrams3 = await validWordArray(anagrams2);
-                if (anagrams3) {
-                    const todaysPangrams = pangrams(anagrams3, uniqueArray);
-                    const anagramObjList = anagrams3.map((word) => {
-                        return calculatePoints(word, todaysPangrams);
-                    });
-                    const now = moment().format('YYYY_MM_DD');
-                    console.log(now);
-                    return {
-                        id: now,
-                        centerLetter: center,
-                        pangrams: todaysPangrams,
-                        letters: uniqueArray,
-                        totalPoints: calculateTotal(anagramObjList),
-                        validWords: anagramObjList
-                    };
-                }
+            const index = Math.floor(Math.random() * 7);
+            const center = uniqueArray[index];
+            uniqueArray.splice(index, 1);
+            uniqueArray.unshift(center);
+            const filteredAnagrams = centerFilter(anagrams, center);
+            /* const anagrams3 = await validWordArray(filteredAnagrams); */
+            if (filteredAnagrams) {
+                const todaysPangrams = pangrams(filteredAnagrams, uniqueArray);
+                const anagramObjList = filteredAnagrams.map((word) => {
+                    return calculatePoints(word, todaysPangrams);
+                });
+                return {
+                    id: now,
+                    centerLetter: center,
+                    pangrams: todaysPangrams,
+                    letters: uniqueArray,
+                    totalPoints: calculateTotal(anagramObjList),
+                    validWords: anagramObjList,
+                    sessions: []
+                };
             }
         }
         else

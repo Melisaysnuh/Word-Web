@@ -8,8 +8,10 @@ async function connectDB () {
             statusCode: 200,
         };
     } catch (e) {
+        console.log('internal server error: ', e)
         return {
             statusCode: 500,
+
         };
     }
 }
@@ -20,6 +22,7 @@ const daySchema = new Schema ({
     pangrams: Array,
     totalPoints: Number,
     letters: Array,
-    validWords: Array
+    validWords: Array,
+    sessions: Array
 })
 export const dayModel = mongoose.model('word-web', daySchema);

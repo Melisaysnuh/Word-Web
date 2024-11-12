@@ -3,7 +3,7 @@ import { finalConstructor } from '../utilities/daylist-constructor.js';
 import { error } from 'console';
 import { CronJob } from 'cron';
 export const job = new CronJob('0 0 0 * * *', // cronTime
-async function storeDay() {
+async function storeDayModule() {
     try {
         const result = await finalConstructor();
         if (result) {
@@ -21,7 +21,7 @@ async function storeDay() {
 false, 'Europe/Berlin' // timeZone
 );
 job.start();
-async function storeDayTest() {
+async function storeDayModuleTest() {
     try {
         console.log('in storedaytest');
         const result = await finalConstructor();
@@ -38,4 +38,4 @@ async function storeDayTest() {
     }
 }
 ;
-storeDayTest();
+storeDayModuleTest();

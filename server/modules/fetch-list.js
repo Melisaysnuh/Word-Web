@@ -1,31 +1,17 @@
 import { dayModel } from "./index.js";
-import { CronJob } from 'cron';
-import moment from "moment";
-let cache;
-// won't work as expectd in dev
-const job = new CronJob('0 0 0 * * *', function clearCache() {
-    cache = null;
-}, null, false, 'Europe/Berlin');
-job.start();
-export async function fetchList() {
-    const now = moment().format('YYYY_MM_DD');
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
+export async function fetchListModule() {
     try {
-        if (!cache) {
-            const precache = await dayModel.findOne({
-                id: now
-            });
-            if (precache) {
-                cache = precache;
-                return cache;
-            }
-            else {
-                console.log('No data found for today:', now);
-                return null;
-            }
+        const list = await dayModel.findOne({
+            id: now
+        });
+        if (list) {
+            return list;
         }
         else {
-            console.log('returning cache!');
-            return cache;
+            console.log('No data found for today:', now);
+            return null;
         }
     }
     catch (e) {

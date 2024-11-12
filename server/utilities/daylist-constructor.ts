@@ -6,8 +6,11 @@ import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
 import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
-import moment from 'moment';
-moment().format();
+import {configDotenv} from 'dotenv';
+configDotenv();
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
+
 
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 
@@ -21,7 +24,10 @@ const longArray = mainWordArray.filter((word: string) => word.length >= 7);
 
 async function validateWord (word: string): Promise<boolean> {
     try {
-        const res = await fetch(`${process.env.BASE_URL}${word}${process.env.API_KEY}`);
+        const url = process.env.API_BASE_URL;
+        const apiKey = process.env.API_KEY;
+        console.log('URL after update: ', url);
+        const res = await fetch(`${url}${word}${apiKey}`);
         if (res.ok) {
             const data = await res.json();
             if (data && typeof data[0] === 'object' && data[0].meta.id === word) {
@@ -59,7 +65,7 @@ async function getRandomWord () {
 }
 
 
-// FIND CENTER LETTER FOR GAME (MOST COMMON)
+/* // FIND CENTER LETTER FOR GAME (MOST COMMON)
 async function getCenter (list: string[], word: string) {
     try {
 
@@ -85,9 +91,9 @@ async function getCenter (list: string[], word: string) {
         console.log('error in getting center letter: ', e)
     }
 }
-
-
-async function validWordArray (list: string[]) {
+ */
+//todo fix this to remove weird words
+/* async function validWordArray (list: string[]) {
     try {
         const validWords = [];
         for (let i = 0; i < list.length; i++) {
@@ -103,7 +109,7 @@ async function validWordArray (list: string[]) {
         console.log('error validating array: ', e)
 
     }
-}
+} */
 
 
 
@@ -116,21 +122,21 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
             const letterArray = word.split('');
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
             const anagrams = generateAnagrams(word, mainWordArray);
-            const center = await getCenter(anagrams, word);
-            if (center) {
-                const index = uniqueArray.indexOf(center);
+
+
+                const index = Math.floor(Math.random()*7);
+                const center = uniqueArray[index];
                 uniqueArray.splice(index, 1);
                 uniqueArray.unshift(center);
 
-                const anagrams2 = centerFilter(anagrams, center);
-                const anagrams3 = await validWordArray(anagrams2);
-                if (anagrams3) {
-                    const todaysPangrams = pangrams(anagrams3, uniqueArray);
-                    const anagramObjList = anagrams3.map((word) => {
+                const filteredAnagrams = centerFilter(anagrams, center);
+                /* const anagrams3 = await validWordArray(filteredAnagrams); */
+                if (filteredAnagrams) {
+                    const todaysPangrams = pangrams(filteredAnagrams, uniqueArray);
+                    const anagramObjList = filteredAnagrams.map((word) => {
                         return calculatePoints(word, todaysPangrams)
                     })
-                    const now =  moment().format('YYYY_MM_DD');
-                    console.log(now)
+
 
                     return {
                         id: now,
@@ -138,11 +144,12 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                         pangrams: todaysPangrams,
                         letters: uniqueArray,
                         totalPoints: calculateTotal(anagramObjList),
-                        validWords: anagramObjList
+                        validWords: anagramObjList,
+                        sessions: []
                     }
                 }
 
-            }
+
         }
         else throw new Error('error in final constructor')
     }

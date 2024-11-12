@@ -1,46 +1,35 @@
 import { dayModel } from "./index.js"
-import { CronJob } from 'cron';
-import moment from "moment";
+
 import { Daylist } from "../types/Daylist.js";
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
 
-let cache: Daylist | null;
 
-// won't work as expectd in dev
-const job = new CronJob(
-    '0 0 0 * * *',
-function clearCache (){
-    cache = null;
-},
-null,
-false,
-    'Europe/Berlin' );
-    job.start();
 
-export async function fetchList () {
 
-    const now = moment().format('YYYY_MM_DD');
+
+
+
+export async function fetchListModule () {
+
+
     try {
-        if (!cache) {
-            const precache: Daylist | null = await dayModel.findOne({
-                id: now
-            });
-            if (precache) {
 
-              cache = precache;
+        const list: Daylist | null = await dayModel.findOne({
+            id: now
+        });
+        if (list) {
 
-                return cache;
-            }
-            else {
-                console.log('No data found for today:', now);
-                return null;
-            }
-
+            return list
         }
         else {
-            console.log('returning cache!');
-            return cache;
+            console.log('No data found for today:', now);
+            return null;
         }
+
     }
+
+
     catch (e) {
         console.log('error fetching list from your db: ', e)
     }

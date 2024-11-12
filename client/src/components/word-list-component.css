@@ -46,9 +46,12 @@ ul {
   column-gap: 10px;
   font-size: 1rem;
   line-height: 1.3rem;
-  font-family: 'NTR';
+
   overflow: hidden;
 
+}
+li {
+  font-family: 'Nunito';
 }
 
 .prog-spider-class-0 {
@@ -123,7 +126,7 @@ ul {
 }
 .statusmess {
 
-  font-family: 'NTR';
+  font-family: 'Averia Libre';
 
   font-size: 1.1rem;
   text-shadow: 20%;
@@ -139,13 +142,13 @@ align-content: center;
 .status{
   align-content: center;
   font-size: 1.1rem;
-  font-family: 'NTR';
+  font-family: 'Nunito';
 
 
 }
 .pointspan {
   font-size: 0.7rem;
-  font-family: 'NTR';
+  font-family: 'Nunito';
   color: orange;
   text-align: center;
   margin: 0 0 10px 0;

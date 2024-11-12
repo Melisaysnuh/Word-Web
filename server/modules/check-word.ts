@@ -1,14 +1,32 @@
 import { Daylist } from "../types/Daylist.js";
-import { fetchList } from "./fetch-list.js";
+import { fetchListModule } from "./fetch-list.js";
 import { WordObj } from "../types/WordObj.js";
+import { CronJob } from "cron";
 
-
-// todo query DB //
+let cache: Daylist | null | undefined;
+const job = new CronJob(
+    '0 0 0 * * *',
+    function clearCache () {
+        cache = null;
+    },
+    null,
+    false,
+    'Europe/Berlin');
+job.start();
 export async function checkWord (thisWord: string, ) {
-
+    let list: Daylist | null | undefined;
     try {
+        if (!cache) {
+            list = await fetchListModule();
+            if (list) {
+                cache = list;
 
-        const list: Daylist | null | undefined = await fetchList();
+            }
+                  }
+        else {
+            console.log('returning cache!');
+            list = cache;
+        }
 
         if (list) {
             const toCheck: WordObj[] | null = list.validWords;

@@ -1,6 +1,7 @@
 import './game-component.css';
 import React, { useState, useEffect } from 'react';
-import { getDailyList, checkWord } from '../services/api-client-service.tsx';
+import { getDailyList} from '../services/api-client-get.tsx';
+import { checkWord } from '../services/api-client-checkword.tsx';
 import { WordObj } from '../types/WordObj.ts';
 import { GameComponentProps } from '../types/GameComponent.ts';
 
@@ -18,8 +19,9 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
 
     async function fetchDailyList () {
         try {
-            const list = await getDailyList();
-            if (list) {
+            const data = await getDailyList()
+            if (data) {
+                const list = data.list;
 
                 return list;
             } else console.log('you are not yet fetching your info')
@@ -149,9 +151,8 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
                             className='other-button'
                             onClick={handleClear}
                         >CLEAR</button>
-                        <span className="material-symbols-outlined"
-                        onClick={handleShuffle}>
-                            shuffle
+                        <span className="material-symbols-outlined" onClick={handleShuffle}>
+                            refresh
                         </span>
                         <button type='submit'
                         key='submit'

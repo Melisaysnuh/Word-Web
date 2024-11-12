@@ -31,19 +31,19 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
 
             console.log(prog, prog);
 
-            if (prog> .125 && prog< .25) {
+            if (prog> .10 && prog< .20) {
                 setSpiderClass('prog-spider-class-1');
                 setSpiderName('Weaver');
             }
-            else if (prog> .25 && prog< .375) {
+            else if (prog> .20 && prog< .30) {
                 setSpiderClass('prog-spider-class-2');
                 setSpiderName('Jumping');
             }
-            else if (prog> .375 && prog< .5) {
+            else if (prog> .30 && prog< .4) {
                 setSpiderClass('prog-spider-class-3');
                 setSpiderName('Tarantula');
             }
-            else if (prog> .5 && prog< .625) {
+            else if (prog> .4 && prog< .625) {
                 setSpiderClass('prog-spider-class-4');
                 setSpiderName('Trapdoor');
             }

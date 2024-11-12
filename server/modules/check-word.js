@@ -1,8 +1,23 @@
-import { fetchList } from "./fetch-list.js";
-// todo query DB //
+import { fetchListModule } from "./fetch-list.js";
+import { CronJob } from "cron";
+let cache;
+const job = new CronJob('0 0 0 * * *', function clearCache() {
+    cache = null;
+}, null, false, 'Europe/Berlin');
+job.start();
 export async function checkWord(thisWord) {
+    let list;
     try {
-        const list = await fetchList();
+        if (!cache) {
+            list = await fetchListModule();
+            if (list) {
+                cache = list;
+            }
+        }
+        else {
+            console.log('returning cache!');
+            list = cache;
+        }
         if (list) {
             const toCheck = list.validWords;
             const res = toCheck.find((obj) => obj.word == thisWord);
