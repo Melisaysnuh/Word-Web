@@ -1,14 +1,12 @@
 import './game-component.css';
 import React, { useState, useEffect } from 'react';
-import { getDailyLetters, checkWord } from '../services/api-client-service.tsx';
+import { getDailyList, checkWord } from '../services/api-client-service.tsx';
 import { WordObj } from '../types/WordObj.ts';
+import { GameComponentProps } from '../types/GameComponent.ts';
 
-interface GameComponentProps {
-    guessedWords: WordObj[];
-    setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
-}
 
-function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
+
+function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameComponentProps) {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
@@ -17,12 +15,14 @@ function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
 
 
 
-    async function fetchDailyLetters () {
+
+    async function fetchDailyList () {
         try {
-            const letters = await getDailyLetters();
-            if (letters) {
-                return letters;
-            } else console.log('you are not yet fetching letters')
+            const list = await getDailyList();
+            if (list) {
+
+                return list;
+            } else console.log('you are not yet fetching your info')
         }
         catch (e) {
             console.log('error in fetchDaily in game component:', e)
@@ -37,13 +37,16 @@ function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
             const randomIndex = Math.floor(Math.random() * remainingLetters.length);
             shuffled.push(remainingLetters.splice(randomIndex, 1)[0]);
         }
-
         return shuffled;
 
     };
     const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setGuess(event.target.value.toUpperCase())
+
+       setGuess(event.target.value.toUpperCase())
     }
+
+
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault();
 
@@ -63,7 +66,7 @@ function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
         setFormStatus({ success: 'none', message: '' });
     }
 
-    async function handleSubmit (event: React.MouseEvent<HTMLButtonElement>) {
+    async function handleSubmit (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) {
         event.preventDefault();
         const word = guess;
         if (word.length < 4) {
@@ -73,41 +76,31 @@ function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         }
             else {
-          try {
-              const guessedWord: WordObj | null | undefined = await checkWord(word.toLowerCase());
-              if (guessedWord) {
-
-
-                  setGuessedWords([...guessedWords, guessedWord]);
-
-              }
-
-
-          }
-          catch (e) {
-            console.log(e)
-          }
-
-
+            const res = await checkWord(word, { guessedWords, setGuessedWords });
+            if (res) {
+                setFormStatus({ success: 'fail', message: 'Word not in list.' });
+            } else
+                setFormStatus({ success: 'pass', message: 'nice!' });
         }
         setGuess('');
     }
-   /*  const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
-        return guess + event;
-    } */
 
 
 
     useEffect(() => {
         async function fetchShuffle () {
-            const letters = await fetchDailyLetters();
+            const list = await fetchDailyList();
+            const letters = list.letters;
+            const totalP = list.totalPoints;
             const shuffled = generateRandomIndices(letters);
             setDailyLetters(shuffled);
             setGuess('');
             setFormStatus({ success: 'none', message: '' });
+            setTotalPoints(totalP);
         }
         fetchShuffle();
-    }, []);
+    }, [setTotalPoints]);
+
 
 
     return (
@@ -117,12 +110,18 @@ function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
 
                 <img id='spiderweb' src='/spiderweb.svg' />
 
-                <form id="letter-form" >
+                <form className="letter-form" >
 <div id='message' className={formStatus.success}>{formStatus.message}</div>
                     <input type='text'
-                        id='text-input'
+                        className='text-input'
                         value={guess}
                         onChange={handleTextInput}
+                        onKeyDown={(event) => {
+                            if (event.key === 'Enter') {
+                                event.preventDefault();
+                                handleSubmit(event);
+                            }
+                        }}
 
                     ></input>
                     <div className='gameholder'>
@@ -150,7 +149,8 @@ function GameComponent ({ guessedWords, setGuessedWords }: GameComponentProps) {
                         onClick={handleShuffle}>
                             shuffle
                         </span>
-                        <button key='submit'
+                        <button type='submit'
+                        key='submit'
                             className='other-button'
                             onClick={handleSubmit}
                         >SUBMIT</button>

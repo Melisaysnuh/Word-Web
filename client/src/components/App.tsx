@@ -2,21 +2,29 @@ import './App.css'
 import GameComponent from './game-component'
 import WordListComponent from './word-list-component'
 import { useState } from 'react'
-
+import { WordObj } from '../types/WordObj'
 
 
 
 function App () {
-  const [guessedWords, setGuessedWords] = useState<{ word: string, points: number, pangram: boolean }[]>([]);
+  const [guessedWords, setGuessedWords] = useState<WordObj[]>([]);
+  const [totalPoints, setTotalPoints] =useState<number>(0);
 
 
   return (
     <>
-      <div id='main-container'>
-        <nav id='navigation'><img src='/logo.svg' alt='logo' /></nav>
-        <div id='subhead'>
-          <GameComponent guessedWords={guessedWords} setGuessedWords={setGuessedWords}></GameComponent>
-          <WordListComponent guessedWords={guessedWords}></WordListComponent>
+      <div className='main-container'>
+        <nav className='navigation'><img src='/logo.svg' alt='word-web-logo' /></nav>
+        <div className='subhead'>
+          <GameComponent
+          guessedWords={guessedWords}
+          setGuessedWords={setGuessedWords}
+          totalPoints={totalPoints}
+          setTotalPoints={setTotalPoints}
+          />
+          <WordListComponent
+          guessedWords={guessedWords}
+          totalPoints = {totalPoints}/>
         </div>
       </div>
     </>

@@ -1,12 +1,18 @@
 import { checkWord } from '../modules/check-word.js';
 export async function submitWordController(req, res) {
-    console.log('in submitword function....');
     try {
-        console.log(req.body);
         const wordToCheck = req.body.word.toLowerCase();
         const answer = await checkWord(wordToCheck);
-        if (answer) {
-            console.log('answer: ', answer);
+        if (!answer) {
+            res.status(500);
+        }
+        else if (answer && Object.keys(answer).length == 0) {
+            res.status(400).json({
+                message: 'Invalid word',
+                error: 'The word does not exist in the valid words list',
+            });
+        }
+        if (answer && Object.keys(answer).length > 0) {
             res.status(200).json(answer);
         }
     }

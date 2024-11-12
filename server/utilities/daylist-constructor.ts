@@ -41,7 +41,7 @@ async function validateWord (word: string): Promise<boolean> {
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
 async function getRandomWord () {
     try {
-        let rand = Math.floor(Math.random() * longArray.length);
+        const rand = Math.floor(Math.random() * longArray.length);
         const test = longArray[rand];
         if (count_length(test) === 7) {
             const result: boolean = await (validateWord(test))
@@ -71,7 +71,7 @@ async function getCenter (list: string[], word: string) {
             thisResult[letter] = length;
         });
 
-        for (let item of list) {
+        for (const item of list) {
             const itemArray = item.split("");
             Array.from(new Set(itemArray)).forEach(letter => {
                 const { length } = itemArray.filter(l => l === letter);
@@ -110,6 +110,7 @@ async function validWordArray (list: string[]) {
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor (): Promise<Daylist | undefined> {
     try {
+        console.log('in constructor');
         const word = await getRandomWord();
         if (word) {
             const letterArray = word.split('');
@@ -118,11 +119,13 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
             const center = await getCenter(anagrams, word);
             if (center) {
                 const index = uniqueArray.indexOf(center);
-                letterArray.slice(index, 1).push(center);
-                const anagrams2 = centerFilter(anagrams, center)
+                uniqueArray.splice(index, 1);
+                uniqueArray.unshift(center);
+
+                const anagrams2 = centerFilter(anagrams, center);
                 const anagrams3 = await validWordArray(anagrams2);
                 if (anagrams3) {
-                    const todaysPangrams = pangrams(anagrams3, letterArray);
+                    const todaysPangrams = pangrams(anagrams3, uniqueArray);
                     const anagramObjList = anagrams3.map((word) => {
                         return calculatePoints(word, todaysPangrams)
                     })

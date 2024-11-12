@@ -1,7 +1,8 @@
 .block {
   background: radial-gradient(#381d75, #180a37);
-  width: 500px;
-  height: 550px;
+  width: 45vw;
+  max-width: 600px;
+  height: auto;
   border-radius: 20px;
 }
 
@@ -14,16 +15,16 @@
 }
 #spiderweb {
 position: absolute;
-margin-top: 25px;
 margin-right: 15px;
   width: 100%;
-  height: auto;
+  max-width: 600px;
   z-index: 1;
   opacity: 0.3;
 
+
 }
 
-#letter-form {
+.letter-form {
     position: absolute;
   width: 80%;
   display: flex;
@@ -45,8 +46,10 @@ align-items: center;
 
 
 .hex-button {
-  width: 90px;
-  height: 90px;
+  width: 12.5vh;
+  height: 12.5vh;
+  max-width: 90px;
+  max-height: 90px;
   background-color: #e7e7e7;
   color: black;
   font-weight: 700;
@@ -96,8 +99,10 @@ align-items: center;
 
 }
 
-#text-input {
+.text-input {
   width: fit-content;
+
+  max-width: 100%;
   height: 75px;
   text-align: center;
   z-index: 3;
@@ -107,10 +112,16 @@ align-items: center;
   font-size: 3.2rem;
   background: none;
   color: orange;
+  border: none;
+
 
 
 
 }
+.text-input:focus {
+  border-style:none;
+}
+
 #button-holder {
   display: flex;
   flex-direction: row;
@@ -134,24 +145,28 @@ align-items: center;
   font-size: 1rem;
 
 }
+
+
 #message {
   font-family: 'NTR';
   font-size: 1.2rem;
   height: 20px;
   margin-bottom: 20px;
+
+}
+.fail, .pass {
+  visibility: visible;
+
 }
 .fail {
-  visibility:visible;
   color: orange;
   font-style: italic;
-
 }
 .pass {
-  visibility:visible;
-  color: #b3aaff;
-  text-shadow: 10;
-
+   color: #b3aaff;
+  font-weight:500;
 }
 .none {
   visibility: hidden;
+
 }

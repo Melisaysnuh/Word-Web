@@ -28,8 +28,9 @@ export const job = new CronJob(
 );
 job.start();
 
-/* async function storeDayTest () {
+ async function storeDayTest () {
     try {
+        console.log('in storedaytest');
         const result = await finalConstructor();
         if (result) {
             const createdList = await dayModel.create(result);
@@ -42,5 +43,5 @@ job.start();
     catch (e) {
         console.log('error storing day', e)
     }
-}
- */
+};
+ storeDayTest();

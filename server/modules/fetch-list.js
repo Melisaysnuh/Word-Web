@@ -16,7 +16,6 @@ export async function fetchList() {
             });
             if (precache) {
                 cache = precache;
-                console.log('You have cached:  ', cache);
                 return cache;
             }
             else {
@@ -33,4 +32,3 @@ export async function fetchList() {
         console.log('error fetching list from your db: ', e);
     }
 }
-fetchList();

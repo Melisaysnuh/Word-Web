@@ -5,15 +5,13 @@
   gap: 10px;
   padding: 30px;
    background: radial-gradient(#381d75, #180a37);
-  width: 500px;
-  height: 550px;
   border-radius: 20px;
 }
-#progress-bar-container {
+.progress-bar-container {
   position: relative;
   width: 20%;
   margin: 10px;
-  padding: 5% 1%;
+  padding: 1% 1%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,5 +50,69 @@ ul {
   font-family: 'NTR';
   overflow: hidden;
 
+}
+
+.prog-spider-class-0 {
+  position: absolute;
+  top: 0;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-1 {
+  position: absolute;
+  top: 10%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-2 {
+  position: absolute;
+  top: 21%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-3 {
+  position: absolute;
+  top: 32%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-4 {
+  position: absolute;
+  top: 43%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-5 {
+  position: absolute;
+  top: 54%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-6 {
+  position: absolute;
+  top: 64%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-7 {
+  position: absolute;
+  top: 75%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
+}
+.prog-spider-class-8 {
+  position: absolute;
+  top: 86%;
+  margin-right: 20%;
+  margin-left: 10%;
+  z-index: 3;
 }
 
