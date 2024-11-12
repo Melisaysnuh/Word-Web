@@ -8,6 +8,8 @@ import { GameComponentProps } from '../types/GameComponent';
 
 function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
     const [spiderClass, setSpiderClass] = useState('prog-spider-class-0');
+    const [spiderName, setSpiderName] = useState('Daddy Long-Legs');
+
 
     function calculatePoints (guessedWords: WordObj[]) {
         let myPoints: number = 0;
@@ -26,30 +28,31 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
             const myPoints = num;
             console.log('your points: ', myPoints);
             const prog = myPoints / total;
-            const curvedProg = Math.pow(prog, 2);
 
-            if (curvedProg> .125 && curvedProg< .25) {
+            console.log(prog, prog);
+
+            if (prog> .125 && prog< .25) {
                 setSpiderClass('prog-spider-class-1');
             }
-            else if (curvedProg> .25 && curvedProg< .375) {
+            else if (prog> .25 && prog< .375) {
                 setSpiderClass('prog-spider-class-2')
             }
-            else if (curvedProg> .375 && curvedProg< .5) {
+            else if (prog> .375 && prog< .5) {
                 setSpiderClass('prog-spider-class-3')
             }
-            else if (curvedProg> .5 && curvedProg< .625) {
+            else if (prog> .5 && prog< .625) {
                 setSpiderClass('prog-spider-class-4')
             }
-            else if (curvedProg> .625 && curvedProg< .75) {
+            else if (prog> .625 && prog< .75) {
                 setSpiderClass('prog-spider-class-5')
             }
-            else if (curvedProg> .75 && curvedProg< .875) {
+            else if (prog> .75 && prog< .875) {
                 setSpiderClass('prog-spider-class-6')
             }
-            else if (curvedProg> .875 && curvedProg< 1) {
+            else if (prog> .875 && prog< 1) {
                 setSpiderClass('prog-spider-class-7')
             }
-            else if (curvedProg=== 1) {
+            else if (prog=== 1) {
                 setSpiderClass('prog-spider-class-8')
             }
         }
@@ -77,7 +80,7 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
                     <ul>
                         {guessedWords && guessedWords.length > 0 ? (
                            guessedWords.sort((a,b)=> a.word.localeCompare(b.word)).map((obj: WordObj) => (
-                                <li key={obj.word}>{obj.word}</li>
+                                <li className={obj.pangram===true ? 'pangram' :'normal'} key={obj.word}>{obj.word}</li>
                             ))
                         ) : (
                             <li> </li>

@@ -115,4 +115,10 @@ ul {
   margin-left: 10%;
   z-index: 3;
 }
-
+.pangram  {
+  font-weight: 700;
+  font-style: italic;
+}
+.normal {
+  font-weight: 0;
+}

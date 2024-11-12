@@ -8,6 +8,7 @@ import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
 import moment from 'moment';
 moment().format();
+
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 
 // FETCH WORD LISTS
@@ -16,12 +17,11 @@ const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((
 const longArray = mainWordArray.filter((word: string) => word.length >= 7);
 
 // // HELPER:  async function to validate word by checking it in merriam webster api
-const base_url = 'https://www.dictionaryapi.com/api/v3/references/collegiate/json/';
-const apiKey = '?key=c9d049a8-6724-4795-87f9-e091f2940fce';
+
 
 async function validateWord (word: string): Promise<boolean> {
     try {
-        const res = await fetch(`${base_url}${word}${apiKey}`);
+        const res = await fetch(`${process.env.BASE_URL}${word}${process.env.API_KEY}`);
         if (res.ok) {
             const data = await res.json();
             if (data && typeof data[0] === 'object' && data[0].meta.id === word) {

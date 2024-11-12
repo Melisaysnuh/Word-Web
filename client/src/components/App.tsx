@@ -12,14 +12,13 @@ function App () {
 
 
   return (
-    <>
+
       <div className='main-container'>
         <nav className='navigation'><img src='/logo.svg' alt='word-web-logo' /></nav>
         <div className='subhead'>
           <GameComponent
           guessedWords={guessedWords}
           setGuessedWords={setGuessedWords}
-          totalPoints={totalPoints}
           setTotalPoints={setTotalPoints}
           />
           <WordListComponent
@@ -27,7 +26,7 @@ function App () {
           totalPoints = {totalPoints}/>
         </div>
       </div>
-    </>
+
   )
 }
 
