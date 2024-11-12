@@ -3,14 +3,13 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  padding: 30px;
-   background: radial-gradient(#381d75, #180a37);
-  border-radius: 20px;
+
+
 }
 .progress-bar-container {
   position: relative;
   width: 20%;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   padding: 1% 1%;
   display: flex;
   flex-direction: column;
@@ -68,49 +67,49 @@ ul {
 }
 .prog-spider-class-2 {
   position: absolute;
-  top: 21%;
+  top: 20%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
 }
 .prog-spider-class-3 {
   position: absolute;
-  top: 32%;
+  top: 30%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
 }
 .prog-spider-class-4 {
   position: absolute;
-  top: 43%;
+  top: 40%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
 }
 .prog-spider-class-5 {
   position: absolute;
-  top: 54%;
+  top: 50%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
 }
 .prog-spider-class-6 {
   position: absolute;
-  top: 64%;
+  top: 60%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
 }
 .prog-spider-class-7 {
   position: absolute;
-  top: 75%;
+  top: 70%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
 }
 .prog-spider-class-8 {
   position: absolute;
-  top: 86%;
+  top: 80%;
   margin-right: 20%;
   margin-left: 10%;
   z-index: 3;
@@ -122,3 +121,33 @@ ul {
 .normal {
   font-weight: 0;
 }
+.statusmess {
+
+  font-family: 'NTR';
+
+  font-size: 1.1rem;
+  text-shadow: 20%;
+padding: 0 0 0 10%;
+align-content: center;
+  width: 100%;
+  height: 10vh;
+  color: orange;
+  font-weight: 500;
+
+
+}
+.status{
+  align-content: center;
+  font-size: 1.1rem;
+  font-family: 'NTR';
+
+
+}
+.pointspan {
+  font-size: 0.7rem;
+  font-family: 'NTR';
+  color: orange;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+

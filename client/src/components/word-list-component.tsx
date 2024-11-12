@@ -33,27 +33,36 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
 
             if (prog> .125 && prog< .25) {
                 setSpiderClass('prog-spider-class-1');
+                setSpiderName('Weaver');
             }
             else if (prog> .25 && prog< .375) {
-                setSpiderClass('prog-spider-class-2')
+                setSpiderClass('prog-spider-class-2');
+                setSpiderName('Jumping');
             }
             else if (prog> .375 && prog< .5) {
-                setSpiderClass('prog-spider-class-3')
+                setSpiderClass('prog-spider-class-3');
+                setSpiderName('Tarantula');
             }
             else if (prog> .5 && prog< .625) {
-                setSpiderClass('prog-spider-class-4')
+                setSpiderClass('prog-spider-class-4');
+                setSpiderName('Trapdoor');
             }
             else if (prog> .625 && prog< .75) {
-                setSpiderClass('prog-spider-class-5')
+                setSpiderClass('prog-spider-class-5');
+                setSpiderName('Hunstman');
+
             }
             else if (prog> .75 && prog< .875) {
-                setSpiderClass('prog-spider-class-6')
+                setSpiderClass('prog-spider-class-6');
+                setSpiderName('Funnel-web');
             }
             else if (prog> .875 && prog< 1) {
-                setSpiderClass('prog-spider-class-7')
+                setSpiderClass('prog-spider-class-7');
+                setSpiderName('Recluse');
             }
             else if (prog=== 1) {
-                setSpiderClass('prog-spider-class-8')
+                setSpiderClass('prog-spider-class-8');
+                setSpiderName('BLACK WIDOW');
             }
         }
         setSpiderClassFunc(calculatePoints(guessedWords));
@@ -64,7 +73,9 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
     return (
         <>
 
-            <div id='word-list-container' className='block'>
+            <div className='block'>
+                <div className='statusmess'><span className='status'>Status: </span>{spiderName}</div>
+                <div id='word-list-container'>
                 <div className='progress-bar-container'>
                     <img id='prog-spider' className={spiderClass} src='./placeholder-spider.svg'></img>
                     <svg id='prog-line' height="450" width="50">
@@ -73,9 +84,11 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
                             <circle className="foreground" cx="3" cy="3" r="2" />
                         </marker>
                     </svg>
-
+                        <span className='pointspan'>{calculatePoints(guessedWords)} of {totalPoints} points</span>
                 </div>
+
                 <div id='word-list'>
+
 
                     <ul>
                         {guessedWords && guessedWords.length > 0 ? (
@@ -87,6 +100,7 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
                         )}
                     </ul>
 
+                </div>
                 </div>
             </div>
 

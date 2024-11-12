@@ -75,6 +75,10 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
         } else if (guessedWords.some((element:WordObj) => element.word.toUpperCase() === word)) {
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         }
+        else if (!word.includes(dailyLetters[0].toUpperCase())) {
+            console.log(word,' should include ', dailyLetters[0] )
+            setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
+        }
             else {
             const res = await checkWord(word, { guessedWords, setGuessedWords });
             if (res) {
@@ -111,7 +115,7 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
                 <img id='spiderweb' src='/spiderweb.svg' />
 
                 <form className="letter-form" >
-<div id='message' className={formStatus.success}>{formStatus.message}</div>
+                    <div className='message'><div className={formStatus.success}>{formStatus.message}</div></div>
                     <input type='text'
                         className='text-input'
                         value={guess}
