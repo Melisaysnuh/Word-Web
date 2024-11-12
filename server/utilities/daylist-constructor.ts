@@ -1,6 +1,6 @@
 import fs from 'fs';
 import { Daylist } from '../types/Daylist.js';
-import { count_length } from './count_length.js';
+import { countLength } from './count-length.js';
 import { generateAnagrams } from './generate-anagrams.js';
 import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
@@ -43,7 +43,7 @@ async function getRandomWord () {
     try {
         const rand = Math.floor(Math.random() * longArray.length);
         const test = longArray[rand];
-        if (count_length(test) === 7) {
+        if (countLength(test) === 7) {
             const result: boolean = await (validateWord(test))
             if (result)
                 return test
