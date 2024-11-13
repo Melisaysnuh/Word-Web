@@ -11,6 +11,7 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
     const [spiderName, setSpiderName] = useState('Daddy Long-Legs');
 
 
+
     function calculatePoints (guessedWords: WordObj[]) {
         let myPoints: number = 0;
         guessedWords.forEach((word) => {
@@ -24,9 +25,7 @@ function WordListComponent ({ guessedWords, totalPoints }: GameComponentProps) {
     useEffect(() => {
         const setSpiderClassFunc = (num: number) => {
             const total = totalPoints;
-            console.log('total points: ', totalPoints);
             const myPoints = num;
-            console.log('your points: ', myPoints);
             const prog = myPoints / total;
 
             console.log(prog, prog);

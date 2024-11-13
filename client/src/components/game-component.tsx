@@ -4,6 +4,8 @@ import { getDailyList} from '../services/api-client-get.tsx';
 import { checkWord } from '../services/api-client-checkword.tsx';
 import { WordObj } from '../types/WordObj.ts';
 import { GameComponentProps } from '../types/GameComponent.ts';
+import { generateRandomIndices } from '../utilities/shuffle-utility.tsx';
+import { calculatePoints } from '../utilities/calculate-totals-utility.tsx';
 
 
 
@@ -11,9 +13,6 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
-
-
-
 
 
 
@@ -31,39 +30,17 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
         }
     }
 
-    function generateRandomIndices (letters: string[]) {
-
-        const remainingLetters = letters.slice(1);
-        const shuffled = [letters[0]]
-        while (remainingLetters.length) {
-            const randomIndex = Math.floor(Math.random() * remainingLetters.length);
-            shuffled.push(remainingLetters.splice(randomIndex, 1)[0]);
-        }
-        return shuffled;
-
-    };
     const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const guess = event.target.value.toLowerCase()
         const lastKey = guess[guess.length-1]
-        console.log('last key: ', lastKey);
-        setGuess(event.target.value.toUpperCase());
-        console.log(dailyLetters)
-
-
-        // Check if the pressed key matches any of the daily letters
+                setGuess(event.target.value.toUpperCase());
         if (dailyLetters.includes(lastKey)) {
-            console.log('yes')
-
-
-            // Find the button associated with this key
             const button = document.querySelector(`button[value="${lastKey}"]`);
             if (button) {
                 button.classList.add('flash');
-
-                // Remove the 'flash' class after a short period (e.g., 300ms)
-                setTimeout(() => {
+        setTimeout(() => {
                     button.classList.remove('flash');
-                }, 300);
+                }, 200);
             }
         }
     }
@@ -119,12 +96,12 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
         async function fetchShuffle () {
             const list = await fetchDailyList();
             const letters = list.letters;
-            const totalP = list.totalPoints;
+            const allWords = list.validWords;
             const shuffled = generateRandomIndices(letters);
             setDailyLetters(shuffled);
             setGuess('');
             setFormStatus({ success: 'none', message: '' });
-            setTotalPoints(totalP);
+            setTotalPoints(calculatePoints(allWords));
         }
         fetchShuffle();
     }, [setTotalPoints]);
