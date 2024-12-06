@@ -1,8 +1,8 @@
-import './App.css'
+import '../styles/App.css'
 import GameComponent from './game-component'
 import WordListComponent from './word-list-component'
 import { useState } from 'react'
-import { WordObj } from '../types/WordObj'
+import WordObj from '../types/WordObj'
 
 
 
@@ -20,10 +20,13 @@ function App () {
           guessedWords={guessedWords}
           setGuessedWords={setGuessedWords}
           setTotalPoints={setTotalPoints}
+          totalPoints={totalPoints}
+
           />
           <WordListComponent
           guessedWords={guessedWords}
           totalPoints = {totalPoints}/>
+
         </div>
       </div>
 

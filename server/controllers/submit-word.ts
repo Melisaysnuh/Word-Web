@@ -1,4 +1,4 @@
-import { checkWord } from '../modules/check-word.js';
+import { checkWord } from '../Models/check-word.js';
 import { Request, Response } from 'express';
 
 export async function submitWordController (req: Request, res: Response) {

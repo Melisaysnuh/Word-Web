@@ -1,13 +1,17 @@
-import './game-component.css';
+import '../styles/game-component.css';
 import React, { useState, useEffect } from 'react';
-import { getDailyList} from '../services/api-client-get.tsx';
-import { checkWord } from '../services/api-client-checkword.tsx';
-import { WordObj } from '../types/WordObj.ts';
-import { GameComponentProps } from '../types/GameComponent.ts';
-import { generateRandomIndices } from '../utilities/shuffle-utility.tsx';
-import { calculatePoints } from '../utilities/calculate-totals-utility.tsx';
+import { getDailyList } from '../services/api-client-get';
+import { checkWord } from '../services/api-client-checkword';
+import WordObj from '../types/WordObj';
+import { generateRandomIndices } from '../utilities/shuffle-utility';
+import calculatePoints from '../utilities/calculate-totals-utility';
 
-
+export interface GameComponentProps {
+    guessedWords: WordObj[];
+    setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
+    totalPoints: number;
+    setTotalPoints: React.Dispatch<React.SetStateAction<number>>;
+}
 
 function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameComponentProps) {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
@@ -49,8 +53,8 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault();
-
-        setGuess(`${guess}${event.target.value.toUpperCase()}`)
+        const target = event.target as HTMLButtonElement;
+        setGuess(`${guess}${target.value.toUpperCase()}`)
     }
     const handleClear = (event: React.MouseEvent<HTMLButtonElement>) =>{
         event.preventDefault();

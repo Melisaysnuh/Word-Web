@@ -1,9 +1,11 @@
-import { GameComponentProps } from "../types/GameComponent";
 import { base_URL } from "./api-client-get";
-import { WordObj } from "../types/WordObj";
+import WordObj from "../types/WordObj";
+interface CheckWordProps {
+    guessedWords: WordObj[];
+    setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
+};
 
-
-export const checkWord = async (word: string, { guessedWords, setGuessedWords }: GameComponentProps) => {
+export const checkWord = async (word: string, { guessedWords, setGuessedWords }: CheckWordProps) => {
     const wordObj = { word };
     try {
         const res = await fetch(`${base_URL}/submit`, {

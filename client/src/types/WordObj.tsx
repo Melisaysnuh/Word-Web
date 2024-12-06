@@ -1,4 +1,4 @@
-export interface WordObj {
+export default interface WordObj {
 
     word: string;
     points: number;

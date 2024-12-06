@@ -10,9 +10,12 @@ export default defineConfig({
     },
   },
   build: {
+    outDir: 'build',
     rollupOptions: {
-
-      external: [],
-    },
-  },
+      input: './src/main.tsx',
+      output: {
+        dir: 'build',
+      }
+    }
+  }
 });

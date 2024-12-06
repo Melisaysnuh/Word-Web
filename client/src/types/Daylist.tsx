@@ -1,5 +1,5 @@
-import { WordObj } from "./WordObj";
-export interface Daylist {
+import WordObj from "./WordObj";
+export default interface Daylist {
 
         id: string;
         pangrams: string[];

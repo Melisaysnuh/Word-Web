@@ -10,6 +10,8 @@
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
+        "outDir": "./build",
+    "rootDir": "./src",
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,

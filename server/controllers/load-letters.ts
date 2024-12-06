@@ -1,6 +1,6 @@
-import { fetchListModule } from "../modules/fetch-list.js"
+import { fetchListModule } from "../Models/fetch-list.js"
 import { Request, Response } from 'express';
-import { storeSessionModule } from "../modules/session.js";
+import { storeSessionModule } from "../Models/session.js";
 
 
 export async function loadLettersController (req: Request, res:Response) {

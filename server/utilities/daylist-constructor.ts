@@ -15,9 +15,12 @@ const now = format(new Date(), "yyyy_MM_dd");
 // ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 
 // FETCH WORD LISTS
-const wordListPath = await import('word-list').then(module => module.default);
-const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((word: string) => word.length >= 4);
-const longArray = mainWordArray.filter((word: string) => word.length >= 7);
+async function getLongArray (){
+    const wordListPath = await import('word-list').then(module => module.default);
+    const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((word: string) => word.length >= 4);
+    return mainWordArray.filter((word: string) => word.length >= 7);
+}
+
 
 // // HELPER:  async function to validate word by checking it in merriam webster api
 
@@ -47,8 +50,9 @@ async function validateWord (word: string): Promise<boolean> {
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
 async function getRandomWord () {
     try {
+        const longArray = await getLongArray()
         const rand = Math.floor(Math.random() * longArray.length);
-        const test = longArray[rand];
+        const test: string = longArray[rand];
         if (countLength(test) === 7) {
             const result: boolean = await (validateWord(test))
             if (result)
@@ -116,6 +120,7 @@ async function getCenter (list: string[], word: string) {
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor (): Promise<Daylist | undefined> {
     try {
+        const mainWordArray = await getLongArray()
         console.log('in constructor');
         const word = await getRandomWord();
         if (word) {
