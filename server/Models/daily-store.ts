@@ -12,10 +12,10 @@ export const job = new CronJob(
             const result = await finalConstructor();
             if (result) {
                 const createdList = await dayModel.create(result);
-                console.log('list successfully stored like this: ', createdList)
+                console.log('list successfully created.")
 
             }
-            else throw new Error('could not get day list from service');
+            else throw new Error('error fetching list from service');
             console.log(error);
         }
         catch (e) {
@@ -34,7 +34,7 @@ job.start();
         const result = await finalConstructor();
         if (result) {
             const createdList = await dayModel.create(result);
-            console.log('list successfully stored like this: ', createdList)
+            console.log('list successfully stored.')
 
         }
         else throw new Error('could not get day list from service');

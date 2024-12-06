@@ -80,7 +80,6 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         }
         else if (!word.includes(dailyLetters[0].toUpperCase())) {
-            console.log(word,' should include ', dailyLetters[0] )
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
         }
             else {

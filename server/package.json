@@ -8,7 +8,7 @@
   "build": "tsc",
   "dev": "node dist/index.js",
   "watch": "concurrently \"tsc -w\" \"nodemon dist/index.js\"",
-  "store": "tsc && concurrently \"tsc -w\" \"nodemon dist/Models/daily-store.js\"",
+  "start": "tsc && concurrently \"tsc -w\" \"nodemon dist/Models/daily-store.js\"",
   "this": "tsc && concurrently \"tsc -w\" \"nodemon dist/Models/session.js\""
 },
   "keywords": [],

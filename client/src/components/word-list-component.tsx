@@ -32,8 +32,6 @@ function WordListComponent ({ guessedWords, totalPoints }: WordListProps)  {
             const myPoints = num;
             const prog = myPoints / total;
 
-            console.log(prog, prog);
-
             if (prog> .10 && prog< .20) {
                 setSpiderClass('prog-spider-class-1');
                 setSpiderName('Weaver');
