@@ -32,7 +32,6 @@ export async function checkWord (thisWord: string, ) {
             const toCheck: WordObj[] | null = list.validWords;
 
             const res= toCheck.find((obj) => obj.word == thisWord);
-            console.log('result: ', res)
             if (!res) {
                 return {}
             }

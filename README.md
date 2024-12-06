@@ -75,7 +75,6 @@ Navigate into /server and run npm i
 
 Run npm run start
 
-Run npm run store to store the list for the day
 
 
 *Start the frontend*
@@ -83,7 +82,7 @@ Navigate into /client
 
 Run npm i
 
-Run npm run dev
+Run npm run start
 
 You will now load the game.
 
