@@ -1,50 +1,15 @@
-import fs from 'fs';
 import { Daylist } from '../types/Daylist.js';
-import { countLength } from './count-length.js';
 import { generateAnagrams } from './generate-anagrams.js';
 import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
 import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
-import {configDotenv} from 'dotenv';
-configDotenv();
+import { getLongArray, validateWord } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
 
 
-// ABOUT: This is my backend service, that will eventually run  once a day at 8 a.m. to generate the letters and words for the daily game. It uses a word list to get the words, as well as merriam webster's free api to validate that word variants or non-words aren't included. the word list i chose is filtered for profanity, or else that would be included here.
 
-// FETCH WORD LISTS
-async function getLongArray (){
-    const wordListPath = await import('word-list').then(module => module.default);
-    const mainWordArray = fs.readFileSync(wordListPath, 'utf8').split('\n').filter((word: string) => word.length >= 4);
-    return mainWordArray.filter((word: string) => word.length >= 7);
-}
-
-
-// // HELPER:  async function to validate word by checking it in merriam webster api
-
-
-async function validateWord (word: string): Promise<boolean> {
-    try {
-        const url = process.env.API_BASE_URL;
-        const apiKey = process.env.API_KEY;
-        console.log('URL after update: ', url);
-        const res = await fetch(`${url}${word}${apiKey}`);
-        if (res.ok) {
-            const data = await res.json();
-            if (data && typeof data[0] === 'object' && data[0].meta.id === word) {
-                return true;
-            }
-            else { return false; }
-        }
-        else throw new Error(`Response: ${res.status}`);
-    }
-    catch (e) {
-        console.error('error validating word in api', e)
-        throw e;
-    }
-}
 
 // GET RANDOM WORD
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
@@ -53,7 +18,7 @@ async function getRandomWord () {
         const longArray = await getLongArray()
         const rand = Math.floor(Math.random() * longArray.length);
         const test: string = longArray[rand];
-        if (countLength(test) === 7) {
+        if (test.length === 7) {
             const result: boolean = await (validateWord(test))
             if (result)
                 return test
@@ -69,7 +34,7 @@ async function getRandomWord () {
 }
 
 
-/* // FIND CENTER LETTER FOR GAME (MOST COMMON)
+ // FIND CENTER LETTER FOR GAME (LEAST COMMON)
 async function getCenter (list: string[], word: string) {
     try {
 
@@ -95,7 +60,7 @@ async function getCenter (list: string[], word: string) {
         console.log('error in getting center letter: ', e)
     }
 }
- */
+
 //todo fix this to remove weird words
 /* async function validWordArray (list: string[]) {
     try {
@@ -113,8 +78,8 @@ async function getCenter (list: string[], word: string) {
         console.log('error validating array: ', e)
 
     }
-} */
-
+}
+ */
 
 
 // *CONSTRUCT OUR LIST AND EXPORT
@@ -129,11 +94,12 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
             const anagrams = generateAnagrams(word, mainWordArray);
 
 
-                const index = Math.floor(Math.random()*7);
-                const center = uniqueArray[index];
-                uniqueArray.splice(index, 1);
-                uniqueArray.unshift(center);
 
+                const center = await getCenter(anagrams, word)
+                // can't remember why i have this
+                // uniqueArray.splice(index, 1);
+                // uniqueArray.unshift(center);
+                if (center) {
                 const filteredAnagrams = centerFilter(anagrams, center);
                 /* const anagrams3 = await validWordArray(filteredAnagrams); */
                 if (filteredAnagrams) {
@@ -152,7 +118,7 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                         validWords: anagramObjList,
                         sessions: []
                     }
-                }
+                }}
 
 
         }
