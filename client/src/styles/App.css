@@ -14,5 +14,18 @@
 .main-container {
   height: 100vh;
 }
+.other-button {
+    border-radius: 12px;
+  width: 80%;
+  border: 0;
+  font-family: 'Nunito';
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 8px;
+  margin: 8px;
+   background: #180a37;
+   color: orange;
+   box-shadow: 1px 1px 1px 1px #381d75;
 
+}
 

@@ -7,8 +7,5 @@ export interface Daylist {
         letters: string[];
         totalPoints: number;
         validWords: WordObj[];
-        sessions: {
-                sessionId: string;
-        }[]
 
 }

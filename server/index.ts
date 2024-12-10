@@ -6,6 +6,9 @@ import cors from 'cors';
 import session from 'express-session';
 import { randomUUID } from 'crypto';
 
+import crypto from 'crypto';
+const jwtSecret = crypto.randomBytes(64).toString('hex');
+console.log(jwtSecret);
 app.use(
     session({
         genid: function () {

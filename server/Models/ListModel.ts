@@ -1,9 +1,38 @@
-import { dayModel } from './index.js';
+import { dayModel } from "./index.js"
+import { Daylist } from "../types/Daylist.js";
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
 import { finalConstructor } from '../utilities/daylist-constructor.js';
 import { error } from 'console';
 import { CronJob } from 'cron';
 
 
+
+
+
+export async function fetchListModel () {
+    try {
+
+        const list: Daylist | null = await dayModel.findOne({
+            id: now
+        });
+        if (list) {
+
+            return list
+        }
+        else {
+            console.log('No data found for today:', now);
+            return null;
+        }
+
+    }
+
+
+    catch (e) {
+        console.log('error fetching list from your db: ', e)
+    }
+
+}
 
 export const job = new CronJob(
     '0 0 0 * * *', // cronTime
@@ -29,7 +58,7 @@ export const job = new CronJob(
 );
 job.start();
 
- async function storeDayModuleTest () {
+ async function storeListModel () {
     try {
         console.log('in storedaytest');
         const result = await finalConstructor();
@@ -45,4 +74,4 @@ job.start();
         console.log('error storing day', e)
     }
 };
-storeDayModuleTest();
+storeListModel();

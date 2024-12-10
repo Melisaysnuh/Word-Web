@@ -8,6 +8,7 @@ import LoginComponent from './login-component'
 
 
 
+
 function App () {
   const [guessedWords, setGuessedWords] = useState<WordObj[]>([]);
   const [totalPoints, setTotalPoints] =useState<number>(0);
@@ -23,9 +24,11 @@ function App () {
 
   return (
     <>
-      {registerModal && <RegisterComponent />}
-      {loginModal && <LoginComponent />} <div className='main-container'>
-        <nav className='navigation'><img src='/logo.svg' alt='word-web-logo' /><div><button onClick={handleLoginClick}>Log in</button><button onClick={handleRegisterClick}>Register</button></div> </nav>
+      {registerModal && <RegisterComponent setRegisterModal={setRegisterModal} />}
+      {loginModal && <LoginComponent setLoginModal={setLoginModal}/>}  <div className='main-container'>
+        <nav className='navigation'><img src='/logo.svg' alt='word-web-logo' /><div><button className='other-button'
+        onClick={handleLoginClick}>Log in</button><button
+            className='other-button' onClick={handleRegisterClick}>Register</button></div> </nav>
         <div className='subhead'>
           <GameComponent
             guessedWords={guessedWords}

@@ -1,5 +1,5 @@
 import { Daylist } from "../types/Daylist.js";
-import { fetchListModule } from "./fetch-list.js";
+import { fetchListModel } from "./ListModel.js";
 import { WordObj } from "../types/WordObj.js";
 import { CronJob } from "cron";
 
@@ -17,7 +17,7 @@ export async function checkWord (thisWord: string, ) {
     let list: Daylist | null | undefined;
     try {
         if (!cache) {
-            list = await fetchListModule();
+            list = await fetchListModel();
             if (list) {
                 cache = list;
 

@@ -4,7 +4,7 @@ import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
 import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
-import { getLongArray, validateWord } from './word-list-mgmt.js';
+import { getArray, validateWord } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
 
@@ -15,16 +15,18 @@ const now = format(new Date(), "yyyy_MM_dd");
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
 async function getRandomWord () {
     try {
-        const longArray = await getLongArray()
+        const longArray = await getArray(7, 7)
         const rand = Math.floor(Math.random() * longArray.length);
-        const test: string = longArray[rand];
-        if (test.length === 7) {
-            const result: boolean = await (validateWord(test))
+        const candidate: string = longArray[rand];
+        const regex = /^(?!.*(.).*\1)[a-z]+$/;
+        console.log(`candidate is ${candidate} and it is ${regex.test(candidate)}`)
+        if (candidate.length === 7 && regex.test(candidate)) {
+            const result: boolean = await validateWord(candidate);
             if (result)
-                return test
+                return candidate
         }
 
-        return getRandomWord()
+     return getRandomWord()
             ;
     }
     catch (e) {
@@ -85,7 +87,7 @@ async function getCenter (list: string[], word: string) {
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor (): Promise<Daylist | undefined> {
     try {
-        const mainWordArray = await getLongArray()
+        const mainWordArray = await getArray(4, 12)
         console.log('in constructor');
         const word = await getRandomWord();
         if (word) {
@@ -116,7 +118,7 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                         letters: uniqueArray,
                         totalPoints: calculateTotal(anagramObjList),
                         validWords: anagramObjList,
-                        sessions: []
+
                     }
                 }}
 

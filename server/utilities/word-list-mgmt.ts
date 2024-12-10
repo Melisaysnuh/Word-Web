@@ -1,12 +1,12 @@
 import fs from 'fs';
-const WORDS_FILE = '../words.txt';
+const WORDS_FILE = './words.txt';
 import dotenv from 'dotenv';
 dotenv.config()
 
 
-export const getLongArray = async () => {
-    const mainWordArray = fs.readFileSync(WORDS_FILE, 'utf8').split('\n').filter((word: string) => word.length >= 4);
-    return mainWordArray.filter((word: string) => word.length >= 7);
+export const getArray = async (num: number, num2: number) => {
+    const mainWordArray = fs.readFileSync(WORDS_FILE, 'utf8').split('\n').filter((word: string) => word.length >= num && word.length <= num2);
+    return mainWordArray
 }
 
 
@@ -23,7 +23,7 @@ export const validateWord = async (word: string): Promise<boolean> => {
                 return true;
             }
             else {
-                console.log(word, 'is not valid...trying to delete');
+                console.log(word, 'is not valid');
                 return false;
             }
         }
