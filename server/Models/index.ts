@@ -1,8 +1,8 @@
 import { Schema } from 'mongoose';
 import mongoose from 'mongoose';
-async function connectDB () {
+export async function connectDB () {
     try {
-        await mongoose.connect('mongodb://localhost:27017/wordweb');
+        await mongoose.connect('mongodb://localhost:27018/wordweb');
         console.log('successfully connected in model');
         return {
             statusCode: 200,

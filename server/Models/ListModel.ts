@@ -71,7 +71,7 @@ job.start();
         console.log(error);
     }
     catch (e) {
-        console.log('error storing day', e)
+        console.error('Error storing day:', e);
     }
 };
 storeListModel();

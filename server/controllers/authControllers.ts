@@ -3,20 +3,20 @@ import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
-import UserModel from '../Models/UserModel';
-import { UserI } from '../types/User';
+import UserModel from '../Models/UserModel.js';
+// import { UserI } from '../types/User';
 
 dotenv.config();
 // automatic jwtSecretgenerator
 const jwtSecret = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex');
 
-const generateToken = (user: UserI) => {
+/* const generateToken = (user: UserI) => {
     return jwt.sign(
         { _id: user._id, email: user.email, firstName: user.firstName },
         jwtSecret,
         { expiresIn: '1d' }
     );
-};
+}; */
 
 export const registerController = async (req: Request, res: Response): Promise<void> => {
     const { email, password, firstName } = req.body;
@@ -49,6 +49,7 @@ export const registerController = async (req: Request, res: Response): Promise<v
         );
         console.log(`user ${user.email} registered`)
         res.status(201).json({
+            user: user,
             message: `${user.email} was successfully registered`,
             token
         });
@@ -84,7 +85,7 @@ export const editController = async (req: Request, res: Response): Promise<void 
             const token = jwt.sign({ _id: updated._id, email: updated.email, firstName: updated.firstName }, jwtSecret, { expiresIn: '1d' });
             res.status(200).json({
                 token,
-                updated: {
+                user: {
                     _id: updated._id,
                     email: updated.email,
                     firstName: updated.firstName,

@@ -1,12 +1,15 @@
 import { useState, FormEvent } from 'react';
 import '../styles/modal.css'
 import { register } from '../services/authService';
+import { UserI } from '../types/User';
+
 
 interface RegisterProps {
-    setRegisterModal: (view: boolean) => void
+    setRegisterModal: (view: boolean) => void;
+    setUser: (user: UserI) => void;
  }
 
-const RegisterComponent: React.FC<RegisterProps> = ({setRegisterModal}) => {
+const RegisterComponent: React.FC<RegisterProps> = ({setRegisterModal, setUser}) => {
     const [message, setMessage] = useState("");
 const [formData, setFormData] = useState({
     firstName: '',
@@ -26,18 +29,30 @@ const [formData, setFormData] = useState({
             return;
         }
         try {
-           await register(formData);
+           const response = await register(formData)
+           if (response && response.user) {
+            setUser(response.user);
+            console.log('user is', response.user.firstName)
+               setMessage('User registered successfully!')
+           }
+
+
+
             setRegisterModal(false)
         } catch (error) {
             setMessage("Error registering. Please try again. " + error);
         }
     };
+    const handleClose = () => {
+        return setRegisterModal(false);
+    }
 
     return (
         <>
             <div className="modal-background">
                 <form className='modal-form'
                 onSubmit={handleSubmit}>
+                    <button className="btn" onClick={handleClose}><i className="fa fa-close"></i></button>
                     <h3>Register</h3>
                     <label htmlFor='first-name'>First Name (Optional)</label>
                         <input id='first-name'

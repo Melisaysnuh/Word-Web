@@ -1,4 +1,5 @@
 import { WordObj } from "./WordObj";
+
 export interface Daylist {
 
         id: string;

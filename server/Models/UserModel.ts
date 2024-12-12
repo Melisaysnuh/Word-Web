@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 import { UserI } from '../types/User';
 
 
-const userSchema = new Schema<UserI>({
+export const userSchema = new Schema<UserI>({
     email: {
         type: String,
         required: [true, "Email is required"],
