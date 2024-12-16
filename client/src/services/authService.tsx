@@ -1,19 +1,14 @@
 import { LoginDataI, RegisterDataI, UserI } from "../types/User";
+import {jwtDecode, JwtPayload} from 'jwt-decode';
 
 // todo move to env
 const AUTH_URL = "http://localhost:3000/auth";
-
-
-export const getToken = (): string | null => {
-  return localStorage.getItem("token");
-};
 
 export interface AuthResponse {
   token?: string;
   message?: string;
   user?: UserI;
 }
-
 
 const fetchAPI = async (
   url: string,
@@ -78,5 +73,27 @@ export const login = async (
     throw error;
   }
 };
+export const getToken = (): string | null => {
+  return localStorage.getItem("token");
+};
 
+
+export const decodeToken = (token: string ): UserI | null => {
+  try {
+    return jwtDecode(token);
+  } catch (error) {
+    console.error("Invalid token" + error);
+    return null;
+  }
+}
+
+
+export function getDecodedToken () {
+  const token = getToken();
+  return token ? decodeToken(token) : null;
+}
+
+export function isTokenExpired (decodedToken: string) {
+  if (!decodedToken) return true;
+}
 

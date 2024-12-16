@@ -1,21 +1,22 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useContext } from 'react';
 import '../styles/modal.css'
 import { register } from '../services/authService';
-import { UserI } from '../types/User';
+import { AuthContext } from '../context/UserContext';
 
 
 interface RegisterProps {
     setRegisterModal: (view: boolean) => void;
-    setUser: (user: UserI) => void;
  }
 
-const RegisterComponent: React.FC<RegisterProps> = ({setRegisterModal, setUser}) => {
+const RegisterComponent: React.FC<RegisterProps> = ({setRegisterModal}) => {
     const [message, setMessage] = useState("");
 const [formData, setFormData] = useState({
     firstName: '',
     email: '',
     password: '',
 });
+
+    const { setUser } = useContext(AuthContext);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });

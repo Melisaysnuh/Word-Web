@@ -1,20 +1,20 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useContext } from 'react';
 import '../styles/modal.css'
 import { login } from '../services/authService';
-import { UserI } from '../types/User';
+import { AuthContext } from '../context/UserContext';
+
 
 interface LoginProps {
     setLoginModal: (view: boolean) => void;
-    setUser: (user: UserI) => void;
  }
 
-const RegisterComponent: React.FC<LoginProps> = ({setLoginModal, setUser}) => {
+const RegisterComponent: React.FC<LoginProps> = ({setLoginModal}) => {
     const [message, setMessage] = useState("");
 const [formData, setFormData] = useState({
     email: '',
     password: '',
 });
-
+    const { setUser } = useContext(AuthContext);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
@@ -45,12 +45,12 @@ const [formData, setFormData] = useState({
                     <h3>Welcome back!</h3>
                     <label htmlFor='email'>Email</label>
                         <input id='email'
-                        type='text'
+                        type='email'
                         name='email'
                         onChange={handleChange}></input>
                     <label htmlFor='password'>Password</label>
                         <input id='password'
-                        type='text'
+                        type='password'
                         name='password'
                         onChange={handleChange}></input>
                         <button

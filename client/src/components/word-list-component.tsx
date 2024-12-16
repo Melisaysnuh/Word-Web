@@ -1,20 +1,15 @@
 import WordObj from '../types/WordObj';
 import '../styles/word-list-component.css';
 
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../context/UserContext';
 
 
-export interface WordListProps {
-    guessedWords: WordObj[];
-totalPoints: number;
-};
-
-
-function WordListComponent ({ guessedWords, totalPoints }: WordListProps)  {
+function WordListComponent ()  {
     const [spiderClass, setSpiderClass] = useState('prog-spider-class-0');
     const [spiderName, setSpiderName] = useState('Daddy Long-Legs');
 
-
+const {guessedWords, totalPoints } = useContext(AuthContext)
 
     function calculatePoints (guessedWords: WordObj[]) {
         let myPoints: number = 0;
