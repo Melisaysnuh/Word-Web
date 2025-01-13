@@ -12,6 +12,8 @@ export interface RegisterDataI extends LoginDataI {
 export interface HistoryI {
     daylist_id: string;
     guessedWords: WordObj[];
+    totalPoints: number;
+    level: string;
 }
 export interface UserI extends RegisterDataI{
     _id: string;

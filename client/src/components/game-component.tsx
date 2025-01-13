@@ -1,24 +1,24 @@
 import '../styles/game-component.css';
-import React, { useState, useEffect } from 'react';
-import { getDailyList } from '../services/api-client-get';
-import { checkWord } from '../services/api-client-checkword';
+import React, { useState, useEffect, useContext } from 'react';
+import { getDailyList } from '../services/list-service';
+import { checkWord } from '../services/submit-service';
 import WordObj from '../types/WordObj';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
-import calculatePoints from '../utilities/calculate-totals-utility';
+import { calculatePoints } from '../utilities/points-utility';
+import { AuthContext } from '../context/UserContext';
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
+import { HistoryI } from '../types/User';
+import SubmitWordResponse from '../types/SubmitWordResponse';
 
-export interface GameComponentProps {
-    guessedWords: WordObj[];
-    setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
-    totalPoints: number;
-    setTotalPoints: React.Dispatch<React.SetStateAction<number>>;
-}
 
-function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameComponentProps) {
+function GameComponent () {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
+    const [date] = useState<string>(now)
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
 
-
+    const { user, guessedWords, setGuessedWords, totalPoints, setTotalPoints } = useContext(AuthContext);
 
     async function fetchDailyList () {
         try {
@@ -83,11 +83,32 @@ function GameComponent ({ guessedWords, setGuessedWords, setTotalPoints}: GameCo
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
         }
             else {
-            const res = await checkWord(word, { guessedWords, setGuessedWords });
-            if (res) {
-                setFormStatus({ success: 'fail', message: 'Word not in list.' });
-            } else
-                setFormStatus({ success: 'pass', message: 'nice!' });
+            const res: SubmitWordResponse | {error: string} | undefined  = await checkWord(word);
+               if ( res !== undefined && 'history' in res) {
+                const userHistory: HistoryI[] | undefined = res.history;
+                if (userHistory !== undefined){
+                const todayHistory: HistoryI = userHistory.filter(h  => h.daylist_id === date)[0];
+                if (todayHistory && todayHistory.guessedWords) {
+                    // todayHistory.guessedWords is likely an array of objects, which may or may not match your WordObj type
+                    // Adjust as necessary to match your expected structure.
+                    setGuessedWords(todayHistory.guessedWords);
+                }}
+                if (res.valid === true) {
+                    const resWord = res.guessedWord as WordObj;
+                    if (resWord) {
+
+                        setGuessedWords([...guessedWords, resWord]);
+                        setFormStatus({ success: 'pass', message: resWord.word + ' is a valid word!.' });
+                    }
+                }
+                else {
+                    console.log('word was not valide!');
+                    setFormStatus({ success: 'fail', message: `${word} is not valid` });
+                }
+            }
+
+
+
         }
         setGuess('');
     }

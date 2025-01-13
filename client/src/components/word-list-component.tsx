@@ -3,6 +3,7 @@ import '../styles/word-list-component.css';
 
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/UserContext';
+import { calculatePoints } from '../utilities/points-utility';
 
 
 function WordListComponent ()  {
@@ -11,14 +12,6 @@ function WordListComponent ()  {
 
 const {guessedWords, totalPoints } = useContext(AuthContext)
 
-    function calculatePoints (guessedWords: WordObj[]) {
-        let myPoints: number = 0;
-        guessedWords.forEach((word) => {
-            myPoints += word.points;
-
-        });
-        return myPoints;
-    }
 
 
     useEffect(() => {

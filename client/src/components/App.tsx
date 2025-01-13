@@ -4,7 +4,7 @@ import WordListComponent from './word-list-component'
 import RegisterComponent from './register-component'
 import LoginComponent from './login-component'
 import { AuthContext } from '../context/UserContext'
-import { logout } from '../services/authService'
+import { logout } from '../services/auth-service'
 import { useContext, useState } from 'react'
 
 

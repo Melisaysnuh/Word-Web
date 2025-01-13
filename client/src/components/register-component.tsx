@@ -1,6 +1,6 @@
 import { useState, FormEvent, useContext } from 'react';
 import '../styles/modal.css'
-import { register } from '../services/authService';
+import { register } from '../services/auth-service';
 import { AuthContext } from '../context/UserContext';
 
 

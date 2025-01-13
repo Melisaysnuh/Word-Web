@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import { UserI } from '../types/User';
 
 
+
 export const userSchema = new Schema<UserI>({
     email: {
         type: String,
@@ -21,7 +22,11 @@ export const userSchema = new Schema<UserI>({
     },
     firstName: {
         type: String,
-        required: [false, "First name is required"],
+        required: [false],
+    },
+    history: {
+        type: Array,
+        required: [false]
     }
 
 });

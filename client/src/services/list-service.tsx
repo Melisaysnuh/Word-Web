@@ -14,8 +14,9 @@ export const getDailyList = async () => {
         )
         if (res) {
             const data = await res.json();
-            const {list, session} = data;
-                       return {list, session}
+            const list = data;
+                       return list
+
 
         }
     }

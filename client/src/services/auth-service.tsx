@@ -1,10 +1,12 @@
 import { LoginDataI, RegisterDataI, UserI } from "../types/User";
-import {jwtDecode, JwtPayload} from 'jwt-decode';
+import {jwtDecode} from 'jwt-decode';
+
+
 
 // todo move to env
 const AUTH_URL = "http://localhost:3000/auth";
 
-export interface AuthResponse {
+export interface AuthuserResponse {
   token?: string;
   message?: string;
   user?: UserI;
@@ -13,22 +15,22 @@ export interface AuthResponse {
 const fetchAPI = async (
   url: string,
   options: RequestInit
-): Promise<AuthResponse> => {
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    const errorMessage = `Error: ${response.status} ${response.statusText}`;
+): Promise<AuthuserResponse> => {
+  const userResponse = await fetch(url, options);
+  if (!userResponse.ok) {
+    const errorMessage = `Error: ${userResponse.status} ${userResponse.statusText}`;
     console.error(errorMessage);
     throw new Error(errorMessage);
   }
-  return response.json();
+  return userResponse.json();
 };
 
 
 export const register = async (
   userData: RegisterDataI
-): Promise<AuthResponse | undefined> => {
+): Promise<AuthuserResponse | undefined> => {
   try {
-    const response = await fetchAPI(`${AUTH_URL}/register`, {
+    const userResponse = await fetchAPI(`${AUTH_URL}/register`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -37,10 +39,10 @@ export const register = async (
       body: JSON.stringify(userData),
     });
 
-    if (response.token) {
-      localStorage.setItem("token", response.token);
+    if (userResponse.token) {
+      localStorage.setItem("token", userResponse.token);
     }
-    return response;
+    return userResponse;
   } catch (error) {
     console.error("Auth service error on register: ", error);
     throw error;
@@ -53,9 +55,9 @@ export const logout = (): void => {
 
 export const login = async (
   userData: LoginDataI
-): Promise<AuthResponse> => {
+): Promise<AuthuserResponse> => {
   try {
-    const response = await fetchAPI(`${AUTH_URL}/login`, {
+    const userResponse = await fetchAPI(`${AUTH_URL}/login`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -63,11 +65,14 @@ export const login = async (
       },
       body: JSON.stringify(userData),
     });
-    if (response && response.token) {
-      localStorage.setItem("token", response.token);
+    if (userResponse && userResponse.token) {
+      localStorage.setItem("token", userResponse.token);
 
     }
-    return response
+
+
+
+    return userResponse
   } catch (error) {
     console.error("Service error logging in: ", error);
     throw error;
@@ -80,7 +85,13 @@ export const getToken = (): string | null => {
 
 export const decodeToken = (token: string ): UserI | null => {
   try {
-    return jwtDecode(token);
+    const thisUser: UserI = jwtDecode(token);
+    if (thisUser) {
+
+
+      return thisUser
+    } else return null
+
   } catch (error) {
     console.error("Invalid token" + error);
     return null;
@@ -96,4 +107,5 @@ export function getDecodedToken () {
 export function isTokenExpired (decodedToken: string) {
   if (!decodedToken) return true;
 }
+
 

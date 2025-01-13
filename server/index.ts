@@ -1,13 +1,14 @@
 import express from 'express';
 const app = express();
-import { loadLettersController } from './controllers/load-letters.js';
-import { submitWordController } from './controllers/submit-word.js';
+import { loadLettersController } from './controllers/fetch-controller.js';
+import { submitWordController } from './controllers/submit-controller.js';
 import cors from 'cors';
 import { connectDB } from './Models/index.js';
 
 import crypto from 'crypto';
 //import { authMiddleware } from './middleware/authMiddleware.js';
-import { loginController, registerController } from './controllers/authControllers.js';
+import { loginController, registerController } from './controllers/auth-controller.js';
+import { authMiddleware } from './middleware/authMiddleware.js';
 const jwtSecret = crypto.randomBytes(64).toString('hex');
 console.log(jwtSecret);
 
@@ -23,12 +24,12 @@ app.use(express.json());
 
     (async () => {
         await connectDB();
-        console.log('Application is ready');
+        console.log('DB Connected from server.');
     })()
 
 
 app.get("/", loadLettersController);
-app.post('/submit', submitWordController);
+app.post('/submit', authMiddleware, submitWordController);
 app.post('/auth/login', loginController);
 app.post('/auth/register', registerController);
 

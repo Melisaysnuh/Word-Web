@@ -58,7 +58,7 @@ export const job = new CronJob(
 );
 job.start();
 
- async function storeListModel () {
+/*  async function storeListModel () {
     try {
         console.log('in storedaytest');
         const result = await finalConstructor();
@@ -73,5 +73,5 @@ job.start();
     catch (e) {
         console.error('Error storing day:', e);
     }
-};
-storeListModel();
+}; */
+

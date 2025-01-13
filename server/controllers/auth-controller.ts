@@ -4,7 +4,8 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import UserModel from '../Models/UserModel.js';
-// import { UserI } from '../types/User';
+import { fetchListModel } from '../Models/ListModel.js';
+
 
 dotenv.config();
 // automatic jwtSecretgenerator
@@ -21,44 +22,44 @@ const jwtSecret = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex
 export const registerController = async (req: Request, res: Response): Promise<void> => {
     const { email, password, firstName } = req.body;
 
-        if (!email || !password ) {
-            throw new Error(`Email and password are required`)
-        }
-        if (password.length < 8 /* || !/[A-Z]/.test(password) || !/[0-9]/.test(password) */) {
-            throw new Error(`Password doesn't meet strength requirements`)
-        }
-        const existingUser = await UserModel.findOne({ email });
-        if (existingUser) {
-            res.status(400)
-            throw new Error('User already exists');
-            ;
-        };
-
-        const user = new UserModel({ email, password, firstName});
-        await user.save();
-        const token = jwt.sign(
-            {
-                _id: user._id,
-                email: user.email,
-                firstName: user.firstName,
-                password: '*****',
-                history: []
-            },
-            jwtSecret,
-            { expiresIn: '48h' }
-        );
-        console.log(`user ${user.email} registered`)
-        res.status(201).json({
-            user: user,
-            message: `${user.email} was successfully registered`,
-            token
-        });
-
+    if (!email || !password) {
+        throw new Error(`Email and password are required`)
     }
+    if (password.length < 8 /* || !/[A-Z]/.test(password) || !/[0-9]/.test(password) */) {
+        throw new Error(`Password doesn't meet strength requirements`)
+    }
+    const existingUser = await UserModel.findOne({ email });
+    if (existingUser) {
+        res.status(400)
+        throw new Error('User already exists');
+        ;
+    };
 
-export const editController = async (req: Request, res: Response): Promise<void | void> => {
+    const user = new UserModel({ email, password, firstName });
+    await user.save();
+    const token = jwt.sign(
+        {
+            _id: user._id,
+            email: user.email,
+            firstName: user.firstName,
+            password: '*****',
+            history: []
+        },
+        jwtSecret,
+        { expiresIn: '48h' }
+    );
+    console.log(`user ${user.email} registered`)
+    res.status(201).json({
+        user: user,
+        message: `${user.email} was successfully registered`,
+        token
+    });
+
+}
+
+/* export const userHistoryController = async (req: Request, res: Response): Promise<void | void> => {
     try {
-        const toEdit: { [x: string]: string; password: string; _id: string } = req.body;
+        const toEdit: { history: HistoryI; _id: string } = req.body;
         console.log('to edit: ', toEdit)
         const fieldToUpdate = Object.keys(toEdit).find(key => key !== 'password' && key !== '_id');
         if (!fieldToUpdate) {
@@ -72,13 +73,7 @@ export const editController = async (req: Request, res: Response): Promise<void 
             throw new Error('no user found')
         }
 
-        const isMatch = await bcrypt.compare(toEdit.password, potentialUser.password);
-        if (!isMatch) {
-            res.status(401);
-            throw new Error('passwords did not match. could not edit information')
-        }
-
-        const update = { [fieldToUpdate]: toEdit[fieldToUpdate] };
+                const update = { history: toEdit[history] };
         const updated = await UserModel.findOneAndUpdate(filter, update);
         if (updated) {
 
@@ -108,7 +103,7 @@ export const editController = async (req: Request, res: Response): Promise<void 
         res.status(500).json({ error: `Server error in edit controller:` + error })
 
     }
-}
+} */
 
 export const loginController = async (req: Request, res: Response): Promise<void | void> => {
     try {
@@ -135,7 +130,23 @@ export const loginController = async (req: Request, res: Response): Promise<void
                 res.status(401).json({ error: 'Invalid credentials' });
             }
 
-            const token = jwt.sign({ _id: user._id, email: user.email, firstName: user.firstName}, jwtSecret, { expiresIn: '1d' });
+            const token = jwt.sign({ _id: user._id, email: user.email, firstName: user.firstName, history: user.history }, jwtSecret, { expiresIn: '1d' });
+
+            const today = await fetchListModel();
+            if (user.history && today) {
+                const alreadyHasHistory = user.history.some(item => item.daylist_id === today.id);
+                if (!alreadyHasHistory) {
+                    user.history.push({
+                        daylist_id: today.id,
+                        guessedWords: [],
+                        totalPoints: 0,
+                        level: 'Daddy Long-Legs'
+                    });
+                    await user.save();
+                }
+            }
+
+
             res.status(200).json({
                 token,
                 user: {
@@ -143,7 +154,8 @@ export const loginController = async (req: Request, res: Response): Promise<void
                     email: user.email,
                     firstName: user.firstName,
                     password: '*******',
-                    history: []
+                    history: user.history
+
                 }
             });
         }
@@ -153,3 +165,4 @@ export const loginController = async (req: Request, res: Response): Promise<void
         res.status(500).json({ error: 'Server error' });
     }
 }
+

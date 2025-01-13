@@ -10,7 +10,6 @@ export async function loadLettersController (req: Request, res:Response) {
 
             res.status(200).json({
                 list,
-                session: req.session.id
             });
         } else {
             res.status(404).json({ message: "List not found" });

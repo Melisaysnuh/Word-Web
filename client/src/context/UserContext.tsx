@@ -1,7 +1,7 @@
 import WordObj from '../types/WordObj';
 import React, { createContext, useEffect, useState } from 'react';
 import { UserI } from '../types/User';
-import { getDecodedToken } from '../services/authService';
+import { getDecodedToken } from '../services/auth-service';
 
 interface AppContextValue {
     user: UserI | null;
@@ -19,7 +19,7 @@ export const AuthContext = createContext<AppContextValue>({
     guessedWords: [],
     setGuessedWords: () => { },
     totalPoints: 0,
-    setTotalPoints: () => 0
+    setTotalPoints: () => 0,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -43,7 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         guessedWords,
         setGuessedWords,
         totalPoints,
-        setTotalPoints
+        setTotalPoints,
     };
 
     return (
