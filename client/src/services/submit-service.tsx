@@ -27,14 +27,12 @@ export const checkWord = async (
             },
         });
 
-        if (res.status === 200) {
+
             const data: SubmitWordResponse = await res.json();
             return data;
 
-        } else  {
-            console.log('error submitting word in checkWord function:', res);
-            return { error: 'Word not found in the dictionary.' };
-        }
+
+
     } catch (e) {
         console.error('error checking word in api client. Error:', e);
     }

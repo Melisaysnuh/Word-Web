@@ -45,7 +45,6 @@ export async function submitWordController (req: Request, res: Response): Promis
                 console.log('validated word is ', validatedWord);
 
                 if (user) {
-                    console.log(user)
                     const userHistory = user.history || [];
                     let dayEntry = userHistory.find((entry: HistoryI) => entry.daylist_id === currentDaylistId);
                     if (!dayEntry) {

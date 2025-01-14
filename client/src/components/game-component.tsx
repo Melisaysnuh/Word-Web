@@ -54,6 +54,10 @@ function GameComponent () {
     const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
         event.preventDefault();
         const target = event.target as HTMLButtonElement;
+        target.classList.add('flash');
+        setTimeout(() => {
+            target.classList.remove('flash');
+        }, 200);
         setGuess(`${guess}${target.value.toUpperCase()}`)
     }
     const handleClear = (event: React.MouseEvent<HTMLButtonElement>) =>{
@@ -102,8 +106,7 @@ function GameComponent () {
                     }
                 }
                 else {
-                    console.log('word was not valide!');
-                    setFormStatus({ success: 'fail', message: `${word} is not valid` });
+                    setFormStatus({ success: 'fail', message: `${guess} is not valid` });
                 }
             }
 
