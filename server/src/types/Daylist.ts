@@ -6,7 +6,7 @@ export interface Daylist {
         pangrams: string[];
         centerLetter: string;
         letters: string[];
-        totalPoints: number;
+        totalPossiblePoints: number;
         validWords: WordObj[];
 
 }

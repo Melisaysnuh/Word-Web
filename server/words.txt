@@ -20,17 +20,14 @@ aas
 aasvogel
 aasvogels
 ab
-aba
 abac
 abaca
 abacas
 abaci
 aback
-abacs
 abacterial
 abactinal
 abactinally
-abactor
 abactors
 abacus
 abacuses
@@ -2958,7 +2955,6 @@ advecting
 advection
 advections
 advective
-advects
 advene
 advened
 advenes
@@ -4431,7 +4427,6 @@ aguish
 aguishly
 aguising
 aguize
-aguized
 aguizes
 aguizing
 aguna
@@ -12345,7 +12340,6 @@ armpits
 armrest
 armrests
 arms
-armsful
 armure
 armures
 army
@@ -19451,7 +19445,6 @@ beckoner
 beckoners
 beckoning
 beckonings
-beckons
 becks
 beclamor
 beclamored
@@ -29135,7 +29128,6 @@ budgero
 budgeros
 budgerow
 budgerows
-budgers
 budges
 budget
 budgetary
@@ -29720,7 +29712,6 @@ bunjee
 bunjees
 bunjes
 bunjie
-bunjies
 bunjy
 bunk
 bunked
@@ -32052,7 +32043,6 @@ campings
 campion
 campions
 cample
-campled
 camples
 campling
 camply
@@ -42223,7 +42213,6 @@ coactive
 coactively
 coactivities
 coactivity
-coactor
 coactors
 coacts
 coadaptation
@@ -54474,7 +54463,6 @@ curvesome
 curvet
 curveted
 curveting
-curvets
 curvetted
 curvetting
 curvey
@@ -63287,7 +63275,6 @@ dietarian
 dietarians
 dietaries
 dietarily
-dietary
 dieted
 dieter
 dieters
@@ -63542,7 +63529,6 @@ diglossia
 diglossias
 diglossic
 diglot
-diglots
 diglottic
 diglyceride
 diglycerides
@@ -66014,7 +66000,6 @@ disjunctors
 disjuncts
 disjuncture
 disjunctures
-disjune
 disjunes
 disk
 disked
@@ -79444,7 +79429,6 @@ esprits
 espumoso
 espumosos
 espy
-espying
 esquire
 esquired
 esquires
@@ -88862,7 +88846,6 @@ flutelike
 flutemouth
 flutemouths
 fluter
-fluters
 flutes
 flutey
 flutier
@@ -89017,7 +89000,6 @@ foamer
 foamers
 foamflower
 foamflowers
-foamier
 foamiest
 foamily
 foaminess
@@ -95074,7 +95056,6 @@ gazars
 gaze
 gazebo
 gazeboes
-gazebos
 gazed
 gazeful
 gazehound
@@ -102110,7 +102091,6 @@ gutturalnesses
 gutturals
 gutty
 gutzer
-gutzers
 guv
 guvs
 guy
@@ -108390,7 +108370,6 @@ hogtied
 hogtieing
 hogties
 hogtying
-hogward
 hogwards
 hogwash
 hogwashes
@@ -110979,7 +110958,6 @@ hussifs
 hussy
 hustings
 hustle
-hustled
 hustler
 hustlers
 hustles
@@ -123969,7 +123947,6 @@ jingle
 jingled
 jingler
 jinglers
-jingles
 jinglet
 jinglets
 jinglier
@@ -126222,7 +126199,6 @@ keynoting
 keypad
 keypads
 keypal
-keypals
 keypunch
 keypunched
 keypuncher
@@ -141275,7 +141251,6 @@ mercapto
 mercaptopurine
 mercaptopurines
 mercat
-mercats
 mercenaries
 mercenarily
 mercenariness
@@ -160146,7 +160121,6 @@ onslaught
 onslaughts
 onst
 onstage
-onstead
 onsteads
 onstream
 ontic
@@ -165590,7 +165564,6 @@ overplotting
 overplus
 overpluses
 overplusses
-overply
 overplying
 overpoise
 overpoised
@@ -166825,7 +166798,6 @@ paals
 paan
 paans
 pablum
-pablums
 pabouche
 pabouches
 pabular
@@ -169377,7 +169349,6 @@ parchedness
 parchednesses
 parcheesi
 parcheesis
-parches
 parchesi
 parchesis
 parching
@@ -175006,7 +174977,6 @@ phlyctena
 phlyctenae
 pho
 phobia
-phobias
 phobic
 phobics
 phobism
@@ -182820,7 +182790,6 @@ pox
 poxed
 poxes
 poxier
-poxiest
 poxing
 poxvirus
 poxviruses
@@ -188169,7 +188138,6 @@ proudest
 proudful
 proudhearted
 proudish
-proudly
 proudness
 proudnesses
 proul
@@ -191388,7 +191356,6 @@ quartzites
 quartzitic
 quartzose
 quartzous
-quartzy
 quasar
 quasars
 quash
@@ -221973,7 +221940,6 @@ snorkelling
 snorkellings
 snorkels
 snort
-snorted
 snorter
 snorters
 snortier
@@ -226085,7 +226051,6 @@ splodgily
 splodginess
 splodginesses
 splodging
-splodgy
 splog
 splogs
 sploosh
@@ -259069,7 +259034,6 @@ unsmooth
 unsmoothed
 unsmoothing
 unsmooths
-unsmote
 unsmotherable
 unsnag
 unsnagged
@@ -260473,7 +260437,6 @@ uphild
 uphill
 uphills
 uphillward
-uphoard
 uphoarded
 uphoarding
 uphoards

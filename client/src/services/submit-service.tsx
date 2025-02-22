@@ -14,7 +14,7 @@ const token = localStorage.getItem("token");
 
 export const checkWord = async (
     wordToCheck: string
-): Promise<SubmitWordResponse | { error: string } | undefined> => {
+): Promise<SubmitWordResponse | undefined> => {
     const wordObj: WordObj = { word: wordToCheck };
     try {
         const res = await fetch(`${base_URL}/submit`, {

@@ -51,10 +51,11 @@ export async function submitWordController (req: Request, res: Response): Promis
                         dayEntry = {
                             daylist_id: currentDaylistId,
                             guessedWords: [],
-                            totalPoints: 0,
+                            totalUserPoints: 0,
                             level: 'Daddy Long-Legs'
                         };
-                        user.history?.push(dayEntry);
+                        if (dayEntry)
+                        {user.history?.push(dayEntry)};
 
                     }
                     if (validatedWord) {
@@ -63,7 +64,7 @@ export async function submitWordController (req: Request, res: Response): Promis
                         if (dayEntry && validatedWord) {
                             if (!dayEntry.guessedWords.find(word => word === validatedWord)) {
                                 dayEntry.guessedWords.push(validatedWord);
-                                dayEntry.totalPoints += validatedWord.points
+                                dayEntry.totalUserPoints += validatedWord.points
                             }
                             await user.save();
                         }

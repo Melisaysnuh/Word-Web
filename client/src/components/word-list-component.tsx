@@ -6,15 +6,16 @@ import { AuthContext } from '../context/UserContext';
 import { calculatePoints } from '../utilities/points-utility';
 
 
-function WordListComponent ()  {
+function WordListComponent ({})  {
     const [spiderClass, setSpiderClass] = useState('prog-spider-class-0');
     const [spiderName, setSpiderName] = useState('Daddy Long-Legs');
 
-const {guessedWords, totalPoints } = useContext(AuthContext)
+const {guessedWords} = useContext(AuthContext)
 
 
 
     useEffect(() => {
+        const userPoints = calculatePoints(guessedWords))
         const setSpiderClassFunc = (num: number) => {
             const total = totalPoints;
             const myPoints = num;

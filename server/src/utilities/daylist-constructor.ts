@@ -13,13 +13,13 @@ const now = format(new Date(), "yyyy_MM_dd");
 
 // GET RANDOM WORD
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
-async function getRandomWord () {
+export async function getRandomWord() {
     try {
-        const longArray = await getArray(7, 7)
+        const longArray = await getArray(7, 7);
         const rand = Math.floor(Math.random() * longArray.length);
         const candidate: string = longArray[rand];
+        console.log(candidate);
         const regex = /^(?!.*(.).*\1)[a-z]+$/;
-        console.log(`candidate is ${candidate} and it is ${regex.test(candidate)}`)
         if (candidate.length === 7 && regex.test(candidate)) {
             const result: boolean = await validateWord(candidate);
             if (result)
@@ -37,7 +37,7 @@ async function getRandomWord () {
 
 
  // FIND CENTER LETTER FOR GAME (LEAST COMMON)
-async function getCenter (list: string[], word: string) {
+export async function getCenter (list: string[], word: string) {
     try {
 
         const thisResult: { [key: string]: number } = {};
@@ -88,7 +88,6 @@ async function getCenter (list: string[], word: string) {
 export async function finalConstructor (): Promise<Daylist | undefined> {
     try {
         const mainWordArray = await getArray(4, 12)
-        console.log('in constructor');
         const word = await getRandomWord();
         if (word) {
             const letterArray = word.split('');
@@ -116,7 +115,7 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                         centerLetter: center,
                         pangrams: todaysPangrams,
                         letters: uniqueArray,
-                        totalPoints: calculateTotal(anagramObjList),
+                        totalPossiblePoints: calculateTotal(anagramObjList),
                         validWords: anagramObjList,
 
                     }

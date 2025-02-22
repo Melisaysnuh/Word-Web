@@ -1,9 +1,11 @@
 import { Schema } from 'mongoose';
 import mongoose from 'mongoose';
+import { fetchListModel } from './ListModel';
 export async function connectDB () {
     try {
         await mongoose.connect('mongodb://localhost:27017/wordweb');
         console.log('successfully connected in model');
+        fetchListModel();
         return {
             statusCode: 200,
         };
@@ -24,5 +26,6 @@ const daySchema = new Schema ({
     letters: Array,
     validWords: Array,
     sessions: Array
-})
+});
+
 export const dayModel = mongoose.model('word-web', daySchema);

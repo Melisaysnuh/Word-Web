@@ -8,8 +8,8 @@ interface AppContextValue {
     setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
     guessedWords: WordObj[];
     setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
-    totalPoints: number;
-    setTotalPoints: React.Dispatch<React.SetStateAction<number>>;
+    totalUserPoints: number;
+    settotalUserPoints: React.Dispatch<React.SetStateAction<number>>;
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -18,14 +18,14 @@ export const AuthContext = createContext<AppContextValue>({
     setUser: () => { },
     guessedWords: [],
     setGuessedWords: () => { },
-    totalPoints: 0,
-    setTotalPoints: () => 0,
+    totalUserPoints: 0,
+    settotalUserPoints: () => 0,
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<UserI | null>(null);
     const [guessedWords, setGuessedWords] = useState<WordObj[]>([]);
-    const [totalPoints, setTotalPoints] = useState<number>(0)
+    const [totalUserPoints, settotalUserPoints] = useState<number>(0)
 
     useEffect(() => {
         const decoded = getDecodedToken();
@@ -42,8 +42,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser,
         guessedWords,
         setGuessedWords,
-        totalPoints,
-        setTotalPoints,
+        totalUserPoints,
+        settotalUserPoints,
     };
 
     return (
@@ -52,3 +52,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         </AuthContext.Provider>
     );
 };
+
+
+/*   const userHistory: HistoryI[] | undefined = res.history;
+  if (userHistory !== undefined) {
+      const todayHistory: HistoryI = userHistory.filter(h => h.daylist_id === date)[0];
+      if (todayHistory && todayHistory.guessedWords) {
+          // todayHistory.guessedWords is likely an array of objects, which may or may not match your WordObj type
+          // Adjust as necessary to match your expected structure.
+          setGuessedWords(todayHistory.guessedWords);
+      }
+  } */

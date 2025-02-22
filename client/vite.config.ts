@@ -1,21 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'node',
+    include: ['__tests__/**/*.test.ts'],  // Test files are separate
+    exclude: ['dist/**', 'node_modules/**'],  // Ignore compiled output
+  },
   resolve: {
     alias: {
-      '@': '/src',
+      '@': './src', // Allows you to import using '@/utils' instead of relative paths
     },
   },
-  build: {
-    outDir: 'build',
-    rollupOptions: {
-      input: './src/main.tsx',
-      output: {
-        dir: 'build',
-      }
-    }
-  }
 });

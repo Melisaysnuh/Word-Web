@@ -139,7 +139,7 @@ export const loginController = async (req: Request, res: Response): Promise<void
                     user.history.push({
                         daylist_id: today.id,
                         guessedWords: [],
-                        totalPoints: 0,
+                        totalUserPoints: 0,
                         level: 'Daddy Long-Legs'
                     });
                     await user.save();
