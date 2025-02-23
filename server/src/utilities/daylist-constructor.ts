@@ -7,64 +7,14 @@ import { calculateTotal } from './calculate-total.js';
 import { getArray, validateWord } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
+import { getRandomWord } from './get-random-word.js';
+import { getCenter } from './get-center.js';
 
 
 
 
-// GET RANDOM WORD
-// Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
-export async function getRandomWord() {
-    try {
-        const longArray = await getArray(7, 7);
-        const rand = Math.floor(Math.random() * longArray.length);
-        const candidate: string = longArray[rand];
-        console.log(candidate);
-        const regex = /^(?!.*(.).*\1)[a-z]+$/;
-        if (candidate.length === 7 && regex.test(candidate)) {
-            const result: boolean = await validateWord(candidate);
-            if (result)
-                return candidate
-        }
 
-     return getRandomWord()
-            ;
-    }
-    catch (e) {
-        console.log('error in getRandomWord: ', e)
-
-    }
-}
-
-
- // FIND CENTER LETTER FOR GAME (LEAST COMMON)
-export async function getCenter (list: string[], word: string) {
-    try {
-
-        const thisResult: { [key: string]: number } = {};
-        const mainArray = word.split('');
-
-        Array.from(new Set(mainArray)).forEach(letter => {
-            const { length } = mainArray.filter(l => l === letter);
-            thisResult[letter] = length;
-        });
-
-        for (const item of list) {
-            const itemArray = item.split("");
-            Array.from(new Set(itemArray)).forEach(letter => {
-                const { length } = itemArray.filter(l => l === letter);
-                thisResult[letter] += length;
-            });
-        }
-        const highestLetter = Object.keys(thisResult).reduce((a, b) => { return thisResult[a] > thisResult[b] ? a : b });
-        return highestLetter
-    }
-    catch (e) {
-        console.log('error in getting center letter: ', e)
-    }
-}
-
-//todo fix this to remove weird words
-/* async function validWordArray (list: string[]) {
+async function validWordArray (list: string[]) {
     try {
         const validWords = [];
         for (let i = 0; i < list.length; i++) {
@@ -81,35 +31,30 @@ export async function getCenter (list: string[], word: string) {
 
     }
 }
- */
+
 
 
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor (): Promise<Daylist | undefined> {
     try {
+        console.log('in daylist constructor');
         const mainWordArray = await getArray(4, 12)
         const word = await getRandomWord();
         if (word) {
             const letterArray = word.split('');
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
             const anagrams = generateAnagrams(word, mainWordArray);
+            const validWordAnagrams = await validWordArray(anagrams);
 
-
-
-                const center = await getCenter(anagrams, word)
-                // can't remember why i have this
-                // uniqueArray.splice(index, 1);
-                // uniqueArray.unshift(center);
+            console.log('in line 49');
+            if (validWordAnagrams) {
+                const center = await getCenter(validWordAnagrams, uniqueArray);
                 if (center) {
-                const filteredAnagrams = centerFilter(anagrams, center);
-                /* const anagrams3 = await validWordArray(filteredAnagrams); */
-                if (filteredAnagrams) {
-                    const todaysPangrams = pangrams(filteredAnagrams, uniqueArray);
-                    const anagramObjList = filteredAnagrams.map((word) => {
+                    const filteredAnagramsbyCenter = centerFilter(validWordAnagrams, center)
+                    const todaysPangrams = pangrams(filteredAnagramsbyCenter, uniqueArray);
+                    const anagramObjList = filteredAnagramsbyCenter.map((word: string) => {
                         return calculatePoints(word, todaysPangrams)
-                    })
-
-
+                    });
                     return {
                         id: now,
                         centerLetter: center,
@@ -119,12 +64,36 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                         validWords: anagramObjList,
 
                     }
-                }}
+                }
+                }
+
+
 
 
         }
-        else throw new Error('error in final constructor')
-    }
+
+
+
+               //  const center = await getCenter(anagrams, word)
+                // can't remember why i have this
+                // uniqueArray.splice(index, 1);
+                // uniqueArray.unshift(center);
+               // if (center) {
+                /* const filteredAnagrams = centerFilter(anagrams, center);
+                 const anagrams3 = await validWordArray(filteredAnagrams);
+                if (filteredAnagrams) {
+                    const todaysPangrams = pangrams(filteredAnagrams, uniqueArray);
+                    const anagramObjList = filteredAnagrams.map((word) => {
+                        return calculatePoints(word, todaysPangrams)
+                    })} */
+
+
+
+                }
+
+
+
+
     catch (e) {
         console.log('fetch error in constructor', e)
     }
@@ -132,3 +101,10 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
 
 
 
+async function testFunc () {
+    const result = await finalConstructor();
+    if (result) {
+        console.log(result)
+    }
+}
+testFunc();

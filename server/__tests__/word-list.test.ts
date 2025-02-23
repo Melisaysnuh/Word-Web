@@ -1,6 +1,6 @@
-import { expect, test, vi } from 'vitest';
+import { expect, MockedFunction, test, vi } from 'vitest';
 import { getArray, validateWord, removeInvalidWord } from '../src/utilities/word-list-mgmt';
-import { mockWordArray } from './mocks/wordResponse.mock';
+import { twoLetterMock } from './mocks/mocks.mock';
 
 
 vi.mock('../src/utilities/word-list-mgmt', () => ({
@@ -11,7 +11,7 @@ vi.mock('../src/utilities/word-list-mgmt', () => ({
 
 test('should filter word list words with length between given parameters', async () => {
 
-    (getArray as unknown as vi.Mock).mockResolvedValue(mockWordArray);
+    (getArray as unknown as vi.Mock).mockResolvedValue(twoLetterMock);
 
     const result = await getArray(1,2);
 
@@ -25,20 +25,20 @@ test('should filter word list words with length between given parameters', async
 test('validate word via API', async () => {
 
 
-    (validateWord as unknown as vi.Mock)
+    (validateWord as unknown as MockedFunction<typeof validateWord>)
         .mockResolvedValueOnce(false) // "abactor" should return false
         .mockResolvedValueOnce(true)  // "coactor" should return true
         .mockResolvedValueOnce(false); // "abacs" should return false
 
     await expect(validateWord("abactor")).resolves.toBe(false);
-    await expect(validateWord("coactor")).resolves.toBe(true);
-    await expect(validateWord("abacs")).resolves.toBe(false);
+    await expect(validateWord("aerobic")).resolves.toBe(true);
+    await expect(validateWord("parsing")).resolves.toBe(false);
 
 
 })
 
 test('should remove invalid words from word list', async () => {
-    (removeInvalidWord as unknown as vi.Mock)
+    (removeInvalidWord as unknown as MockedFunction<typeof removeInvalidWord>)
     .mockResolvedValueOnce()
     await expect(removeInvalidWord('')).resolves.toBeFalsy();
 

@@ -3,14 +3,12 @@ import fs from 'fs';
 const WORDS = './words.txt';
 import dotenv from 'dotenv';
 dotenv.config()
-console.log('hello');
+
 
 export const getArray = async (num: number, num2: number) => {
     const mainWordArray = fs.readFileSync(WORDS, 'utf8').split('\n').filter((word: string) => word.length >= num && word.length <= num2);
     return mainWordArray
 }
-
-console.log(getArray(1,2));
 
 
 export const validateWord = async (word: string): Promise<boolean> => {
@@ -23,10 +21,11 @@ export const validateWord = async (word: string): Promise<boolean> => {
             console.log(data);
             if (
                 data && typeof data[0] === 'object' &&
-                data[0].meta.id === word &&
+                data[0].hwi.hw === word &&
                 data[0].meta.offensive === false &&
-            data[0].fl !== 'abbreviation' ) {
-                console.log(word + ' is a valid word')
+            data[0].fl !== 'abbreviation' &&
+                data[0].fl !== 'Latin phrase' &&
+                data[0].fl !== 'Spanish phrase' ) {
                 return true;
             }
             else {
@@ -43,7 +42,6 @@ export const validateWord = async (word: string): Promise<boolean> => {
 }
 export const removeInvalidWord = async (wordToRemove: string): Promise<void> => {
     try {
-        console.log(`Removing invalid word: ${wordToRemove}`);
 
         // Read current words
         const words = fs.readFileSync(WORDS, 'utf8')
@@ -54,9 +52,19 @@ export const removeInvalidWord = async (wordToRemove: string): Promise<void> => 
         // Write updated words back to the file
         fs.writeFileSync(WORDS, words.join('\n'), 'utf8');
 
-        console.log(`Word "${wordToRemove}" removed from words.txt`);
     } catch (error) {
         console.error('Error removing word:', error);
         throw error;
     }
 };
+
+async function testValidateWord (word: string) {
+    try {
+        const validate = await validateWord(word);
+        console.log(validate);
+    }
+    catch (e) {
+        console.log('error validating word', e)
+    }
+};
+testValidateWord('parsing');

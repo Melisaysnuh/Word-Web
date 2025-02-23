@@ -4,7 +4,7 @@
     "target": "ES2020",
     "module": "ES2020",
     "moduleResolution": "node",
-    "types": ["node"],
+    "types": ["node", "vitest"],
 
     /* Paths and Compilation */
     "rootDir": "./src",      /* 👈 Ensures TypeScript treats `src/` as the root */

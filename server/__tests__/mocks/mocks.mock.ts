@@ -70,14 +70,14 @@ export const twoLetterMock = [
 
 ]
 export const anagramListMock = [
-    'asar', 'asea', 'asset', 'aster', 'ate', 'ates', 'ats',
-    'att', 'attar', 'caa', 'caas', 'caca', 'cacas', 'caeca',
-    'caese', 'car', 'carat', 'care', 'carer', 'cares', 'caret',
+    'asar', 'asea', 'asset', 'aster', 'ates',
+    'attar',  'caas', 'caca', 'cacas', 'caeca',
+    'caese', 'carat', 'care', 'carer', 'cares', 'caret',
     'carr', 'carrs', 'cars', 'carse', 'cart', 'carta', 'carte',
     'carts', 'casa', 'casas', 'case', 'cases', 'cast', 'caste',
-    'casts', 'cat', 'cate', 'cater', 'cates', 'cats', 'ceas',
-    'cease', 'ceca', 'cee', 'cees', 'cere', 'ceres', 'cert',
+    'casts',  'cate', 'cater', 'cates', 'cats', 'ceas',
+    'cease', 'ceca', 'cees', 'cere', 'ceres', 'cert',
     'certs', 'cess', 'cesse', 'cesta', 'cete', 'cetes', 'crare',
-    'crass', 'crate', 'cree', 'crees', 'cress', 'crest', 'ear',
+    'crass', 'crate', 'cree', 'crees', 'cress', 'crest',
     'ears', 'earst'
 ]
