@@ -1,5 +1,4 @@
 import fs from 'fs';
-
 const WORDS = './words.txt';
 import dotenv from 'dotenv';
 dotenv.config()

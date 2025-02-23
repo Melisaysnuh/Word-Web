@@ -4,35 +4,12 @@ import { centerFilter } from './center-filter.js';
 import { pangrams } from './get-pangrams.js';
 import { calculatePoints } from './calculate-score.js';
 import { calculateTotal } from './calculate-total.js';
-import { getArray, validateWord } from './word-list-mgmt.js';
+import { getArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
 import { getRandomWord } from './get-random-word.js';
 import { getCenter } from './get-center.js';
-
-
-
-
-
-async function validWordArray (list: string[]) {
-    try {
-        const validWords = [];
-        for (let i = 0; i < list.length; i++) {
-            const item = list[i];
-            const isValid = await validateWord(item);
-            if (isValid) {
-                validWords.push(item)
-            }
-        }
-        return validWords;
-    }
-    catch (e) {
-        console.log('error validating array: ', e)
-
-    }
-}
-
-
+import { validWordArray } from './valid-word-array.js';
 
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor (): Promise<Daylist | undefined> {
@@ -65,34 +42,9 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
 
                     }
                 }
-                }
-
-
-
-
+            }
         }
-
-
-
-               //  const center = await getCenter(anagrams, word)
-                // can't remember why i have this
-                // uniqueArray.splice(index, 1);
-                // uniqueArray.unshift(center);
-               // if (center) {
-                /* const filteredAnagrams = centerFilter(anagrams, center);
-                 const anagrams3 = await validWordArray(filteredAnagrams);
-                if (filteredAnagrams) {
-                    const todaysPangrams = pangrams(filteredAnagrams, uniqueArray);
-                    const anagramObjList = filteredAnagrams.map((word) => {
-                        return calculatePoints(word, todaysPangrams)
-                    })} */
-
-
-
-                }
-
-
-
+    }
 
     catch (e) {
         console.log('fetch error in constructor', e)
@@ -101,10 +53,10 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
 
 
 
-async function testFunc () {
+/* async function testFunc () {
     const result = await finalConstructor();
     if (result) {
         console.log(result)
     }
 }
-testFunc();
+testFunc(); */

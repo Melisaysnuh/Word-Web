@@ -3209,6 +3209,7 @@ aerobats
 aerobe
 aerobes
 aerobia
+aerobic
 aerobically
 aerobicise
 aerobicised
