@@ -1,15 +1,9 @@
 import { Daylist } from '../types/Daylist.js';
-import { generateAnagrams } from './generate-anagrams.js';
-import { centerFilter } from './center-filter.js';
-import { pangrams } from './get-pangrams.js';
-import { calculatePoints } from './calculate-score.js';
-import { calculateTotal } from './calculate-total.js';
-import { getArray } from './word-list-mgmt.js';
+import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints, calculateTotal } from './utlities.js';
+import { getArray, getRandomWord, validWordArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
-import { getRandomWord } from './get-random-word.js';
-import { getCenter } from './get-center.js';
-import { validWordArray } from './valid-word-array.js';
+
 
 // *CONSTRUCT OUR LIST AND EXPORT
 export async function finalConstructor (): Promise<Daylist | undefined> {
