@@ -72,3 +72,24 @@ export function pangrams (wordList: string[], letterList: string[]) {
     const pangrams: string[] = wordList.filter((word: string) => regex.test(word));
     return pangrams;
 }
+async function testFunc (list: string[], letter: string) {
+    const result = centerFilter(list, letter);
+
+    if (result) {
+        console.log('here is the result', result)
+    } else console.log('no result')
+}
+
+const anagramListMock = [
+    'asar', 'asea', 'asset', 'aster', 'ates',
+    'attar', 'caas', 'caca', 'cacas', 'caeca',
+    'caese', 'carat', 'care', 'carer', 'cares', 'caret',
+    'carr', 'carrs', 'cars', 'carse', 'cart', 'carta', 'carte',
+    'carts', 'casa', 'casas', 'case', 'cases', 'cast', 'caste',
+    'casts', 'cate', 'cater', 'cates', 'cats', 'ceas',
+    'cease', 'ceca', 'cees', 'cere', 'ceres', 'cert',
+    'certs', 'cess', 'cesse', 'cesta', 'cete', 'cetes', 'crare',
+    'crass', 'crate', 'cree', 'crees', 'cress', 'crest',
+    'ears', 'earst'
+]
+testFunc(anagramListMock, 's');

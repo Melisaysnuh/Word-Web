@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest",
     "build": "tsc",
-    "this": "tsc && node dist/utilities/word-list-mgmt.js",
+    "this": "tsc && node dist/utilities/utilities.js",
     "start": "node dist/index.js",
     "dev": "concurrently \"tsc -w\" \"node dist/index.js\""
   },

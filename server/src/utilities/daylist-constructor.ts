@@ -1,5 +1,5 @@
 import { Daylist } from '../types/Daylist.js';
-import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints, calculateTotal } from './utlities.js';
+import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints, calculateTotal } from './utilities.js';
 import { getArray, getRandomWord, validWordArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
@@ -16,8 +16,6 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
             const anagrams = generateAnagrams(word, mainWordArray);
             const validWordAnagrams = await validWordArray(anagrams);
-
-            console.log('in line 49');
             if (validWordAnagrams) {
                 const center = await getCenter(validWordAnagrams, uniqueArray);
                 if (center) {
@@ -47,10 +45,3 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
 
 
 
-/* async function testFunc () {
-    const result = await finalConstructor();
-    if (result) {
-        console.log(result)
-    }
-}
-testFunc(); */
