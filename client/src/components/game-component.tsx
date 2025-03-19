@@ -4,7 +4,6 @@ import { getDailyList } from '../services/list-service';
 import { checkWord } from '../services/submit-service';
 import WordObj from '../types/WordObj';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
-import { calculatePoints } from '../utilities/points-utility';
 import { AuthContext } from '../context/UserContext';
 import SubmitWordResponse from '../types/SubmitWordResponse';
 
@@ -14,7 +13,7 @@ function GameComponent () {
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
 
-    const { guessedWords, setGuessedWords } = useContext(AuthContext);
+    const { guessedWords, setGuessedWords, totalUserPoints, setTotalUserPoints } = useContext(AuthContext);
 
     async function fetchDailyList () {
         try {
@@ -156,15 +155,14 @@ function GameComponent () {
         async function fetchShuffle () {
             const list = await fetchDailyList();
             const letters = list.letters;
-            const allWords = list.validWords;
             const shuffled = generateRandomIndices(letters);
             setDailyLetters(shuffled);
             setGuess('');
             setFormStatus({ success: 'none', message: '' });
-            setTotalPoints(calculatePoints(allWords));
+            setTotalUserPoints(totalUserPoints);
         }
         fetchShuffle();
-    }, [setTotalPoints]);
+    }, [totalUserPoints, setTotalUserPoints]);
 
 
 

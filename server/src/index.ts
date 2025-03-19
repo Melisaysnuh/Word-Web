@@ -4,13 +4,8 @@ import { loadLettersController } from './controllers/fetch-controller.js';
 import { submitWordController } from './controllers/submit-controller.js';
 import cors from 'cors';
 import { connectDB } from './Models/index.js';
-
-import crypto from 'crypto';
-//import { authMiddleware } from './middleware/authMiddleware.js';
 import { loginController, registerController } from './controllers/auth-controller.js';
 import { authMiddleware } from './middleware/authMiddleware.js';
-const jwtSecret = crypto.randomBytes(64).toString('hex');
-console.log(jwtSecret);
 
 
 const port = process.env.PORT || 3000;

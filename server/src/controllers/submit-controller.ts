@@ -66,12 +66,14 @@ export async function submitWordController (req: Request, res: Response): Promis
                                 dayEntry.guessedWords.push(validatedWord);
                                 dayEntry.totalUserPoints += validatedWord.points
                             }
-                            await user.save();
+
                         }
+                        await user.save();
+                        const updatedUser = await UserModel.findById(userId);
                         const toReturn: SubmitWordResponse = {
                             valid: true,
                             guessedWord: validatedWord,
-                            history: user.history
+                            history: updatedUser?.history
                         };
                         res.status(200).json(toReturn
                         );

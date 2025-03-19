@@ -15,7 +15,9 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
             const letterArray = word.split('');
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
             const anagrams = generateAnagrams(word, mainWordArray);
+            console.log('pre valid array')
             const validWordAnagrams = await validWordArray(anagrams);
+            console.log('post valid array')
             if (validWordAnagrams) {
                 const center = await getCenter(validWordAnagrams, uniqueArray);
                 if (center) {

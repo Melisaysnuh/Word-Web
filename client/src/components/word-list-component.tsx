@@ -1,64 +1,80 @@
 import WordObj from '../types/WordObj';
 import '../styles/word-list-component.css';
-
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { calculatePoints } from '../utilities/points-utility';
+import { getDailyList } from '../services/list-service';
 
+const spiderClasses = [
+    { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
+    { threshold: 0.18, className: 'prog-spider-class-1', name: 'Weaver' },
+    { threshold: 0.28, className: 'prog-spider-class-2', name: 'Jumping' },
+    { threshold: 0.47, className: 'prog-spider-class-3', name: 'Tarantula' },
+    { threshold: 0.56, className: 'prog-spider-class-4', name: 'Trapdoor' },
+    { threshold: 0.67, className: 'prog-spider-class-5', name: 'Huntsman' },
+    { threshold: 0.8, className: 'prog-spider-class-6', name: 'Funnel-web' },
+    { threshold: 0.9, className: 'prog-spider-class-7', name: 'Recluse' },
+    { threshold: 1, className: 'prog-spider-class-8', name: 'BLACK WIDOW' },
+];
 
-function WordListComponent ({})  {
-    const [spiderClass, setSpiderClass] = useState('prog-spider-class-0');
-    const [spiderName, setSpiderName] = useState('Daddy Long-Legs');
+function WordListComponent () {
+    const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
+    const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
+    const [totalPoints, setTotalPoints] = useState(0);
+    const { guessedWords, setGuessedWords, totalUserPoints } = useContext(AuthContext);
 
-const {guessedWords} = useContext(AuthContext)
+    const fetchPoints = async () => {
+        try {
+            const data = await getDailyList();
+            const arr = data.list.validWords;
+            const points = calculatePoints(arr);
+            return points
+        } catch (e) {
+            console.error('Error in fetchDailyList:', e);
+            return 100;
+        }
+    };
 
-
+    const updateSpiderClass = (points: number, total: number) => {
+        const prog = points / total;
+        console.log('prog is', prog)
+        const spider = spiderClasses.find(({ threshold }) => prog < threshold);
+        console.log(spider?.className)
+if (spider) {
+    setSpiderClass(spider.className);
+    setSpiderName(spider.name);
+}
+    };
 
     useEffect(() => {
-        const userPoints = calculatePoints(guessedWords))
-        const setSpiderClassFunc = (num: number) => {
-            const total = totalPoints;
-            const myPoints = num;
-            const prog = myPoints / total;
+        const getPoints = async () => {
+            const points = await fetchPoints();
+            console.log('points are', points);
+            setTotalPoints(points);
+        };
+        getPoints();
+    }, []);
 
-            if (prog> .10 && prog< .20) {
-                setSpiderClass('prog-spider-class-1');
-                setSpiderName('Weaver');
-            }
-            else if (prog> .20 && prog< .30) {
-                setSpiderClass('prog-spider-class-2');
-                setSpiderName('Jumping');
-            }
-            else if (prog> .30 && prog< .4) {
-                setSpiderClass('prog-spider-class-3');
-                setSpiderName('Tarantula');
-            }
-            else if (prog> .5 && prog< .625) {
-                setSpiderClass('prog-spider-class-4');
-                setSpiderName('Trapdoor');
-            }
-            else if (prog> .625 && prog< .75) {
-                setSpiderClass('prog-spider-class-5');
-                setSpiderName('Hunstman');
-
-            }
-            else if (prog> .75 && prog< .875) {
-                setSpiderClass('prog-spider-class-6');
-                setSpiderName('Funnel-web');
-            }
-            else if (prog> .875 && prog< 1) {
-                setSpiderClass('prog-spider-class-7');
-                setSpiderName('Recluse');
-            }
-            else if (prog=== 1) {
-                setSpiderClass('prog-spider-class-8');
-                setSpiderName('BLACK WIDOW');
-            }
+    useEffect(() => {
+        if (totalPoints > 0) {
+            updateSpiderClass(totalUserPoints, totalPoints);
         }
-        setSpiderClassFunc(calculatePoints(guessedWords));
+    }, [guessedWords, totalUserPoints, totalPoints]);
+
+    useEffect(() => {
+        const storedGuessedWords = localStorage.getItem('guessedWords');
+        if (storedGuessedWords) {
+            setGuessedWords(JSON.parse(storedGuessedWords));
+        }
+    }, [setGuessedWords]);
+
+    useEffect(() => {
+        localStorage.setItem('guessedWords', JSON.stringify(guessedWords));
+        if (totalPoints > 0) {
+            const calculatedPoints = calculatePoints(guessedWords);
+            updateSpiderClass(calculatedPoints, totalPoints);
+        }
     }, [guessedWords, totalPoints]);
-
-
 
     return (
         <>

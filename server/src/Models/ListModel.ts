@@ -57,7 +57,6 @@ job.start(); */
 
 async function storeListModel () {
     try {
-        console.log('in storedaytest');
         const result = await finalConstructor();
         if (result) {
             const createdList = await dayModel.create(result);

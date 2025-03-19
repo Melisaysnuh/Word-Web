@@ -16,7 +16,7 @@ export const validateWord = async (word: string): Promise<boolean> => {
         const res = await fetch(`${url}${word}${apiKey}`);
         if (res.ok) {
             const data = await res.json();
-            console.log(data);
+           // console.log(data);
             if (
                 data && typeof data[0] === 'object' &&
                 data[0].hwi.hw === word &&
