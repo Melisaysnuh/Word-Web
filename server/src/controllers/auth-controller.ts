@@ -5,6 +5,9 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import UserModel from '../Models/UserModel.js';
 import { fetchListModel } from '../Models/ListModel.js';
+import { UserI } from '../types/User.js';
+
+
 
 
 dotenv.config();
@@ -56,6 +59,7 @@ export const registerController = async (req: Request, res: Response): Promise<v
     });
 
 }
+
 
 /* export const userHistoryController = async (req: Request, res: Response): Promise<void | void> => {
     try {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import '../styles/game-component.css';
 import React, { useState, useEffect, useContext } from 'react';
 import { getDailyList } from '../services/list-service';
@@ -6,6 +7,7 @@ import WordObj from '../types/WordObj';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
 import { AuthContext } from '../context/UserContext';
 import SubmitWordResponse from '../types/SubmitWordResponse';
+import { HistoryI } from '../types/User';
 
 
 function GameComponent () {
@@ -13,7 +15,7 @@ function GameComponent () {
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
 
-    const { guessedWords, setGuessedWords, totalUserPoints, setTotalUserPoints } = useContext(AuthContext);
+    const { guessedWords, setGuessedWords, totalUserPoints, setTotalUserPoints, user, setUser } = useContext(AuthContext);
 
     async function fetchDailyList () {
         try {
@@ -74,82 +76,41 @@ function GameComponent () {
         const word = guess;
         if (word.length < 4) {
             setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
-
-        } else if (guessedWords.some((element:WordObj) => element.word.toUpperCase() === word)) {
+        } else if (guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
             setFormStatus({ success: 'fail', message: 'Word already found.' });
-        }
-        else if (!word.includes(dailyLetters[0].toUpperCase())) {
+        } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
-        }
-            else {
-            const res: SubmitWordResponse | undefined  = await checkWord(word);
-               if ( res !== undefined) {
-                console.log(res);
+        } else {
+            const res: SubmitWordResponse | undefined = await checkWord(word);
+            if (res !== undefined) {
                 if (res.valid && res.valid === true) {
                     const resWord = res.guessedWord as WordObj;
-                    if (resWord) {
-
-                        setGuessedWords([...guessedWords, resWord]);
+                    if (resWord && !guessedWords.includes(resWord)) {
+                        setGuessedWords((prevGuessedWords) => [...prevGuessedWords, resWord]);
                         setFormStatus({ success: 'pass', message: resWord.word + ' is a valid word!.' });
-                        // ! add helper function
+                        if (resWord.points) {
+                            setTotalUserPoints((prevPoints) => prevPoints + resWord.points);
+                        }
+                        if (res.history && user && user.history) {
+                            const thisHist: HistoryI = res.history;
 
+                            // Avoid infinite loop: update only if history is different
+                            const updatedUser = {
+                                ...user,
+                                history: [thisHist, ...user.history.slice(1)],
+                            };
+
+                            setUser(updatedUser);
+                            console.log('user updated successfully');
+                        }
                     }
                 } else {
                     setFormStatus({ success: 'fail', message: `${guess} is not valid` });
                 }
-
-
             }
-
-
-
         }
         setGuess('');
     }
-    /* async function handleSubmit (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) {
-        event.preventDefault();
-        const word = guess;
-        if (word.length < 4) {
-            setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
-
-        } else if (guessedWords.some((element:WordObj) => element.word.toUpperCase() === word)) {
-            setFormStatus({ success: 'fail', message: 'Word already found.' });
-        }
-        else if (!word.includes(dailyLetters[0].toUpperCase())) {
-            setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
-        }
-            else {
-            const res: SubmitWordResponse | {error: string} | undefined  = await checkWord(word);
-               if ( res !== undefined && 'history' in res) {
-                const userHistory: HistoryI[] | undefined = res.history;
-                if (userHistory !== undefined){
-                const todayHistory: HistoryI = userHistory.filter(h  => h.daylist_id === date)[0];
-                if (todayHistory && todayHistory.guessedWords) {
-                    // todayHistory.guessedWords is likely an array of objects, which may or may not match your WordObj type
-                    // Adjust as necessary to match your expected structure.
-                    setGuessedWords(todayHistory.guessedWords);
-                }}
-                if (res.valid === true) {
-                    const resWord = res.guessedWord as WordObj;
-                    if (resWord) {
-
-                        setGuessedWords([...guessedWords, resWord]);
-                        setFormStatus({ success: 'pass', message: resWord.word + ' is a valid word!.' });
-                    }
-                }
-                else {
-                    setFormStatus({ success: 'fail', message: `${guess} is not valid` });
-                }
-            }
-
-
-
-        }
-        setGuess('');
-    } */
-
-
-
 
     useEffect(() => {
         async function fetchShuffle () {
@@ -162,7 +123,8 @@ function GameComponent () {
             setTotalUserPoints(totalUserPoints);
         }
         fetchShuffle();
-    }, [totalUserPoints, setTotalUserPoints]);
+
+    }, []);
 
 
 

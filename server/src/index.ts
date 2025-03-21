@@ -28,6 +28,7 @@ app.post('/submit', authMiddleware, submitWordController);
 app.post('/auth/login', loginController);
 app.post('/auth/register', registerController);
 
+
 // Start the Express server
 app.listen(port, () => {
     console.log(`The server is running at http://localhost:${port}`);

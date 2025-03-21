@@ -21,7 +21,7 @@ function WordListComponent () {
     const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
     const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
     const [totalPoints, setTotalPoints] = useState(0);
-    const { guessedWords, setGuessedWords, totalUserPoints } = useContext(AuthContext);
+    const { guessedWords, totalUserPoints } = useContext(AuthContext);
 
     const fetchPoints = async () => {
         try {
@@ -36,10 +36,9 @@ function WordListComponent () {
     };
 
     const updateSpiderClass = (points: number, total: number) => {
+
         const prog = points / total;
-        console.log('prog is', prog)
         const spider = spiderClasses.find(({ threshold }) => prog < threshold);
-        console.log(spider?.className)
 if (spider) {
     setSpiderClass(spider.className);
     setSpiderName(spider.name);
@@ -47,34 +46,25 @@ if (spider) {
     };
 
     useEffect(() => {
+
         const getPoints = async () => {
             const points = await fetchPoints();
-            console.log('points are', points);
             setTotalPoints(points);
         };
         getPoints();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
-        if (totalPoints > 0) {
+        if(guessedWords.length > 0) {
             updateSpiderClass(totalUserPoints, totalPoints);
-        }
-    }, [guessedWords, totalUserPoints, totalPoints]);
 
-    useEffect(() => {
-        const storedGuessedWords = localStorage.getItem('guessedWords');
-        if (storedGuessedWords) {
-            setGuessedWords(JSON.parse(storedGuessedWords));
         }
-    }, [setGuessedWords]);
 
-    useEffect(() => {
-        localStorage.setItem('guessedWords', JSON.stringify(guessedWords));
-        if (totalPoints > 0) {
-            const calculatedPoints = calculatePoints(guessedWords);
-            updateSpiderClass(calculatedPoints, totalPoints);
-        }
-    }, [guessedWords, totalPoints]);
+
+    }, []);
+
+
 
     return (
         <>

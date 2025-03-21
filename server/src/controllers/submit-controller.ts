@@ -30,9 +30,10 @@ export async function submitWordController (req: Request, res: Response): Promis
 
 
             const userId = decoded._id;
-            console.log(userId);
+
             const list = await fetchListModel();
             const user = await UserModel.findById(userId);
+            console.log('user is', user)
             if (list) {
                 const currentDaylistId = list.id;
                 const { word } = req.body;
@@ -44,14 +45,14 @@ export async function submitWordController (req: Request, res: Response): Promis
                 const validatedWord = list.validWords.find(thisword => thisword.word === wordToCheck);
                 console.log('validated word is ', validatedWord);
 
-                if (user) {
+                if (user && validatedWord) {
                     const userHistory = user.history || [];
                     let dayEntry = userHistory.find((entry: HistoryI) => entry.daylist_id === currentDaylistId);
                     if (!dayEntry) {
                         dayEntry = {
                             daylist_id: currentDaylistId,
-                            guessedWords: [],
-                            totalUserPoints: 0,
+                            guessedWords: [validatedWord],
+                            totalUserPoints: validatedWord.points,
                             level: 'Daddy Long-Legs'
                         };
                         if (dayEntry)
@@ -69,19 +70,17 @@ export async function submitWordController (req: Request, res: Response): Promis
 
                         }
                         await user.save();
-                        const updatedUser = await UserModel.findById(userId);
                         const toReturn: SubmitWordResponse = {
                             valid: true,
                             guessedWord: validatedWord,
-                            history: updatedUser?.history
+                            history: dayEntry
                         };
                         res.status(200).json(toReturn
                         );
                     } else {
                         const toReturn: SubmitWordResponse = {
                             valid: false,
-                            guessedWord: validatedWord,
-                            history: user.history
+                            guessedWord: validatedWord
                         };
                         res.status(200).json(toReturn
                         );

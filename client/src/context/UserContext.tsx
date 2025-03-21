@@ -34,35 +34,36 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     useEffect(() => {
         const decoded = getDecodedToken();
-        if (decoded) {
+        if (decoded && decoded !== user) {  // Only update if decoded token is different from the current user
             setUser(decoded);
-        } else {
-
-            setUser(null);
         }
+
         if (user && user.history) {
+            // Find today's history (filter by `daylist_id` matching today's date)
+            const todayHistory: HistoryI | undefined = user.history.find(h => h.daylist_id === Date.now().toString());
 
-            const todayHistory: HistoryI = user.history.filter(h => h.daylist_id === Date.now().toString())[0];
-            if (todayHistory && todayHistory.guessedWords) {
-                // todayHistory.guessedWords is likely an array of objects, which may or may not match your WordObj type
-                // Adjust as necessary to match your expected structure.
-                setGuessedWords(todayHistory.guessedWords);
-            }
-
-            else {
-                const todayHistory: HistoryI = {
-                    daylist_id: now,
-                    guessedWords: guessedWords,
-                    totalUserPoints: totalUserPoints
+            if (todayHistory) {
+                if (todayHistory.guessedWords) {
+                    setGuessedWords(todayHistory.guessedWords);  // Only set guessedWords if today's history exists
                 }
+            } else {
+                const newHistory: HistoryI = {
+                    daylist_id: now,
+                    guessedWords: guessedWords,  // Set initial guessedWords
+                    totalUserPoints: totalUserPoints
+                };
+
                 const updatedUser = {
                     ...user,
-                    history: [...user.history, todayHistory], // Add the new history entry
+                    history: [...user.history, newHistory]
                 };
+
+
                 setUser(updatedUser);
             }
         }
-    }, [setUser, guessedWords, totalUserPoints]);
+    }, []);
+
 
     const value: AppContextValue = {
         user,

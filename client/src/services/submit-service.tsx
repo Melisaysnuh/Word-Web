@@ -29,6 +29,7 @@ export const checkWord = async (
 
 
             const data: SubmitWordResponse = await res.json();
+            // or, should we take it here in the service and update? or in the context itself?
             return data;
 
 

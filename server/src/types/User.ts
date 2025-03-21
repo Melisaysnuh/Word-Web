@@ -15,7 +15,7 @@ export interface HistoryI {
     totalUserPoints: number; // need this for history, not relevant now
     level: string; // need this for history, not relevant now
 }
-export interface UserI extends RegisterDataI{
+export interface UserI extends RegisterDataI {
     _id: string;
     history?: HistoryI[];
 }
