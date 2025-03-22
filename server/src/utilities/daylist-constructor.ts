@@ -1,12 +1,12 @@
 import { Daylist } from '../types/Daylist.js';
-import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints, calculateTotal } from './utilities.js';
+import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints } from './utilities.js';
 import { getArray, getRandomWord, validWordArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
 
 
 // *CONSTRUCT OUR LIST AND EXPORT
-export async function finalConstructor (): Promise<Daylist | undefined> {
+export default async function finalConstructor (): Promise<Daylist | undefined> {
     try {
         console.log('in daylist constructor');
         const mainWordArray = await getArray(4, 12)
@@ -31,7 +31,6 @@ export async function finalConstructor (): Promise<Daylist | undefined> {
                         centerLetter: center,
                         pangrams: todaysPangrams,
                         letters: uniqueArray,
-                        totalPossiblePoints: calculateTotal(anagramObjList),
                         validWords: anagramObjList,
 
                     }

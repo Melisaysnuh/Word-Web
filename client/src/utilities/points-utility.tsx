@@ -1,10 +1,10 @@
 import WordObj from "../types/WordObj";
-export function calculatePoints (list: WordObj[]) {
-    let myPoints: number = 0;
+export function calculateTotalPoints (list: WordObj[]) {
+    let totalPoints: number = 0;
     list.forEach((word) => {
         if (word.points)
-        myPoints += word.points;
+        totalPoints += word.points;
 
     });
-    return myPoints;
+    return totalPoints;
 }

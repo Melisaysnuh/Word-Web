@@ -1,7 +1,18 @@
-import { expect, describe, test } from 'vitest';
+import { expect, describe, test, vi } from 'vitest';
+import * as wordListMgmt from  '../src/utilities/word-list-mgmt'
+
+vi.mock('../src/utilities/word-list-mgmt', () => ({
+    validateWord: vi.fn(),
+    removeInvalidWord: vi.fn(),
+    getArray: vi.fn()
+}));
+
 
 describe('daylist Constructor', () => {
-    test('should provide an output that is a WordObj type', async () => {
-expect(1+2).toBe(3);
+    test('should call all utility functions', async () => {
+
+        /* const getArraySpy = vi.spyOn(wordListMgmt, wordListMgmt.getArray); */
+
+        expect(getArraySpy).toHaveBeenCalled()
     });
 });

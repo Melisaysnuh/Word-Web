@@ -1,6 +1,7 @@
 import { expect, MockedFunction, describe, test, vi } from 'vitest';
-import { anagramListMock, mock7LetterArray } from './mocks/mocks.mock';
-import {centerFilter, generateAnagrams, getCenter, pangrams} from '../dist/utilities/utilities'
+import { anagramListMock, mock7LetterArray, mockPangramsArray, wordString1, wordString2, wordString3 } from './mocks/mocks.mock';
+import {calculatePoints, centerFilter, generateAnagrams, getCenter, pangrams} from '../dist/utilities/utilities'
+
 
 vi.mock('../src/utilities/utilities', () => ({
     generateAnagrams: vi.fn().mockResolvedValue(anagramListMock)
@@ -19,16 +20,31 @@ describe('utility functions', () => {
     });
 
     describe('calculate points', () => {
-        test('receive a word and calculate points', async () => {
-            expect(1 + 2).toBe(3);
+        test('it should receive a word and the list of pangrams and calculate the points for that word', async () => {
+            const testResult1 = calculatePoints(wordString1, mockPangramsArray);
+            const testResult2 = calculatePoints(wordString2, mockPangramsArray);
+            const testResult3 = calculatePoints(wordString3, mockPangramsArray);
+            expect(testResult1).toBeTruthy();
+            expect(testResult2).toBeTruthy();
+            expect(testResult3).toBeTruthy();
+
+            expect(testResult1).toBeTypeOf("object");
+            expect(testResult1.points).toBe(6);
+            expect(testResult1.pangram).toBe(false);
+
+            expect(testResult2).toBeTypeOf("object");
+            expect(testResult2.points).toBe(14);
+            expect(testResult2.pangram).toBe(true);
+
+            expect(testResult3).toBeTypeOf("object");
+            expect(testResult3.points).toBe(1);
+            expect(testResult3.pangram).toBe(false);
+
+
         });
     });
 
-    describe('calculate total', () => {
-        test('it should receive a list of words and calculate the total score', async () => {
-            expect(1 + 2).toBe(3);
-        });
-    });
+
     describe('center filter', () => {
         test('it should receive a list and filter any words that dont contain a given letter', async () => {
             const testResult = centerFilter(anagramListMock, 's');
