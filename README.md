@@ -11,12 +11,7 @@ Find English words with at least 4 letters that are anagrams. Each day will have
 *Scoring*
 Four-letter words are worth one point each, five-or-more-letter words are worth one point per letter. Any pangram is worth its letters + seven bonus points.
 
- ## Tech Stack
 
-- **React** (with TypeScript)
-- **Express** (Node.js)
-- **npm** (Node Package Manager)
-- **Other relevant technologies/libraries** word-list, Merriam-Webster API, cron, fn-dns, crypto
 
 ## Prerequisites
 
@@ -31,7 +26,7 @@ Before setting up the project, ensure you have the following installed:
 # Project Name
 
 **Description**:
-A brief description of what your project does.
+Word web is a game for word lovers and puzzle-heads. See how many different words you can make using a 7-letter Pangram. Get extra points if you guess the pangram, and become a BLACK WIDOW!
 
 ---
 
@@ -40,7 +35,7 @@ A brief description of what your project does.
 - **React** (with TypeScript)
 - **Express** (Node.js)
 - **npm** (Node Package Manager)
-- **Other relevant technologies/libraries** (e.g., Redux, Axios, etc.)
+- **Other relevant technologies/libraries**: Merriam Webster API, Vitest
 
 ---
 
@@ -99,11 +94,10 @@ Users should see a new group of 7 letters each day, and should be able to enter 
 ### Upcoming Features:
 
 1. Native
-2. Login
-3. History*
-4. "Helper" to show a grid containing how many words remain grouped by length and starting letter, that is updated dynamically
-5. "Hover" over a word to get a definition
-6. German-language option
+2. History*
+3. "Helper" to show a grid containing how many words remain grouped by length and starting letter, that is updated dynamically
+4. "Hover" over a word to get a definition
+5. German-language option
 7.
 5.1.  - recluse /black widow screen
 1. Select word list source
