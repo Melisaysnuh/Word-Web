@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "vitest --coverage",
+    "coverage": "vitest --coverage",
+    "test": "vitest ",
     "build": "tsc",
     "this": "tsc && node dist/utilities/utilities.js",
     "start": "npm run build && node dist/index.js",

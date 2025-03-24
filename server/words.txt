@@ -8513,7 +8513,6 @@ anoestri
 anoestrous
 anoestrum
 anoestrus
-anoetic
 anoint
 anointed
 anointer
@@ -13893,7 +13892,6 @@ atomical
 atomically
 atomicities
 atomicity
-atomics
 atomies
 atomisation
 atomisations
@@ -16375,7 +16373,6 @@ baclavas
 baclofen
 baclofens
 bacon
-baconer
 baconers
 bacons
 bacs
@@ -17700,7 +17697,6 @@ bargemen
 bargepole
 bargepoles
 barges
-bargest
 bargests
 barghest
 barghests
@@ -18322,7 +18318,6 @@ bastes
 basti
 bastide
 bastides
-bastile
 bastiles
 bastille
 bastilles
@@ -28611,7 +28606,6 @@ bugler
 buglers
 bugles
 buglet
-buglets
 bugleweed
 bugleweeds
 bugling
@@ -31155,7 +31149,6 @@ cambistry
 cambists
 cambium
 cambiums
-camboge
 camboges
 cambogia
 cambogias
@@ -31635,7 +31628,6 @@ canicular
 canid
 canids
 canier
-caniest
 canikin
 canikins
 canine
@@ -49292,7 +49284,6 @@ cotyloids
 cotylosaur
 cotylosaurs
 cotype
-cotypes
 coucal
 coucals
 couch
@@ -63497,7 +63488,6 @@ disburthened
 disburthening
 disburthens
 disc
-discage
 discaged
 discages
 discaging
@@ -78588,7 +78578,6 @@ euphorias
 euphoric
 euphorically
 euphories
-euphory
 euphotic
 euphrasia
 euphrasias
@@ -99659,7 +99648,6 @@ guqin
 guqins
 gur
 gurami
-guramis
 gurdwara
 gurdwaras
 gurged
@@ -102002,7 +101990,6 @@ hartely
 harten
 hartened
 hartening
-hartens
 hartlesse
 harts
 hartshorn
@@ -124276,7 +124263,6 @@ kisspeptins
 kissy
 kist
 kisted
-kistful
 kistfuls
 kisting
 kists
@@ -125889,7 +125875,6 @@ ladyfying
 ladyhood
 ladyhoods
 ladyish
-ladyism
 ladyisms
 ladykin
 ladykins
@@ -126757,7 +126742,6 @@ laptray
 laptrays
 lapwing
 lapwings
-lapwork
 lapworks
 laquearia
 lar
@@ -132421,7 +132405,6 @@ lumpingly
 lumpishly
 lumpishness
 lumpishnesses
-lumpkin
 lumpkins
 lumpsucker
 lumpsuckers
@@ -136670,7 +136653,6 @@ mauveines
 mauveins
 mauver
 mauves
-mauvest
 mauvin
 mauvines
 mauvins
@@ -137563,7 +137545,6 @@ megrims
 megs
 meh
 mehndi
-mehndis
 meibomian
 meikle
 mein
@@ -156169,7 +156150,6 @@ oilstone
 oilstones
 oiltight
 oilway
-oilways
 oily
 oink
 oinked
@@ -202399,7 +202379,6 @@ ryots
 ryotwari
 ryotwaris
 rypeck
-rypecks
 saag
 saags
 sab
@@ -218247,7 +218226,6 @@ somberness
 sombernesses
 sombers
 sombre
-sombred
 sombrely
 sombreness
 sombrenesses
@@ -237148,7 +237126,6 @@ teuchters
 teugh
 teugher
 teughest
-teughly
 teutonise
 teutonised
 teutonises
@@ -241534,7 +241511,6 @@ touzier
 touziest
 touzle
 touzled
-touzles
 touzling
 touzy
 tovarich
@@ -247945,7 +247921,6 @@ unbeloved
 unbelt
 unbelted
 unbelting
-unbelts
 unbemused
 unbend
 unbendable
@@ -252706,7 +252681,6 @@ unquoting
 unracked
 unraised
 unrake
-unraked
 unrakes
 unraking
 unranked
@@ -261468,7 +261442,6 @@ washwomen
 washy
 wasp
 waspie
-waspier
 waspies
 waspiest
 waspily
@@ -264847,7 +264820,6 @@ wombat
 wombed
 wombier
 wombiest
-wombing
 womblike
 wombs
 womby

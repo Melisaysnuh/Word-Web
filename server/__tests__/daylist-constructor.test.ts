@@ -2,7 +2,7 @@ import { expect, describe, test, vi, MockedFunction } from 'vitest';
 import * as wordListMgmt from  '../src/utilities/word-list-mgmt'
 import * as utilities from  '../src/utilities/utilities'
 import finalConstructor from '../src/utilities/daylist-constructor'
-import { twoLetterMock } from './mocks/mocks.mock';
+import { anagramListMock, twoLetterMock } from './mocks/mocks.mock';
 
 
 vi.mock('../src/utilities/word-list-mgmt', () => ({
@@ -80,18 +80,18 @@ describe('daylist Constructor', () => {
         const result = await finalConstructor();
         expect(result).toBeUndefined();
     });
-    /*test('Should call validWord', async () => {
-        (wordListMgmt.getArray as unknown as MockedFunction<typeof wordListMgmt.getArray>).mockResolvedValue(twoLetterMock);
+    test('Should call validWordArray', async () => {
 
         const validWordArraySpy = vi.spyOn(wordListMgmt, 'validWordArray');
         await finalConstructor();
-        expect(validWordArraySpy).toHaveBeenCalledOnce()
+        expect(validWordArraySpy).toHaveBeenCalledTimes(4)
+
 
     });
 
-    test('Should handle errors for validWord', async () => {
+    test('Should handle errors for validWordArray', async () => {
         // Mock getArray to throw an error
-        wordListMgmt.getArray.mockRejectedValueOnce(new Error('API Error'));
+        wordListMgmt.validWordArray.mockRejectedValueOnce(new Error('API Error'));
 
         const consoleSpy = vi.spyOn(console, 'log');
 
@@ -102,41 +102,21 @@ describe('daylist Constructor', () => {
         const result = await finalConstructor();
         expect(result).toBeUndefined();
     });
-     test('With randomword, should call getCenter', async () => {
-        (wordListMgmt.getArray as unknown as MockedFunction<typeof wordListMgmt.getArray>).mockResolvedValue(twoLetterMock);
-        const getArraySpy = vi.spyOn(wordListMgmt, 'getArray');
-        const validateWordSpy = vi.spyOn(wordListMgmt, 'validateWord');
-        const removeInvalidWordSpy = vi.spyOn(wordListMgmt, 'removeInvalidWord');
-        const getRandomWordSpy = vi.spyOn(wordListMgmt, 'getRandomWord');
-        const validWordArraySpy = vi.spyOn(wordListMgmt, 'validWordArray');
-
-        const calculatePointsSpy = vi.spyOn(utilities, 'calculatePoints');
-        const centerFilterSpy = vi.spyOn(utilities, 'centerFilter');
-        const generateAnagramsSpy = vi.spyOn(utilities, 'generateAnagrams');
+     test('should call getCenter', async () => {
+        (wordListMgmt.validWordArray as unknown as MockedFunction<typeof wordListMgmt.validWordArray>).mockResolvedValue(anagramListMock);
         const getCenterSpy = vi.spyOn(utilities, 'getCenter');
-        const pangramsSpy = vi.spyOn(utilities, 'pangrams');
 
 
         await finalConstructor();
 
-        expect(getArraySpy).toHaveBeenCalledOnce()
-
-        expect(validateWordSpy).toHaveBeenCalledOnce()
-        expect(removeInvalidWordSpy).toHaveBeenCalledOnce()
-        expect(getRandomWordSpy).toHaveBeenCalledOnce()
-        expect(validWordArraySpy).toHaveBeenCalledOnce()
-        //expect(calculatePointsSpy).toHaveBeenCalledOnce()
-        //expect(centerFilterSpy).toHaveBeenCalledOnce()
-        //expect(generateAnagramsSpy).toHaveBeenCalledOnce()
-        //expect(getCenterSpy).toHaveBeenCalledOnce()
-        //expect(pangramsSpy).toHaveBeenCalledOnce()
+        expect(getCenterSpy).toHaveBeenCalledOnce()
 
 
     });
 
     test('should handle errors for getCenter', async () => {
         // Mock getArray to throw an error
-        wordListMgmt.getArray.mockRejectedValueOnce(new Error('API Error'));
+        (utilities.getCenter as unknown as MockedFunction<typeof utilities.getCenter>).mockResolvedValue('i');
 
         const consoleSpy = vi.spyOn(console, 'log');
 
@@ -147,34 +127,22 @@ describe('daylist Constructor', () => {
         const result = await finalConstructor();
         expect(result).toBeUndefined();
     });
+
     test('With getCenter, call centerFilter, panGrams, calculatePoints', async () => {
-        (wordListMgmt.getArray as unknown as MockedFunction<typeof wordListMgmt.getArray>).mockResolvedValue(twoLetterMock);
-        const getArraySpy = vi.spyOn(wordListMgmt, 'getArray');
-        const validateWordSpy = vi.spyOn(wordListMgmt, 'validateWord');
-        const removeInvalidWordSpy = vi.spyOn(wordListMgmt, 'removeInvalidWord');
-        const getRandomWordSpy = vi.spyOn(wordListMgmt, 'getRandomWord');
-        const validWordArraySpy = vi.spyOn(wordListMgmt, 'validWordArray');
+        (wordListMgmt.getRandomWord as unknown as MockedFunction<typeof wordListMgmt.getRandomWord>).mockResolvedValue('drought');
+        (utilities.pangrams as unknown as MockedFunction<typeof utilities.pangrams>).mockResolvedValue(['drought']);
+        (utilities.getCenter as unknown as MockedFunction<typeof utilities.getCenter>).mockResolvedValue('0');
 
         const calculatePointsSpy = vi.spyOn(utilities, 'calculatePoints');
         const centerFilterSpy = vi.spyOn(utilities, 'centerFilter');
-        const generateAnagramsSpy = vi.spyOn(utilities, 'generateAnagrams');
-        const getCenterSpy = vi.spyOn(utilities, 'getCenter');
         const pangramsSpy = vi.spyOn(utilities, 'pangrams');
 
 
         await finalConstructor();
 
-        expect(getArraySpy).toHaveBeenCalledOnce()
-
-        expect(validateWordSpy).toHaveBeenCalledOnce()
-        expect(removeInvalidWordSpy).toHaveBeenCalledOnce()
-        expect(getRandomWordSpy).toHaveBeenCalledOnce()
-        expect(validWordArraySpy).toHaveBeenCalledOnce()
-        //expect(calculatePointsSpy).toHaveBeenCalledOnce()
-        //expect(centerFilterSpy).toHaveBeenCalledOnce()
-        //expect(generateAnagramsSpy).toHaveBeenCalledOnce()
-        //expect(getCenterSpy).toHaveBeenCalledOnce()
-        //expect(pangramsSpy).toHaveBeenCalledOnce()
+        expect(calculatePointsSpy).toHaveBeenCalledOnce()
+        expect(centerFilterSpy).toHaveBeenCalledOnce()
+        expect(pangramsSpy).toHaveBeenCalledOnce()
 
 
     });
@@ -191,5 +159,5 @@ describe('daylist Constructor', () => {
 
         const result = await finalConstructor();
         expect(result).toBeUndefined();
-    }); */
+    });
 });
