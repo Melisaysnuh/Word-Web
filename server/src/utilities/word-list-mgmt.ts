@@ -16,10 +16,9 @@ export const validateWord = async (word: string): Promise<boolean> => {
         const res = await fetch(`${url}${word}${apiKey}`);
         if (res.ok) {
             const data = await res.json();
-           // console.log(data);
+           //console.log('returning data: ', data);
             if (
                 data && typeof data[0] === 'object' &&
-                data[0].hwi.hw === word &&
                 data[0].meta.offensive === false &&
             data[0].fl !== 'abbreviation' &&
                 data[0].fl !== 'Latin phrase' &&
@@ -96,7 +95,7 @@ export async function validWordArray (list: string[]) {
 
     }
 }
-
+//console.log('checking validate word....', await validateWord('clever'))
 
 /* async function testValidateWord (word: string) {
     try {

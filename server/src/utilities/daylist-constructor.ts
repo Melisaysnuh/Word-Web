@@ -8,7 +8,6 @@ const now = format(new Date(), "yyyy_MM_dd");
 // *CONSTRUCT OUR LIST AND EXPORT
 export default async function finalConstructor (): Promise<Daylist | undefined> {
     try {
-        console.log('in daylist constructor');
         const mainWordArray = await getArray(4, 12)
         const word = await getRandomWord();
         if (word) {
@@ -17,7 +16,6 @@ export default async function finalConstructor (): Promise<Daylist | undefined> 
             const anagrams = generateAnagrams(word, mainWordArray);
             console.log('pre valid array')
             const validWordAnagrams = await validWordArray(anagrams);
-            console.log('post valid array')
             if (validWordAnagrams) {
                 const center = await getCenter(validWordAnagrams, uniqueArray);
                 if (center) {

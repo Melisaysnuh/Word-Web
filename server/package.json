@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "vitest",
+    "test": "vitest --coverage",
     "build": "tsc",
     "this": "tsc && node dist/utilities/utilities.js",
     "start": "npm run build && node dist/index.js",
@@ -37,6 +37,7 @@
     "@types/express": "^5.0.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.9.0",
+    "@vitest/coverage-v8": "^3.0.6",
     "concurrently": "^9.1.0",
     "cors": "^2.8.5",
     "nodemon": "^3.1.7",

@@ -1,17 +1,17 @@
 import { expect, MockedFunction, describe, test, vi } from 'vitest';
 import { anagramListMock, mock7LetterArray, mockPangramsArray, wordString1, wordString2, wordString3 } from './mocks/mocks.mock';
-import {calculatePoints, centerFilter, generateAnagrams, getCenter, pangrams} from '../dist/utilities/utilities'
+import * as wordListMgmt from '../src/utilities/utilities'
 
 
-vi.mock('../src/utilities/utilities', () => ({
+/* vi.mock('../src/utilities/utilities', () => ({
     generateAnagrams: vi.fn().mockResolvedValue(anagramListMock)
-}));
+})); */
 
 describe('utility functions', () => {
     describe('generate-Anagrams', () => {
         test('should receive a word and an array and return only words that are anagrams and between 4 and 12 characters', async () => {
-            (generateAnagrams as unknown as MockedFunction<typeof generateAnagrams>)
-            const result = generateAnagrams('scatter', anagramListMock);
+           // (wordListMgmt.generateAnagrams as unknown as MockedFunction<typeof wordListMgmt.generateAnagrams>)
+            const result = wordListMgmt.generateAnagrams('scatter', anagramListMock);
             expect(result).toBeTypeOf('object');
             expect(result).not.toHaveLength(0);
             expect(result.every(word => word.match(`^['scatter']+$`))).toBe(true);
@@ -21,9 +21,9 @@ describe('utility functions', () => {
 
     describe('calculate points', () => {
         test('it should receive a word and the list of pangrams and calculate the points for that word', async () => {
-            const testResult1 = calculatePoints(wordString1, mockPangramsArray);
-            const testResult2 = calculatePoints(wordString2, mockPangramsArray);
-            const testResult3 = calculatePoints(wordString3, mockPangramsArray);
+            const testResult1 = wordListMgmt.calculatePoints(wordString1, mockPangramsArray);
+            const testResult2 = wordListMgmt.calculatePoints(wordString2, mockPangramsArray);
+            const testResult3 = wordListMgmt.calculatePoints(wordString3, mockPangramsArray);
             expect(testResult1).toBeTruthy();
             expect(testResult2).toBeTruthy();
             expect(testResult3).toBeTruthy();
@@ -47,7 +47,7 @@ describe('utility functions', () => {
 
     describe('center filter', () => {
         test('it should receive a list and filter any words that dont contain a given letter', async () => {
-            const testResult = centerFilter(anagramListMock, 's');
+            const testResult = wordListMgmt.centerFilter(anagramListMock, 's');
             expect(testResult).toBeTruthy();
             expect(testResult).toBeTypeOf("object");
             expect(testResult).toContain('asar'
@@ -57,7 +57,7 @@ describe('utility functions', () => {
     });
     describe('get center', () => {
         test('it should determine the center letter based on a list that will return no more than 50 words for that days list', async () => {
-            const testResult = await getCenter(anagramListMock, ['s', 'c', 'a', 't']);
+            const testResult = await wordListMgmt.getCenter(anagramListMock, ['s', 'c', 'a', 't']);
             expect(testResult).toBeTruthy();
             expect(testResult).toBeTypeOf("string");
 
@@ -66,7 +66,10 @@ describe('utility functions', () => {
     });
     describe('pangram finder', () => {
         test('it should receive a list of words determine if each word is a pangram or not', async () => {
-            const testResult = pangrams(["alba", "alibi", "bail", "bald", "ball", "barb", "bard", "basil", "bias", "bird", 'billiards'], mock7LetterArray);
+            const pangramsSpy = vi.spyOn(wordListMgmt, 'pangrams');
+            const testResult = await wordListMgmt.pangrams(["alba", "alibi", "bail", "bald", "ball", "barb", "bard", "basil", "bias", "bird", 'billiards'], mock7LetterArray);
+
+            expect(pangramsSpy).toHaveBeenCalled();
             expect(testResult).toBeTypeOf('object');
             expect(testResult).toHaveLength(1);
 

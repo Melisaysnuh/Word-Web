@@ -7,7 +7,6 @@ aals
 aardvark
 aardvarks
 aardwolf
-aardwolves
 aarti
 aartis
 aas
@@ -40530,7 +40529,6 @@ cleughs
 cleve
 cleveite
 cleveites
-clever
 cleveralities
 cleverality
 cleverer
