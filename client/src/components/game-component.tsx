@@ -85,8 +85,10 @@ function GameComponent () {
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
         } else {
+            console.log('guessing...', word)
             const res: SubmitWordResponse | undefined = await checkWord(word);
             if (res !== undefined) {
+                console.log(res);
                 if (res.valid && res.valid === true) {
                     const resWord = res.guessedWord as WordObj;
                     if (resWord && !guessedWords.includes(resWord)) {
@@ -96,9 +98,10 @@ function GameComponent () {
                             setTotalUserPoints((prevPoints) => prevPoints + resWord.points);
                         }
                         if (res.history && user && user.history) {
-                            const thisHist: HistoryI = res.history;
+                            const typedHist: array = res.history;
+                            const thisHist: HistoryI = res.history[typedHist.length-1];
 
-                            // Avoid infinite loop: update only if history is different
+
                             const updatedUser = {
                                 ...user,
                                 history: [thisHist, ...user.history.slice(1)],

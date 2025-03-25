@@ -53,6 +53,8 @@ export const logout = (): void => {
   localStorage.removeItem("token");
 };
 
+
+
 export const login = async (
   userData: LoginDataI
 ): Promise<AuthuserResponse> => {
@@ -85,13 +87,8 @@ export const getToken = (): string | null => {
 
 export const decodeToken = (token: string ): UserI | null => {
   try {
-    const thisUser: UserI = jwtDecode(token);
-    if (thisUser) {
 
-
-      return thisUser
-    } else return null
-
+    return jwtDecode<UserI>(token);
   } catch (error) {
     console.error("Invalid token" + error);
     return null;
@@ -100,12 +97,21 @@ export const decodeToken = (token: string ): UserI | null => {
 
 
 export function getDecodedToken () {
-  const token = getToken();
-  return token ? decodeToken(token) : null;
+  const token = localStorage.getItem('token');
+  if (token) {
+    console.log('token exists')
+    try {
+      return decodeToken(token);
+    } catch (error) {
+      console.error("Invalid token", error);
+      return null;
+    }
+  }
+  return null;
 }
 
-export function isTokenExpired (decodedToken: string) {
-  if (!decodedToken) return true;
+export function isTokenExpired () {
+  return (getDecodedToken())
 }
 
 

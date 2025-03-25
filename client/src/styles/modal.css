@@ -14,6 +14,22 @@ min-height: 359px;
   border-radius: 20px;
 
 }
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(#381d75, #180a37);
+  min-width: 359px;
+  max-width: 500px;
+  max-height: 600px;
+min-height: 359px;
+  border-radius: 20px;
+
+}
 .modal-background {
   position: absolute;
   width: 100%;
@@ -36,7 +52,7 @@ input {
 
 
 }
-label {
+label, modal-title {
    font-family: 'Averia Libre';
   font-size: 1.1rem;
   text-shadow: 20%;
@@ -57,8 +73,20 @@ label {
   font-size: 16px; /* Set a font size */
   cursor: pointer; /* Mouse pointer on hover */
 }
+.modal-close-btn {
 
-/* Darker background on mouse-over */
+  background-color: rgba(24, 10, 55, 0);
+  border: none;
+  color: orange;
+  padding: 12px 16px; /* Some padding */
+  font-size: 16px; /* Set a font size */
+  cursor: pointer; /* Mouse pointer on hover */
+}
+
+
 .btn:hover {
+  background-color: rgba(24, 10, 55, 0.85);
+}
+.modal-close-btn:hover {
   background-color: rgba(24, 10, 55, 0.85);
 }

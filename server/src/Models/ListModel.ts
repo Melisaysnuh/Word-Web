@@ -17,10 +17,10 @@ export async function fetchListModel () {
             id: now
         });
         if (list) {
-
-            return list
+            console.log('list already found')
         }
         else {
+            console.log('no list found, creating new list')
             const list: Daylist | void = await storeListModel();
             return list
 

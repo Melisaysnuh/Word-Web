@@ -1,17 +1,18 @@
+import Daylist from "../types/Daylist";
 
 const currentTime = Date.now();
-const CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // Cache expires after 1 hour
-const cachedDailyList: number | null = null;
-const cacheTimestamp: number = 0;
+const CACHE_EXPIRATION_TIME = 60 * 90 * 1000;
+let cachedDailyList: Daylist | null = null;
+let cacheTimestamp: number = 0;
 export const base_URL = 'http://localhost:3000'
 
 
 
 export const getDailyList = async () => {
-
+    console.log(cachedDailyList)
     if (cachedDailyList && currentTime - cacheTimestamp < CACHE_EXPIRATION_TIME) {
         console.log('Returning cached daily list');
-        return cachedDailyList; // Return the cached data if still valid
+        return cachedDailyList;
     }
     try {
         const res = await fetch(`${base_URL}/`,
@@ -23,6 +24,8 @@ export const getDailyList = async () => {
         if (res) {
             const data = await res.json();
             const list = data;
+            cachedDailyList = list;
+            cacheTimestamp = currentTime;
                        return list
 
 

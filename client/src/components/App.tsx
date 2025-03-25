@@ -5,8 +5,8 @@ import RegisterComponent from './register-component'
 import LoginComponent from './login-component'
 import UserComponent from './user-component'
 import { AuthContext } from '../context/UserContext'
-import { logout } from '../services/auth-service'
-import { useContext, useState } from 'react'
+import { logout, isTokenExpired } from '../services/auth-service'
+import { useContext, useEffect, useState } from 'react'
 
 
 
@@ -16,6 +16,12 @@ function App () {
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [userModal, setUserModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (!user) {
+      setLoginModal(true);
+      }
+  }, [user]);
 
   const handleLoginClick = () => {
     setLoginModal(true)

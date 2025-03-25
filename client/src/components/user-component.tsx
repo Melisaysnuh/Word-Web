@@ -10,12 +10,13 @@ interface UserProps {
 const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
     const [message, setMessage] = useState("");
 
-    const { user } = useContext(AuthContext);
+    const { user, guessedWords } = useContext(AuthContext);
 
     let latestHistory: HistoryI;
 
     if (user && user.history) {
-        latestHistory = user.history[0];
+        console.log(user.history)
+        latestHistory = user.history[user.history.length-1];
         localStorage.setItem("history", JSON.stringify(latestHistory));
     } else {
         latestHistory = {
@@ -45,8 +46,8 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
                     <div className="modal-words">
                         <h3>Your Guessed Words:</h3>
                         <ul>
-                            {latestHistory?.guessedWords && latestHistory.guessedWords.length > 0 ? (
-                                latestHistory.guessedWords.map((word, index) => (
+                            {guessedWords && guessedWords.length > 0 ? (
+                                guessedWords.map((word, index) => (
                                     <li key={index}>{word.word}</li>
                                 ))
                             ) : (
@@ -61,10 +62,9 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
 
                     </div>
 
-                    {/* Close Button */}
                     <button onClick={handleClose} className="modal-close-btn">Close</button>
 
-                    {/* Message */}
+
                     {message && <p className="message">{message}</p>}
                 </div>
             </div>
