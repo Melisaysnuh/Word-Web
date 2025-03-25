@@ -2,7 +2,7 @@ import { dayModel } from "./index.js"
 import { Daylist } from "../types/Daylist.js";
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
-import { finalConstructor } from '../utilities/daylist-constructor.js';
+import  finalConstructor  from '../utilities/daylist-constructor.js';
 import { error } from 'console';
 
 

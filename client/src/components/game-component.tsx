@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import '../styles/game-component.css';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { getDailyList } from '../services/list-service';
 import { checkWord } from '../services/submit-service';
 import WordObj from '../types/WordObj';
@@ -16,6 +16,8 @@ function GameComponent () {
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
 
     const { guessedWords, setGuessedWords, totalUserPoints, setTotalUserPoints, user, setUser } = useContext(AuthContext);
+    const inputRef = useRef<HTMLInputElement>(null);
+
 
     async function fetchDailyList () {
         try {
@@ -69,6 +71,8 @@ function GameComponent () {
         const shuffled = generateRandomIndices(dailyLetters);
        setDailyLetters(shuffled);
         setFormStatus({ success: 'none', message: '' });
+        inputRef.current?.focus();
+
     }
 
     async function handleSubmit (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) {
@@ -110,6 +114,7 @@ function GameComponent () {
             }
         }
         setGuess('');
+        inputRef.current?.focus();
     }
 
     useEffect(() => {
@@ -123,6 +128,7 @@ function GameComponent () {
             setTotalUserPoints(totalUserPoints);
         }
         fetchShuffle();
+        inputRef.current?.focus();
 
     }, []);
 
@@ -138,8 +144,10 @@ function GameComponent () {
                 <form className="letter-form" >
                     <div className='message'><div className={formStatus.success}>{formStatus.message}</div></div>
                     <input type='text'
+                    aria-label='text input field'
                         className='text-input'
                         value={guess}
+                        ref={inputRef}
                         onChange={handleTextInput}
                         onKeyDown={(event) => {
                             if (event.key === 'Enter') {

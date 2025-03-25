@@ -2,7 +2,7 @@ import WordObj from '../types/WordObj';
 import '../styles/word-list-component.css';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/UserContext';
-import { calculatePoints } from '../utilities/points-utility';
+import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyList } from '../services/list-service';
 
 const spiderClasses = [
@@ -27,7 +27,7 @@ function WordListComponent () {
         try {
             const data = await getDailyList();
             const arr = data.list.validWords;
-            const points = calculatePoints(arr);
+            const points = calculateTotalPoints(arr);
             return points
         } catch (e) {
             console.error('Error in fetchDailyList:', e);
@@ -73,14 +73,14 @@ if (spider) {
                 <div className='statusmess'><span className='status'>Status: </span>{spiderName}</div>
                 <div id='word-list-container'>
                     <div className='progress-bar-container'>
-                        <img id='prog-spider' className={spiderClass} src='./placeholder-spider.svg'></img>
+                        <img alt='progress spider' id='prog-spider' className={spiderClass} src='./placeholder-spider.svg'></img>
                         <svg id='prog-line' height="450" width="50">
                             <polyline className="dotted-line" points="20,8 20,58 20,108 20,158 20,208 20,258 20, 308 20, 358 20, 408" />
                             <marker id="circle-marker" markerWidth="6" markerHeight="6" refX="3" refY="3">
                                 <circle className="foreground" cx="3" cy="3" r="2" />
                             </marker>
                         </svg>
-                            <span className='pointspan'>{calculatePoints(guessedWords)} of {totalPoints} points</span>
+                            <span className='pointspan'>{calculateTotalPoints(guessedWords)} of {totalPoints} points</span>
                     </div>
 
                 <div id='word-list'>
