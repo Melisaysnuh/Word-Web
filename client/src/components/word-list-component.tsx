@@ -1,6 +1,6 @@
 import WordObj from '../types/WordObj';
 import '../styles/word-list-component.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useMemo } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyList } from '../services/list-service';
@@ -34,6 +34,14 @@ function WordListComponent () {
             return 100;
         }
     };
+    const memoizedTotalPoints = useMemo(async () => {
+        const points = await fetchPoints();
+        return points;
+    }, []);
+
+    const guessedWordPoints = useMemo(() => {
+        return calculateTotalPoints(guessedWords);
+    }, [guessedWords]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
@@ -46,14 +54,8 @@ if (spider) {
     };
 
     useEffect(() => {
-
-        const getPoints = async () => {
-            const points = await fetchPoints();
-            setTotalPoints(points);
-        };
-        getPoints();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        memoizedTotalPoints.then((points) => setTotalPoints(points));
+    }, [memoizedTotalPoints]);
 
     useEffect(() => {
         if(guessedWords.length > 0) {
@@ -62,7 +64,7 @@ if (spider) {
         }
 
 
-    }, []);
+    }, [guessedWords, totalUserPoints, totalPoints]);
 
 
 
@@ -80,7 +82,7 @@ if (spider) {
                                 <circle className="foreground" cx="3" cy="3" r="2" />
                             </marker>
                         </svg>
-                            <span className='pointspan'>{calculateTotalPoints(guessedWords)} of {totalPoints} points</span>
+                            <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
                     </div>
 
                 <div id='word-list'>

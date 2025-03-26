@@ -5,7 +5,7 @@ export async function connectDB () {
     try {
         await mongoose.connect('mongodb://localhost:27017/wordweb');
         console.log('successfully connected in model');
-        fetchListModel();
+
         return {
             statusCode: 200,
         };
@@ -19,7 +19,7 @@ export async function connectDB () {
 }
 connectDB();
 const daySchema = new Schema ({
-    id: String,
+    id: { type: String, unique: true },
     centerLetter: String,
     pangrams: Array,
     totalPoints: Number,

@@ -85,7 +85,6 @@ export async function validWordArray (list: string[]) {
             const item = list[i];
             const isValid = await validateWord(item);
             if (isValid) {
-                console.log('called!')
                 validWords.push(item)
             }
         }

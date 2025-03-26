@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import UserModel from '../Models/UserModel.js';
 import { HistoryI, UserI } from '../types/User';
 import SubmitWordResponse from '../types/SubmitWordResponse.js';
+//import { Daylist } from '../types/Daylist.js';
+import { dayModel } from '../Models/index.js';
 
 
 
@@ -34,7 +36,7 @@ export async function submitWordController (req: Request, res: Response): Promis
             const list = await fetchListModel();
             const user = await UserModel.findById(userId);
             console.log('user is', user)
-            if (list) {
+            if (list && list instanceof dayModel) {
                 const currentDaylistId = list.id;
                 const { word } = req.body;
                 if (!word || typeof word !== 'string') {

@@ -17,7 +17,8 @@ export async function fetchListModel () {
             id: now
         });
         if (list) {
-            console.log('list already found')
+            console.log('list already found');
+            return list;
         }
         else {
             console.log('no list found, creating new list')

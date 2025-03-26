@@ -61,6 +61,8 @@ describe('getDailyList', () => {
         const mockExpiredTimestamp = Date.now() - CACHE_EXPIRATION_TIME - 1000;
         cacheTimestamp = mockExpiredTimestamp;
 
+        
+
         global.fetch.mockResolvedValueOnce({
             json: vi.fn().mockResolvedValue(mockApiResponse),
         });
