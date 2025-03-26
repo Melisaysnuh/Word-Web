@@ -1,15 +1,18 @@
 import Daylist from "../types/Daylist";
 
-const currentTime = Date.now();
+
 const CACHE_EXPIRATION_TIME = 60 * 90 * 1000;
 let cachedDailyList: Daylist | null = null;
-let cacheTimestamp: number = 0;
+export let cacheTimestamp: number = 0;
 export const base_URL = 'http://localhost:3000'
 
 
 
 export const getDailyList = async () => {
-    console.log(cachedDailyList)
+    const currentTime = Date.now();
+
+
+
     if (cachedDailyList && currentTime - cacheTimestamp < CACHE_EXPIRATION_TIME) {
         console.log('Returning cached daily list');
         return cachedDailyList;
@@ -23,10 +26,9 @@ export const getDailyList = async () => {
         )
         if (res) {
             const data = await res.json();
-            const list = data;
-            cachedDailyList = list;
+            cachedDailyList = data;
             cacheTimestamp = currentTime;
-                       return list
+                       return data
 
 
         }
@@ -35,5 +37,7 @@ export const getDailyList = async () => {
         console.error('error getting your letters in api client', e)
 
     }
+    console.log('no letters found...')
+    return null
 }
 
