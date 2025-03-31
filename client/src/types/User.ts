@@ -18,5 +18,6 @@ export interface HistoryI {
 export interface UserI extends RegisterDataI{
     _id: string;
     history: HistoryI[];
+    exp?: number
 }
 

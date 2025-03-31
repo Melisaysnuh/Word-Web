@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             }
         }
 
-    }, []);
+    }, [setHistory]);
 
     // Update the entire history object
     const updateHistory = (newHistory: HistoryI) => {

@@ -1,6 +1,7 @@
 import { base_URL } from "./list-service";
 import WordObj from "../types/WordObj";
 import SubmitWordResponse from "../types/SubmitWordResponse";
+import { getToken } from "./auth-service";
 
 // * to delete or move
 /* interface CheckWordProps {
@@ -10,11 +11,12 @@ import SubmitWordResponse from "../types/SubmitWordResponse";
 
 
 
-const token = localStorage.getItem("token");
+
 
 export const checkWord = async (
     wordToCheck: string
 ): Promise<SubmitWordResponse | undefined> => {
+    const token = getToken();
     const wordObj: WordObj = { word: wordToCheck };
     if (token){
     try {

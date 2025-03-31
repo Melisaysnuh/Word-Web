@@ -95,6 +95,7 @@ export const getDecodedToken = (): UserI | null => {
 
 export const isTokenExpired = (): boolean => {
   const decoded = getDecodedToken();
+  console.log('decoded:', decoded)
   if (!decoded || !decoded.exp) return true; // No valid token
 
   const currentTime = Math.floor(Date.now() / 1000);

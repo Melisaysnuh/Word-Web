@@ -4,6 +4,14 @@ import { useContext, useEffect, useState, useMemo } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
+import { format } from 'date-fns';
+import { HistoryI } from '../types/User';
+//const [selectedDate, setSelectedDate] = useState(new Date());
+//const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+
+//const formattedDate = format(selectedDate, "yyyy_MM_dd");
+const todayFormatted = format(new Date(), "yyyy_MM_dd");
+
 
 const spiderClasses = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
@@ -21,7 +29,22 @@ function WordListComponent () {
     const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
     const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
     const [totalPoints, setTotalPoints] = useState(0);
-    const { history } = useContext(AuthContext);
+    const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+
+    const { user } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (user && user.history) {
+            const historyForSelectedDate = user.history.find(
+                (h) => h.daylist_id === todayFormatted
+
+            );
+
+            setSelectedHistory(historyForSelectedDate)
+
+        }
+    }, [user]);
+
 
     const fetchPoints = async () => {
 
@@ -49,8 +72,8 @@ function WordListComponent () {
     }, []);
 
     const guessedWordPoints = useMemo(() => {
-        if (history) { return calculateTotalPoints(history.guessedWords); }
-    }, [history]);
+        if (selectedHistory) { return calculateTotalPoints(selectedHistory.guessedWords); }
+    }, [selectedHistory]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
@@ -67,14 +90,18 @@ function WordListComponent () {
     }, [memoizedTotalPoints]);
 
     useEffect(() => {
-        if (history && history.guessedWords) {
+        if (selectedHistory && selectedHistory.guessedWords) {
             console.log(history)
-            updateSpiderClass(history.totalUserPoints, totalPoints);
+            updateSpiderClass(selectedHistory.totalUserPoints, totalPoints);
 
         }
 
 
+
+
     }, [history, totalPoints]);
+
+
 
 
 
@@ -99,8 +126,8 @@ function WordListComponent () {
 
 
                         <ul>
-                            {history?.guessedWords ? (
-                                history?.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
+                            {selectedHistory?.guessedWords ? (
+                                selectedHistory.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
                                     <li className={obj.pangram === true ? 'pangram' : 'normal'} key={obj.word}>{obj.word}</li>
                                 ))
                             ) : (
