@@ -16,8 +16,9 @@ export const checkWord = async (
     wordToCheck: string
 ): Promise<SubmitWordResponse | undefined> => {
     const wordObj: WordObj = { word: wordToCheck };
+    if (token){
     try {
-        const res = await fetch(`${base_URL}/submit`, {
+        const res = await fetch(`${base_URL}/submitauth`, {
             method: 'POST',
             credentials: 'include',
             body: JSON.stringify(wordObj),
@@ -26,6 +27,29 @@ export const checkWord = async (
                 ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
             },
         });
+
+
+            const data: SubmitWordResponse = await res.json();
+            if (data) {
+                return data
+            } else {
+                console.log('no data found')
+            }
+
+
+
+    } catch (e) {
+        console.error('error checking word in api client. Error:', e);
+    }} else {
+        try {
+            const res = await fetch(`${base_URL}/submit`, {
+                method: 'POST',
+                credentials: 'include',
+                body: JSON.stringify(wordObj),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            });
 
 
             const data: SubmitWordResponse = await res.json();
@@ -38,7 +62,8 @@ export const checkWord = async (
 
 
 
-    } catch (e) {
-        console.error('error checking word in api client. Error:', e);
+        } catch (e) {
+            console.error('error checking word in api client. Error:', e);
+        }
     }
 };

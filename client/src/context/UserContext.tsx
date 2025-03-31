@@ -1,95 +1,74 @@
-    import WordObj from '../types/WordObj';
-    import React, { createContext, useEffect, useState } from 'react';
-    import { UserI, HistoryI } from '../types/User';
-    import { getDecodedToken } from '../services/auth-service';
-    import { format } from 'date-fns';
-    const now = format(new Date(), "yyyy_MM_dd");
+import WordObj from '../types/WordObj';
+import React, { createContext, useEffect, useState } from 'react';
+import { UserI, HistoryI } from '../types/User';
+import { getDecodedToken } from '../services/auth-service';
+import { format } from 'date-fns';
 
-    interface AppContextValue {
-        user: UserI | null;
-        setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
-        guessedWords: WordObj[];
-        setGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
-        totalUserPoints: number;
-        setTotalUserPoints: React.Dispatch<React.SetStateAction<number>>;
-    }
+const now = format(new Date(), "yyyy_MM_dd");
 
-    // eslint-disable-next-line react-refresh/only-export-components
-    export const AuthContext = createContext<AppContextValue>({
-        user: null,
-        setUser: () => { },
-        guessedWords: [],
-        setGuessedWords: () => { },
-        totalUserPoints: 0,
-        setTotalUserPoints: () => 0,
+interface AppContextValue {
+    user: UserI | null;
+    setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
+    history: HistoryI | null;
+    setHistory: React.Dispatch<React.SetStateAction<HistoryI | null>>;
+}
 
-    });
+export const AuthContext = createContext<AppContextValue>({
+    user: null,
+    setUser: () => { },
+    history: null,
+    setHistory: () => { },
+});
 
-    export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-        const [user, setUser] = useState<UserI | null>(getDecodedToken);
-        const [guessedWords, setGuessedWords] = useState<WordObj[]>([]);
-        const [totalUserPoints, setTotalUserPoints] = useState<number>(0);
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const [user, setUser] = useState<UserI | null>(getDecodedToken);
+    const [history, setHistory] = useState<HistoryI | null>(null);
 
+    useEffect(() => {
+        const decoded = getDecodedToken();
 
-        useEffect(() => {
+        if (decoded) {
+            const decodedUser: UserI = decoded;
+            setUser(decodedUser);
 
-            const decoded =  getDecodedToken();
-            console.log('decoded is', decoded);
-            if (decoded) {
-                const decodedUser: UserI = decoded
-                console.log('typed user', decodedUser)
-                console.log('user...', user)
-             try {
-                 setUser(decodedUser);
+            const todayHistory = decodedUser.history.find(h => h.daylist_id === now);
 
-                 if (user && user.history) {
-                     // Find today's history (filter by `daylist_id` matching today's date)
-                     const todayHistory: HistoryI | undefined = user.history.find(h => h.daylist_id === Date.now().toString());
-
-                     if (todayHistory) {
-                         if (todayHistory.guessedWords) {
-                             setGuessedWords(todayHistory.guessedWords);  // Only set guessedWords if today's history exists
-                         }
-                     } else {
-                         const newHistory: HistoryI = {
-                             daylist_id: now,
-                             guessedWords: guessedWords,  // Set initial guessedWords
-                             totalUserPoints: totalUserPoints
-                         };
-
-                         const updatedUser = {
-                             ...user,
-                             history: [...user.history, newHistory]
-                         };
-
-
-                         setUser(updatedUser);
-                     }
-                 }
-             } catch (e) {
-                console.log(e)
-             }
+            if (todayHistory) {
+                setHistory(todayHistory);
+            } else {
+                // Create new history entry if today’s data is missing
+                const newHistory: HistoryI = {
+                    daylist_id: now,
+                    guessedWords: [],
+                    totalUserPoints: 0,
+                    level: "Daddy Long-Legs"
+                };
+                setHistory(newHistory);
+                updateHistory(newHistory);
             }
-        }, []);
+        }
+    }, []);
 
-
-
-
-
-        const value: AppContextValue = {
-            user,
-            setUser,
-            guessedWords,
-            setGuessedWords,
-            totalUserPoints,
-            setTotalUserPoints,
-        };
-
-        return (
-            <AuthContext.Provider value={value}>
-                {children}
-            </AuthContext.Provider>
-        );
+    // Update the entire history object
+    const updateHistory = (newHistory: HistoryI) => {
+        setUser((prevUser) => {
+            if (!prevUser) return prevUser;
+            const updatedHistory = [newHistory, ...prevUser.history.slice(1)];
+            return { ...prevUser, history: updatedHistory };
+        });
     };
 
+    // The context value now includes the whole history object
+    const value: AppContextValue = {
+        user,
+        setUser,
+        history,
+        setHistory,
+    };
 
+    return (
+        <AuthContext.Provider value={value}>
+            {children}
+        </AuthContext.Provider>
+    );
+};

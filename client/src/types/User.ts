@@ -13,6 +13,7 @@ export interface HistoryI {
     daylist_id: string;
     guessedWords: WordObj[];
     totalUserPoints: number;
+    level: string;
 }
 export interface UserI extends RegisterDataI{
     _id: string;

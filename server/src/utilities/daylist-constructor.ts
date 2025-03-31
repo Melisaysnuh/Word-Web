@@ -25,7 +25,7 @@ export default async function finalConstructor (): Promise<Daylist | undefined> 
                         return calculatePoints(word, todaysPangrams)
                     });
                     return {
-                        id: now,
+                        daylist_id: now,
                         centerLetter: center,
                         pangrams: todaysPangrams,
                         letters: uniqueArray,

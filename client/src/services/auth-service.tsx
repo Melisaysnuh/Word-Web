@@ -99,7 +99,6 @@ export const decodeToken = (token: string ): UserI | null => {
 export function getDecodedToken () {
   const token = localStorage.getItem('token');
   if (token) {
-    console.log('token exists')
     try {
       return decodeToken(token);
     } catch (error) {

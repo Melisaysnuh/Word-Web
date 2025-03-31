@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import UserModel from '../Models/UserModel.js';
 import { fetchListModel } from '../Models/ListModel.js';
-import { UserI } from '../types/User.js';
+
 
 
 
@@ -138,10 +138,10 @@ export const loginController = async (req: Request, res: Response): Promise<void
 
             const today = await fetchListModel();
             if (user.history && today) {
-                const alreadyHasHistory = user.history.some(item => item.daylist_id === today.id);
+                const alreadyHasHistory = user.history.some(item => item.daylist_id === today.daylist_id);
                 if (!alreadyHasHistory) {
                     user.history.push({
-                        daylist_id: today.id,
+                        daylist_id: today.daylist_id,
                         guessedWords: [],
                         totalUserPoints: 0,
                         level: 'Daddy Long-Legs'

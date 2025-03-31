@@ -1,13 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import '../styles/game-component.css';
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { getDailyList } from '../services/list-service';
+import { getDailyListService } from '../services/list-service';
 import { checkWord } from '../services/submit-service';
 import WordObj from '../types/WordObj';
-import { generateRandomIndices } from '../utilities/shuffle-utility';
 import { AuthContext } from '../context/UserContext';
 import SubmitWordResponse from '../types/SubmitWordResponse';
 import { HistoryI } from '../types/User';
+import Daylist from '../types/Daylist';
+import { ListBackUpTemp } from '../services/list-backup';
+import { generateRandomIndices } from '../utilities/shuffle-utility';
 
 
 function GameComponent () {
@@ -15,21 +16,23 @@ function GameComponent () {
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
 
-    const { guessedWords, setGuessedWords, totalUserPoints, setTotalUserPoints, user, setUser } = useContext(AuthContext);
+    const { setUser, history, setHistory } = useContext(AuthContext);
     const inputRef = useRef<HTMLInputElement>(null);
 
 
     async function fetchDailyList () {
-        try {
-            const data = await getDailyList()
-            if (data) {
-                const list = data.list;
+                try {
+            const data = await getDailyListService()
 
+            if (data) {
+                const list: Daylist = data.list;
                 return list;
-            } else console.log('you are not yet fetching your info')
+            } else console.log('you are not yet fetching your info');
+            return ListBackUpTemp;
         }
         catch (e) {
-            console.log('error in fetchDaily in game component:', e)
+            console.log('error in fetchDaily in game component:', e);
+            return ListBackUpTemp
         }
     }
 
@@ -68,47 +71,59 @@ function GameComponent () {
     }
     const handleShuffle = (event: React.MouseEvent<HTMLSpanElement>) => {
         event.preventDefault();
-        const shuffled = generateRandomIndices(dailyLetters);
+/*         const shuffled = generateRandomIndices(dailyLetters);
        setDailyLetters(shuffled);
         setFormStatus({ success: 'none', message: '' });
-        inputRef.current?.focus();
+        inputRef.current?.focus(); */
 
     }
 
     async function handleSubmit (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) {
         event.preventDefault();
         const word = guess;
+
         if (word.length < 4) {
             setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
-        } else if (guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
+        } else if (history && history.guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
         } else {
-            console.log('guessing...', word)
+            console.log('guessing...', word);
             const res: SubmitWordResponse | undefined = await checkWord(word);
+
             if (res !== undefined) {
-                console.log(res);
+                console.log('res is', res);
                 if (res.valid && res.valid === true) {
                     const resWord = res.guessedWord as WordObj;
-                    if (resWord && !guessedWords.includes(resWord)) {
-                        setGuessedWords((prevGuessedWords) => [...prevGuessedWords, resWord]);
-                        setFormStatus({ success: 'pass', message: resWord.word + ' is a valid word!.' });
-                        if (resWord.points) {
-                            setTotalUserPoints((prevPoints) => prevPoints + resWord.points);
-                        }
-                        if (res.history && user && user.history) {
-                            const typedHist: array = res.history;
-                            const thisHist: HistoryI = res.history[typedHist.length-1];
+                    if (resWord) {
+                        // Make sure history is not null or undefined
+                        if (history) {
+                            // Update guessedWords and totalUserPoints in history
+                            const updatedGuessedWords = [...history.guessedWords, resWord];
+                            const updatedPoints = history.totalUserPoints + (resWord.points || 0);
 
-
-                            const updatedUser = {
-                                ...user,
-                                history: [thisHist, ...user.history.slice(1)],
+                            // Create a new updated history object
+                            const updatedHistory: HistoryI = {
+                                ...history,
+                                guessedWords: updatedGuessedWords,
+                                totalUserPoints: updatedPoints,
                             };
 
-                            setUser(updatedUser);
-                            console.log('user updated successfully');
+                            // Update the history in context
+                            setHistory(updatedHistory);
+
+                            // Also update the user object in context
+                            setUser((prevUser) => {
+                                if (!prevUser || !prevUser.history) return prevUser;
+
+                                // Update the user's history with the new history entry
+                                const updatedUserHistory = [updatedHistory, ...prevUser.history.slice(1)];
+                                return { ...prevUser, history: updatedUserHistory };
+                            });
+
+                            // Provide feedback to the user
+                            setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word!` });
                         }
                     }
                 } else {
@@ -116,20 +131,24 @@ function GameComponent () {
                 }
             }
         }
+        // Clear the guess input field after submission
         setGuess('');
         inputRef.current?.focus();
     }
 
+
     useEffect(() => {
         async function fetchShuffle () {
+
             const list = await fetchDailyList();
-            const letters = list.letters;
+            if (list && list.letters){
+            const letters = list ? list.letters :  ListBackUpTemp.letters
             const shuffled = generateRandomIndices(letters);
             setDailyLetters(shuffled);
             setGuess('');
             setFormStatus({ success: 'none', message: '' });
-            setTotalUserPoints(totalUserPoints);
-        }
+
+        }}
         fetchShuffle();
         inputRef.current?.focus();
 

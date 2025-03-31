@@ -1,75 +1,81 @@
-import { useState, useContext } from 'react';
-import '../styles/modal.css'
+import { useState, useContext, useEffect } from 'react';
+import '../styles/user-component.css';
 import { AuthContext } from '../context/UserContext';
-import { HistoryI } from '../types/User';
+import { format, subDays, addDays } from 'date-fns';
 
 interface UserProps {
     setUserModal: (view: boolean) => void;
 }
 
 const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
+    const { user } = useContext(AuthContext);
     const [message, setMessage] = useState("");
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedHistory, setSelectedHistory] = useState<any>(null); // Store the history for the selected date
 
-    const { user, guessedWords } = useContext(AuthContext);
+    const formattedDate = format(selectedDate, "yyyy_MM_dd");
+    const todayFormatted = format(new Date(), "yyyy_MM_dd");
 
-    let latestHistory: HistoryI;
-
-    if (user && user.history) {
-        console.log(user.history)
-        latestHistory = user.history[user.history.length-1];
-        localStorage.setItem("history", JSON.stringify(latestHistory));
-    } else {
-        latestHistory = {
-            daylist_id: "",
-            guessedWords: [],
-            totalUserPoints: 0,
-        };
-    }
-
-    // Get today's date in a friendly format
-    const today = new Date().toLocaleDateString();
+    // Fetch history for the selected date when the selected date changes
+    useEffect(() => {
+        if (user && user.history) {
+            const historyForSelectedDate = user.history.find(
+                (h) => h.daylist_id === formattedDate
+            );
+            setSelectedHistory(historyForSelectedDate || null); // Store the selected day's history
+        }
+    }, [selectedDate, formattedDate, user]); // Dependencies: update when selectedDate, user, or formattedDate changes
 
     const handleClose = () => {
         setUserModal(false);
         setMessage('bye');
-    }
+    };
+
+    const handlePrevDay = () => {
+        setSelectedDate(prevDate => subDays(prevDate, 1));
+    };
+
+    const handleNextDay = () => {
+        if (formattedDate !== todayFormatted) {
+            setSelectedDate(prevDate => addDays(prevDate, 1));
+        }
+    };
 
     return (
-        <>
-            <div onClick={handleClose} className="modal-background">
-                <div className="modal-container">
-                    {/* Greeting and Today's Date */}
-                    <h2 className="modal-title">Hi, {user?.firstName}!</h2>
-                    <p className="modal-date">Today: {today}</p>
+        <div className="user-background">
+            <div className="user-container">
+                <h2 className="user-title">Hello, {user?.firstName}!</h2>
+                <p className="user-date">Date: {format(selectedDate, "EEEE, MMMM d, yyyy")}</p>
 
-                    {/* Guessed Words List */}
-                    <div className="modal-words">
-                        <h3>Your Guessed Words:</h3>
-                        <ul>
-                            {guessedWords && guessedWords.length > 0 ? (
-                                guessedWords.map((word, index) => (
-                                    <li key={index}>{word.word}</li>
-                                ))
-                            ) : (
-                                <li>No guessed words available</li>
-                            )}
-                        </ul>
-                    </div>
-
-                    {/* Points and Score */}
-                    <div className="modal-points">
-                        <p><strong>Total Points:</strong> {latestHistory.totalUserPoints}</p>
-
-                    </div>
-
-                    <button onClick={handleClose} className="modal-close-btn">Close</button>
-
-
-                    {message && <p className="message">{message}</p>}
+                <div className="nav-buttons">
+                    <button onClick={handlePrevDay}>&larr; Previous</button>
+                    <button onClick={handleNextDay} disabled={formattedDate === todayFormatted}>
+                        Next &rarr;
+                    </button>
                 </div>
+
+                <div className="user-words">
+                    <h3>Guessed Words:</h3>
+                    <ul>
+                        {selectedHistory && selectedHistory.guessedWords.length > 0 ? (
+                            selectedHistory.guessedWords.map((word, index) => (
+                                <li key={index}>{word.word}</li>
+                            ))
+                        ) : (
+                            <li>No guessed words available for this day</li>
+                        )}
+                    </ul>
+                </div>
+
+                <div className="user-points">
+                    <p><strong>Total Points:</strong> {selectedHistory ? selectedHistory.totalUserPoints : 0}</p>
+                </div>
+
+                <button onClick={handleClose} className="user-close-btn">Close</button>
+                {message && <p className="message">{message}</p>}
             </div>
-        </>
+        </div>
     );
-}
+};
 
 export default UserComponent;

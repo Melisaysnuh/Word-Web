@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
 import { loadLettersController } from './controllers/fetch-controller.js';
-import { submitWordController } from './controllers/submit-controller.js';
+import { submitAuthController, submitWordController } from './controllers/submit-controller.js';
 import cors from 'cors';
 import { connectDB } from './Models/index.js';
 import { loginController, registerController } from './controllers/auth-controller.js';
@@ -24,7 +24,8 @@ app.use(express.json());
 
 
 app.get("/", loadLettersController);
-app.post('/submit', authMiddleware, submitWordController);
+app.post('/submitauth', authMiddleware, submitAuthController);
+app.post('/submit', submitWordController);
 app.post('/auth/login', loginController);
 app.post('/auth/register', registerController);
 

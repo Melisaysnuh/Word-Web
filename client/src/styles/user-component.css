@@ -1,0 +1,100 @@
+.user-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 650px;
+  border-radius: 20px;
+}
+
+.user-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  justify-content: space-between;
+  top: 50%;
+  left: 50%;
+  background: radial-gradient(#381d75, #180a37);
+  min-width: 400px;
+  max-width: 550px;
+  max-height: 700px;
+  min-height: 400px;
+  border-radius: 20px;
+}
+
+.user-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  background-color: rgba(24, 10, 55, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input {
+  height: 46px;
+  width: 85%;
+  background-color: #180a37;
+  color: white;
+}
+
+label, .user-title {
+  font-family: 'Averia Libre';
+  font-size: 1.2rem;
+  text-shadow: 20%;
+  padding: 2%;
+  text-align: center;
+  width: 100%;
+  color: orange;
+  font-weight: 600;
+}
+
+.btn, .user-close-btn {
+  background-color: rgba(24, 10, 55, 0);
+  border: none;
+  color: orange;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover, .user-close-btn:hover {
+  background-color: rgba(24, 10, 55, 0.85);
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.nav-buttons button {
+  background-color: orange;
+  border: none;
+  padding: 8px 12px;
+  color: #180a37;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background-color: #ffb347;
+}
+
+.nav-buttons button:disabled {
+  background-color: gray;
+  cursor: not-allowed;
+}

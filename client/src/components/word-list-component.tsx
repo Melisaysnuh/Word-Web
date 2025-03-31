@@ -3,7 +3,7 @@ import '../styles/word-list-component.css';
 import { useContext, useEffect, useState, useMemo } from 'react';
 import { AuthContext } from '../context/UserContext';
 import { calculateTotalPoints } from '../utilities/points-utility';
-import { getDailyList } from '../services/list-service';
+import { getDailyListService } from '../services/list-service';
 
 const spiderClasses = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
@@ -21,14 +21,23 @@ function WordListComponent () {
     const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
     const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
     const [totalPoints, setTotalPoints] = useState(0);
-    const { guessedWords, totalUserPoints } = useContext(AuthContext);
+    const { history } = useContext(AuthContext);
 
     const fetchPoints = async () => {
+
         try {
-            const data = await getDailyList();
-            const arr = data.list.validWords;
-            const points = calculateTotalPoints(arr);
-            return points
+            const data = await getDailyListService();
+            if (data && data.list) {
+                //console.log('getDailyListService returning', data)
+                const arr = data.list.validWords;
+                const points = calculateTotalPoints(arr);
+                return points
+            }
+            else {
+                const arr = data.validWords;
+                const points = calculateTotalPoints(arr);
+                return points
+            }
         } catch (e) {
             console.error('Error in fetchDailyList:', e);
             return 100;
@@ -40,17 +49,17 @@ function WordListComponent () {
     }, []);
 
     const guessedWordPoints = useMemo(() => {
-        return calculateTotalPoints(guessedWords);
-    }, [guessedWords]);
+        if (history) { return calculateTotalPoints(history.guessedWords); }
+    }, [history]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
         const prog = points / total;
         const spider = spiderClasses.find(({ threshold }) => prog < threshold);
-if (spider) {
-    setSpiderClass(spider.className);
-    setSpiderName(spider.name);
-}
+        if (spider) {
+            setSpiderClass(spider.className);
+            setSpiderName(spider.name);
+        }
     };
 
     useEffect(() => {
@@ -58,13 +67,14 @@ if (spider) {
     }, [memoizedTotalPoints]);
 
     useEffect(() => {
-        if(guessedWords.length > 0) {
-            updateSpiderClass(totalUserPoints, totalPoints);
+        if (history && history.guessedWords.length > 0) {
+            updateSpiderClass(history.totalUserPoints, totalPoints);
 
         }
 
 
-    }, [guessedWords, totalUserPoints, totalPoints]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [history]);
 
 
 
@@ -82,23 +92,23 @@ if (spider) {
                                 <circle className="foreground" cx="3" cy="3" r="2" />
                             </marker>
                         </svg>
-                            <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
+                        <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
                     </div>
 
-                <div id='word-list'>
+                    <div id='word-list'>
 
 
-                    <ul>
-                        {guessedWords && guessedWords.length > 0 ? (
-                           guessedWords.sort((a,b)=> a.word.localeCompare(b.word)).map((obj: WordObj) => (
-                                <li className={obj.pangram===true ? 'pangram' :'normal'} key={obj.word}>{obj.word}</li>
-                            ))
-                        ) : (
-                            <li> </li>
-                        )}
-                    </ul>
+                        <ul>
+                            {history?.guessedWords && history?.guessedWords.length > 0 ? (
+                                history?.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
+                                    <li className={obj.pangram === true ? 'pangram' : 'normal'} key={obj.word}>{obj.word}</li>
+                                ))
+                            ) : (
+                                <li> </li>
+                            )}
+                        </ul>
 
-                </div>
+                    </div>
                 </div>
             </div>
 

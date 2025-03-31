@@ -1,6 +1,5 @@
 import { Schema } from 'mongoose';
 import mongoose from 'mongoose';
-import { fetchListModel } from './ListModel';
 export async function connectDB () {
     try {
         await mongoose.connect('mongodb://localhost:27017/wordweb');
@@ -17,9 +16,9 @@ export async function connectDB () {
         };
     }
 }
-connectDB();
+
 const daySchema = new Schema ({
-    id: { type: String, unique: true },
+    daylist_id: { type: String, unique: true },
     centerLetter: String,
     pangrams: Array,
     totalPoints: Number,

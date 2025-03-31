@@ -2,7 +2,8 @@ import { WordObj } from "./WordObj";
 
 export interface Daylist {
 
-        id: string;
+        daylist_id: string;
+        _id?: string;
         pangrams: string[];
         centerLetter: string;
         letters: string[];

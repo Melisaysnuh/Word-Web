@@ -14,7 +14,7 @@ export async function fetchListModel () {
     try {
 
         const list: Daylist | null = await dayModel.findOne({
-            id: now
+            daylist_id: now
         });
         if (list) {
             console.log('list already found');
