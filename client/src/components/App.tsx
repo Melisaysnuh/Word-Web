@@ -18,7 +18,8 @@ function App () {
   const [userModal, setUserModal] = useState<boolean>(false);
 
   useEffect(() => {
-    if (!user) {
+    if (!user || isTokenExpired()) {
+      handleLogOut();
       setLoginModal(true);
       }
   }, [user]);

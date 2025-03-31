@@ -1,4 +1,3 @@
-import WordObj from '../types/WordObj';
 import React, { createContext, useEffect, useState } from 'react';
 import { UserI, HistoryI } from '../types/User';
 import { getDecodedToken } from '../services/auth-service';
@@ -29,11 +28,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (decoded) {
             const decodedUser: UserI = decoded;
+            console.log(decodedUser)
             setUser(decodedUser);
 
             const todayHistory = decodedUser.history.find(h => h.daylist_id === now);
 
             if (todayHistory) {
+                console.log('todayHistory', history)
+
                 setHistory(todayHistory);
             } else {
                 // Create new history entry if today’s data is missing
@@ -47,13 +49,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
                 updateHistory(newHistory);
             }
         }
+
     }, []);
 
     // Update the entire history object
     const updateHistory = (newHistory: HistoryI) => {
         setUser((prevUser) => {
             if (!prevUser) return prevUser;
-            const updatedHistory = [newHistory, ...prevUser.history.slice(1)];
+
+            const updatedHistory = prevUser.history
+                ? [newHistory, ...prevUser.history.filter(entry => entry.daylist_id !== now)]  // Replace today's history if needed
+                : [newHistory];
+
             return { ...prevUser, history: updatedHistory };
         });
     };

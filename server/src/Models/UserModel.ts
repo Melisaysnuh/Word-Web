@@ -1,9 +1,14 @@
 import mongoose, { Schema, Model } from 'mongoose';
 import bcrypt from 'bcrypt';
-import { UserI } from '../types/User';
+import { HistoryI, UserI } from '../types/User';
 
 
-
+const historySchema = new Schema<HistoryI>({
+    daylist_id: { type: String, required: true },
+    guessedWords: { type: [Object], required: true }, // Adjust based on your needs
+    totalUserPoints: { type: Number, required: true },
+    level: { type: String, required: true }
+});
 export const userSchema = new Schema<UserI>({
     email: {
         type: String,
@@ -25,8 +30,8 @@ export const userSchema = new Schema<UserI>({
         required: [false],
     },
     history: {
-        type: Array,
-        required: [false]
+        type: [historySchema],
+        required: [true, 'no history found'],
     }
 
 });

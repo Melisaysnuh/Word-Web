@@ -2,6 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import '../styles/user-component.css';
 import { AuthContext } from '../context/UserContext';
 import { format, subDays, addDays } from 'date-fns';
+import WordObj from '../types/WordObj';
+import { HistoryI } from '../types/User';
 
 interface UserProps {
     setUserModal: (view: boolean) => void;
@@ -11,18 +13,17 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
     const { user } = useContext(AuthContext);
     const [message, setMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedHistory, setSelectedHistory] = useState<any>(null); // Store the history for the selected date
+    const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
 
     const formattedDate = format(selectedDate, "yyyy_MM_dd");
     const todayFormatted = format(new Date(), "yyyy_MM_dd");
 
-    // Fetch history for the selected date when the selected date changes
     useEffect(() => {
         if (user && user.history) {
             const historyForSelectedDate = user.history.find(
                 (h) => h.daylist_id === formattedDate
             );
-            setSelectedHistory(historyForSelectedDate || null); // Store the selected day's history
+            setSelectedHistory(historyForSelectedDate); // Store the selected day's history
         }
     }, [selectedDate, formattedDate, user]); // Dependencies: update when selectedDate, user, or formattedDate changes
 
@@ -58,7 +59,7 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
                     <h3>Guessed Words:</h3>
                     <ul>
                         {selectedHistory && selectedHistory.guessedWords.length > 0 ? (
-                            selectedHistory.guessedWords.map((word, index) => (
+                            selectedHistory.guessedWords.map((word: WordObj, index: number) => (
                                 <li key={index}>{word.word}</li>
                             ))
                         ) : (

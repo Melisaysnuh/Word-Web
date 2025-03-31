@@ -67,14 +67,14 @@ function WordListComponent () {
     }, [memoizedTotalPoints]);
 
     useEffect(() => {
-        if (history && history.guessedWords.length > 0) {
+        if (history && history.guessedWords) {
+            console.log(history)
             updateSpiderClass(history.totalUserPoints, totalPoints);
 
         }
 
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [history]);
+    }, [history, totalPoints]);
 
 
 
@@ -99,7 +99,7 @@ function WordListComponent () {
 
 
                         <ul>
-                            {history?.guessedWords && history?.guessedWords.length > 0 ? (
+                            {history?.guessedWords ? (
                                 history?.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
                                     <li className={obj.pangram === true ? 'pangram' : 'normal'} key={obj.word}>{obj.word}</li>
                                 ))
