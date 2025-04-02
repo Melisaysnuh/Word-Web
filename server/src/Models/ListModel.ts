@@ -32,6 +32,23 @@ export async function fetchListModel () {
 
 }
 
+
+export async function storeListModel () {
+    try {
+        const result = await finalConstructor();
+        if (result) {
+            const createdList = await dayModel.create(result);
+            console.log('list successfully stored: ' + createdList)
+
+        }
+        else throw new Error('could not get day list from service');
+        console.log(error);
+    }
+    catch (e) {
+        console.error('Error storing day:', e);
+    }
+};
+
 /* export const job = new CronJob(
     '0 0 0 * * *', // cronTime
     async function storeDayModule () {
@@ -55,20 +72,3 @@ export async function fetchListModel () {
     'Europe/Berlin' // timeZone
 );
 job.start(); */
-
-async function storeListModel () {
-    try {
-        const result = await finalConstructor();
-        if (result) {
-            const createdList = await dayModel.create(result);
-            console.log('list successfully stored: ' + createdList)
-
-        }
-        else throw new Error('could not get day list from service');
-        console.log(error);
-    }
-    catch (e) {
-        console.error('Error storing day:', e);
-    }
-};
-

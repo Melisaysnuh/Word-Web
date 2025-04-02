@@ -1,7 +1,7 @@
 import { expect, describe, test, vi } from 'vitest';
 import dotenv from 'dotenv';
 dotenv.config();
-import * as wordListMgmt from '../src/utilities/word-list-mgmt';
+import * as wordListMgmt from '../../src/utilities/word-list-mgmt';
 
 
 

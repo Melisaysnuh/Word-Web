@@ -22,8 +22,8 @@
   background: radial-gradient(#381d75, #180a37);
   min-width: 400px;
   max-width: 550px;
-  max-height: 700px;
-  min-height: 400px;
+  max-height: 80%;
+  min-height: 600px;
   border-radius: 20px;
 }
 
@@ -97,4 +97,8 @@ label, .user-title {
 .nav-buttons button:disabled {
   background-color: gray;
   cursor: not-allowed;
+}
+.user-date {
+  font-family: 'Nunito';
+  font-size: 1.1 rem;
 }

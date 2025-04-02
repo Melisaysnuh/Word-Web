@@ -1,5 +1,5 @@
 import express from 'express';
-const app = express();
+export const app = express();
 import { loadLettersController } from './controllers/fetch-controller.js';
 import { submitAuthController, submitWordController } from './controllers/submit-controller.js';
 import cors from 'cors';

@@ -26,10 +26,12 @@ export function calculatePoints (thisWord: string, pangramsList: string[]) {
 }
 
 export function centerFilter (list: string[], letter: string) {
-
+    //console.log(list)
     const finalAnagrams: string[] = list.filter((word: string) => {
+        //console.log(word.includes(letter))
         return word.includes(letter)
     });
+    //console.log('final anagrams are', finalAnagrams)
     return finalAnagrams;
 
 }
@@ -57,6 +59,8 @@ export function pangrams (wordList: string[], letterList: string[]) {
     const reg2 = `)`;
     const reg3 = letterList.join('')
     const regconstruct = letterList.map(l => reg1 + l + reg2).join('');
+    console.log(wordList);
+    console.log(letterList)
 
     const regex = new RegExp(`^${regconstruct}[${reg3}]+$`)
     const pangrams: string[] = wordList.filter((word: string) => regex.test(word));

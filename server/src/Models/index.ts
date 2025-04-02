@@ -12,6 +12,7 @@ export async function connectDB () {
         console.log('internal server error: ', e)
         return {
             statusCode: 500,
+            message: 'internal server error.'
 
         };
     }

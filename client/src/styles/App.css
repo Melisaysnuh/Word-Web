@@ -29,3 +29,9 @@
 
 }
 
+@media (max-width: 480px) {
+  .subhead {
+    flex-direction: column; /* Change to column layout for small screens */
+    gap: 20px; /* Adjust gap for better spacing */
+  }
+}

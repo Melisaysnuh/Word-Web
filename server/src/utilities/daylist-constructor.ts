@@ -21,6 +21,7 @@ export default async function finalConstructor (): Promise<Daylist | undefined> 
                 if (center) {
                     const filteredAnagramsbyCenter = centerFilter(validWordAnagrams, center)
                     const todaysPangrams = pangrams(filteredAnagramsbyCenter, uniqueArray);
+                    console.log('todays pangrams', todaysPangrams)
                     const anagramObjList = filteredAnagramsbyCenter.map((word: string) => {
                         return calculatePoints(word, todaysPangrams)
                     });

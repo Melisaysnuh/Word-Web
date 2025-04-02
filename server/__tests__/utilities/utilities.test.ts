@@ -1,9 +1,9 @@
-import { expect, MockedFunction, describe, test, vi } from 'vitest';
-import { anagramListMock, mock7LetterArray, mockPangramsArray, wordString1, wordString2, wordString3 } from './mocks/mocks.mock';
-import * as wordListMgmt from '../src/utilities/utilities'
+import { expect,  describe, test, vi } from 'vitest';
+import { anagramListMock, mock7LetterArray, mockPangramsArray, wordString1, wordString2, wordString3 } from '../mocks/mocks.mock';
+import * as wordListMgmt from '../../src/utilities/utilities'
 
 
-/* vi.mock('../src/utilities/utilities', () => ({
+/* vi.mock('../../src/utilities/utilities', () => ({
     generateAnagrams: vi.fn().mockResolvedValue(anagramListMock)
 })); */
 

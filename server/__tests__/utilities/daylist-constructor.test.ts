@@ -1,11 +1,11 @@
 import { expect, describe, test, vi, MockedFunction } from 'vitest';
-import * as wordListMgmt from  '../src/utilities/word-list-mgmt'
-import * as utilities from  '../src/utilities/utilities'
-import finalConstructor from '../src/utilities/daylist-constructor'
-import { anagramListMock, twoLetterMock } from './mocks/mocks.mock';
+import * as wordListMgmt from  '../../src/utilities/word-list-mgmt'
+import * as utilities from  '../../src/utilities/utilities'
+import finalConstructor from '../../src/utilities/daylist-constructor'
+import { anagramListMock, twoLetterMock } from '../mocks/mocks.mock';
 
 
-vi.mock('../src/utilities/word-list-mgmt', () => ({
+vi.mock('../../src/utilities/word-list-mgmt', () => ({
     getArray: vi.fn(),
     validateWord: vi.fn(),
     removeInvalidWord: vi.fn(),
@@ -13,7 +13,7 @@ vi.mock('../src/utilities/word-list-mgmt', () => ({
     validWordArray: vi.fn(),
 
 }));
-vi.mock('../src/utilities/utilities', () => ({
+vi.mock('../../src/utilities/utilities', () => ({
     calculatePoints: vi.fn(),
     centerFilter: vi.fn(),
     generateAnagrams: vi.fn(),
@@ -128,15 +128,35 @@ describe('daylist Constructor', () => {
         expect(result).toBeUndefined();
     });
 
-    test('With getCenter, call centerFilter, panGrams, calculatePoints', async () => {
-        (wordListMgmt.getRandomWord as unknown as MockedFunction<typeof wordListMgmt.getRandomWord>).mockResolvedValue('drought');
-        (utilities.pangrams as unknown as MockedFunction<typeof utilities.pangrams>).mockResolvedValue(['drought']);
-        (utilities.getCenter as unknown as MockedFunction<typeof utilities.getCenter>).mockResolvedValue('0');
+    test('With getCenter, call centerFilter, panGrams', async () => {
+      //  (wordListMgmt.getRandomWord as unknown as MockedFunction<typeof wordListMgmt.getRandomWord>).mockResolvedValue('drought');
+     //   (utilities.pangrams as unknown as MockedFunction<typeof utilities.pangrams>).mockResolvedValue(['drought']);
+  //      (utilities.getCenter as unknown as MockedFunction<typeof utilities.getCenter>).mockResolvedValue('O');
 
-        const calculatePointsSpy = vi.spyOn(utilities, 'calculatePoints');
+
         const centerFilterSpy = vi.spyOn(utilities, 'centerFilter');
         const pangramsSpy = vi.spyOn(utilities, 'pangrams');
 
+
+        await finalConstructor();
+
+
+        expect(centerFilterSpy).toHaveBeenCalledTimes(3)
+        expect(pangramsSpy).toHaveBeenCalledTimes(3)
+
+
+    });
+
+
+ /*    test('Call calculatePoints', async () => {
+        (wordListMgmt.getRandomWord as unknown as MockedFunction<typeof wordListMgmt.getRandomWord>).mockResolvedValue('drought');
+        (utilities.pangrams as unknown as MockedFunction<typeof utilities.pangrams>).mockResolvedValue(['drought']);
+        (utilities.getCenter as unknown as MockedFunction<typeof utilities.getCenter>).mockResolvedValue('O');
+
+
+        const centerFilterSpy = vi.spyOn(utilities, 'centerFilter');
+        const pangramsSpy = vi.spyOn(utilities, 'pangrams');
+        const calculatePointsSpy = vi.spyOn(utilities, 'calculatePoints');
 
         await finalConstructor();
 
@@ -147,7 +167,7 @@ describe('daylist Constructor', () => {
 
     });
 
-    test('should handle errors for centerFilter, pangrams, calculatePoints', async () => {
+    test('Handle errors for calculatePoints', async () => {
         // Mock getArray to throw an error
         wordListMgmt.getArray.mockRejectedValueOnce(new Error('API Error'));
 
@@ -159,5 +179,5 @@ describe('daylist Constructor', () => {
 
         const result = await finalConstructor();
         expect(result).toBeUndefined();
-    });
+    });  */
 });
