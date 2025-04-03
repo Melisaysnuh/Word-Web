@@ -26,12 +26,11 @@ export function calculatePoints (thisWord: string, pangramsList: string[]) {
 }
 
 export function centerFilter (list: string[], letter: string) {
-    //console.log(list)
+    console.log('in center filter. list is: ', list)
     const finalAnagrams: string[] = list.filter((word: string) => {
-        //console.log(word.includes(letter))
         return word.includes(letter)
     });
-    //console.log('final anagrams are', finalAnagrams)
+    console.log('final anagrams are', finalAnagrams)
     return finalAnagrams;
 
 }
@@ -52,6 +51,7 @@ export async function getCenter (validWordAnagrams: string[], uniqueArray: strin
             return center;
         }
     }
+    return center;
 }
 
 export function pangrams (wordList: string[], letterList: string[]) {

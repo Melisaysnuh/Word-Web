@@ -18,21 +18,27 @@ export default async function finalConstructor (): Promise<Daylist | undefined> 
             const validWordAnagrams = await validWordArray(anagrams);
             if (validWordAnagrams) {
                 const center = await getCenter(validWordAnagrams, uniqueArray);
+                console.log('center is...', center);
                 if (center) {
-                    const filteredAnagramsbyCenter = centerFilter(validWordAnagrams, center)
-                    const todaysPangrams = pangrams(filteredAnagramsbyCenter, uniqueArray);
-                    console.log('todays pangrams', todaysPangrams)
-                    const anagramObjList = filteredAnagramsbyCenter.map((word: string) => {
-                        return calculatePoints(word, todaysPangrams)
-                    });
-                    return {
-                        daylist_id: now,
-                        centerLetter: center,
-                        pangrams: todaysPangrams,
-                        letters: uniqueArray,
-                        validWords: anagramObjList,
+                    const filteredAnagramsbyCenter = centerFilter(validWordAnagrams, center);
+                    console.log('filtered anagrams', filteredAnagramsbyCenter);
+                    if (filteredAnagramsbyCenter) {
+                        const todaysPangrams = pangrams(filteredAnagramsbyCenter, uniqueArray);
+                        console.log('todays pangrams', todaysPangrams);
+                        const anagramObjList = filteredAnagramsbyCenter.map((word: string) => {
+                            return calculatePoints(word, todaysPangrams)
+                        });
+                        return {
+                            daylist_id: now,
+                            centerLetter: center,
+                            pangrams: todaysPangrams,
+                            letters: uniqueArray,
+                            validWords: anagramObjList,
 
+                        }
                     }
+
+
                 }
             }
         }

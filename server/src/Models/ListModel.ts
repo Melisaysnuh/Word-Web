@@ -2,7 +2,7 @@ import { dayModel } from "./index.js"
 import { Daylist } from "../types/Daylist.js";
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
-import  finalConstructor  from '../utilities/daylist-constructor.js';
+import finalConstructor from '../utilities/daylist-constructor.js';
 import { error } from 'console';
 
 
@@ -17,15 +17,24 @@ export async function fetchListModel () {
             daylist_id: now
         });
         if (list) {
-            console.log('list already found');
+            console.log('returning list from database');
             return list;
         }
         else {
-            console.log('no list found, creating new list')
-            const list: Daylist | void = await storeListModel();
-            return list
+            console.log('no list found in database, creating new list')
+            const newList = await storeListModel();
+            if (newList) {
+                console.log('Returning newly created list');
+                return newList;
 
-    }}
+            }
+            else {
+                console.error('error returning new list');
+                return null;
+            }
+
+        }
+    }
     catch (e) {
         console.log('error fetching list from your db: ', e)
     }
@@ -38,14 +47,18 @@ export async function storeListModel () {
         const result = await finalConstructor();
         if (result) {
             const createdList = await dayModel.create(result);
-            console.log('list successfully stored: ' + createdList)
+            console.log('list successfully stored: ' + createdList);
+            return createdList;
 
         }
-        else throw new Error('could not get day list from service');
-        console.log(error);
+        else {
+            console.error('could not get day list from service');
+            return null;
+        }
     }
     catch (e) {
-        console.error('Error storing day:', e);
+        console.error('Error storing day list:', e);
+        return null;
     }
 };
 

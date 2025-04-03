@@ -2846,7 +2846,6 @@ aduncous
 adust
 adusted
 adusting
-adusts
 advance
 advanced
 advancement
@@ -4660,7 +4659,6 @@ akvavit
 akvavits
 al
 ala
-alaaps
 alabamine
 alabamines
 alabandine
@@ -4699,8 +4697,6 @@ alannah
 alannahs
 alanyl
 alanyls
-alapas
-alaps
 alarm
 alarmable
 alarmed
@@ -5840,8 +5836,6 @@ alpacas
 alpaccas
 alpargata
 alpargatas
-alpeen
-alpeens
 alpenglow
 alpenglows
 alpenhorn
@@ -7326,10 +7320,8 @@ anandamide
 anandamides
 anandrous
 ananthous
-anapaest
 anapaestic
 anapaestical
-anapaests
 anapest
 anapestic
 anapestics
@@ -8561,7 +8553,6 @@ antemortem
 antemundane
 antenatal
 antenatally
-antenatals
 antenna
 antennae
 antennal
@@ -8574,8 +8565,6 @@ antennule
 antennules
 antenuptial
 anteorbital
-antepast
-antepasts
 antependia
 antependium
 antependiums
@@ -9877,8 +9866,6 @@ aoudad
 aoudads
 apace
 apaches
-apadana
-apadanas
 apage
 apagoge
 apagoges
@@ -10089,12 +10076,10 @@ apitherapies
 apitherapy
 apivorous
 aplacental
-aplanat
 aplanatic
 aplanatically
 aplanatism
 aplanatisms
-aplanats
 aplanetic
 aplanogamete
 aplanogametes
@@ -10112,7 +10097,6 @@ aplombs
 aplustre
 aplustres
 apnea
-apneal
 apneas
 apneic
 apneuses
@@ -10495,7 +10479,6 @@ appeasers
 appeases
 appeasing
 appeasingly
-appel
 appellant
 appellants
 appellate
@@ -10509,7 +10492,6 @@ appellee
 appellees
 appellor
 appellors
-appels
 append
 appendage
 appendages
@@ -10558,8 +10540,6 @@ appertainments
 appertains
 appertinent
 appertinents
-appestat
-appestats
 appeteezement
 appeteezements
 appetence
@@ -10911,7 +10891,6 @@ aptnesses
 aptote
 aptotes
 aptotic
-apts
 apyrase
 apyrases
 apyretic
@@ -12519,7 +12498,6 @@ aseity
 asepalous
 asepses
 asepsis
-aseptate
 aseptic
 aseptically
 asepticise
@@ -13465,7 +13443,6 @@ ataman
 atamans
 atamasco
 atamascos
-ataps
 ataractic
 ataractics
 ataraxia
@@ -13793,7 +13770,6 @@ attaintments
 attaints
 attainture
 attaintures
-attaps
 attars
 attasked
 attasking
@@ -14053,7 +14029,6 @@ audaciousness
 audaciousnesses
 audacities
 audacity
-audads
 audial
 audibilities
 audibility
@@ -18811,7 +18786,6 @@ becharmed
 becharming
 becharms
 beck
-becke
 becked
 beckes
 becket
@@ -19806,8 +19780,6 @@ belling
 bellings
 bellman
 bellmen
-bellock
-bellocked
 bellocking
 bellocks
 bellow
@@ -24331,7 +24303,6 @@ bocconcini
 boche
 boches
 bock
-bocked
 bockedy
 bocking
 bocks
@@ -24557,8 +24528,6 @@ boisterousnesses
 boite
 boites
 bok
-boke
-boked
 bokeh
 bokes
 boking
@@ -24955,7 +24924,6 @@ booby
 boobyish
 boobyism
 boobyisms
-boocoo
 boocoos
 boodies
 boodlers
@@ -34333,7 +34301,6 @@ cellarous
 cellars
 cellarway
 cellarways
-cellblock
 cellblocks
 celled
 cellentani
@@ -37673,7 +37640,6 @@ chollers
 cholo
 cholos
 choltries
-choltry
 chometz
 chometzes
 chommie
@@ -38620,7 +38586,6 @@ cid
 cidaris
 cidarises
 cide
-cided
 cider
 ciderkin
 ciderkins
@@ -40364,7 +40329,6 @@ clockwise
 clockwork
 clockworks
 clod
-clodded
 cloddier
 cloddiest
 clodding
@@ -40419,8 +40383,6 @@ cloisters
 cloistral
 cloistress
 cloistresses
-cloke
-cloked
 clokes
 cloking
 clomb
@@ -41098,7 +41060,6 @@ cobaltite
 cobaltites
 cobaltous
 cobb
-cobbed
 cobber
 cobbers
 cobbier
@@ -41391,7 +41352,6 @@ cocoanuts
 cocoas
 cocobola
 cocobolas
-cocobolo
 cocobolos
 cocomat
 cocomats
@@ -42391,7 +42351,6 @@ collectors
 collectorship
 collectorships
 collects
-colled
 colleen
 colleens
 college
@@ -47021,7 +46980,6 @@ coo
 cooch
 cooches
 cooed
-cooeed
 cooeeing
 cooees
 cooers
@@ -51577,7 +51535,6 @@ cruck
 crucks
 crud
 crudded
-cruddier
 cruddiest
 crudding
 cruddle
@@ -51596,7 +51553,6 @@ crudities
 crudity
 cruds
 crudy
-crue
 cruel
 crueler
 cruelest
@@ -54355,7 +54311,6 @@ danseur
 danseurs
 danseuse
 danseuses
-dant
 danted
 danthonia
 danthonias
@@ -54364,7 +54319,6 @@ danton
 dantoned
 dantoning
 dantons
-dants
 dap
 daphne
 daphnes
@@ -54654,7 +54608,6 @@ daubs
 dauby
 dauded
 dauding
-dauds
 daughter
 daughterhood
 daughterhoods
@@ -54702,12 +54655,10 @@ dauphins
 daur
 daured
 daurs
-daut
 dauted
 dautie
 dauties
 dauting
-dauts
 daven
 davened
 davening
@@ -55508,7 +55459,6 @@ decayers
 decaying
 decayless
 decays
-deccie
 deccies
 decease
 deceased
@@ -55759,7 +55709,6 @@ deck
 deckchair
 deckchairs
 decked
-deckel
 deckels
 decker
 deckers
@@ -55770,10 +55719,7 @@ deckhouses
 decking
 deckings
 deckle
-deckled
 deckles
-decko
-deckoed
 deckoing
 deckos
 decks
@@ -55884,8 +55830,6 @@ decoherence
 decoherences
 decoherer
 decoherers
-decoke
-decoked
 decokes
 decoking
 decollate
@@ -59165,7 +59109,6 @@ derogatoriness
 derogatory
 deros
 derrick
-derricked
 derricking
 derricks
 derrieres
@@ -61239,7 +61182,6 @@ dickeybird
 dickeybirds
 dickeys
 dickie
-dickier
 dickies
 dickiest
 dickings
@@ -61799,7 +61741,6 @@ dikers
 dikes
 diketone
 dikey
-dikier
 dikiest
 diking
 dikkop
@@ -62548,7 +62489,6 @@ dirigisms
 dirigiste
 diriment
 dirk
-dirke
 dirked
 dirkes
 dirking
@@ -66673,8 +66613,6 @@ doobies
 doobrey
 doobreys
 doobries
-dooce
-dooced
 dooces
 doocing
 doocot
@@ -67940,7 +67878,6 @@ drearisome
 drears
 dreary
 dreck
-dreckier
 dreckiest
 drecks
 drecksill
@@ -68030,7 +67967,6 @@ dribbly
 driblet
 driblets
 dribs
-drice
 drices
 dricksie
 dricksier
@@ -68515,7 +68451,6 @@ drywells
 dso
 dsomo
 dsomos
-duads
 dual
 dualin
 dualise
@@ -68538,7 +68473,6 @@ dualled
 dualling
 dually
 duals
-duans
 duar
 duarchies
 duarchy
@@ -68595,7 +68529,6 @@ duchessed
 duchesses
 duchessing
 duchy
-duci
 duck
 duckbill
 duckbills
@@ -68605,7 +68538,6 @@ ducked
 ducker
 duckers
 duckfoot
-duckie
 duckier
 duckies
 duckiest
@@ -68653,8 +68585,6 @@ dud
 dudderies
 dudders
 duddery
-duddie
-duddier
 duddiest
 duddy
 dude
@@ -69002,7 +68932,6 @@ dunshed
 dunshes
 dunshing
 dunting
-dunts
 duo
 duobinary
 duodecennial
@@ -69041,8 +68970,6 @@ dup
 dupabilities
 dupability
 dupable
-dupatta
-dupattas
 dupe
 duped
 duper
@@ -69163,7 +69090,6 @@ duroy
 duroys
 durra
 durras
-durrie
 durries
 durrs
 durry
@@ -70005,7 +69931,6 @@ ecartes
 ecaudate
 ecblasteses
 ecblastesis
-ecbole
 ecboles
 ecbolic
 ecbolics
@@ -70200,7 +70125,6 @@ ecocide
 ecocides
 ecoclimate
 ecoclimates
-ecod
 ecofeminism
 ecofeminisms
 ecofeminist
@@ -70433,7 +70357,6 @@ ecumenism
 ecumenisms
 ecumenist
 ecumenists
-ecurie
 ecuries
 ecus
 eczema
@@ -71000,7 +70923,6 @@ eightvo
 eightvos
 eighty
 eik
-eiked
 eiking
 eikon
 eikones
@@ -71097,8 +71019,6 @@ elances
 elancing
 eland
 elands
-elanet
-elanets
 elans
 elaphine
 elapid
@@ -71114,8 +71034,6 @@ elasmosaur
 elasmosaurs
 elastance
 elastances
-elastane
-elastanes
 elastase
 elastases
 elastic
@@ -74697,10 +74615,8 @@ ensphering
 enstamped
 enstamping
 enstamps
-ensteep
 ensteeped
 ensteeping
-ensteeps
 enstructured
 enstyle
 enstyled
@@ -75361,7 +75277,6 @@ epagogic
 epagomenal
 epanadiploses
 epanadiplosis
-epanalepses
 epanalepsis
 epanaleptic
 epanaphora
@@ -75376,7 +75291,6 @@ eparchates
 eparchial
 eparchies
 eparchs
-epatant
 epaule
 epaulement
 epaulements
@@ -77237,7 +77151,6 @@ etamin
 etamine
 etamines
 etamins
-etapes
 etas
 etatism
 etatisme
@@ -95499,7 +95412,6 @@ goldtail
 goldthread
 goldthreads
 goldtone
-goldurn
 goldurns
 goldwork
 goldworks
@@ -121872,18 +121784,13 @@ kebbock
 kebbocks
 kebbuck
 kebbucks
-kebele
 kebeles
 keblah
 keblahs
 kebob
-kebobbed
 kebobbing
 kebobs
-kecked
 kecking
-keckle
-keckled
 keckles
 keckling
 kecklings
@@ -122539,7 +122446,6 @@ kickboxing
 kickboxings
 kickdown
 kickdowns
-kicked
 kicker
 kickers
 kickflip
@@ -122572,7 +122478,6 @@ kidded
 kidder
 kidders
 kiddie
-kiddied
 kiddier
 kiddiers
 kiddies
@@ -123056,7 +122961,6 @@ kirigamis
 kirimon
 kirimons
 kirk
-kirked
 kirking
 kirkings
 kirkman
@@ -123680,7 +123584,6 @@ koekoea
 koekoeas
 koeksister
 koeksisters
-koel
 koels
 koff
 koffs
@@ -123793,7 +123696,6 @@ koodoos
 kook
 kookaburra
 kookaburras
-kooked
 kookie
 kookier
 kookiest
@@ -124113,7 +124015,6 @@ kurfuffles
 kurfuffling
 kurgan
 kurgans
-kuri
 kuris
 kurrajong
 kurrajongs
@@ -125114,7 +125015,6 @@ lamster
 lamsters
 lanai
 lanais
-lanate
 lanated
 lance
 lanced
@@ -125481,8 +125381,6 @@ lapises
 lapje
 lapjes
 lapped
-lappel
-lappels
 lapper
 lappered
 lappering
@@ -126568,7 +126466,6 @@ leavings
 leavy
 leaze
 leazes
-lebbek
 lebbeks
 leben
 lebens
@@ -126975,7 +126872,6 @@ lek
 leke
 lekgotla
 lekgotlas
-lekked
 lekking
 lekkings
 leks
@@ -130000,7 +129896,6 @@ loitering
 loiteringly
 loiterings
 loiters
-loke
 lokes
 lokshen
 loligo
@@ -147164,7 +147059,6 @@ nandines
 nandoos
 nandrolone
 nandrolones
-nandus
 nang
 nanisation
 nanisations
@@ -147239,7 +147133,6 @@ napalm
 napalmed
 napalming
 napalms
-napas
 nape
 naped
 naperies
@@ -147287,8 +147180,6 @@ napoo
 napooed
 napooing
 napoos
-nappa
-nappas
 nappe
 napped
 napper
@@ -161790,9 +161681,6 @@ ozonous
 ozzie
 ozzies
 pa
-paals
-paan
-paans
 pablum
 pabouche
 pabouches
@@ -162092,11 +161980,9 @@ paeonics
 paeonies
 paeons
 paeony
-paesan
 paesani
 paesano
 paesanos
-paesans
 pagan
 pagandom
 pagandoms
@@ -162390,9 +162276,6 @@ palankeen
 palankeens
 palanquin
 palanquins
-palapas
-palas
-palases
 palatabilities
 palatability
 palatable
@@ -162442,7 +162325,6 @@ palea
 paleaceous
 paleae
 paleal
-paleate
 palebuck
 palebucks
 paled
@@ -162531,10 +162413,8 @@ palestra
 palestrae
 palestral
 palestras
-palet
 paletot
 paletots
-palets
 palette
 palettes
 paleways
@@ -162608,7 +162488,6 @@ palladious
 palladium
 palladiums
 palladous
-pallae
 pallah
 pallahs
 pallbearer
@@ -162894,8 +162773,6 @@ panarthritises
 panary
 panatela
 panatelas
-panatella
-panatellas
 panax
 panaxes
 panbroil
@@ -162948,7 +162825,6 @@ pancreozymin
 pancreozymins
 pancytopenia
 pancytopenias
-pand
 panda
 pandaemonium
 pandaemoniums
@@ -163006,7 +162882,6 @@ pandores
 pandours
 pandowdies
 pandowdy
-pands
 pandura
 panduras
 pandurate
@@ -163064,8 +162939,6 @@ panesthesia
 panesthesias
 panetela
 panetelas
-panetella
-panetellas
 panettone
 panettones
 panettoni
@@ -163192,7 +163065,6 @@ pannikins
 panning
 pannings
 pannose
-pannus
 pannuses
 panocha
 panochas
@@ -163273,7 +163145,6 @@ pantagraph
 pantagraphs
 pantaleon
 pantaleons
-pantalet
 pantalets
 pantaletted
 pantalettes
@@ -163390,8 +163261,6 @@ pants
 pantsuit
 pantsuited
 pantsuits
-pantun
-pantuns
 pantyhose
 pantywaist
 pantywaists
@@ -164986,8 +164855,6 @@ pasear
 paseared
 pasearing
 pasears
-pasela
-paselas
 paseo
 paseos
 pases
@@ -165065,8 +164932,6 @@ passaments
 passamezzo
 passamezzos
 passant
-passata
-passatas
 passband
 passbands
 passbook
@@ -165148,7 +165013,6 @@ passivities
 passivity
 passkey
 passkeys
-passless
 passman
 passmen
 passment
@@ -165335,7 +165199,6 @@ patella
 patellae
 patellar
 patellas
-patellate
 patellectomies
 patellectomy
 patelliform
@@ -165486,8 +165349,6 @@ patissiers
 patka
 patkas
 patly
-patness
-patnesses
 patois
 patonce
 patootie
@@ -165651,18 +165512,14 @@ patternings
 patternless
 patterns
 patters
-pattes
 pattie
 patties
 patting
-pattle
-pattles
 pattress
 pattresses
 patty
 pattypan
 pattypans
-patu
 patulent
 patulin
 patulins
@@ -165670,7 +165527,6 @@ patulous
 patulously
 patulousness
 patulousnesses
-patus
 patutuki
 patutukis
 paty
@@ -165981,10 +165837,8 @@ pealed
 pealike
 pealing
 peals
-pean
 peaned
 peaning
-peans
 peanut
 peapod
 peapods
@@ -166046,7 +165900,6 @@ pease
 peasecod
 peasecods
 peased
-peasen
 peashooter
 peashooters
 peason
@@ -166515,7 +166368,6 @@ pekins
 pekoe
 pekoes
 pel
-pela
 pelage
 pelages
 pelagial
@@ -166526,7 +166378,6 @@ pelagics
 pelargonic
 pelargonium
 pelargoniums
-pelas
 pele
 pelecypod
 pelecypods
@@ -166624,11 +166475,6 @@ pelotherapy
 peloton
 pelotons
 pelt
-pelta
-peltae
-peltas
-peltast
-peltasts
 peltate
 peltately
 peltation
@@ -166640,7 +166486,6 @@ peltering
 pelters
 peltingly
 peltings
-peltless
 peltmonger
 peltmongers
 peltries
@@ -166867,13 +166712,9 @@ penman
 penmanship
 penmanships
 penmen
-penna
 pennaceous
-pennae
-pennal
 pennalism
 pennalisms
-pennals
 penname
 pennames
 pennant
@@ -167091,8 +166932,6 @@ pentazocine
 pentazocines
 penteconter
 penteconters
-pentene
-pentenes
 penteteric
 penthemimer
 penthemimeral
@@ -167136,7 +166975,6 @@ pentoxide
 pentoxides
 pentroof
 pentroofs
-pents
 pentstemon
 pentstemons
 pentyl
@@ -168650,9 +168488,6 @@ pervs
 pes
 pesade
 pesades
-pesant
-pesante
-pesants
 pesaunts
 peseta
 pesetas
@@ -168805,7 +168640,6 @@ petitionist
 petitionists
 petitions
 petitory
-petnap
 petnaper
 petnapers
 petnaping
@@ -168814,7 +168648,6 @@ petnapped
 petnapper
 petnappers
 petnapping
-petnaps
 petrale
 petrales
 petraries
@@ -168948,9 +168781,7 @@ pettishly
 pettishness
 pettishnesses
 pettitoes
-pettle
 pettled
-pettles
 pettling
 petto
 petty
@@ -172585,8 +172416,6 @@ pizzicato
 pizzicatos
 pizzle
 pizzles
-plaas
-plaases
 placabilities
 placability
 placable
@@ -172792,7 +172621,6 @@ planarians
 planarias
 planarities
 planarity
-planate
 planation
 planations
 planch
@@ -172808,8 +172636,6 @@ plane
 planed
 planeload
 planeloads
-planeness
-planenesses
 planer
 planers
 planes
@@ -172898,14 +172724,12 @@ plans
 plant
 planta
 plantable
-plantae
 plantage
 plantages
 plantaginaceous
 plantain
 plantains
 plantar
-plantas
 plantation
 plantations
 planters
@@ -172913,7 +172737,6 @@ plantigrade
 plantigrades
 planting
 plantings
-plantless
 plantlet
 plantlets
 plantlike
@@ -172940,7 +172763,6 @@ planuries
 planxties
 plapped
 plapping
-plaps
 plaque
 plaques
 plaquette
@@ -173010,7 +172832,6 @@ plasmosome
 plasmosomes
 plasms
 plast
-plaste
 plaster
 plasterboard
 plasterboards
@@ -173084,8 +172905,6 @@ plastrums
 plat
 platan
 platanaceous
-platane
-platanes
 platanna
 platannas
 platans
@@ -183574,8 +183393,6 @@ pudsey
 pudsier
 pudsiest
 pudsy
-pudu
-pudus
 pueblo
 pueblos
 puered
@@ -189274,11 +189091,8 @@ recaution
 recautioned
 recautioning
 recautions
-recced
-recceed
 recceing
 recces
-reccied
 reccos
 reccying
 recede
@@ -190242,8 +190056,6 @@ recuperator
 recuperators
 recuperatory
 recur
-recure
-recured
 recureless
 recures
 recuring
@@ -190386,8 +190198,6 @@ redeals
 redealt
 redear
 redears
-redecide
-redecided
 redecides
 redeciding
 redecorate
@@ -199924,7 +199734,6 @@ rudderposts
 rudders
 rudderstock
 rudderstocks
-ruddied
 ruddier
 ruddies
 ruddiest
@@ -199955,7 +199764,6 @@ rudes
 rudesbies
 rudesby
 rudest
-rudie
 rudies
 rudiment
 rudimental
@@ -202033,8 +201841,6 @@ sannyasi
 sannyasin
 sannyasins
 sannyasis
-sanpan
-sanpans
 sanpro
 sanpros
 sans
@@ -202095,14 +201901,10 @@ saouaris
 sap
 sapajou
 sapajous
-sapan
-sapans
 sapanwood
 sapanwoods
 sapego
 sapegoes
-sapele
-sapeles
 sapful
 saphead
 sapheaded
@@ -202169,8 +201971,6 @@ sapote
 sapotes
 sapour
 sapours
-sappan
-sappans
 sappanwood
 sappanwoods
 sapped
@@ -202194,9 +201994,7 @@ sappily
 sappiness
 sappinesses
 sapping
-sapple
 sappled
-sapples
 sappling
 sappy
 sapraemia
@@ -207429,8 +207227,6 @@ septenarius
 septenary
 septendecillion
 septendecillions
-septennate
-septennates
 septennia
 septennial
 septennially
@@ -207444,8 +207240,6 @@ septentriones
 septentrions
 septet
 septets
-septette
-septettes
 septic
 septicaemia
 septicaemias
@@ -209880,7 +209674,6 @@ shopfitter
 shopfitters
 shopfront
 shopfronts
-shopful
 shopfuls
 shopgirl
 shopgirls
@@ -212870,8 +212663,6 @@ slanderously
 slanderousness
 slanderousnesses
 slanders
-slane
-slanes
 slang
 slanged
 slanger
@@ -214440,7 +214231,6 @@ snaphaunce
 snaphaunces
 snaphaunch
 snaphaunches
-snapless
 snaplink
 snaplinks
 snappable
@@ -217156,25 +216946,19 @@ spald
 spaldeen
 spaldeens
 spalds
-spale
-spales
 spall
 spallable
 spallation
 spallations
-spalle
 spalled
 spaller
 spallers
-spalles
 spalling
 spallings
 spalls
 spalpeen
 spalpeens
-spalt
 spalting
-spalts
 spam
 spambots
 spammed
@@ -217206,9 +216990,7 @@ spandrel
 spandrels
 spandril
 spandrils
-spane
 spaned
-spanes
 spang
 spanged
 spanghew
@@ -217254,7 +217036,6 @@ spanking
 spankingly
 spankings
 spanks
-spanless
 spanned
 spanner
 spanners
@@ -217429,13 +217210,8 @@ spatiality
 spatially
 spatiotemporal
 spatiotemporally
-spatlese
-spatlesen
-spatleses
 spats
 spatted
-spattee
-spattees
 spatter
 spatterdash
 spatterdashes
@@ -217506,8 +217282,6 @@ speakings
 speakout
 speakouts
 speaks
-speal
-speals
 spean
 speaned
 speaning
@@ -217538,8 +217312,6 @@ spears
 spearwort
 spearworts
 speary
-speat
-speats
 spec
 specced
 speccing
@@ -217842,7 +217614,6 @@ speirings
 speirs
 spekboom
 spekbooms
-spelaean
 spelaeological
 spelaeologies
 spelaeologist
@@ -217865,7 +217636,6 @@ speldring
 speldrings
 speldrins
 spelds
-spelean
 speleological
 speleologies
 speleologist
@@ -218039,10 +217809,8 @@ spessartine
 spessartines
 spessartite
 spessartites
-spet
 spetch
 spetches
-spets
 spetsnaz
 spetsnazes
 spetting
@@ -220249,8 +220017,6 @@ stacte
 stactes
 stactometer
 stactometers
-stadda
-staddas
 staddle
 staddles
 staddlestone
@@ -220666,8 +220432,6 @@ stannaries
 stannary
 stannator
 stannators
-stannel
-stannels
 stannic
 stanniferous
 stannite
@@ -220690,7 +220454,6 @@ stanzes
 stanzo
 stanzoes
 stanzos
-stap
 stapedectomies
 stapedectomy
 stapedes
@@ -220727,9 +220490,6 @@ stapling
 staplings
 stapped
 stapping
-stapple
-stapples
-staps
 star
 staragen
 staragens
@@ -221368,7 +221128,6 @@ stelae
 stelai
 stelar
 stele
-stelene
 steles
 stelic
 stella
@@ -221588,7 +221347,6 @@ stepson
 stepsons
 stepstool
 stepstools
-stept
 stepwise
 steradian
 steradians
@@ -231282,8 +231040,6 @@ tallaging
 tallaisim
 tallboy
 tallboys
-tallent
-tallents
 taller
 tallest
 tallgrass
@@ -231345,9 +231101,6 @@ taloned
 talons
 talooka
 talookas
-talpa
-talpae
-talpas
 taluk
 taluka
 talukas
@@ -231707,11 +231460,9 @@ tapas
 tape
 tapeable
 taped
-tapeless
 tapelike
 tapeline
 tapelines
-tapen
 tapenade
 tapenades
 taper
@@ -231735,10 +231486,8 @@ tapestries
 tapestry
 tapestrying
 tapeta
-tapetal
 tapeti
 tapetis
-tapets
 tapetum
 tapeworm
 tapeworms
@@ -231774,7 +231523,6 @@ taplashes
 tapotement
 tapotements
 tappable
-tappas
 tapped
 tapper
 tappers
@@ -231804,10 +231552,8 @@ tapsters
 tapstress
 tapstresses
 tapstry
-tapu
 tapued
 tapuing
-tapus
 taqueria
 taquerias
 tar
@@ -232200,8 +231946,6 @@ tauntingly
 tauntings
 tauon
 tauons
-taupata
-taupatas
 taupe
 taupes
 taupie
@@ -233250,8 +232994,6 @@ tell
 tellable
 tellared
 tellaring
-tellen
-tellens
 teller
 tellered
 tellering
@@ -233708,7 +233450,6 @@ tenrecs
 tens
 tense
 tensed
-tenseless
 tensely
 tenseness
 tensenesses
@@ -233825,9 +233566,6 @@ teopan
 teopans
 teosinte
 teosintes
-tepal
-tepals
-tepas
 tepee
 tepees
 tepefaction
@@ -243030,8 +242768,6 @@ tundish
 tundishes
 tundra
 tundras
-tunds
-tunduns
 tune
 tuneable
 tuneably
@@ -243112,8 +242848,6 @@ tuppenny
 tupping
 tups
 tuptowing
-tupuna
-tupunas
 tuque
 tuques
 turacin
@@ -251771,7 +251505,6 @@ unwelcomely
 unwelcomeness
 unwelcomenesses
 unwelded
-unweldy
 unwell
 unwellness
 unwellnesses
@@ -252464,11 +252197,9 @@ upstages
 upstaging
 upstair
 upstairs
-upstand
 upstanding
 upstandingness
 upstandingnesses
-upstands
 upstared
 upstares
 upstaring
@@ -252521,7 +252252,6 @@ upswinging
 upswings
 upswollen
 upswung
-upta
 uptak
 uptake
 uptaken
@@ -252766,7 +252496,6 @@ uredosori
 uredosorus
 uredospore
 uredospores
-ureic
 ureide
 ureides
 uremia

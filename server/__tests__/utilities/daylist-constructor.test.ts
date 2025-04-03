@@ -141,8 +141,8 @@ describe('daylist Constructor', () => {
         await finalConstructor();
 
 
-        expect(centerFilterSpy).toHaveBeenCalledTimes(3)
-        expect(pangramsSpy).toHaveBeenCalledTimes(3)
+        expect(centerFilterSpy).toHaveBeenCalledTimes(1)
+        expect(pangramsSpy).toHaveBeenCalledTimes(1)
 
 
     });

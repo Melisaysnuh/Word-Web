@@ -5,8 +5,10 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import UserModel from '../Models/UserModel.js';
 import { fetchListModel } from '../Models/ListModel.js';
+import { format } from 'date-fns';
 
 
+const now = format(new Date(), "yyyy_MM_dd");
 
 
 
@@ -141,7 +143,7 @@ export const loginController = async (req: Request, res: Response): Promise<void
                 const alreadyHasHistory = user.history.some(item => item.daylist_id === today.daylist_id);
                 if (!alreadyHasHistory) {
                     user.history.push({
-                        daylist_id: today.daylist_id,
+                        daylist_id: now,
                         guessedWords: [],
                         totalUserPoints: 0,
                         level: 'Daddy Long-Legs'

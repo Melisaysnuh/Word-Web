@@ -7,6 +7,9 @@ import { HistoryI, UserI } from '../types/User';
 import SubmitWordResponse from '../types/SubmitWordResponse.js';
 //import { Daylist } from '../types/Daylist.js';
 import { dayModel } from '../Models/index.js';
+import { format } from 'date-fns';
+
+const now = format(new Date(), "yyyy_MM_dd");
 
 
 
@@ -107,13 +110,12 @@ export async function submitAuthController (req: Request, res: Response): Promis
             user.history = [];
         }
 
-        // Find today's history entry
-        let dayEntry = user.history.find(entry => entry.daylist_id === currentDaylistId);
+
+        const dayEntry = user.history.find(entry => entry.daylist_id === currentDaylistId);
 
         if (!dayEntry) {
-            // Create a new history entry for today
-            dayEntry = {
-                daylist_id: currentDaylistId,
+            const dayEntry: HistoryI = {
+                daylist_id: now,
                 guessedWords: [validatedWord],
                 totalUserPoints: validatedWord.points,
                 level: 'Daddy Long-Legs'

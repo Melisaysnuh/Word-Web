@@ -54,10 +54,17 @@ describe('utility functions', () => {
             )
 
         });
+        test('it should always return an array', async () => {
+            const testResult = wordListMgmt.centerFilter(anagramListMock, 'x');
+            expect(testResult).toBeTruthy();
+            expect(testResult).toBeTypeOf("object");
+            expect(testResult).toHaveLength(0);
+
+        });
     });
     describe('get center', () => {
         test('it should determine the center letter based on a list that will return no more than 50 words for that days list', async () => {
-            const testResult = await wordListMgmt.getCenter(anagramListMock, ['s', 'c', 'a', 't']);
+            const testResult = await wordListMgmt.getCenter(anagramListMock, ['p', 'l', 'u', 'n', 'g', 'e', 's']);
             expect(testResult).toBeTruthy();
             expect(testResult).toBeTypeOf("string");
 
