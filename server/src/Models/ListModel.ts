@@ -3,14 +3,16 @@ import { Daylist } from "../types/Daylist.js";
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
 import finalConstructor from '../utilities/daylist-constructor.js';
-import { error } from 'console';
 
 
 
 
+let isCreating = false;
+let creationPromise: Promise<Daylist | null> | null = null;
 
 
 export async function fetchListModel () {
+
     try {
 
         const list: Daylist | null = await dayModel.findOne({
@@ -36,31 +38,44 @@ export async function fetchListModel () {
         }
     }
     catch (e) {
-        console.log('error fetching list from your db: ', e)
+        console.log('error fetching list from your db: ', e);
+        return null
     }
 
 }
 
 
-export async function storeListModel () {
-    try {
-        const result = await finalConstructor();
-        if (result) {
-            const createdList = await dayModel.create(result);
-            console.log('list successfully stored: ' + createdList);
-            return createdList;
+export async function storeListModel (): Promise<Daylist | null> {
+    if (isCreating && creationPromise) {
+        console.log('🔁 Already creating list, waiting on existing promise');
+        return creationPromise;
+    }
 
-        }
-        else {
-            console.error('could not get day list from service');
-            return null;
-        }
-    }
-    catch (e) {
-        console.error('Error storing day list:', e);
+    try {
+        isCreating = true;
+
+        creationPromise = (async () => {
+            const result = await finalConstructor();
+            if (result) {
+                const createdList = await dayModel.create(result) as unknown as Daylist;
+                console.log('✅ List successfully stored:', createdList);
+                return createdList;
+            } else {
+                console.error('❌ Could not get day list from service');
+                return null;
+            }
+        })();
+
+        const finalResult = await creationPromise;
+        return finalResult;
+    } catch (e) {
+        console.error('❌ Error storing day list:', e);
         return null;
+    } finally {
+        isCreating = false;
+        creationPromise = null;
     }
-};
+}
 
 /* export const job = new CronJob(
     '0 0 0 * * *', // cronTime

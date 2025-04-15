@@ -50,7 +50,7 @@ describe('daylist Constructor', () => {
         expect(consoleSpy).toHaveBeenCalledWith('fetch error in constructor', expect.any(Error));
 
         const result = await finalConstructor();
-        expect(result).toBeUndefined();
+        expect(result).toBeNull();
     });
     test('should call generateAnagrams', async () => {
         (wordListMgmt.getRandomWord as unknown as MockedFunction<typeof wordListMgmt.getRandomWord>).mockResolvedValue('drought');
@@ -78,7 +78,7 @@ describe('daylist Constructor', () => {
         expect(consoleSpy).toHaveBeenCalledWith('fetch error in constructor', expect.any(Error));
 
         const result = await finalConstructor();
-        expect(result).toBeUndefined();
+        expect(result).toBeNull()
     });
     test('Should call validWordArray', async () => {
 
@@ -100,7 +100,7 @@ describe('daylist Constructor', () => {
         expect(consoleSpy).toHaveBeenCalledWith('fetch error in constructor', expect.any(Error));
 
         const result = await finalConstructor();
-        expect(result).toBeUndefined();
+        expect(result).toBeNull();
     });
      test('should call getCenter', async () => {
         (wordListMgmt.validWordArray as unknown as MockedFunction<typeof wordListMgmt.validWordArray>).mockResolvedValue(anagramListMock);
@@ -125,13 +125,14 @@ describe('daylist Constructor', () => {
         expect(consoleSpy).toHaveBeenCalledWith('fetch error in constructor', expect.any(Error));
 
         const result = await finalConstructor();
-        expect(result).toBeUndefined();
+        expect(result).toBeNull();
     });
 
     test('With getCenter, call centerFilter, panGrams', async () => {
       //  (wordListMgmt.getRandomWord as unknown as MockedFunction<typeof wordListMgmt.getRandomWord>).mockResolvedValue('drought');
      //   (utilities.pangrams as unknown as MockedFunction<typeof utilities.pangrams>).mockResolvedValue(['drought']);
-  //      (utilities.getCenter as unknown as MockedFunction<typeof utilities.getCenter>).mockResolvedValue('O');
+        (utilities.centerFilter as MockedFunction<typeof utilities.centerFilter>)
+            .mockReturnValue(['word1', 'word2']);
 
 
         const centerFilterSpy = vi.spyOn(utilities, 'centerFilter');
@@ -141,7 +142,7 @@ describe('daylist Constructor', () => {
         await finalConstructor();
 
 
-        expect(centerFilterSpy).toHaveBeenCalledTimes(1)
+        expect(centerFilterSpy).toHaveBeenCalledTimes(3)
         expect(pangramsSpy).toHaveBeenCalledTimes(1)
 
 
