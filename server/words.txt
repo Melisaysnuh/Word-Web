@@ -3852,7 +3852,6 @@ agenizes
 agenizing
 agent
 agented
-agential
 agenting
 agentings
 agentival
@@ -4023,7 +4022,6 @@ agitprop
 agitprops
 aglare
 agleam
-aglee
 aglet
 aglets
 agley
@@ -4335,7 +4333,6 @@ aids
 aieries
 aiery
 aight
-aiglet
 aiglets
 aigret
 aigrets
@@ -4357,7 +4354,6 @@ ailantos
 ailed
 aileron
 ailerons
-ailette
 ailettes
 ailing
 ailment
@@ -4963,12 +4959,10 @@ alee
 alefs
 alegar
 alegars
-alegge
 aleggeaunce
 aleggeaunces
 alegged
 alegges
-alegging
 alehouse
 alehouses
 alembicated
@@ -5060,7 +5054,6 @@ algarrobas
 algarrobo
 algarrobos
 algas
-algate
 algates
 algebra
 algebraic
@@ -5335,7 +5328,6 @@ alkyls
 alkyne
 alkynes
 all
-allanite
 allanites
 allantoic
 allantoid
@@ -5375,10 +5367,8 @@ allegedly
 alleger
 allegers
 alleges
-allegge
 allegged
 allegges
-allegging
 allegiance
 allegiances
 allegiant
@@ -5486,10 +5476,8 @@ allied
 allies
 alligarta
 alligartas
-alligate
 alligated
 alligates
-alligating
 alligation
 alligations
 alligator
@@ -5772,7 +5760,6 @@ almudes
 almuds
 almug
 almugs
-alnage
 alnager
 alnagers
 alnages
@@ -7651,8 +7638,6 @@ anelastic
 anelasticities
 anelasticity
 aneled
-aneling
-anelli
 anemia
 anemias
 anemic
@@ -7774,7 +7759,6 @@ angelica
 angelical
 angelically
 angelicas
-angeling
 angelolatries
 angelolatry
 angelologies
@@ -7989,7 +7973,6 @@ anidroses
 anidrosis
 anigh
 anight
-anile
 anilinctus
 anilinctuses
 aniline
@@ -9763,8 +9746,6 @@ antiwrinkle
 antler
 antlered
 antlers
-antliae
-antliate
 antlion
 antlions
 antoninianus
@@ -69450,7 +69431,6 @@ ealdorman
 ealdormen
 ean
 eaned
-eanling
 eanlings
 eans
 ear
@@ -70870,7 +70850,6 @@ elaeolite
 elaeolites
 elaeoptene
 elaeoptenes
-elain
 elains
 elaiosome
 elaiosomes
@@ -71475,7 +71454,6 @@ eliminative
 eliminator
 eliminators
 eliminatory
-elint
 elints
 elision
 elisions
@@ -72773,7 +72751,6 @@ enacture
 enactures
 enalapril
 enalaprils
-enallage
 enallages
 enamel
 enameled
@@ -73811,7 +73788,6 @@ engild
 engilded
 engilding
 engilds
-engilt
 engined
 engineered
 enginery
@@ -74110,7 +74086,6 @@ enlisting
 enlistment
 enlistments
 enlists
-enlit
 enliven
 enlivened
 enlivener
@@ -76992,7 +76967,6 @@ etaerio
 etaerios
 etagere
 etageres
-etalage
 etalages
 etalon
 etamin
@@ -77322,7 +77296,6 @@ etrangers
 etrennes
 etriers
 ettercaps
-ettling
 etudes
 etui
 etuis
@@ -90594,7 +90567,6 @@ galactoside
 galactosides
 galactosyl
 galactosyls
-galage
 galages
 galago
 galagos
@@ -90604,7 +90576,6 @@ galanga
 galangal
 galangals
 galangas
-galant
 galantamine
 galantamines
 galantine
@@ -90629,19 +90600,15 @@ galdragon
 galdragons
 gale
 galea
-galeae
 galeas
-galeate
 galeated
 galeiform
 galena
 galenas
-galengale
 galengales
 galenic
 galenical
 galenicals
-galenite
 galenites
 galenoid
 galeopithecine
@@ -90703,7 +90670,6 @@ gallbladders
 galleass
 galleasses
 galled
-gallein
 galleins
 galleon
 galleons
@@ -90719,11 +90685,9 @@ gallerygoers
 gallerying
 galleryite
 galleryites
-gallet
 galleta
 galletas
 galleted
-galleting
 gallets
 galley
 galleys
@@ -91172,7 +91136,6 @@ gangland
 ganglands
 ganglia
 gangliar
-gangliate
 gangliated
 ganglier
 gangliest
@@ -91242,9 +91205,7 @@ gantelope
 gantelopes
 gantlet
 gantleted
-gantleting
 gantlets
-gantline
 gantlines
 gantlope
 gantlopes
@@ -92054,9 +92015,7 @@ gazunderers
 gazundering
 gazunders
 gazy
-geal
 gealed
-gealing
 gealousies
 gealousy
 geals
@@ -92156,17 +92115,14 @@ geladas
 gelande
 gelandesprung
 gelandesprungs
-gelant
 gelastic
 gelate
 gelated
 gelates
 gelati
 gelatin
-gelatinate
 gelatinated
 gelatinates
-gelatinating
 gelatination
 gelatinations
 gelatine
@@ -92321,7 +92277,6 @@ gemutlich
 gemutlichkeit
 gemutlichkeits
 gen
-genal
 genappe
 genappes
 gendarme
@@ -92486,7 +92441,6 @@ genistein
 genisteins
 genital
 genitalia
-genitalial
 genitalic
 genitally
 genitival
@@ -92568,7 +92522,6 @@ genteelnesses
 gentes
 gentian
 gentianaceous
-gentianella
 gentianellas
 gentians
 gentier
@@ -92586,8 +92539,6 @@ gentilish
 gentilising
 gentilism
 gentilisms
-gentilitial
-gentilitian
 gentilities
 gentilitious
 gentility
@@ -93404,7 +93355,6 @@ giggling
 gigglingly
 giggly
 gighe
-giglet
 giglets
 giglot
 giglots
@@ -93435,7 +93385,6 @@ gildsman
 gildsmen
 gildswoman
 gildswomen
-gilet
 gilets
 gilgies
 gill
@@ -93444,7 +93393,6 @@ gillaroos
 gilled
 giller
 gillers
-gillet
 gillets
 gillflirt
 gillflirts
@@ -94117,7 +94065,6 @@ gleesome
 gleet
 gleetier
 gleetiest
-gleeting
 gleets
 gleety
 gleg
@@ -94138,9 +94085,7 @@ glenoid
 glenoidal
 glenoids
 glens
-glent
 glented
-glenting
 glents
 gley
 gleyed
@@ -94240,7 +94185,6 @@ glistered
 glistering
 glisteringly
 glisters
-glit
 glitch
 glitches
 glitchier
@@ -94843,7 +94787,6 @@ gnathostomatous
 gnathostome
 gnathostomes
 gnatlike
-gnatling
 gnatlings
 gnats
 gnattier
@@ -114277,7 +114220,6 @@ inlayings
 inlays
 inlet
 inlets
-inletting
 inlier
 inliers
 inlock
@@ -115242,7 +115184,6 @@ intact
 intactly
 intactness
 intactnesses
-intagli
 intagliated
 intaglio
 intaglioed
@@ -116738,7 +116679,6 @@ intis
 intitle
 intitled
 intitles
-intitling
 intitule
 intituled
 intitules
@@ -124375,7 +124315,6 @@ laevuloses
 lag
 lagan
 lagans
-lagena
 lagenas
 lagend
 lagends
@@ -124392,7 +124331,6 @@ laggardness
 laggardnesses
 laggards
 lagged
-laggen
 laggens
 lagger
 laggers
@@ -126547,7 +126485,6 @@ legitimizes
 legitimizing
 legitims
 legits
-leglan
 leglans
 legless
 leglessnesses
@@ -126768,7 +126705,6 @@ lent
 lentamente
 lentando
 lenten
-lenti
 lentic
 lenticel
 lenticellate
@@ -127603,7 +127539,6 @@ liegers
 lieges
 lien
 lienable
-lienal
 liens
 lienteric
 lienteries
@@ -127786,7 +127721,6 @@ lightweight
 lightweights
 lightwood
 lightwoods
-lignage
 lignages
 lignaloes
 lignan
@@ -128141,7 +128075,6 @@ linearized
 linearizes
 linearizing
 linearly
-lineate
 lineated
 lineation
 lineations
@@ -128324,11 +128257,9 @@ lintel
 lintelled
 lintels
 linter
-lintie
 lintier
 linties
 lintiest
-linting
 lintless
 lintol
 lintols
@@ -128893,7 +128824,6 @@ litigious
 litigiously
 litigiousness
 litigiousnesses
-liting
 litmus
 litmuses
 litoral
@@ -128929,9 +128859,7 @@ littler
 littles
 littlest
 littleworth
-littlie
 littlies
-littling
 littlings
 littlish
 littoral
@@ -147322,7 +147250,6 @@ neafes
 neaffe
 neaffes
 nealed
-nealing
 neandertal
 neandertaler
 neandertalers
@@ -230170,10 +230097,8 @@ taiahas
 taiga
 taigas
 taiglach
-taigle
 taigled
 taigles
-taigling
 taihoa
 taiko
 taikonaut
@@ -230220,7 +230145,6 @@ taillessness
 taillessnesses
 tailleur
 tailleurs
-taillie
 taillies
 taillight
 taillights
@@ -230369,7 +230293,6 @@ talebearers
 talebearing
 talebearings
 taleful
-talegalla
 talegallas
 taleggio
 taleggios
@@ -230432,7 +230355,6 @@ tall
 tallage
 tallaged
 tallages
-tallaging
 tallaisim
 tallboy
 tallboys
@@ -230441,10 +230363,8 @@ tallest
 tallgrass
 tallgrasses
 talliable
-talliate
 talliated
 talliates
-talliating
 tallied
 tallier
 talliers
@@ -230666,7 +230586,6 @@ tangences
 tangencies
 tangency
 tangent
-tangental
 tangentally
 tangential
 tangentialities
@@ -230752,7 +230671,6 @@ tanks
 tankship
 tankships
 tanky
-tanling
 tanlings
 tannable
 tannage
@@ -231302,7 +231220,6 @@ tattles
 tattletale
 tattletaled
 tattletales
-tattletaling
 tattling
 tattlingly
 tattlings
@@ -231621,10 +231538,8 @@ teade
 teades
 teads
 teaed
-teagle
 teagled
 teagles
-teagling
 teahouse
 teahouses
 teak
@@ -232006,7 +231921,6 @@ teichopsias
 teiglach
 teiid
 teiids
-teil
 teils
 teind
 teinded
@@ -232101,7 +232015,6 @@ teleferique
 teleferiques
 telefilm
 telefilms
-telega
 telegas
 telegenic
 telegenically
@@ -232392,7 +232305,6 @@ tellers
 tellership
 tellerships
 tellies
-tellin
 telling
 tellingly
 tellings
@@ -232436,7 +232348,6 @@ telneted
 telneting
 telnets
 telnetted
-telnetting
 telocentric
 telocentrics
 teloi
@@ -232645,8 +232556,6 @@ tenacity
 tenacula
 tenaculum
 tenaculums
-tenail
-tenaille
 tenailles
 tenaillon
 tenaillons
@@ -235926,7 +235835,6 @@ tillier
 tilliest
 tilling
 tillings
-tillite
 tillites
 tills
 tilly
@@ -236515,7 +236423,6 @@ tittlebat
 tittlebats
 tittled
 tittles
-tittling
 tittup
 tittuped
 tittuping
