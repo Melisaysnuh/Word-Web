@@ -1,7 +1,7 @@
 import { useState, FormEvent, useContext } from 'react';
 import '../styles/modal.css'
 import { login } from '../services/auth-service';
-import { AuthContext } from '../context/UserContext';
+import { AuthContext } from '../context/auth-context';
 
 
 interface LoginProps {

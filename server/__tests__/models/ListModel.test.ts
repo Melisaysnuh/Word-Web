@@ -35,8 +35,8 @@ describe('fetchListModel()', () => {
     });
 
     it('should call storeListModel if no list exists', async () => {
-       // const constructorSpy = vi.spyOn(construct, 'default'); // Correctly spy on the default export
- // todo fix / test E2E -- constructor spy should be in storemodel, this should be a storemodel spy
+        // const constructorSpy = vi.spyOn(construct, 'default'); // Correctly spy on the default export
+        // todo fix / test E2E -- constructor spy should be in storemodel, this should be a storemodel spy
         // Mock database find to return null (no list found)
         dayModel.findOne.mockResolvedValueOnce(null);
         construct.default.mockResolvedValueOnce(MockList);
@@ -65,7 +65,7 @@ describe('fetchListModel()', () => {
         const result = await fetchListModel();
 
         expect(dayModel.findOne).toHaveBeenCalledWith({ daylist_id: now });
-        expect(result).toBeUndefined(); // Since the function does not throw, just logs error
+        expect(result).toBeNull();
     });
 });
 
@@ -84,7 +84,7 @@ describe('storeListModel', () => {
         dayModel.create.mockResolvedValueOnce(MockList);
 
         // Call storeListModel
-       const result = await storeListModel();
+        const result = await storeListModel();
 
         // Ensure that the list was saved correctly
         expect(dayModel.create).toHaveBeenCalledWith(MockList);
@@ -101,7 +101,8 @@ describe('storeListModel', () => {
         expect(result).toBe(null);
 
         // Ensure that the error is logged
-        expect(consoleErrorSpy).toHaveBeenCalled()});
+        expect(consoleErrorSpy).toHaveBeenCalled()
+    });
 
     it('should handle errors when dayModel.create fails', async () => {
         construct.default.mockResolvedValueOnce(MockList);
@@ -113,6 +114,7 @@ describe('storeListModel', () => {
         await storeListModel();
 
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith('Error storing day list:', expect.any(Error));
+        expect(consoleErrorSpy).toHaveBeenCalledWith("❌ Error storing day list:",
+            new Error("Database error"));
     });
 });

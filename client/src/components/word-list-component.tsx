@@ -1,7 +1,7 @@
 import WordObj from '../types/WordObj';
 import '../styles/word-list-component.css';
 import { useContext, useEffect, useState, useMemo } from 'react';
-import { AuthContext } from '../context/UserContext';
+import { AuthContext } from '../context/auth-context';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
 import { format } from 'date-fns';

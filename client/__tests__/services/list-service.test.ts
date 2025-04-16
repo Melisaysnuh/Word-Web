@@ -1,75 +1,88 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach, MockedFunction } from 'vitest';
 import * as gdlist from '../../src/services/list-service';
 import { mockApiResponse } from './response.mock';
-let cacheTimestamp: number = 0;
+import { format } from 'date-fns';
+const now = format(new Date(), "yyyy_MM_dd");
+import { ListBackUpTemp } from "../../src/services/list-backup";
 
+// Helper to mock localStorage
+const localStorageMock = (() => {
+    let store: Record<string, string> = {};
+    return {
+        getItem: vi.fn((key: string) => store[key] || null),
+        setItem: vi.fn((key: string, value: string) => {
+            store[key] = value;
+        }),
+        clear: vi.fn(() => {
+            store = {};
+        }),
+        removeItem: vi.fn((key: string) => {
+            delete store[key];
+        }),
+    };
+})();
 
-
-
-
-describe('getDailyList', () => {
+describe('getDailyListService', () => {
     beforeEach(() => {
-
+        vi.resetModules();
         vi.clearAllMocks();
+
+        // @ts-ignore
+        global.localStorage = localStorageMock;
+
         global.fetch = vi.fn();
+        localStorageMock.clear();
     });
 
-    it('should fetch the daily list from the API if no cache exists', async () => {
-
-        global.fetch.mockResolvedValueOnce({
-            json: vi.fn().mockResolvedValue(mockApiResponse),
-        });
-
-        const result = await gdlist.getDailyList();
-
-        // Check if the API call is made
-        expect(fetch).toHaveBeenCalledTimes(1);
-        expect(fetch).toHaveBeenCalledWith(`${gdlist.base_URL}/`, expect.any(Object));
-
-        expect(result).toEqual(mockApiResponse);
-    });
-
-    it('should return cached data and not call the API if cache is valid', async () => {
-
-        global.fetch.mockResolvedValueOnce({
-            json: vi.fn().mockResolvedValue(mockApiResponse),
-        });
-        await gdlist.getDailyList();
-
+    afterEach(() => {
         vi.clearAllMocks();
+    });
 
-        const result = await gdlist.getDailyList();
+    it('fetches from API if no cache exists', async () => {
+        (global.fetch as MockedFunction).mockResolvedValueOnce({
+            json: vi.fn().mockResolvedValue(mockApiResponse),
+        });
 
+        const result = await gdlist.getDailyListService();
+
+        expect(fetch).toHaveBeenCalledTimes(1);
+        expect(result).toEqual(mockApiResponse);
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            'cachedDailyList',
+            JSON.stringify(mockApiResponse)
+        );
+    });
+
+    it('returns cached list if valid', async () => {
+        // Manually set the correct format in cache
+        localStorage.setItem(
+            'cachedDailyList',
+            JSON.stringify({
+                list: {
+                    ...mockApiResponse.list,
+                    daylist_id: now
+                },
+            })
+        );
+
+        const result = await gdlist.getDailyListService();
 
         expect(fetch).not.toHaveBeenCalled();
-
-
-        expect(result).toEqual(mockApiResponse);
+        expect(result.list.daylist_id).toEqual(
+            now
+        );
     });
 
-    // todo fix in feature
-    it('should refetch the daily list from the API if cache has expired', async () => {
+    it('uses backup if fetch fails', async () => {
+        (global.fetch as unknown as vi.Mock).mockRejectedValueOnce(new Error('API is down'));
 
-        global.fetch.mockResolvedValueOnce({
-            json: vi.fn().mockResolvedValue(mockApiResponse),
-        });
+        // Clear localStorage to simulate no cache
+        localStorage.clear();
 
+        const result = await gdlist.getDailyListService();
 
-        await gdlist.getDailyList();
-
-        const CACHE_EXPIRATION_TIME = 60 * 90 * 1000;
-        const mockExpiredTimestamp = Date.now() - CACHE_EXPIRATION_TIME - 1000;
-        cacheTimestamp = mockExpiredTimestamp;
-
-        
-
-        global.fetch.mockResolvedValueOnce({
-            json: vi.fn().mockResolvedValue(mockApiResponse),
-        });
-
-        const result = await gdlist.getDailyList();
+        // Should fallback to backup if fetch fails
+        expect(result).toEqual(ListBackUpTemp);
         expect(fetch).toHaveBeenCalledTimes(1);
-        expect(result).toEqual(mockApiResponse);
-
     });
 });

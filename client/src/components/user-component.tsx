@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from 'react';
 import '../styles/user-component.css';
-import { AuthContext } from '../context/UserContext';
+import { AuthContext } from '../context/auth-context';
 import { format, subDays, addDays } from 'date-fns';
 import WordObj from '../types/WordObj';
 import { HistoryI } from '../types/User';

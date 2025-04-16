@@ -20837,7 +20837,6 @@ bethumb
 bethumbed
 bethumbing
 bethumbs
-bethump
 bethumped
 bethumping
 bethumps
@@ -29528,7 +29527,6 @@ bywork
 byworks
 byzant
 byzantine
-byzants
 caa
 caaing
 caatinga
