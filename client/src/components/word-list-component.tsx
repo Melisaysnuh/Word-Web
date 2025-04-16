@@ -5,13 +5,10 @@ import { AuthContext } from '../context/auth-context';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
 import { format } from 'date-fns';
-import { HistoryI } from '../types/User';
+//import { HistoryI } from '../types/User';
 //const [selectedDate, setSelectedDate] = useState(new Date());
-//const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
-
-//const formattedDate = format(selectedDate, "yyyy_MM_dd");
-const todayFormatted = format(new Date(), "yyyy_MM_dd");
-
+//const [history, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+const now = format(new Date(), "yyyy_MM_dd");
 
 const spiderClasses = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
@@ -29,19 +26,14 @@ function WordListComponent () {
     const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
     const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
     const [totalPoints, setTotalPoints] = useState(0);
-    const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
 
-    const { user } = useContext(AuthContext);
-
+    const { user, history, setHistory } = useContext(AuthContext);
     useEffect(() => {
-        if (user && user.history) {
-            const historyForSelectedDate = user.history.find(
-                (h) => h.daylist_id === todayFormatted
-
-            );
-
-            setSelectedHistory(historyForSelectedDate)
-
+        if (user?.history) {
+            const thisHistory = user.history.find(h=>h.daylist_id===now)
+            if(thisHistory) {
+                setHistory(thisHistory);
+            }
         }
     }, [user]);
 
@@ -51,7 +43,6 @@ function WordListComponent () {
         try {
             const data = await getDailyListService();
             if (data && data.list) {
-                //console.log('getDailyListService returning', data)
                 const arr = data.list.validWords;
                 const points = calculateTotalPoints(arr);
                 return points
@@ -66,14 +57,10 @@ function WordListComponent () {
             return 100;
         }
     };
-    const memoizedTotalPoints = useMemo(async () => {
-        const points = await fetchPoints();
-        return points;
-    }, []);
 
     const guessedWordPoints = useMemo(() => {
-        if (selectedHistory) { return calculateTotalPoints(selectedHistory.guessedWords); }
-    }, [selectedHistory]);
+        return history?.guessedWords ? calculateTotalPoints(history.guessedWords) : 0;
+    }, [history]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
@@ -86,13 +73,14 @@ function WordListComponent () {
     };
 
     useEffect(() => {
-        memoizedTotalPoints.then((points) => setTotalPoints(points));
-    }, [memoizedTotalPoints]);
+        fetchPoints().then(setTotalPoints);
+    }, []);
 
     useEffect(() => {
-        if (selectedHistory && selectedHistory.guessedWords) {
-            console.log(history)
-            updateSpiderClass(selectedHistory.totalUserPoints, totalPoints);
+        console.log('hello')
+        if (history) {
+
+            updateSpiderClass(history.totalUserPoints, totalPoints);
 
         }
 
@@ -126,8 +114,8 @@ function WordListComponent () {
 
 
                         <ul>
-                            {selectedHistory?.guessedWords ? (
-                                selectedHistory.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
+                            {history?.guessedWords ? (
+                                history.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
                                     <li className={obj.pangram === true ? 'pangram' : 'normal'} key={obj.word}>{obj.word}</li>
                                 ))
                             ) : (
