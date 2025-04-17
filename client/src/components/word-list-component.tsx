@@ -5,12 +5,13 @@ import { AuthContext } from '../context/auth-context';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
 import { format } from 'date-fns';
+import { HistoryI } from '../types/User';
 //import { HistoryI } from '../types/User';
 //const [selectedDate, setSelectedDate] = useState(new Date());
 //const [history, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
 const now = format(new Date(), "yyyy_MM_dd");
 
-const spiderClasses = [
+const spiderLevels = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
     { threshold: 0.18, className: 'prog-spider-class-1', name: 'Weaver' },
     { threshold: 0.28, className: 'prog-spider-class-2', name: 'Jumping' },
@@ -23,11 +24,23 @@ const spiderClasses = [
 ];
 
 function WordListComponent () {
-    const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
-    const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
+    const [spiderClass, setSpiderClass] = useState(spiderLevels[0].className);
+    const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
     const [totalPoints, setTotalPoints] = useState(0);
 
     const { user, history, setHistory } = useContext(AuthContext);
+    const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
+    const verticalPoints = "20,8 20,58 20,108 20,158 20,208 20,258 20,308 20,358 20,408";
+const horizontalPoints = "8,20 58,20 108,20 158,20 208,20 258,20 308,20 358,20 408,20";
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsHorizontal(window.innerWidth <= 480);
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
     useEffect(() => {
         if (user?.history) {
             const thisHistory = user.history.find(h=>h.daylist_id===now)
@@ -65,7 +78,7 @@ function WordListComponent () {
     const updateSpiderClass = (points: number, total: number) => {
 
         const prog = points / total;
-        const spider = spiderClasses.find(({ threshold }) => prog < threshold);
+        const spider = spiderLevels.find(({ threshold }) => prog < threshold);
         if (spider) {
             setSpiderClass(spider.className);
             setSpiderName(spider.name);
@@ -78,8 +91,7 @@ function WordListComponent () {
 
     useEffect(() => {
         console.log('hello')
-        if (history) {
-
+        if (history && history.totalUserPoints) {
             updateSpiderClass(history.totalUserPoints, totalPoints);
 
         }
@@ -96,7 +108,7 @@ function WordListComponent () {
     return (
         <>
 
-            <div className='block'>
+            <div className='block' id='word-container'>
                 <div className='statusmess'><span className='status'>Status: </span>{spiderName}</div>
                 <div id='word-list-container'>
                     <div className='progress-bar-container'>

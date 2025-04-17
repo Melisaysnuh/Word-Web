@@ -103,6 +103,8 @@ function GameComponent () {
                             const updatedGuessedWords = [...history.guessedWords, resWord];
                             const updatedPoints = history.totalUserPoints + (resWord.points || 0);
 
+
+
                             // Create a new updated history object
                             const updatedHistory: HistoryI = {
                                 ...history,

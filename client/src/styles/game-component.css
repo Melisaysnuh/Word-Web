@@ -1,9 +1,9 @@
 
 .block {
-  background: radial-gradient(#381d75, #180a37);
+  background: radial-gradient(#381d75, rgb(24, 10, 55));
   width: 45vw;
   max-width: 600px;
-  height: auto;
+  height: 80vh;
   border-radius: 20px;
 }
 
@@ -179,4 +179,55 @@ align-items: center;
 .flash {
   background-color: orange !important;
   transition: background-color 0.2s ease;
+}
+@media (max-width: 480px) {
+
+
+.block {
+  width: 95%;
+    background: rgba(24, 10, 55, 0);
+
+  }
+
+#game-container {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  height: 65%;
+
+}
+#spiderweb {
+position: absolute;
+margin-top: 35%;
+  width: 100%;
+  max-width: 600px;
+  z-index: 1;
+  opacity: 0.3;
+
+
+}
+#button-holder {
+  width: 100%;
+}
+
+.text-input {
+  width: fit-content;
+
+  max-width: 100%;
+  height: 10%;
+  text-align: center;
+  z-index: 3;
+ border: 0;
+  font-family: 'Nunito';
+  font-weight:400;
+  font-size: 2.6rem;
+  background: none;
+  color: orange;
+  border: none;
+
+
+
+
+}
+
+
 }
