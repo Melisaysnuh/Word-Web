@@ -6,14 +6,12 @@ import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
 import { format } from 'date-fns';
 import { HistoryI } from '../types/User';
+//import { HistoryI } from '../types/User';
 //const [selectedDate, setSelectedDate] = useState(new Date());
-//const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+//const [history, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+const now = format(new Date(), "yyyy_MM_dd");
 
-//const formattedDate = format(selectedDate, "yyyy_MM_dd");
-const todayFormatted = format(new Date(), "yyyy_MM_dd");
-
-
-const spiderClasses = [
+const spiderLevels = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
     { threshold: 0.18, className: 'prog-spider-class-1', name: 'Weaver' },
     { threshold: 0.28, className: 'prog-spider-class-2', name: 'Jumping' },
@@ -26,22 +24,29 @@ const spiderClasses = [
 ];
 
 function WordListComponent () {
-    const [spiderClass, setSpiderClass] = useState(spiderClasses[0].className);
-    const [spiderName, setSpiderName] = useState(spiderClasses[0].name);
+    const [spiderClass, setSpiderClass] = useState(spiderLevels[0].className);
+    const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
     const [totalPoints, setTotalPoints] = useState(0);
-    const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
 
-    const { user } = useContext(AuthContext);
+    const { user, history, setHistory } = useContext(AuthContext);
+    const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
+    const verticalPoints = "20,8 20,58 20,108 20,158 20,208 20,258 20,308 20,358 20,408";
+const horizontalPoints = "8,20 58,20 108,20 158,20 208,20 258,20 308,20 358,20 408,20";
 
     useEffect(() => {
-        if (user && user.history) {
-            const historyForSelectedDate = user.history.find(
-                (h) => h.daylist_id === todayFormatted
+        const handleResize = () => {
+            setIsHorizontal(window.innerWidth <= 480);
+        };
 
-            );
-
-            setSelectedHistory(historyForSelectedDate)
-
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    useEffect(() => {
+        if (user?.history) {
+            const thisHistory = user.history.find(h=>h.daylist_id===now)
+            if(thisHistory) {
+                setHistory(thisHistory);
+            }
         }
     }, [user]);
 
@@ -51,7 +56,6 @@ function WordListComponent () {
         try {
             const data = await getDailyListService();
             if (data && data.list) {
-                //console.log('getDailyListService returning', data)
                 const arr = data.list.validWords;
                 const points = calculateTotalPoints(arr);
                 return points
@@ -66,19 +70,15 @@ function WordListComponent () {
             return 100;
         }
     };
-    const memoizedTotalPoints = useMemo(async () => {
-        const points = await fetchPoints();
-        return points;
-    }, []);
 
     const guessedWordPoints = useMemo(() => {
-        if (selectedHistory) { return calculateTotalPoints(selectedHistory.guessedWords); }
-    }, [selectedHistory]);
+        return history?.guessedWords ? calculateTotalPoints(history.guessedWords) : 0;
+    }, [history]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
         const prog = points / total;
-        const spider = spiderClasses.find(({ threshold }) => prog < threshold);
+        const spider = spiderLevels.find(({ threshold }) => prog < threshold);
         if (spider) {
             setSpiderClass(spider.className);
             setSpiderName(spider.name);
@@ -86,13 +86,13 @@ function WordListComponent () {
     };
 
     useEffect(() => {
-        memoizedTotalPoints.then((points) => setTotalPoints(points));
-    }, [memoizedTotalPoints]);
+        fetchPoints().then(setTotalPoints);
+    }, []);
 
     useEffect(() => {
-        if (selectedHistory && selectedHistory.guessedWords) {
-            console.log(history)
-            updateSpiderClass(selectedHistory.totalUserPoints, totalPoints);
+        console.log('hello')
+        if (history && history.totalUserPoints) {
+            updateSpiderClass(history.totalUserPoints, totalPoints);
 
         }
 
@@ -108,13 +108,13 @@ function WordListComponent () {
     return (
         <>
 
-            <div className='block'>
+            <div className='block' id='word-container'>
                 <div className='statusmess'><span className='status'>Status: </span>{spiderName}</div>
                 <div id='word-list-container'>
                     <div className='progress-bar-container'>
                         <img alt='progress spider' id='prog-spider' className={spiderClass} src='./placeholder-spider.svg'></img>
-                        <svg id='prog-line' height="450" width="50">
-                            <polyline className="dotted-line" points="20,8 20,58 20,108 20,158 20,208 20,258 20, 308 20, 358 20, 408" />
+                        <svg id='prog-line' height={isHorizontal? 50 : 450} width={isHorizontal ? 300 : 50}>
+                            <polyline className="dotted-line" points={isHorizontal?horizontalPoints : verticalPoints} />
                             <marker id="circle-marker" markerWidth="6" markerHeight="6" refX="3" refY="3">
                                 <circle className="foreground" cx="3" cy="3" r="2" />
                             </marker>
@@ -126,8 +126,8 @@ function WordListComponent () {
 
 
                         <ul>
-                            {selectedHistory?.guessedWords ? (
-                                selectedHistory.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
+                            {history?.guessedWords ? (
+                                history.guessedWords.sort((a, b) => a.word.localeCompare(b.word)).map((obj: WordObj) => (
                                     <li className={obj.pangram === true ? 'pangram' : 'normal'} key={obj.word}>{obj.word}</li>
                                 ))
                             ) : (

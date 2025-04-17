@@ -15,7 +15,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (decoded) {
             const decodedUser: UserI = decoded;
-            console.log('in authcontext. decoded user is: ', decodedUser)
+            console.log('in auth provider. decoded user is: ', decodedUser)
             setUser(decodedUser);
 
             const todayHistory = decodedUser.history.find(h => h.daylist_id === now);
