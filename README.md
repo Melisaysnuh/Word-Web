@@ -1,6 +1,8 @@
 
 
 # Word Web
+![ScreenShot](/client/public/Screenshot.png)
+
 
 **Description**:
  Word Web is a free daily word game where the goal is to find anagrams for a group of seven letters.
