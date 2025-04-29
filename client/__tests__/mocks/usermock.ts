@@ -1,9 +1,10 @@
 import { UserI } from "../../src/types/User";
 
 export const mockUser: UserI = {
-    id: '123', // or use the actual MongoDB ID if your type expects `_id`
+    _id: '123', // or use the actual MongoDB ID if your type expects `_id`
     email: 'jenny@gamil.com',
     firstName: 'Meli',
+    password: '%%%%%%',
     history: [
         {
             daylist_id: '2025_03_19',

@@ -11,7 +11,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom', // ← This is the key fix
     include: ['__tests__/**/*.test.ts?(x)'],
-    exclude: ['dist/**', 'node_modules/**'],
+    exclude: ['build/**', 'node_modules/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],

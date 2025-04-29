@@ -1,11 +1,6 @@
 
-#word-list-container {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
 
 
-}
 .progress-bar-container {
   position: relative;
   width: 20%;
@@ -29,29 +24,63 @@
 
 }
 #word-list {
-  width: 75%;
-  height: auto;
   display: flex;
+  width: 75%;
   flex-direction: row;
   margin-top: 20px;
+  margin-right: 10px;
+
 }
+#word-list-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  height: 90%;
+
+
+}
+.scroll-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
 ul {
     flex: 1 1 80px;
-  min-width: 80px; /* Minimum width of each column */
+  min-width: 80px;
+  height: 100%; /* Minimum width of each column */
   padding: 10px;
   list-style: none;
   display: inline-block;
   word-wrap: break-word;
   column-count: 3;
-  column-gap: 10px;
+  column-gap: 20px;
   font-size: 1.2rem;
   line-height: 1.5rem;
-
-  overflow: hidden;
-
 }
 li {
   font-family: 'Nunito';
+}
+
+.scroll-btn {
+  background: none;
+  border: none;
+  color: orange;
+  font-size: 1.5rem;
+  cursor: pointer;
+  align-self: center;
+}
+
+.scroll-btn.left {
+  margin-right: 5px;
+}
+
+.scroll-btn.right {
+  margin-left: 5px;
 }
 
 .prog-spider-class-0 {
