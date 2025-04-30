@@ -20,7 +20,6 @@ export default async function finalConstructor (): Promise<Daylist | null> {
                 if (center && validWordAnagrams) {
 
                     const newAnagrams = centerFilter(validWordAnagrams, center);
-                    console.log('filteredAnagramsbyCenter', newAnagrams);
                     if (newAnagrams) {
                         const todaysPangrams = pangrams(newAnagrams, uniqueArray);
                         console.log('todays pangrams', todaysPangrams);

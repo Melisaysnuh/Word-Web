@@ -71,10 +71,10 @@ function GameComponent () {
     }
     const handleShuffle = (event: React.MouseEvent<HTMLSpanElement>) => {
         event.preventDefault();
-/*         const shuffled = generateRandomIndices(dailyLetters);
+        const shuffled = generateRandomIndices(dailyLetters);
        setDailyLetters(shuffled);
         setFormStatus({ success: 'none', message: '' });
-        inputRef.current?.focus(); */
+        inputRef.current?.focus();
 
     }
 

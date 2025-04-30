@@ -25,91 +25,53 @@ const jwtSecret = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex
 }; */
 
 export const registerController = async (req: Request, res: Response): Promise<void> => {
-    const { email, password, firstName } = req.body;
+   try {
+       const { email, password, firstName } = req.body;
 
-    if (!email || !password) {
-        throw new Error(`Email and password are required`)
+       if (!email || !password) {
+           throw new Error(`Email and password are required`)
+       }
+       if (password.length < 8 /* || !/[A-Z]/.test(password) || !/[0-9]/.test(password) */) {
+           throw new Error(`Password doesn't meet strength requirements`)
+       }
+       const existingUser = await UserModel.findOne({ email });
+       if (existingUser) {
+           res.status(400)
+           throw new Error('User already exists');
+           ;
+       };
+
+       const user = new UserModel({ email, password, firstName });
+       await user.save();
+       const token = jwt.sign(
+           {
+               _id: user._id,
+               email: user.email,
+               firstName: user.firstName,
+               history: []
+           },
+           jwtSecret,
+           { expiresIn: '48h' }
+       );
+       console.log(`user ${user.email} registered`)
+       res.status(201).json({
+           user: user,
+           message: `${user.email} was successfully registered`,
+           token
+       });
+   }
+    catch (error: any) {
+          console.error('Error during registration:', error);
+
+    if (error.message === 'Email and password are required' ||
+        error.message === 'Password doesn\'t meet strength requirements' ||
+        error.message === 'User already exists') {
+        res.status(400).json({ error: error.message });
+    } else {
+        res.status(500).json({ error: 'Server error during registration' });
     }
-    if (password.length < 8 /* || !/[A-Z]/.test(password) || !/[0-9]/.test(password) */) {
-        throw new Error(`Password doesn't meet strength requirements`)
-    }
-    const existingUser = await UserModel.findOne({ email });
-    if (existingUser) {
-        res.status(400)
-        throw new Error('User already exists');
-        ;
-    };
-
-    const user = new UserModel({ email, password, firstName });
-    await user.save();
-    const token = jwt.sign(
-        {
-            _id: user._id,
-            email: user.email,
-            firstName: user.firstName,
-            password: '*****',
-            history: []
-        },
-        jwtSecret,
-        { expiresIn: '48h' }
-    );
-    console.log(`user ${user.email} registered`)
-    res.status(201).json({
-        user: user,
-        message: `${user.email} was successfully registered`,
-        token
-    });
-
 }
-
-
-/* export const userHistoryController = async (req: Request, res: Response): Promise<void | void> => {
-    try {
-        const toEdit: { history: HistoryI; _id: string } = req.body;
-        console.log('to edit: ', toEdit)
-        const fieldToUpdate = Object.keys(toEdit).find(key => key !== 'password' && key !== '_id');
-        if (!fieldToUpdate) {
-            res.status(400);
-            throw new Error('could not read field to update')
-        }
-        const filter = { _id: toEdit._id };
-        const potentialUser = await UserModel.findOne(filter);
-        if (!potentialUser) {
-            res.status(400);
-            throw new Error('no user found')
-        }
-
-                const update = { history: toEdit[history] };
-        const updated = await UserModel.findOneAndUpdate(filter, update);
-        if (updated) {
-
-            const token = jwt.sign({ _id: updated._id, email: updated.email, firstName: updated.firstName }, jwtSecret, { expiresIn: '1d' });
-            res.status(200).json({
-                token,
-                user: {
-                    _id: updated._id,
-                    email: updated.email,
-                    firstName: updated.firstName,
-                    password: '*******',
-                    history: []
-                }
-            });
-
-
-
-        }
-
-        else {
-            res.status(400);
-            throw new Error('User info not found')
-        }
-    }
-    catch (error) {
-
-        res.status(500).json({ error: `Server error in edit controller:` + error })
-
-    }
-} */
+}
 
 export const loginController = async (req: Request, res: Response): Promise<void | void> => {
     try {
@@ -159,7 +121,6 @@ export const loginController = async (req: Request, res: Response): Promise<void
                     _id: user._id,
                     email: user.email,
                     firstName: user.firstName,
-                    password: '*******',
                     history: user.history
 
                 }
@@ -168,7 +129,7 @@ export const loginController = async (req: Request, res: Response): Promise<void
     }
     catch (error) {
         console.error('Error during login:', error);
-        res.status(500).json({ error: 'Server error' });
+        res.status(500).json({ error: 'Server error during login' });
     }
 }
 
