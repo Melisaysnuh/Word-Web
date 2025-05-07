@@ -72,7 +72,7 @@ export async function getRandomWord () {
             ;
     }
     catch (e) {
-        console.log('error in getRandomWord: ', e)
+        console.error('error in getRandomWord: ', e)
 
     }
 }
@@ -90,19 +90,8 @@ export async function validWordArray (list: string[]) {
         return validWords;
     }
     catch (e) {
-        console.log('error validating array: ', e)
+        console.error('error validating array: ', e);
 
     }
 }
-//console.log('checking validate word....', await validateWord('clever'))
 
-/* async function testValidateWord (word: string) {
-    try {
-        const validate = await validateWord(word);
-        console.log(validate);
-    }
-    catch (e) {
-        console.log('error validating word', e)
-    }
-};
-testValidateWord('parsing'); */

@@ -116,7 +116,7 @@ function WordListComponent () {
     }, []);
 
     useEffect(() => {
-        console.log('hello')
+
         if (history && history.totalUserPoints) {
             updateSpiderClass(history.totalUserPoints, totalPoints);
         }

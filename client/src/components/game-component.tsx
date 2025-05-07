@@ -21,30 +21,30 @@ function GameComponent () {
 
 
     async function fetchDailyList () {
-                try {
+        try {
             const data = await getDailyListService()
 
             if (data) {
                 const list: Daylist = data.list;
                 return list;
-            } else console.log('you are not yet fetching your info');
+            } else console.error('you are not yet fetching your info');
             return ListBackUpTemp;
         }
         catch (e) {
-            console.log('error in fetchDaily in game component:', e);
+            console.error('error in fetchDaily in game component:', e);
             return ListBackUpTemp
         }
     }
 
     const handleTextInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         const guess = event.target.value.toLowerCase()
-        const lastKey = guess[guess.length-1]
-                setGuess(event.target.value.toUpperCase());
+        const lastKey = guess[guess.length - 1]
+        setGuess(event.target.value.toUpperCase());
         if (dailyLetters.includes(lastKey)) {
             const button = document.querySelector(`button[value="${lastKey}"]`);
             if (button) {
                 button.classList.add('flash');
-        setTimeout(() => {
+                setTimeout(() => {
                     button.classList.remove('flash');
                 }, 200);
             }
@@ -53,7 +53,7 @@ function GameComponent () {
 
 
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement> ) => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         const target = event.target as HTMLButtonElement;
         target.classList.add('flash');
@@ -62,17 +62,17 @@ function GameComponent () {
         }, 200);
         setGuess(`${guess}${target.value.toUpperCase()}`)
     }
-    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) =>{
+    const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
-         setGuess('');
+        setGuess('');
         setFormStatus({ success: 'none', message: '' });
 
     }
     const handleShuffle = (event: React.MouseEvent<HTMLSpanElement>) => {
         event.preventDefault();
         const shuffled = generateRandomIndices(dailyLetters);
-       setDailyLetters(shuffled);
+        setDailyLetters(shuffled);
         setFormStatus({ success: 'none', message: '' });
         inputRef.current?.focus();
 
@@ -89,42 +89,34 @@ function GameComponent () {
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
         } else {
-            console.log('guessing...', word);
             const res: SubmitWordResponse | undefined = await checkWord(word);
 
             if (res !== undefined) {
-                console.log('res is', res);
                 if (res.valid && res.valid === true) {
                     const resWord = res.guessedWord as WordObj;
                     if (resWord) {
-                        // Make sure history is not null or undefined
+
                         if (history) {
-                            // Update guessedWords and totalUserPoints in history
                             const updatedGuessedWords = [...history.guessedWords, resWord];
                             const updatedPoints = history.totalUserPoints + (resWord.points || 0);
-
-
-
-                            // Create a new updated history object
                             const updatedHistory: HistoryI = {
                                 ...history,
                                 guessedWords: updatedGuessedWords,
                                 totalUserPoints: updatedPoints,
                             };
 
-                            // Update the history in context
                             setHistory(updatedHistory);
 
-                            // Also update the user object in context
+
                             setUser((prevUser) => {
                                 if (!prevUser || !prevUser.history) return prevUser;
 
-                                // Update the user's history with the new history entry
+
                                 const updatedUserHistory = [updatedHistory, ...prevUser.history.slice(1)];
                                 return { ...prevUser, history: updatedUserHistory };
                             });
 
-                            // Provide feedback to the user
+
                             setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word!` });
                         }
                     }
@@ -133,7 +125,7 @@ function GameComponent () {
                 }
             }
         }
-        // Clear the guess input field after submission
+
         setGuess('');
         inputRef.current?.focus();
     }
@@ -143,14 +135,15 @@ function GameComponent () {
         async function fetchShuffle () {
 
             const list = await fetchDailyList();
-            if (list && list.letters){
-            const letters = list ? list.letters :  ListBackUpTemp.letters
-            const shuffled = generateRandomIndices(letters);
-            setDailyLetters(shuffled);
-            setGuess('');
-            setFormStatus({ success: 'none', message: '' });
+            if (list && list.letters) {
+                const letters = list ? list.letters : ListBackUpTemp.letters
+                const shuffled = generateRandomIndices(letters);
+                setDailyLetters(shuffled);
+                setGuess('');
+                setFormStatus({ success: 'none', message: '' });
 
-        }}
+            }
+        }
         fetchShuffle();
         inputRef.current?.focus();
 
@@ -168,7 +161,7 @@ function GameComponent () {
                 <form className="letter-form" >
                     <div className='message'><div className={formStatus.success}>{formStatus.message}</div></div>
                     <input type='text'
-                    aria-label='text input field'
+                        aria-label='text input field'
                         className='text-input'
                         value={guess}
                         ref={inputRef}
@@ -197,7 +190,7 @@ function GameComponent () {
                             )
                         }
                     </div>
-                  <div id='button-holder'>
+                    <div id='button-holder'>
                         <button key='clear'
                             className='other-button'
                             onClick={handleClear}
@@ -206,11 +199,11 @@ function GameComponent () {
                             refresh
                         </span>
                         <button type='submit'
-                        key='submit'
+                            key='submit'
                             className='other-button'
                             onClick={handleSubmit}
                         >SUBMIT</button>
-                  </div>
+                    </div>
                 </form>
             </div>
 

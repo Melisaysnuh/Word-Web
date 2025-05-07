@@ -11,7 +11,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    console.log('in middleware...')
 
     const authHeaders = req.headers['authorization'];
     if (authHeaders) {

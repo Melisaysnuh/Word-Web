@@ -15,13 +15,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
         if (decoded) {
             const decodedUser: UserI = decoded;
-            console.log('in auth provider. decoded user is: ', decodedUser)
             setUser(decodedUser);
 
             const todayHistory = decodedUser.history.find(h => h.daylist_id === now);
 
             if (todayHistory) {
-                console.log('todayHistory', history)
 
                 setHistory(todayHistory);
             } else {
@@ -40,7 +38,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // Update the entire history object
     const updateHistory = (newHistory: HistoryI) => {
         setUser((prevUser) => {
             if (!prevUser) return prevUser;
@@ -53,7 +50,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
     };
 
-    // The context value now includes the whole history object
+
     const value: AppContextValue = {
         user,
         setUser,

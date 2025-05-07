@@ -35,7 +35,7 @@ export const checkWord = async (
             if (data) {
                 return data
             } else {
-                console.log('no data found')
+                console.error('no data found')
             }
 
 
@@ -59,7 +59,7 @@ export const checkWord = async (
             if (data) {
                 return data
             } else {
-                console.log('no data found')
+                console.error('no data found')
             }
 
 

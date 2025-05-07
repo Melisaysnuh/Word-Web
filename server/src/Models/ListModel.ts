@@ -19,14 +19,13 @@ export async function fetchListModel () {
             daylist_id: now
         });
         if (list) {
-            console.log('Returning list from database');
+
             return list;
         }
         else {
-            console.log('No list found in database, creating new list')
+
             const newList = await storeListModel();
             if (newList) {
-                console.log('Returning newly created list.');
                 return newList;
 
             }
@@ -38,7 +37,7 @@ export async function fetchListModel () {
         }
     }
     catch (e) {
-        console.log('error fetching list from your db: ', e);
+        console.error('error fetching list from your db: ', e);
         return null
     }
 
@@ -47,7 +46,6 @@ export async function fetchListModel () {
 
 export async function storeListModel (): Promise<Daylist | null> {
     if (isCreating && creationPromise) {
-        console.log('...Already creating list, awaiting promise...');
         return creationPromise;
     }
 
@@ -58,7 +56,6 @@ export async function storeListModel (): Promise<Daylist | null> {
             const result = await finalConstructor();
             if (result) {
                 const createdList = await dayModel.create(result) as unknown as Daylist;
-                console.log('List successfully stored for ', now);
                 return createdList;
             } else {
                 console.error('Could not get day list from service');

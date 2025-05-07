@@ -33,7 +33,7 @@ const [formData, setFormData] = useState({
            const response = await register(formData)
            if (response && response.user) {
             setUser(response.user);
-            console.log('user is', response.user.firstName)
+
                setMessage('User registered successfully!')
            }
 

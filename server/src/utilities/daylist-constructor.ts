@@ -22,7 +22,6 @@ export default async function finalConstructor (): Promise<Daylist | null> {
                     const newAnagrams = centerFilter(validWordAnagrams, center);
                     if (newAnagrams) {
                         const todaysPangrams = pangrams(newAnagrams, uniqueArray);
-                        console.log('todays pangrams', todaysPangrams);
                         const anagramObjList = newAnagrams.map((word: string) => {
                             return calculatePoints(word, todaysPangrams)
                         });
@@ -36,30 +35,26 @@ export default async function finalConstructor (): Promise<Daylist | null> {
                         }
                     }
                     else {
-                        console.log('no filtered anagram by center');
                         return null;
                     }
 
 
                 }
                 else {
-                    console.log('no valid center');
                     return null
                 }
             }
             else {
-                console.log('no valid word anagram');
                 return null
             }
         }
         else {
-            console.log('No word found');
             return null
         }
     }
 
     catch (e) {
-        console.log('fetch error in constructor', e);
+        console.error('fetch error in constructor', e);
         return null
     }
 }

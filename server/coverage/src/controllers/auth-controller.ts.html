@@ -15,41 +15,41 @@
         }
     </style>
 </head>
-    
+
 <body>
 <div class='wrapper'>
     <div class='pad1'>
         <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controllers</a> auth-controller.ts</h1>
         <div class='clearfix'>
-            
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
                 <span class='fraction'>54/108</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">83.33% </span>
                 <span class="quiet">Branches</span>
                 <span class='fraction'>10/12</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
                 <span class='fraction'>1/2</span>
             </div>
-        
-            
+
+
             <div class='fl pad1y space-right2'>
                 <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
                 <span class='fraction'>54/108</span>
             </div>
-        
-            
+
+
         </div>
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
@@ -390,10 +390,9 @@ export const registerController = async (req: Request, res: Response): Promise&l
            jwtSecret,
            { expiresIn: '48h' }
        );
-       console.log(`user ${user.email} registered`)
        res.status(201).json({
            user: user,
-           message: `${user.email} was successfully registered`,
+           message: `${user.firstName} was successfully registered`,
            token
        });
    }
@@ -490,4 +489,3 @@ export const loginController = <span class="fstat-no" title="function not covere
         <script src="../../block-navigation.js"></script>
     </body>
 </html>
-    

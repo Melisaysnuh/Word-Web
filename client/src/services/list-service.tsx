@@ -17,26 +17,26 @@ const getCachedListFromStorage = () => {
 const saveCachedListToStorage = (data: Daylist) => {
     localStorage.setItem('cachedDailyList', JSON.stringify(data));
 };
-/* function removeCachedListFromStorage () {
+function removeCachedListFromStorage () {
     localStorage.removeItem('cachedDailyList');
 };
-removeCachedListFromStorage() */
+removeCachedListFromStorage()
 
 
 export const getDailyListService = async () => {
     const now = format(new Date(), "yyyy_MM_dd").toString();
-   // console.log('now is...', now)
+
 
     const cachedDailyList = getCachedListFromStorage();
 
 
     if (cachedDailyList && cachedDailyList.list && cachedDailyList.list.daylist_id === now) {
-        //console.log('Returning cached daily list');
+
         return cachedDailyList;
     }
     else {
         try {
-            console.log('fetching list from server instead')
+
             const res = await fetch(`${base_URL}/`,
                 {
                     method: 'GET',
@@ -46,7 +46,6 @@ export const getDailyListService = async () => {
             if (res) {
                 const list = await res.json();
                 saveCachedListToStorage(list);
-                //console.log('now cached..', getCachedListFromStorage())
 
                 return list
 
@@ -60,7 +59,7 @@ export const getDailyListService = async () => {
 
 
         }
-        console.log('no letters found...')
+
         return ListBackUpTemp
     }
 }

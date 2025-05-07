@@ -18,9 +18,9 @@ dotenv.config();
 const jwtSecret = process.env.JWT_SECRET || '4sdhglkjdsg459jd';
 
 export async function submitWordController (req: Request, res: Response): Promise<void> {
-    console.log('in submit controller', jwtSecret)
+
 try {
-            console.log('in submit controller no user')
+
             const list = await fetchListModel();
             if (list) {
                 const { word } = req.body;
@@ -30,7 +30,7 @@ try {
                 }
                 const wordToCheck = word.toLowerCase();
                 const validatedWord = list.validWords.find(thisword => thisword.word === wordToCheck);
-                console.log('validated word is ', validatedWord);
+
                 if (validatedWord) {
                     const toReturn: SubmitWordResponse = {
                         valid: true,
@@ -79,7 +79,7 @@ export async function submitAuthController (req: Request, res: Response): Promis
 
         const userId = decoded._id;
 
-        // Fetch the current list and user
+
         const list = await fetchListModel();
         const user = await UserModel.findById(userId);
 
@@ -91,7 +91,7 @@ export async function submitAuthController (req: Request, res: Response): Promis
         const currentDaylistId = list.daylist_id;
         const { word } = req.body;
 
-        // Validate word input
+
         if (!word || typeof word !== 'string') {
             res.status(400).json({ error: 'Invalid word input' });
             return;
@@ -100,13 +100,13 @@ export async function submitAuthController (req: Request, res: Response): Promis
         const wordToCheck = word.toLowerCase();
         const validatedWord = list.validWords.find(thisword => thisword.word === wordToCheck);
 
-        // Response for invalid word
+
         if (!validatedWord) {
             res.status(200).json({ valid: false });
             return;
         }
 
-        // Ensure user history is initialized
+
         if (!user.history) {
             user.history = [];
         }
@@ -135,12 +135,12 @@ export async function submitAuthController (req: Request, res: Response): Promis
 
         // Save the updated user object
         await user.save();
-        console.log('Updated user:', user.history[user.history.length-1]);
+
 
         // Return the updated information as part of the response
         res.status(200).json({
             valid: true,
-            guessedWord: validatedWord
+            guessedWord: validatedWord;
         });
 
     } catch (e) {

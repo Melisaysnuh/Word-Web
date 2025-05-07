@@ -53,10 +53,10 @@ export const registerController = async (req: Request, res: Response): Promise<v
            jwtSecret,
            { expiresIn: '48h' }
        );
-       console.log(`user ${user.email} registered`)
+       console.log(`user ${user.firstName} registered`)
        res.status(201).json({
            user: user,
-           message: `${user.email} was successfully registered`,
+           message: `${user.firstName} was successfully registered`,
            token
        });
    }
@@ -87,7 +87,7 @@ export const loginController = async (req: Request, res: Response): Promise<void
 
         }
         if (!process.env.JWT_SECRET) {
-            console.log("No JWT Secret Found!");
+            console.error("No JWT Secret Found!");
             res.status(500).json({ error: 'JWT_SECRET is not defined in environment variables' });
             ;
         }
