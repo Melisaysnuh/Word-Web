@@ -7,8 +7,8 @@
     "types": ["node", "vitest"],
 
     /* Paths and Compilation */
-    "rootDir": "./src",      /* 👈 Ensures TypeScript treats `src/` as the root */
-    "outDir": "./dist",      /* 👈 Ensures compiled files go to `dist/` */
+    "rootDir": "./src",
+    "outDir": "./dist",
 
     /* Interop Constraints */
     "esModuleInterop": true,

@@ -97,8 +97,8 @@ export const loginController = async (req: Request, res: Response): Promise<void
             if (!isMatch) {
                 res.status(401).json({ error: 'Invalid credentials' });
             }
-
-            const token = jwt.sign({ _id: user._id, email: user.email, firstName: user.firstName, history: user.history }, jwtSecret, { expiresIn: '1d' });
+            const truncatedHist = user.history.slice(user.history.length - 4, user.history.length)
+            const token = jwt.sign({ _id: user._id, email: user.email, firstName: user.firstName, history: truncatedHist }, jwtSecret, { expiresIn: '1d' });
 
             const today = await fetchListModel();
             if (user.history && today) {
@@ -115,13 +115,14 @@ export const loginController = async (req: Request, res: Response): Promise<void
             }
 
 
+
             res.status(200).json({
                 token,
                 user: {
                     _id: user._id,
                     email: user.email,
                     firstName: user.firstName,
-                    history: user.history
+                    history: truncatedHist
 
                 }
             });

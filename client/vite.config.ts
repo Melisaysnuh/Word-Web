@@ -2,6 +2,8 @@ import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
+  server: {
+    proxy: { '/api': 'http://localhost:3000' }},
   plugins: [
     react({
       jsxRuntime: 'automatic',
@@ -25,4 +27,5 @@ export default defineConfig({
     },
     dedupe: ['react', 'react-dom'], // prevent duplicate React issues
   },
+
 });

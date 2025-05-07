@@ -2,14 +2,14 @@ import request from 'supertest';
 import { vi, describe, it, beforeEach,  expect } from 'vitest';
 import { app } from '../src/index'; // Ensure correct path
 
-// Import controllers and middleware so we can spy on them
+
 import * as fetchController from '../src/controllers/fetch-controller.js';
 import * as submitController from '../src/controllers/submit-controller.js';
 import * as authController from '../src/controllers/auth-controller.js';
-//import * as authMiddleware from '../src/middleware/authMiddleware.js';
+import * as authMiddleware from '../src/middleware/authMiddleware.js';
 
 describe('Express API Endpoints', () => {
-  /*   beforeEach(() => {
+     beforeEach(() => {
         vi.restoreAllMocks(); // Reset spies before each test
     });
 
@@ -102,5 +102,5 @@ describe('Express API Endpoints', () => {
         expect(response.body).toEqual({ message: 'Delayed Response' });
 
         expect(slowSpy).toHaveBeenCalledTimes(1);
-    }); */
+    });
 });

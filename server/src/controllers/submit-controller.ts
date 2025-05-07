@@ -14,10 +14,11 @@ const now = format(new Date(), "yyyy_MM_dd");
 
 
 dotenv.config();
-
+// todo fix:
 const jwtSecret = process.env.JWT_SECRET || '4sdhglkjdsg459jd';
 
 export async function submitWordController (req: Request, res: Response): Promise<void> {
+    console.log('in submit controller', jwtSecret)
 try {
             console.log('in submit controller no user')
             const list = await fetchListModel();
@@ -139,8 +140,7 @@ export async function submitAuthController (req: Request, res: Response): Promis
         // Return the updated information as part of the response
         res.status(200).json({
             valid: true,
-            guessedWord: validatedWord,
-            history: dayEntry
+            guessedWord: validatedWord
         });
 
     } catch (e) {

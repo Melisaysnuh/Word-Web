@@ -16,7 +16,6 @@ export const validateWord = async (word: string): Promise<boolean> => {
         const res = await fetch(`${url}${word}${apiKey}`);
         if (res.ok) {
             const data = await res.json();
-           //console.log('returning data: ', data);
             if (
                 data && typeof data[0] === 'object' &&
                 data[0].meta.offensive === false &&

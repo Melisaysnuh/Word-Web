@@ -11,6 +11,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    console.log('in middleware...')
 
     const authHeaders = req.headers['authorization'];
     if (authHeaders) {
@@ -18,6 +19,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
             const parts = authHeaders.split(' ');
             if (parts.length !== 2 || parts[0] !== 'Bearer' || !parts[1]) {
                 res.status(401).json({ message: 'Malformed auth header' });
+                return;
             }
             const token = parts[1];
 
@@ -31,19 +33,23 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
                 }
                 else {
                     res.status(404).json({ message: "User not found" });
+                    return;
                 }
             } catch (error) {
 
                 if (error instanceof Error) {
                     if (error.name === "TokenExpiredError") {
                         res.status(401).json({ message: "Token has expired" });
+                        return;
                     } else if (error.name === "JsonWebTokenError") {
                         res.status(401).json({ message: "Invalid token" });
+                        return;
                     }
                 }
 
                 else {
                     res.status(500).json({ message: "Internal server error" });
+                    return;
                 }
             }
 
@@ -51,10 +57,12 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         }
         else {
             res.status(500).json({ message: "JWT Secret not found" })
+            return;
         }
     }
     else {
         res.status(401).json({message: "Missing Auth"})
+        return;
     }
 
 
