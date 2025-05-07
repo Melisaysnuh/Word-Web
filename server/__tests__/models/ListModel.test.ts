@@ -114,7 +114,7 @@ describe('storeListModel', () => {
         await storeListModel();
 
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith("❌ Error storing day list:",
+        expect(consoleErrorSpy).toHaveBeenCalledWith("Error storing day list:",
             new Error("Database error"));
     });
 });

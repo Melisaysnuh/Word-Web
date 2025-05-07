@@ -20619,7 +20619,6 @@ bespouse
 bespoused
 bespouses
 bespousing
-bespout
 bespouted
 bespouting
 bespouts
@@ -123591,7 +123590,6 @@ kuta
 kutas
 kutch
 kutcha
-kutches
 kuti
 kutis
 kutus
@@ -215538,7 +215536,6 @@ southeasters
 southeasts
 southeastward
 southeastwards
-southed
 southered
 southering
 southerlies
