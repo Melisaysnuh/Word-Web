@@ -9,7 +9,7 @@ export async function connectDB () {
             statusCode: 200,
         };
     } catch (e) {
-        console.log('internal server error: ', e)
+        console.error('internal server error: ', e)
         return {
             statusCode: 500,
             message: 'internal server error.'

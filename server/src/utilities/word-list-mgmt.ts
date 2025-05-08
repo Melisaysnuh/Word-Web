@@ -9,32 +9,49 @@ export const getArray = async (num: number, num2: number) => {
     return mainWordArray
 }
 
-export const validateWord = async (word: string): Promise<boolean> => {
-    try {
-        const url = process.env.API_BASE_URL;
+export const validateWord = async (word: string): Promise<boolean | null> => {
+    const url = process.env.API_BASE_URL;
+    if (url) {
         const apiKey = process.env.API_KEY;
-        const res = await fetch(`${url}${word}${apiKey}`);
-        if (res.ok) {
-            const data = await res.json();
-            if (
-                data && typeof data[0] === 'object' &&
-                data[0].meta.offensive === false &&
-            data[0].fl !== 'abbreviation' &&
-                data[0].fl !== 'Latin phrase' &&
-                data[0].fl !== 'Spanish phrase' ) {
-                return true;
+        if (apiKey) {
+            try {
+
+                const res = await fetch(`${url}${word}${apiKey}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (
+                        data && typeof data[0] === 'object' &&
+                        data[0].meta.offensive === false &&
+                        data[0].fl !== 'abbreviation' &&
+                        data[0].fl !== 'Latin phrase' &&
+                        data[0].fl !== 'Spanish phrase') {
+                        return true;
+                    }
+                    else {
+                        removeInvalidWord(word);
+                        return false;
+                    }
+                }
+                else throw new Error(`Response: ${res.status}`);
             }
-            else {
-                removeInvalidWord(word);
-                return false;
+            catch (e) {
+                console.error('error validating word in api', e)
+                throw e;
             }
+
+
         }
-        else throw new Error(`Response: ${res.status}`);
+        else {
+            console.error('Error fetching api key from .env');
+            return null;
+        }
     }
-    catch (e) {
-        console.error('error validating word in api', e)
-        throw e;
+    else {
+        console.error('Error fetching URL from .env');
+        return null;
     }
+
+
 }
 export const removeInvalidWord = async (wordToRemove: string): Promise<void> => {
     try {
@@ -63,7 +80,7 @@ export async function getRandomWord () {
         const candidate: string = longArray[rand];
         const regex = /^(?!.*(.).*\1)[a-z]+$/;
         if (candidate.length === 7 && regex.test(candidate)) {
-            const result: boolean = await validateWord(candidate);
+            const result: boolean | null = await validateWord(candidate);
             if (result)
                 return candidate
         }

@@ -6,15 +6,16 @@ import loginRoute from './routes/loginRoute.js';
 import registerRoute from './routes/registerRoute.js';
 import { submitAuthRoute } from './routes/submitAuthRoute.js';
 import submitRoute from './routes/submitRoute.js';
+import { loadLettersController } from './controllers/fetch-controller.js';
 
-export function createApp ({
-    loadLettersController,
-    loginController,
-    registerController,
-    submitAuthController,
-    submitWordController,
-    authMiddleware
-}) {
+export function createApp (args: any) {
+    const {
+        loginController,
+        registerController,
+        submitAuthController,
+        submitWordController,
+        authMiddleware
+    } = args
     const app = express();
 
     app.use(cors({

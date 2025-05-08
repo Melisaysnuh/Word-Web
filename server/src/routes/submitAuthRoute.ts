@@ -1,8 +1,8 @@
 
 import express, { RequestHandler } from 'express';
 import { ParsedQs } from 'qs';
-import { authMiddleware } from '../middleware/authMiddleware';
-export function submitAuthRoute (submitAuthController: RequestHandler<{}, any, any, ParsedQs, Record<string, any>>, authMiddleware: any) {
+
+export function submitAuthRoute (submitAuthController: RequestHandler<{}, any, any, ParsedQs, Record<string, any>>, authMiddleware: RequestHandler<any>) {
     const router = express.Router();
 
     router.post('/submitauth', authMiddleware, submitAuthController);
