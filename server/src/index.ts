@@ -13,7 +13,7 @@ import { authMiddleware } from './middleware/authMiddleware.js';
 import dotenv from 'dotenv';
 dotenv.config()
 
-const port = process.env.PORT;
+const port = process.env.DEV_PORT;
 if (!port) {console.error('Port not found from .env')}
 
 export const app = createApp({

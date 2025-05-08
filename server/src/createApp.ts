@@ -7,6 +7,8 @@ import registerRoute from './routes/registerRoute.js';
 import { submitAuthRoute } from './routes/submitAuthRoute.js';
 import submitRoute from './routes/submitRoute.js';
 import { loadLettersController } from './controllers/fetch-controller.js';
+import dotenv from 'dotenv';
+dotenv.config()
 
 export function createApp (args: any) {
     const {
@@ -18,8 +20,13 @@ export function createApp (args: any) {
     } = args
     const app = express();
 
+    const clientPort = process.env.CLIENT_PORT
+    if (!clientPort) {
+        console.error('error loading client port from .env')
+    }
+
     app.use(cors({
-        origin: 'http://localhost:5173',
+        origin: `http://localhost:${clientPort}`,
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],

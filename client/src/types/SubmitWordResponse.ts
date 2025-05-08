@@ -1,8 +1,8 @@
-import { HistoryI } from "./User";
+import {  UserI } from "./User";
 import WordObj from "./WordObj";
 
 export default interface SubmitWordResponse {
     valid: boolean;
     guessedWord?: WordObj;
-    history?: HistoryI
+    user: UserI
 }

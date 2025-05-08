@@ -1113,7 +1113,6 @@ accipiters
 accipitral
 accipitrine
 accipitrines
-accite
 accited
 accites
 acciting
@@ -9841,7 +9840,6 @@ apartmental
 apartments
 apartness
 apartnesses
-apatetic
 apathaton
 apathatons
 apathetic
@@ -31543,7 +31541,6 @@ capexes
 capful
 capfuls
 caphs
-capi
 capias
 capiases
 capillaceous
@@ -33448,7 +33445,6 @@ catcons
 cate
 catecheses
 catechesis
-catechetic
 catechetical
 catechetically
 catechetics
@@ -33607,7 +33603,6 @@ cathedras
 cathedratic
 cathepsin
 cathepsins
-catheptic
 catheter
 catheterisation
 catheterise
@@ -33729,7 +33724,6 @@ cattalos
 catted
 catteries
 cattery
-cattie
 cattier
 catties
 cattiest
@@ -35452,7 +35446,6 @@ chaparrals
 chapati
 chapaties
 chapatis
-chapatti
 chapatties
 chapattis
 chapbook
@@ -35874,7 +35867,6 @@ chattering
 chatterings
 chatters
 chattery
-chatti
 chattier
 chatties
 chattiest
@@ -36017,7 +36009,6 @@ chechakoes
 chechakos
 chechaquo
 chechaquos
-chechia
 chechias
 check
 checkable
@@ -70042,7 +70033,6 @@ ectases
 ectasia
 ectasias
 ectasis
-ectatic
 ecthlipses
 ecthlipsis
 ecthyma
@@ -75645,8 +75635,6 @@ epithalamic
 epithalamion
 epithalamium
 epithalamiums
-epitheca
-epithecae
 epithelia
 epithelial
 epithelialise
@@ -99329,7 +99317,6 @@ hairworms
 hairy
 hairyback
 hairybacks
-haith
 haj
 hajes
 haji
@@ -100740,7 +100727,6 @@ hatchery
 hatches
 hatchet
 hatchets
-hatchettite
 hatchettites
 hatchety
 hatching
@@ -102478,7 +102464,6 @@ hepatectomised
 hepatectomized
 hepatectomy
 hepatica
-hepaticae
 hepatical
 hepaticas
 hepaticological
@@ -102493,7 +102478,6 @@ hepatise
 hepatised
 hepatises
 hepatising
-hepatite
 hepatites
 hepatitides
 hepatitis
@@ -103218,7 +103202,6 @@ hetmans
 hetmanship
 hetmanships
 hets
-hettie
 hetties
 heuch
 heuchera
@@ -103442,9 +103425,7 @@ hibernizing
 hibiscus
 hibiscuses
 hic
-hicatee
 hicatees
-hiccatee
 hiccatees
 hiccough
 hiccoughed
@@ -103973,7 +103954,6 @@ hipster
 hipsterism
 hipsterisms
 hipsters
-hipt
 hirable
 hiragana
 hiraganas
@@ -104206,7 +104186,6 @@ hitchiest
 hitchily
 hitching
 hitchy
-hithe
 hither
 hithered
 hithering
@@ -108834,7 +108813,6 @@ ichnology
 ichor
 ichorous
 ichors
-ichthic
 ichthyic
 ichthyocolla
 ichthyocollas
@@ -108983,7 +108961,6 @@ icterine
 icteritious
 icterus
 icteruses
-ictic
 ictus
 ictuses
 icy
@@ -112212,7 +112189,6 @@ indapamides
 indart
 indarted
 indarting
-indarts
 indebted
 indebtedness
 indebtednesses
@@ -168018,7 +167994,6 @@ pettedness
 pettednesses
 petter
 petters
-petti
 pettichaps
 pettichapses
 petticoat
@@ -168103,7 +168078,6 @@ phacolite
 phacolites
 phacolith
 phacoliths
-phaeic
 phaeism
 phaeisms
 phaelonion
@@ -171226,7 +171200,6 @@ pioye
 pioyes
 pioys
 pip
-pipa
 pipage
 pipages
 pipal
@@ -171559,7 +171532,6 @@ pitied
 pitier
 pitiers
 pities
-pitieth
 pitiful
 pitifuller
 pitifullest
@@ -171581,7 +171553,6 @@ pitprops
 pits
 pitsaw
 pitsaws
-pitta
 pittance
 pittances
 pittas
@@ -171593,7 +171564,6 @@ pittering
 pitters
 pitting
 pittings
-pittite
 pittites
 pittosporum
 pittosporums
@@ -208331,7 +208301,6 @@ shipbuilding
 shipbuildings
 shipfitter
 shipfitters
-shipful
 shipfuls
 shiplap
 shiplapped
@@ -229639,7 +229608,6 @@ tahsildar
 tahsildars
 tahsils
 tai
-taiaha
 taiahas
 taiga
 taigas
@@ -230347,7 +230315,6 @@ tapestries
 tapestry
 tapestrying
 tapeta
-tapeti
 tapetis
 tapetum
 tapeworm
@@ -230389,7 +230356,6 @@ tapper
 tappers
 tappet
 tappets
-tappice
 tappiced
 tappices
 tappicing
@@ -231071,7 +231037,6 @@ teachers
 teachership
 teacherships
 teaches
-teachie
 teaching
 teachings
 teachless
@@ -231321,7 +231286,6 @@ tectibranch
 tectibranchiate
 tectibranchs
 tectiform
-tectite
 tectites
 tectonic
 tectonically
@@ -233451,7 +233415,6 @@ thegither
 thegn
 thegnly
 thegns
-theic
 theics
 thein
 theine
@@ -235052,13 +235015,10 @@ tibouchinas
 tic
 tical
 ticals
-ticca
 ticced
 ticcing
-tice
 ticed
 tices
-tich
 tiches
 tichier
 tichiest
@@ -235706,7 +235666,6 @@ tipoff
 tipoffs
 tippable
 tipped
-tippee
 tippees
 tipper
 tippers
@@ -235844,7 +235803,6 @@ titarakura
 titarakuras
 titbit
 titbits
-titch
 titches
 titchier
 titchiest
@@ -237060,7 +237018,6 @@ torsion
 torsional
 torsionally
 torsions
-torsive
 torsk
 torsks
 torso

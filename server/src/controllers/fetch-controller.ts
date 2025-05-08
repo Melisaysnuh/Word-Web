@@ -12,7 +12,7 @@ export async function loadLettersController (req: Request, res:Response) {
                 list,
             });
         } else {
-            res.status(404).json({ message: "List not found" });
+            res.status(405).json({ message: "List not found" });
         }
 
     }

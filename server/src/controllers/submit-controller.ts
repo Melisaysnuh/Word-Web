@@ -1,6 +1,6 @@
 import { fetchListModel } from '../Models/ListModel.js';
 import { Request, Response } from 'express';
-import jwt, { Secret } from 'jsonwebtoken';
+import jwt, { JwtPayload, Secret } from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import UserModel from '../Models/UserModel.js';
 import { HistoryI, UserI } from '../types/User';
@@ -73,12 +73,10 @@ if (jwtSecret) {
 
         // checking for token
         try {
-           const decoded = jwt.verify(token, jwtSecret);
-            console.log('decoded is...', decoded)
-
-            const userId = '828hh'
+            const decoded: JwtPayload | UserI = jwt.verify(token, jwtSecret);
+const {_id} = decoded
             const list = await fetchListModel();
-            const user = await UserModel.findById(userId);
+            const user = await UserModel.findById(_id);
 
             if (!user || !list || !(list instanceof dayModel)) {
                 res.status(500).json({ error: 'Error fetching list or user from auth submit' });

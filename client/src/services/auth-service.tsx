@@ -2,7 +2,7 @@ import { LoginDataI, RegisterDataI, UserI } from "../types/User";
 import { jwtDecode } from "jwt-decode";
 
 // Move to environment variables
-const AUTH_URL = "http://localhost:3000/auth";
+const AUTH_URL = "http://localhost:3000/";
 
 export interface AuthUserResponse {
   token?: string;
@@ -34,7 +34,7 @@ export const getStoredUser = (): UserI | null => {
 
 export const register = async (userData: RegisterDataI): Promise<AuthUserResponse | undefined> => {
   try {
-    const userResponse = await fetchAPI(`${AUTH_URL}/register`, {
+    const userResponse = await fetchAPI(`${AUTH_URL}/auth/register`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -53,7 +53,7 @@ export const register = async (userData: RegisterDataI): Promise<AuthUserRespons
 
 export const login = async (userData: LoginDataI): Promise<AuthUserResponse> => {
   try {
-    const userResponse = await fetchAPI(`${AUTH_URL}/login`, {
+    const userResponse = await fetchAPI(`${AUTH_URL}auth/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

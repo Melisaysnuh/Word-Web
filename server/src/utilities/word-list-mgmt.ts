@@ -10,15 +10,15 @@ export const getArray = async (num: number, num2: number) => {
 }
 
 export const validateWord = async (word: string): Promise<boolean | null> => {
-    const url = process.env.API_BASE_URL;
+    const url = process.env.WEBSTER_API_URL;
     if (url) {
-        const apiKey = process.env.API_KEY;
+        const apiKey = process.env.WEBSTER_API_KEY;
         if (apiKey) {
             try {
-
-                const res = await fetch(`${url}${word}${apiKey}`);
-                if (res.ok) {
+                const res = await fetch(`${url}${word}?key=${apiKey}`);
+                  if (res.ok) {
                     const data = await res.json();
+
                     if (
                         data && typeof data[0] === 'object' &&
                         data[0].meta.offensive === false &&
