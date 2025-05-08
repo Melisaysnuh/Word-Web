@@ -73,7 +73,7 @@ if (jwtSecret) {
 
         // checking for token
         try {
-            const decoded: JwtPayload | UserI = jwt.verify(token, jwtSecret);
+            const decoded = jwt.verify(token, jwtSecret) as UserI;
 const {_id} = decoded
             const list = await fetchListModel();
             const user = await UserModel.findById(_id);

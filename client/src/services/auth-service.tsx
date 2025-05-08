@@ -1,8 +1,12 @@
 import { LoginDataI, RegisterDataI, UserI } from "../types/User";
 import { jwtDecode } from "jwt-decode";
+import dotenv from 'dotenv';
+
+dotenv.config()
+
 
 // Move to environment variables
-const AUTH_URL = "http://localhost:3000/";
+const AUTH_URL = process.env.BASE_URL;
 
 export interface AuthUserResponse {
   token?: string;

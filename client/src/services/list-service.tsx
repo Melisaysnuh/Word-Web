@@ -1,9 +1,12 @@
 import { format } from "date-fns";
 import Daylist from "../types/Daylist";
 import { ListBackUpTemp } from "./list-backup";
+import dotenv from 'dotenv';
 
+dotenv.config()
 
-export const base_URL = 'http://localhost:3000'
+const port = process.env.BACKEND_URL
+export const base_URL = `http://localhost:${port}`
 
 const getCachedListFromStorage = () => {
     const cachedData = localStorage.getItem('cachedDailyList');
