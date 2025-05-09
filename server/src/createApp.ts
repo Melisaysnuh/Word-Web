@@ -32,9 +32,13 @@ export function createApp (args: any) {
 
     app.use(cors({
         origin: function (origin, callback) {
-            if (!origin || allowedOrigins.includes(origin)) {
+            if (!origin) {
+                // Allow non-browser requests (e.g., Postman, server-to-server)
+                callback(null, true);
+            } else if (allowedOrigins.includes(origin)) {
                 callback(null, true);
             } else {
+                console.warn(`Blocked CORS origin: ${origin}`);
                 callback(new Error('Not allowed by CORS'));
             }
         },
@@ -42,6 +46,7 @@ export function createApp (args: any) {
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     }));
+
 
     app.options('*', cors());
     app.use(express.json());
