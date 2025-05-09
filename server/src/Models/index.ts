@@ -11,7 +11,9 @@ const url = process.env.DATABASE_URL;
 export async function connectDB () {
    if (url) {
        try {
-           await mongoose.connect(url);
+           await mongoose.connect(url, {
+               dbName: 'wordweb',
+           });
            console.log('successfully connected in model');
 
            return {
