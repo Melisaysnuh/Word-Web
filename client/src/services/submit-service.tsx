@@ -1,4 +1,3 @@
-import { base_URL } from "./list-service";
 import WordObj from "../types/WordObj";
 import SubmitWordResponse from "../types/SubmitWordResponse";
 import { getToken } from "./auth-service";
@@ -11,7 +10,7 @@ import { getToken } from "./auth-service";
 
 
 
-
+const base_URL = import.meta.env.BACKEND_URL
 
 export const checkWord = async (
     wordToCheck: string

@@ -1,12 +1,10 @@
 import { LoginDataI, RegisterDataI, UserI } from "../types/User";
 import { jwtDecode } from "jwt-decode";
-import dotenv from 'dotenv';
 
-dotenv.config()
 
 
 // Move to environment variables
-const AUTH_URL = process.env.BASE_URL;
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 export interface AuthUserResponse {
   token?: string;
@@ -38,7 +36,7 @@ export const getStoredUser = (): UserI | null => {
 
 export const register = async (userData: RegisterDataI): Promise<AuthUserResponse | undefined> => {
   try {
-    const userResponse = await fetchAPI(`${AUTH_URL}/auth/register`, {
+    const userResponse = await fetchAPI(`${apiUrl}/auth/register`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -57,7 +55,7 @@ export const register = async (userData: RegisterDataI): Promise<AuthUserRespons
 
 export const login = async (userData: LoginDataI): Promise<AuthUserResponse> => {
   try {
-    const userResponse = await fetchAPI(`${AUTH_URL}auth/login`, {
+    const userResponse = await fetchAPI(`${apiUrl}auth/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },
@@ -116,7 +114,7 @@ export const refreshUserData = async (): Promise<void> => {
   if (!token || isTokenExpired()) return;
 
   try {
-    const response = await fetch(`${AUTH_URL}/me`, {
+    const response = await fetch(`${apiUrl}/me`, {
       method: "GET",
       headers: { Authorization: `Bearer ${token}` },
     });

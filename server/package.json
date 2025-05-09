@@ -7,7 +7,6 @@
     "coverage": "vitest --coverage",
     "test": "vitest ",
     "build": "tsc",
-    "this": "tsc && node dist/utilities/daylist-constructor.js",
     "start": "tsc && node dist/index.js",
     "dev": "concurrently \"tsc -w\" \"nodemon dist/index.js\""
   },

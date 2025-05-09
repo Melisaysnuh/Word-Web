@@ -13,8 +13,8 @@ import { authMiddleware } from './middleware/authMiddleware.js';
 import dotenv from 'dotenv';
 dotenv.config()
 
-const port = process.env.DEV_PORT;
-if (!port) {console.error('Port not found from .env')}
+const url = process.env.DEV_BACKEND_URL || process.env.PROD_BACKEND_URL;
+if (!url) {console.error('Port not found from .env')}
 
 export const app = createApp({
     loadLettersController,
@@ -24,11 +24,11 @@ export const app = createApp({
     submitWordController,
     authMiddleware
 });
-
+const port = 3000;
 (async () => {
     await connectDB();
     console.log('DB Connected from server.');
     app.listen(port, () => {
-        console.log(`The server is running at http://localhost:${port}`);
+        console.log(`The server is running at ${url}`);
     });
 })();

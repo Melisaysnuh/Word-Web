@@ -1,21 +1,34 @@
 import { Schema } from 'mongoose';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const url = process.env.DATABASE_URL;
+
 export async function connectDB () {
-    try {
-        await mongoose.connect('mongodb://localhost:27017/wordweb');
-        console.log('successfully connected in model');
+   if (url) {
+       try {
+           await mongoose.connect(url);
+           console.log('successfully connected in model');
 
-        return {
-            statusCode: 200,
-        };
-    } catch (e) {
-        console.error('internal server error: ', e)
-        return {
-            statusCode: 500,
-            message: 'internal server error.'
+           return {
+               statusCode: 200,
+           };
+       } catch (e) {
+           console.error('internal server error: ', e)
+           return {
+               statusCode: 500,
+               message: 'internal server error.'
 
-        };
+           };
+       }
+   }
+   else {
+    return {
+        statusCod: 500,
+        message: 'error retrieving url from .env'
     }
+   }
 }
 
 const daySchema = new Schema ({
