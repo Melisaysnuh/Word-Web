@@ -8,6 +8,8 @@ import { submitAuthRoute } from './routes/submitAuthRoute.js';
 import submitRoute from './routes/submitRoute.js';
 import { loadLettersController } from './controllers/fetch-controller.js';
 import dotenv from 'dotenv';
+import storeListRoute from './routes/storeListRoute.js';
+import { storeListController } from './controllers/store-controller.js';
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
@@ -40,6 +42,7 @@ export function createApp (args: any) {
     app.use('/auth/login', loginRoute(loginController));
     app.use('/auth/register', registerRoute(registerController));
     app.use('/submit', submitRoute(submitWordController));
+    app.use('/store', storeListRoute(storeListController));
     app.use('/submitauth', submitAuthRoute(submitAuthController, authMiddleware));
 
     return app;
