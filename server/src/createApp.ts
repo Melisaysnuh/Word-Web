@@ -8,8 +8,6 @@ import { submitAuthRoute } from './routes/submitAuthRoute.js';
 import submitRoute from './routes/submitRoute.js';
 import { loadLettersController } from './controllers/fetch-controller.js';
 import dotenv from 'dotenv';
-import storeListRoute from './routes/storeListRoute.js';
-import { storeListController } from './controllers/store-controller.js';
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
