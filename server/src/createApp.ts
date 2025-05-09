@@ -42,7 +42,6 @@ export function createApp (args: any) {
     app.use('/auth/login', loginRoute(loginController));
     app.use('/auth/register', registerRoute(registerController));
     app.use('/submit', submitRoute(submitWordController));
-    app.use('/store', storeListRoute(storeListController));
     app.use('/submitauth', submitAuthRoute(submitAuthController, authMiddleware));
 
     return app;

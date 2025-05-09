@@ -1,4 +1,4 @@
-import { Daylist } from '../types/Daylist.js';
+import {Daylist} from '../storeListModel.js'
 import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints } from './utilities.js';
 import { getArray, getRandomWord, validWordArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';

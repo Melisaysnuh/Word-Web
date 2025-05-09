@@ -71253,9 +71253,7 @@ elegiacs
 elegiast
 elegiasts
 elegies
-elegise
 elegised
-elegises
 elegising
 elegist
 elegists
@@ -72170,7 +72168,6 @@ emirates
 emirs
 emissaries
 emissary
-emissile
 emission
 emissions
 emissive
@@ -92083,7 +92080,6 @@ gelignites
 gellant
 gellants
 gelled
-gellies
 gelliflowre
 gelliflowres
 gelling
@@ -92107,7 +92103,6 @@ gemclips
 gemeinschaft
 gemeinschaften
 gemeinschafts
-gemels
 gemfibrozil
 gemfibrozils
 gemfishes
@@ -93290,7 +93285,6 @@ gildsmen
 gildswoman
 gildswomen
 gilets
-gilgies
 gill
 gillaroo
 gillaroos
@@ -93331,7 +93325,6 @@ gillyvor
 gillyvors
 gilpey
 gilpeys
-gilpies
 gilpy
 gilravage
 gilravaged
@@ -93384,15 +93377,12 @@ gimmickries
 gimmickry
 gimmicks
 gimmicky
-gimmies
 gimmor
 gimmors
-gimp
 gimped
 gimpier
 gimpiest
 gimping
-gimps
 gimpy
 gin
 gingeley
@@ -93558,12 +93548,10 @@ girts
 gis
 gisarme
 gisarmes
-gism
 gismo
 gismologies
 gismology
 gismos
-gisms
 gist
 gists
 git
@@ -93974,7 +93962,6 @@ gleety
 gleg
 glegger
 glegly
-gleis
 gleisation
 gleisations
 gleization
@@ -94035,7 +94022,6 @@ glike
 glikes
 glim
 glimed
-glimes
 glimmer
 glimmered
 glimmering
@@ -109442,8 +109428,6 @@ illimitations
 illimited
 illinium
 illiniums
-illipe
-illipes
 illiquation
 illiquations
 illiquid
@@ -110603,10 +110587,8 @@ impetus
 impetuses
 imphee
 imphees
-impi
 impictured
 impierceable
-impies
 impieties
 impiety
 impignorate
@@ -110630,7 +110612,6 @@ impious
 impiously
 impiousness
 impiousnesses
-impis
 impish
 impishly
 impishness
@@ -126212,7 +126193,6 @@ legger
 leggers
 leggier
 leggiero
-leggies
 leggiest
 leggin
 legginess
@@ -126221,8 +126201,6 @@ legging
 legginged
 leggings
 leggins
-leggism
-leggisms
 leggy
 leghorns
 legibilities
@@ -126397,8 +126375,6 @@ lekythus
 leman
 lemans
 lemed
-lemels
-lemes
 lemma
 lemmas
 lemmata
@@ -127344,7 +127320,6 @@ liefs
 liege
 liegedom
 liegedoms
-liegeless
 liegeman
 liegemen
 lieger
@@ -127466,7 +127441,6 @@ ligers
 ligged
 ligger
 liggers
-ligges
 light
 lightbulb
 lightbulbs
@@ -127698,7 +127672,6 @@ limeades
 limed
 limekiln
 limekilns
-limeless
 limelight
 limelighted
 limelighter
@@ -128213,9 +128186,7 @@ lipper
 lippered
 lippering
 lippers
-lippie
 lippier
-lippies
 lippiest
 lippiness
 lippinesses
@@ -135801,7 +135772,6 @@ meloxicam
 meloxicams
 melphalan
 melphalans
-mels
 melt
 meltabilities
 meltability
@@ -136466,9 +136436,7 @@ mesdames
 mesdemoiselles
 meseemed
 meseems
-mesel
 meseled
-mesels
 mesembryanthemum
 mesembryanthemums
 mesencephala
@@ -137424,7 +137392,6 @@ meved
 meves
 meving
 mevrou
-mevrous
 mew
 mewed
 mewing
@@ -138323,7 +138290,6 @@ midwives
 midwiving
 midyear
 midyears
-mielies
 mien
 miens
 mieve
@@ -138343,8 +138309,6 @@ miffs
 miffy
 mifty
 mig
-miggles
-miggs
 might
 mightest
 mightful
@@ -138383,7 +138347,6 @@ migrations
 migrator
 migrators
 migratory
-migs
 miha
 mihas
 mihi
@@ -138621,7 +138584,6 @@ millieme
 milliemes
 millier
 milliers
-millies
 milligal
 milligals
 milligram
@@ -139230,7 +139192,6 @@ mioses
 miosis
 miotic
 miotics
-mips
 miquelet
 miquelets
 mir
@@ -140311,8 +140272,6 @@ misleekes
 misleeking
 misletoe
 misletoes
-mislie
-mislies
 mislight
 mislighted
 mislighting
@@ -140690,12 +140649,8 @@ misseeing
 misseeming
 misseemings
 misseen
-missel
-missell
 misselling
 missellings
-missells
-missels
 missend
 missending
 missends
@@ -170725,7 +170680,6 @@ piling
 pilings
 pilinut
 pilinuts
-pilis
 pill
 pillage
 pillaged
@@ -170749,8 +170703,6 @@ pillhead
 pillheads
 pillicock
 pillicocks
-pillie
-pillies
 pilling
 pillings
 pillion
@@ -171261,7 +171213,6 @@ pipiwharauroa
 pipiwharauroas
 pipkin
 pipkins
-pipless
 pipped
 pippiest
 pipsissewa
@@ -172729,10 +172680,8 @@ plighters
 plightful
 plighting
 plights
-plim
 plimmed
 plimming
-plims
 plimsol
 plimsole
 plimsoles
@@ -181918,8 +181867,6 @@ psammophytes
 psammophytic
 pschent
 pschents
-psellism
-psellisms
 psellismus
 psellismuses
 psephism
@@ -205175,13 +205122,11 @@ seelings
 seely
 seem
 seemed
-seemelesse
 seeming
 seemingly
 seemingness
 seemingnesses
 seemings
-seemless
 seemlier
 seemliest
 seemlihead
@@ -210114,9 +210059,7 @@ similarly
 similative
 simile
 similes
-similise
 similised
-similises
 similising
 similitude
 similitudes
@@ -210166,7 +210109,6 @@ simoon
 simoons
 simorg
 simorgs
-simp
 simpai
 simpais
 simpatico
@@ -210191,8 +210133,6 @@ simplenesses
 simpler
 simplers
 simples
-simplesse
-simplesses
 simplest
 simpleton
 simpletons
@@ -210227,7 +210167,6 @@ simplistic
 simplistically
 simplists
 simply
-simps
 sims
 simul
 simulacra
@@ -210538,9 +210477,7 @@ sippers
 sippet
 sippets
 sipping
-sipple
 sippled
-sipples
 sippling
 sippy
 sips
@@ -212088,9 +212025,7 @@ slipcovering
 slipcovers
 slipdress
 slipdresses
-slipe
 sliped
-slipes
 slipform
 slipformed
 slipforming
@@ -212098,7 +212033,6 @@ slipforms
 sliping
 slipknot
 slipknots
-slipless
 slipnoose
 slipnooses
 slipout
@@ -212724,7 +212658,6 @@ smelled
 smeller
 smellers
 smellier
-smellies
 smelliest
 smelliness
 smellinesses
@@ -216498,10 +216431,8 @@ speered
 speering
 speerings
 speers
-speil
 speiled
 speiling
-speils
 speir
 speired
 speiring
@@ -217031,8 +216962,6 @@ spilosites
 spilt
 spilth
 spilths
-spim
-spims
 spin
 spina
 spinacene
@@ -251077,7 +251006,6 @@ upwelling
 upwellings
 upwells
 upwent
-upwhirl
 upwhirled
 upwhirling
 upwhirls
