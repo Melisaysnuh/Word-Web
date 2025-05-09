@@ -22,17 +22,27 @@ export function createApp (args: any) {
     } = args
     const app = express();
 
-    const clientPort = process.env.CLIENT_PORT
-    if (!clientPort) {
-        console.error('error loading client port from .env')
+    const clienturl= process.env.CLIENT_URL
+    const clienturl2 = process.env.CLIENT_URL_2
+    if (!clienturl) {
+        console.error('error loading client url from .env')
     }
 
+    const allowedOrigins = [clienturl, clienturl2];
+
     app.use(cors({
-        origin: `http://localhost:${clientPort}`,
+        origin: function (origin, callback) {
+            if (!origin || allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     }));
+
     app.options('*', cors());
     app.use(express.json());
 
