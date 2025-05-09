@@ -14,7 +14,7 @@ let creationPromise: Promise<Daylist | null> | null = null;
 export async function fetchListModel () {
 
     try {
-
+        console.log('fetch request received. In fetchlist model...')
         const list: Daylist | null = await dayModel.findOne({
             daylist_id: now
         });
