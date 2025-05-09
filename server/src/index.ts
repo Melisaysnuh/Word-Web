@@ -30,7 +30,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const url = process.env.BACKEND_URL || process.env.BACKEND_URL;
-if (!url) {console.error('Port not found from .env')}
+if (!url) {console.error('uRL not found from .env')}
 
 export const app = createApp({
     loadLettersController,
@@ -40,10 +40,10 @@ export const app = createApp({
     submitWordController,
     authMiddleware
 });
-const port = 3000;
+const port = process.env.PORT || 3000
 (async () => {
     await connectDB();
     app.listen(port, () => {
-        console.log(`The server is running at ${url}`);
+        console.log(`The server is running at port ${port}`);
     });
 })();
