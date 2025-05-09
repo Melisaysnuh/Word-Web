@@ -28,7 +28,12 @@ export function createApp (args: any) {
         console.error('error loading client url from .env')
     }
 
-    const allowedOrigins = [clienturl, clienturl2];
+    const allowedOrigins = [
+        'https://word-web-production.up.railway.app',
+        'http://wordwebs.de',
+        'https://wordwebs.de', // if your domain works over https too
+    ];
+
 
     app.use(cors({
         origin: function (origin, callback) {
