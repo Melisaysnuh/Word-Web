@@ -56,6 +56,7 @@ export const getDailyListService = async () => {
         }
         catch (e) {
             console.error('error getting your letters in api client, using backup', e);
+            return ListBackUpTemp
 
 
         }
