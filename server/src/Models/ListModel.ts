@@ -12,7 +12,7 @@ let creationPromise: Promise<Daylist | null> | null = null;
 
 
 export async function fetchListModel () {
-
+    console.log('now is, ', now)
     try {
         const list: Daylist | null = await dayModel.findOne({
             daylist_id: now
@@ -23,7 +23,7 @@ export async function fetchListModel () {
         }
         else {
 
-            console.error('No list created for today.');
+            console.error('No list created for', now);
             return null;
 
 
