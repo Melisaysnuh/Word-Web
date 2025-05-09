@@ -37,6 +37,7 @@ export function createApp (args: any) {
 
     app.use(cors({
         origin: function (origin, callback) {
+            console.log('origin is: ', origin)
             if (!origin) {
                 // Allow non-browser requests (e.g., Postman, server-to-server)
                 callback(null, true);
