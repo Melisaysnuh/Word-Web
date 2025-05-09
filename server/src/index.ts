@@ -29,7 +29,6 @@ export const app = createApp({
 const port = 3000;
 (async () => {
     await connectDB();
-    console.log('DB Connected from server.');
     app.listen(port, () => {
         console.log(`The server is running at ${url}`);
     });
