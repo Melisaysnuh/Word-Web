@@ -3,7 +3,7 @@ import Daylist from "../types/Daylist";
 import { ListBackUpTemp } from "./list-backup";
 
 
-const base_URL = import.meta.env.BACKEND_URL
+const base_URL = 'https://word-web-production.up.railway.app'
 
 const getCachedListFromStorage = () => {
     const cachedData = localStorage.getItem('cachedDailyList');
