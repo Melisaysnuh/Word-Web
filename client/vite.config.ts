@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   server: {
-    proxy: { '/api': 'http://localhost:3000' }},
+    proxy: { '/api': 'https://word-web-production.up.railway.app/' }},
   plugins: [
     react({
       jsxRuntime: 'automatic',
