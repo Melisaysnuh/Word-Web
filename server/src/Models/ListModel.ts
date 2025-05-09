@@ -17,6 +17,7 @@ export async function fetchListModel () {
         const list: Daylist | null = await dayModel.findOne({
             daylist_id: now
         });
+        console.log('list is', list)
         if (list) {
 
             return list;
