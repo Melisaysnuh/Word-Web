@@ -3,7 +3,8 @@ import Daylist from "../types/Daylist";
 import { ListBackUpTemp } from "./list-backup";
 
 
-const base_URL = import.meta.env.BACKEND_URL
+
+const base_URL = import.meta.env.BACKEND_URL || process.env.BACKEND_URL
 if(!base_URL) {
     console.error('NO URL FOUND')
 }
