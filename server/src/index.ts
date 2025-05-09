@@ -11,7 +11,7 @@ import {
 } from './controllers/auth-controller.js';
 import { authMiddleware } from './middleware/authMiddleware.js';
 import dotenv from 'dotenv';
-import fetch from 'node-fetch';
+/* import fetch from 'node-fetch';
 
 async function logOutboundIP () {
     try {
@@ -23,7 +23,7 @@ async function logOutboundIP () {
     }
 }
 
-logOutboundIP();
+logOutboundIP(); */
 
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
