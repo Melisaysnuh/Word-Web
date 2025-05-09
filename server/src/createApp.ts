@@ -29,7 +29,7 @@ export function createApp (args: any) {
     }
 
     const allowedOrigins = [
-        'https://word-web-fe-production.up.railway.app/',
+        'word-web-fe-production.up.railway.app/',
         'http://wordwebs.de',
         'https://wordwebs.de', // if your domain works over https too
     ];
