@@ -8,7 +8,9 @@ import { submitAuthRoute } from './routes/submitAuthRoute.js';
 import submitRoute from './routes/submitRoute.js';
 import { loadLettersController } from './controllers/fetch-controller.js';
 import dotenv from 'dotenv';
-dotenv.config()
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 export function createApp (args: any) {
     const {
