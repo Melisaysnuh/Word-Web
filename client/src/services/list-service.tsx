@@ -4,6 +4,9 @@ import { ListBackUpTemp } from "./list-backup";
 
 
 const base_URL = import.meta.env.BACKEND_URL
+if(!base_URL) {
+    console.error('NO URL FOUND')
+}
 
 const getCachedListFromStorage = () => {
     const cachedData = localStorage.getItem('cachedDailyList');
@@ -42,7 +45,9 @@ export const getDailyListService = async () => {
                     method: 'GET',
                     credentials: 'include',
                 }
-            )
+            );
+            console.log('res is ', res)
+
             if (res) {
                 const list = await res.json();
                 saveCachedListToStorage(list);
