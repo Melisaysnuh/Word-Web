@@ -29,7 +29,6 @@ describe('getDailyListService', () => {
 
         // @ts-expect-error tofix
         global.localStorage = localStorageMock;
-        // @ts-expect-error tofix
         global.fetch = vi.fn();
         localStorageMock.clear();
     });
