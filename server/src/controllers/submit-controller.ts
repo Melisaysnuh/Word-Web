@@ -12,8 +12,9 @@ import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
 
 
-
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 // todo fix:
 const jwtSecret: Secret | undefined = process.env.JWT_SECRET || undefined;
 

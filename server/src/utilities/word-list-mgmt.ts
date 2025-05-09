@@ -1,7 +1,9 @@
 import fs from 'fs';
 const WORDS = './words.txt';
 import dotenv from 'dotenv';
-dotenv.config()
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 // all functions that interact with word list
 export const getArray = async (num: number, num2: number) => {

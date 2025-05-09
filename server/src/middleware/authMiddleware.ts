@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 import { UserI } from "../types/User.js";
 
 
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 const JWT_SECRET = process.env.JWT_SECRET;
 

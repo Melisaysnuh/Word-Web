@@ -11,7 +11,9 @@ import {
 } from './controllers/auth-controller.js';
 import { authMiddleware } from './middleware/authMiddleware.js';
 import dotenv from 'dotenv';
-dotenv.config()
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 
 const url = process.env.DEV_BACKEND_URL || process.env.PROD_BACKEND_URL;
 if (!url) {console.error('Port not found from .env')}

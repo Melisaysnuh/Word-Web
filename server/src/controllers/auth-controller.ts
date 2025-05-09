@@ -10,9 +10,9 @@ import { format } from 'date-fns';
 
 const now = format(new Date(), "yyyy_MM_dd");
 
-
-
-dotenv.config();
+if (process.env.NODE_ENV !== 'production') {
+    dotenv.config();
+}
 // automatic jwtSecretgenerator
 const jwtSecret = process.env.JWT_SECRET || crypto.randomBytes(64).toString('hex');
 
