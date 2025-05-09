@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
 }
 
-const url = process.env.DEV_BACKEND_URL || process.env.PROD_BACKEND_URL;
+const url = process.env.BACKEND_URL || process.env.BACKEND_URL;
 if (!url) {console.error('Port not found from .env')}
 
 export const app = createApp({
