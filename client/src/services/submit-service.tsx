@@ -11,6 +11,9 @@ import { getToken } from "./auth-service";
 
 
 const base_URL = import.meta.env.VITE_BACKEND_URL
+if (!base_URL) {
+    console.error('no url found!')
+}
 
 export const checkWord = async (
     wordToCheck: string
