@@ -77,6 +77,7 @@ export const logout = (): void => {
   localStorage.removeItem("user");
 };
 
+
 export const getToken = (): string | null => {
   return localStorage.getItem("token");
 };
