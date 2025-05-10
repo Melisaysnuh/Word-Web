@@ -28,19 +28,22 @@ export function createApp (args: any) {
         console.error('error loading client url from .env')
     }
 
+
     const allowedOrigins = [
         'https://word-web-fe-production.up.railway.app',
         'http://wordwebs.de',
-        'https://wordwebs.de', // if your domain works over https too
+        'https://wordwebs.de',
+        'http://localhost:5173' // if your domain works over https too
     ];
 
 
     app.use(cors({
         origin: function (origin, callback) {
+            console.log('origin is', origin)
             if (!origin) {
-                // Allow non-browser requests (e.g., Postman, server-to-server)
                 callback(null, true);
             } else if (allowedOrigins.includes(origin)) {
+                console.log('origin whitelisted');
                 callback(null, true);
             } else {
                 console.warn(`Blocked CORS origin: ${origin}`);
@@ -50,7 +53,10 @@ export function createApp (args: any) {
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
+        preflightContinue: false,   // Let CORS handle preflight, end response
+        optionsSuccessStatus: 204   // Some browsers want 204 instead of 200
     }));
+
 
 
     app.options('*', cors());

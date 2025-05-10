@@ -51,7 +51,8 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
 
     async function fetchDailyList () {
         try {
-            const data = await getDailyListService()
+            const data = await getDailyListService();
+            console.log('data is', data)
 
             if (data) {
                 const list: Daylist = data.list;
@@ -116,11 +117,13 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
         if (word.length < 4) {
             setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
         } else if (localGuessedWords && localGuessedWords?.some((element: WordObj) => element.word.toUpperCase() === word) ||history && history.guessedWords && history.guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
+            console.warn('word found already')
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
         } else {
             const res: SubmitWordResponse | undefined = await checkWord(word);
+            console.log('res is')
 
             if (res !== undefined) {
                 if (res.valid && res.valid === true) {

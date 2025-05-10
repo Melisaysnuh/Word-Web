@@ -11,19 +11,9 @@ import {
 } from './controllers/auth-controller.js';
 import { authMiddleware } from './middleware/authMiddleware.js';
 import dotenv from 'dotenv';
-/* import fetch from 'node-fetch';
+ import fetch from 'node-fetch';
 
-async function logOutboundIP () {
-    try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const data = await res.json();
-        console.log('Outbound IP as seen externally:', data.ip);
-    } catch (err) {
-        console.error('Failed to get external IP:', err);
-    }
-}
 
-logOutboundIP(); */
 
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();

@@ -31,7 +31,7 @@ export const getDailyListService = async () => {
 
 
     const cachedDailyList = getCachedListFromStorage();
-
+    console.log('trying cached list', cachedDailyList)
 
     if (cachedDailyList && cachedDailyList.list && cachedDailyList.list.daylist_id === now) {
 
@@ -39,6 +39,7 @@ export const getDailyListService = async () => {
     }
     else {
         try {
+            console.log('trying', base_URL)
 
             const res = await fetch(`${base_URL}/`,
                 {
