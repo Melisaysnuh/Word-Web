@@ -22,17 +22,37 @@ export function createApp (args: any) {
     } = args
     const app = express();
 
-    const clientPort = process.env.CLIENT_PORT
-    if (!clientPort) {
-        console.error('error loading client port from .env')
+    const clienturl= process.env.CLIENT_URL
+    const clienturl2 = process.env.CLIENT_URL_2
+    if (!clienturl) {
+        console.error('error loading client url from .env')
     }
 
+    const allowedOrigins = [
+        'https://word-web-fe-production.up.railway.app',
+        'http://wordwebs.de',
+        'https://wordwebs.de', // if your domain works over https too
+    ];
+
+
     app.use(cors({
-        origin: `http://localhost:${clientPort}`,
+        origin: function (origin, callback) {
+            if (!origin) {
+                // Allow non-browser requests (e.g., Postman, server-to-server)
+                callback(null, true);
+            } else if (allowedOrigins.includes(origin)) {
+                callback(null, true);
+            } else {
+                console.warn(`Blocked CORS origin: ${origin}`);
+                callback(new Error('Not allowed by CORS'));
+            }
+        },
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
     }));
+
+
     app.options('*', cors());
     app.use(express.json());
 
