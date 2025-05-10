@@ -55,7 +55,7 @@ export const register = async (userData: RegisterDataI): Promise<AuthUserRespons
 
 export const login = async (userData: LoginDataI): Promise<AuthUserResponse> => {
   try {
-    const userResponse = await fetchAPI(`${apiUrl}auth/login`, {
+    const userResponse = await fetchAPI(`${apiUrl}/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: { "Content-Type": "application/json" },

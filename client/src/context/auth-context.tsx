@@ -7,7 +7,9 @@ export interface AppContextValue {
     user: UserI | null;
     setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
     history: HistoryI | null;
-    setHistory: React.Dispatch<React.SetStateAction<HistoryI | null>>;
+    setHistory: React.Dispatch<React.SetStateAction<HistoryI | null>>; updateHistory: (newHistory: HistoryI) => void;
+    logoutUser: () => void;
+
 }
 
 export const AuthContext = createContext<AppContextValue>({
@@ -15,6 +17,8 @@ export const AuthContext = createContext<AppContextValue>({
     setUser: () => { },
     history: null,
     setHistory: () => { },
+    updateHistory: () => {},
+    logoutUser: () => {}
 });
 
 
