@@ -57,7 +57,6 @@ export const checkWord = async (
 
 
             const data: SubmitWordResponse = await res.json();
-            console.log(data)
 
             if (data) {
                 return data

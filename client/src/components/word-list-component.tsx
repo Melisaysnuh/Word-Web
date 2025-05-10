@@ -74,7 +74,7 @@ function WordListComponent () {
                 setHistory(thisHistory);
             }
         }
-    }, [user]);
+    }, [user, history]);
 
 
     const fetchPoints = async () => {
