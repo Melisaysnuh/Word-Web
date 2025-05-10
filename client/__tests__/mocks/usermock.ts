@@ -23,3 +23,5 @@ export const mockUser: UserI = {
             level: 'Daddy Long-Legs',
         }]
 }
+export const tokenMock = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywiZmlyc3ROYW1lIjoiTWVsaSIsImVtYWlsIjoibWVsaUBleGFtcGxlLmNvbSIsImV4cCI6MTcxODM1MjAwMH0.ey1QeylnnKrr7svyKQR-gNKnsIl7SAYmpKMw6BztQFLo
+`

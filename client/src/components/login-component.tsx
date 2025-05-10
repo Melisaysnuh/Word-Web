@@ -8,7 +8,7 @@ interface LoginProps {
     setLoginModal: (view: boolean) => void;
  }
 
-const RegisterComponent: React.FC<LoginProps> = ({setLoginModal}) => {
+const LoginComponent: React.FC<LoginProps> = ({setLoginModal}) => {
     const [message, setMessage] = useState("");
 const [formData, setFormData] = useState({
     email: '',
@@ -64,4 +64,4 @@ const [formData, setFormData] = useState({
     )
 }
 
-export default RegisterComponent
+export default LoginComponent

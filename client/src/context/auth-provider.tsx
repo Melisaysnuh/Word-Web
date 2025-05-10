@@ -11,7 +11,7 @@ import {
 } from "../services/auth-service";
 import { AuthContext } from "./auth-context";
 
-const now = format(new Date(), "yyyy_MM_dd");
+
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [user, setUser] = useState<UserI | null>(null);
@@ -41,6 +41,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, []);
 
     const setTodayHistory = (baseUser: UserI) => {
+        const now = format(new Date(), "yyyy_MM_dd");
         const today = baseUser.history.find((h) => h.daylist_id === now);
         if (today) {
             setHistory(today);
@@ -59,7 +60,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setUser((prevUser) => {
             const activeUser = baseUser || prevUser;
             if (!activeUser) return null;
-
+            const now = format(new Date(), "yyyy_MM_dd");
             const updatedHistory = activeUser.history
                 ? [newHistory, ...activeUser.history.filter((h) => h.daylist_id !== now)]
                 : [newHistory];
