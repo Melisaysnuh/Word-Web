@@ -1,5 +1,5 @@
 import fs from 'fs';
-const WORDS = './words.txt';
+const WORDS = '../words.txt';
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
