@@ -1,6 +1,5 @@
 import { format } from "date-fns";
 import Daylist from "../types/Daylist";
-import { ListBackUpTemp } from "./list-backup";
 
 
 
@@ -57,17 +56,18 @@ export const getDailyListService = async () => {
 
 
             } else {
-                return ListBackUpTemp;
+                console.error('error getting list.')
+                return null;
             }
         }
         catch (e) {
-            console.error('error getting your letters in api client, using backup', e);
-            return ListBackUpTemp
+            console.error('error getting your letters in api client', e);
+            return null
 
 
         }
 
-        return ListBackUpTemp
+        return null
     }
 }
 
