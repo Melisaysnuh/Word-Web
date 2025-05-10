@@ -13,13 +13,13 @@ interface GameComponentProps {
     setLocalGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
     localGuessedWords: WordObj[];
     localPoints: number;
-    setLocalPoints: (points: number) => void;
+    setLocalPoints: React.Dispatch<React.SetStateAction<number>>;
 }
 const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, localGuessedWords, setLocalPoints, localPoints}) => {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
-    const { setUser, history, setHistory } = useContext(AuthContext);
+    const { user, setUser, history, setHistory } = useContext(AuthContext);
     const inputRef = useRef<HTMLInputElement>(null);
 
 
@@ -115,7 +115,7 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
 
         if (word.length < 4) {
             setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
-        } else if (history && history.guessedWords?.some((element: WordObj) => element.word.toUpperCase() === word)) {
+        } else if (localGuessedWords && localGuessedWords?.some((element: WordObj) => element.word.toUpperCase() === word) ||history && history.guessedWords && history.guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
@@ -150,11 +150,16 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
                             setLocalGuessedWords(updatedGuessedWords);
                             setLocalPoints(updatedPoints);
 
-                            setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word!` });
+                            setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word, ${user?.firstName}!` });
                         }
                         else {
-                            setLocalGuessedWords((prev: WordObj[]) => [...prev, resWord]);
-                            setLocalPoints(localPoints + (resWord.points || 0));                        }
+                            const updatedGuessedWords = [...localGuessedWords, resWord];
+                            setLocalGuessedWords(updatedGuessedWords);
+
+                            const updatedPoints = localPoints + (resWord.points || 0);
+                            setLocalPoints(updatedPoints);
+                            setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word!` });
+               }
                     }
                 } else {
                     setFormStatus({ success: 'fail', message: `${guess} is not valid` });
