@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-const WORDS = path.join(__dirname, '..', 'words.txt');
+const WORDS = path.join(process.cwd(), 'words.txt');
 import dotenv from 'dotenv';
 if (process.env.NODE_ENV !== 'production') {
     dotenv.config();
