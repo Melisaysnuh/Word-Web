@@ -149,13 +149,14 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
                                 const updatedUserHistory = [updatedHistory, ...prevUser.history.slice(1)];
                                 return { ...prevUser, history: updatedUserHistory };
                             });
-
+                            console.log('updating')
                             setLocalGuessedWords(updatedGuessedWords);
                             setLocalPoints(updatedPoints);
 
                             setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word, ${user?.firstName}!` });
                         }
                         else {
+                            console.log('no user found')
                             const updatedGuessedWords = [...localGuessedWords, resWord];
                             setLocalGuessedWords(updatedGuessedWords);
 
