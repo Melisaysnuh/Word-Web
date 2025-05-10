@@ -10,7 +10,7 @@ import { getToken } from "./auth-service";
 
 
 
-const base_URL = import.meta.env.BACKEND_URL
+const base_URL = import.meta.env.VITE_BACKEND_URL
 
 export const checkWord = async (
     wordToCheck: string
