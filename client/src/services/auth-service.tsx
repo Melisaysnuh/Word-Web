@@ -23,7 +23,7 @@ const fetchAPI = async (url: string, options: RequestInit): Promise<AuthUserResp
 };
 
 // Store user and token in localStorage
-const storeAuthData = (token: string, user: UserI) => {
+export const storeAuthData = (token: string, user: UserI) => {
   localStorage.setItem("token", token);
   localStorage.setItem("user", JSON.stringify(user));
 };

@@ -5,9 +5,9 @@ import {
     getDecodedToken,
     getStoredUser,
     getToken,
-    storeAuthData,
-    clearAuthData,
+    logout,
     refreshUserData,
+    storeAuthData,
 } from "../services/auth-service";
 import { AuthContext } from "./auth-context";
 
@@ -19,7 +19,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     useEffect(() => {
         const init = async () => {
-            const token = getToken();
+            const token = getDecodedToken();
             if (token) {
                 const refreshedUser = await refreshUserData().catch(() => null);
                 if (refreshedUser) {
@@ -75,7 +75,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const logoutUser = () => {
         setUser(null);
         setHistory(null);
-        clearAuthData();
+        logout();
     };
 
     return (
