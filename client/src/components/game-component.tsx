@@ -7,7 +7,6 @@ import { AuthContext } from '../context/auth-context';
 import SubmitWordResponse from '../types/SubmitWordResponse';
 import { HistoryI } from '../types/User';
 import Daylist from '../types/Daylist';
-import { ListBackUpTemp } from '../services/list-backup';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
 
 
@@ -28,11 +27,11 @@ function GameComponent () {
                 const list: Daylist = data.list;
                 return list;
             } else console.error('you are not yet fetching your info');
-            return ListBackUpTemp;
+            return null;
         }
         catch (e) {
             console.error('error in fetchDaily in game component:', e);
-            return ListBackUpTemp
+            return null
         }
     }
 
@@ -136,7 +135,7 @@ function GameComponent () {
 
             const list = await fetchDailyList();
             if (list && list.letters) {
-                const letters = list ? list.letters : ListBackUpTemp.letters
+                const letters = list ? list.letters : [];
                 const shuffled = generateRandomIndices(letters);
                 setDailyLetters(shuffled);
                 setGuess('');
