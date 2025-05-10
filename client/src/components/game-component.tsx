@@ -9,14 +9,44 @@ import { HistoryI } from '../types/User';
 import Daylist from '../types/Daylist';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
 
-
-function GameComponent () {
+interface GameComponentProps {
+    setLocalGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
+    localGuessedWords: WordObj[];
+    localPoints: number;
+    setLocalPoints: (points: number) => void;
+}
+const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, localGuessedWords, setLocalPoints, localPoints}) => {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
-
     const { setUser, history, setHistory } = useContext(AuthContext);
     const inputRef = useRef<HTMLInputElement>(null);
+
+
+    useEffect(() => {
+        if (history && history.guessedWords) {
+            // User is logged in, sync local state with user history
+            setLocalGuessedWords(history.guessedWords);
+            setLocalPoints(history.totalUserPoints);
+        } else {
+            // No user — try to load from localStorage (if using)
+            const savedWords = JSON.parse(localStorage.getItem('localGuessedWords') || '[]');
+            const savedPoints = parseInt(localStorage.getItem('localPoints') || '0', 10);
+            setLocalGuessedWords(savedWords);
+            setLocalPoints(savedPoints);
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [history]);
+
+
+    // reload for non users
+    useEffect(() => {
+        if (!history) {
+            localStorage.setItem('localGuessedWords', JSON.stringify(localGuessedWords));
+            localStorage.setItem('localPoints', localPoints.toString());
+        }
+    }, [localGuessedWords, localPoints, history]);
+
 
 
     async function fetchDailyList () {
@@ -77,13 +107,15 @@ function GameComponent () {
 
     }
 
+    // * THE BIG ONE
+
     async function handleSubmit (event: React.MouseEvent<HTMLButtonElement> | React.KeyboardEvent<HTMLInputElement>) {
         event.preventDefault();
         const word = guess;
 
         if (word.length < 4) {
             setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
-        } else if (history && history.guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
+        } else if (history && history.guessedWords?.some((element: WordObj) => element.word.toUpperCase() === word)) {
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
             setFormStatus({ success: 'fail', message: 'Word must contain center letter.' });
@@ -115,9 +147,14 @@ function GameComponent () {
                                 return { ...prevUser, history: updatedUserHistory };
                             });
 
+                            setLocalGuessedWords(updatedGuessedWords);
+                            setLocalPoints(updatedPoints);
 
                             setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word!` });
                         }
+                        else {
+                            setLocalGuessedWords((prev: WordObj[]) => [...prev, resWord]);
+                            setLocalPoints(localPoints + (resWord.points || 0));                        }
                     }
                 } else {
                     setFormStatus({ success: 'fail', message: `${guess} is not valid` });

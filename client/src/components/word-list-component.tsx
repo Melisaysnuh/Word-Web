@@ -1,15 +1,13 @@
 import WordObj from '../types/WordObj';
 import '../styles/word-list-component.css';
-import { useContext, useEffect, useState, useMemo } from 'react';
-import { AuthContext } from '../context/auth-context';
+import {  useEffect, useState, useMemo } from 'react';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
-import { format } from 'date-fns';
-//import { HistoryI } from '../types/User';
-//const [selectedDate, setSelectedDate] = useState(new Date());
-//const [history, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
-const now = format(new Date(), "yyyy_MM_dd");
 
+interface WordListComponentProps {
+    localGuessedWords: WordObj[];
+    localPoints: number;
+}
 const spiderLevels = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
     { threshold: 0.18, className: 'prog-spider-class-1', name: 'Weaver' },
@@ -25,27 +23,26 @@ const spiderLevels = [
 
 
 
-function WordListComponent () {
+const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords, localPoints }) => {
     const [spiderClass, setSpiderClass] = useState(spiderLevels[0].className);
     const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
-    const [totalPoints, setTotalPoints] = useState(0);
-
-    const { user, history, setHistory } = useContext(AuthContext);
     const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
     const verticalPoints = "20,8 20,58 20,108 20,158 20,208 20,258 20,308 20,358 20,408";
     const horizontalPoints = "8,20 58,20 108,20 158,20 208,20 258,20 308,20 358,20 408,20";
     const [currentPage, setCurrentPage] = useState(0);
+    const [totalPoints, setTotalPoints] = useState(0);
+
 
     const pageSize = isHorizontal ? 18 : 60;
 
     const paginatedWords = useMemo(() => {
-        if (!history?.guessedWords) return [];
+        if (!localGuessedWords) return [];
         const start = currentPage * pageSize;
         const end = start + pageSize;
-        return history.guessedWords.slice(start, end).sort((a, b) => a.word.localeCompare(b.word));
-    }, [history, currentPage, pageSize]);
+        return localGuessedWords.slice(start, end).sort((a, b) => a.word.localeCompare(b.word));
+    }, [localGuessedWords, currentPage, pageSize]);
 
-    const totalPages = history?.guessedWords ? Math.ceil(history.guessedWords.length / pageSize) : 0;
+    const totalPages = localGuessedWords ? Math.ceil(localGuessedWords.length / pageSize) : 0;
 
     const nextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
@@ -67,14 +64,6 @@ function WordListComponent () {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-    useEffect(() => {
-        if (user?.history) {
-            const thisHistory = user.history.find(h => h.daylist_id === now)
-            if (thisHistory) {
-                setHistory(thisHistory);
-            }
-        }
-    }, [user, history]);
 
 
     const fetchPoints = async () => {
@@ -98,8 +87,8 @@ function WordListComponent () {
     };
 
     const guessedWordPoints = useMemo(() => {
-        return history?.guessedWords ? calculateTotalPoints(history.guessedWords) : 0;
-    }, [history]);
+        return localGuessedWords ? calculateTotalPoints(localGuessedWords) : 0;
+    }, [localGuessedWords]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
@@ -112,18 +101,26 @@ function WordListComponent () {
     };
 
     useEffect(() => {
-        fetchPoints().then(setTotalPoints);
+
+        async function callFetchPoints () {
+            // Function to fetch the daily list and extract the total possible points
+            const points = await fetchPoints();
+            setTotalPoints(points);
+
+        }
+        callFetchPoints();
+
     }, []);
 
     useEffect(() => {
-        if (history && history.totalUserPoints) {
-            updateSpiderClass(history.totalUserPoints, totalPoints);
+        if (localGuessedWords && localPoints) {
+            updateSpiderClass(localPoints, totalPoints);
         }
-    }, [history, totalPoints]);
+    }, [localGuessedWords, localPoints, totalPoints]);
 
     useEffect(() => {
         setCurrentPage(0);
-    }, [history, isHorizontal]);
+    }, [localGuessedWords, isHorizontal]);
 
 
 

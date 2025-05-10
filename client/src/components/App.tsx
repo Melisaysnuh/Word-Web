@@ -7,6 +7,7 @@ import UserComponent from './user-component'
 import { AuthContext } from '../context/auth-context'
 import { logout, isTokenExpired } from '../services/auth-service'
 import { useContext, useEffect, useState } from 'react'
+import WordObj from '../types/WordObj'
 
 
 
@@ -16,6 +17,8 @@ function App () {
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [userModal, setUserModal] = useState<boolean>(false);
+      const [localGuessedWords, setLocalGuessedWords] = useState<WordObj[]>([]);
+      const [localPoints, setLocalPoints] = useState(0);
 
   useEffect(() => {
     if (!user || isTokenExpired()) {
@@ -62,9 +65,9 @@ function App () {
               </nav>
         <div className='subhead'>
           <GameComponent
-
+          localGuessedWords={localGuessedWords} setLocalGuessedWords={setLocalGuessedWords} localPoints={localPoints} setLocalPoints={setLocalPoints}
           />
-          <WordListComponent
+          <WordListComponent localGuessedWords={localGuessedWords}  localPoints={localPoints}
 />
 
         </div>
