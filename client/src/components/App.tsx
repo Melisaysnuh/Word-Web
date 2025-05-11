@@ -64,7 +64,7 @@ function App () {
               </nav>
         <div className='subhead'>
           <GameComponent
-          localGuessedWords={localGuessedWords} setLocalGuessedWords={setLocalGuessedWords} localPoints={localPoints} setLocalPoints={setLocalPoints} user={user}
+          localGuessedWords={localGuessedWords} setLocalGuessedWords={setLocalGuessedWords} localPoints={localPoints} setLocalPoints={setLocalPoints} user={user} setUser={setUser}
           />
           <WordListComponent localGuessedWords={localGuessedWords}  localPoints={localPoints}
 />
