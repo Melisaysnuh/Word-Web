@@ -1,11 +1,10 @@
 import '../styles/game-component.css';
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { getDailyListService } from '../services/list-service';
 import { checkWord } from '../services/submit-service';
 import WordObj from '../types/WordObj';
-import { AuthContext } from '../context/auth-context';
 import SubmitWordResponse from '../types/SubmitWordResponse';
-import { HistoryI } from '../types/User';
+import { HistoryI, UserI } from '../types/User';
 import Daylist from '../types/Daylist';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
 
@@ -14,12 +13,14 @@ interface GameComponentProps {
     localGuessedWords: WordObj[];
     localPoints: number;
     setLocalPoints: React.Dispatch<React.SetStateAction<number>>;
+    user: UserI | null;
+    setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
 }
-const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, localGuessedWords, setLocalPoints, localPoints}) => {
+const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, localGuessedWords, setLocalPoints, localPoints, user, setUser}) => {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
-    const { user, setUser, history, setHistory } = useContext(AuthContext);
+    const [ history, setHistory ] = useState<HistoryI>();
     const inputRef = useRef<HTMLInputElement>(null);
 
 

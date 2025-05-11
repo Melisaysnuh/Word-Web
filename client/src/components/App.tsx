@@ -4,16 +4,16 @@ import WordListComponent from './word-list-component'
 import RegisterComponent from './register-component'
 import LoginComponent from './login-component'
 import UserComponent from './user-component'
-import { AuthContext } from '../context/auth-context'
 import { logout, isTokenExpired } from '../services/auth-service'
-import { useContext, useEffect, useState } from 'react'
+import {  useEffect, useState } from 'react'
 import WordObj from '../types/WordObj'
+import { UserI } from '../types/User'
 
 
 
 
 function App () {
-  const { user, setUser } = useContext(AuthContext);
+  const [ user, setUser ] = useState<UserI | null>(null);
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [userModal, setUserModal] = useState<boolean>(false);
@@ -25,7 +25,6 @@ function App () {
       handleLogOut();
       setLoginModal(true);
       }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const handleLoginClick = () => {
@@ -45,15 +44,15 @@ function App () {
 
   return (
     <>
-      {registerModal && <RegisterComponent
+      {registerModal && <RegisterComponent setUser={setUser}
       setRegisterModal={setRegisterModal}
 
  />}
-      {userModal && <UserComponent
+      {userModal && <UserComponent user={user}
       setUserModal={setUserModal}
 
  />}
-      {loginModal && <LoginComponent
+      {loginModal && <LoginComponent setUser={setUser}
       setLoginModal={setLoginModal}
 />}  <div className='main-container'>
         <nav className='navigation'><img id="logo" src='/logo.svg' alt='word-web-logo' />
@@ -65,7 +64,7 @@ function App () {
               </nav>
         <div className='subhead'>
           <GameComponent
-          localGuessedWords={localGuessedWords} setLocalGuessedWords={setLocalGuessedWords} localPoints={localPoints} setLocalPoints={setLocalPoints}
+          localGuessedWords={localGuessedWords} setLocalGuessedWords={setLocalGuessedWords} localPoints={localPoints} setLocalPoints={setLocalPoints} user={user}
           />
           <WordListComponent localGuessedWords={localGuessedWords}  localPoints={localPoints}
 />

@@ -1,20 +1,21 @@
-import { useState, FormEvent, useContext } from 'react';
+import { useState, FormEvent } from 'react';
 import '../styles/modal.css'
 import { login } from '../services/auth-service';
-import { AuthContext } from '../context/auth-context';
+import { UserI } from '../types/User';
 
 
 interface LoginProps {
     setLoginModal: (view: boolean) => void;
+    setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
  }
 
-const LoginComponent: React.FC<LoginProps> = ({setLoginModal}) => {
+const LoginComponent: React.FC<LoginProps> = ({setLoginModal, setUser}) => {
     const [message, setMessage] = useState("");
 const [formData, setFormData] = useState({
     email: '',
     password: '',
 });
-    const { setUser } = useContext(AuthContext);
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };

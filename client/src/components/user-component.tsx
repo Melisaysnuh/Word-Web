@@ -1,16 +1,16 @@
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../styles/user-component.css';
-import { AuthContext } from '../context/auth-context';
 import { format, subDays, addDays } from 'date-fns';
 import WordObj from '../types/WordObj';
-import { HistoryI } from '../types/User';
+import { HistoryI, UserI } from '../types/User';
 
 interface UserProps {
     setUserModal: (view: boolean) => void;
+    user: UserI | null;
 }
 
-const UserComponent: React.FC<UserProps> = ({ setUserModal }) => {
-    const { user } = useContext(AuthContext);
+const UserComponent: React.FC<UserProps> = ({ setUserModal, user }) => {
+
     const [message, setMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
