@@ -10,11 +10,10 @@ import { generateRandomIndices } from '../utilities/shuffle-utility';
 
 interface GameComponentProps {
     todayHistory: HistoryI | null;
-    user: UserI | null;
     setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
     setTodayHistory: React.Dispatch<React.SetStateAction<HistoryI | null>>;
 }
-const GameComponent: React.FC<GameComponentProps> = ({ todayHistory, user, setUser, setTodayHistory }) => {
+const GameComponent: React.FC<GameComponentProps> = ({ todayHistory, setUser, setTodayHistory }) => {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });

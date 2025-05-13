@@ -91,7 +91,7 @@ function App () {
               </nav>
         <div className='subhead'>
           <GameComponent  todayHistory={todayHistory} setTodayHistory={setTodayHistory}
-          user={user} setUser={setUser}
+          setUser={setUser}
           />
           <WordListComponent todayHistory={todayHistory} setUser={setUser}
 />
