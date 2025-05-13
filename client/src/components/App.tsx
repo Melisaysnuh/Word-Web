@@ -75,7 +75,7 @@ function App () {
       setRegisterModal={setRegisterModal}
 
  />}
-      {userModal && <UserComponent user={user}
+      {userModal && <UserComponent user={user} todayHistory={todayHistory}
       setUserModal={setUserModal}
 
  />}
@@ -93,7 +93,7 @@ function App () {
           <GameComponent  todayHistory={todayHistory} setTodayHistory={setTodayHistory}
           user={user} setUser={setUser}
           />
-          <WordListComponent todayHistory={todayHistory}
+          <WordListComponent todayHistory={todayHistory} setUser={setUser}
 />
 
         </div>

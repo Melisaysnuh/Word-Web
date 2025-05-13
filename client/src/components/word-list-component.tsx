@@ -3,10 +3,11 @@ import '../styles/word-list-component.css';
 import {  useEffect, useState, useMemo } from 'react';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
-import { HistoryI } from '../types/User';
+import { HistoryI, UserI } from '../types/User';
 
 interface WordListComponentProps {
-todayHistory: HistoryI | null
+todayHistory: HistoryI | null;
+setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
 }
 const spiderLevels = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
@@ -23,7 +24,7 @@ const spiderLevels = [
 
 
 
-const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory}) => {
+const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, setUser}) => {
     const [spiderClass, setSpiderClass] = useState(spiderLevels[0].className);
     const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
     const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
@@ -97,6 +98,13 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory}) =>
         if (spider) {
             setSpiderClass(spider.className);
             setSpiderName(spider.name);
+            setUser((prevUser) => {
+                if (!prevUser || !prevUser.history) return prevUser;
+
+
+
+                return { ...prevUser, level: spider.name };
+            });
         }
     };
 
@@ -116,7 +124,8 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory}) =>
         if (todayHistory?.guessedWords && todayHistory.totalUserPoints) {
             updateSpiderClass(todayHistory.totalUserPoints, totalPoints);
         }
-    }, [todayHistory, totalPoints]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [todayHistory, totalPoints, spiderClass]);
 
     useEffect(() => {
         setCurrentPage(0);
