@@ -3,10 +3,10 @@ import '../styles/word-list-component.css';
 import {  useEffect, useState, useMemo } from 'react';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
+import { HistoryI } from '../types/User';
 
 interface WordListComponentProps {
-    localGuessedWords: WordObj[];
-    localPoints: number;
+todayHistory: HistoryI | null
 }
 const spiderLevels = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
@@ -23,7 +23,7 @@ const spiderLevels = [
 
 
 
-const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords, localPoints }) => {
+const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory}) => {
     const [spiderClass, setSpiderClass] = useState(spiderLevels[0].className);
     const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
     const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
@@ -36,13 +36,13 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
     const pageSize = isHorizontal ? 18 : 60;
 
     const paginatedWords = useMemo(() => {
-        if (!localGuessedWords) return [];
+        if (!todayHistory) return [];
         const start = currentPage * pageSize;
         const end = start + pageSize;
-        return localGuessedWords.slice(start, end).sort((a, b) => a.word.localeCompare(b.word));
-    }, [localGuessedWords, currentPage, pageSize]);
+        return todayHistory.guessedWords.slice(start, end).sort((a, b) => a.word.localeCompare(b.word));
+    }, [todayHistory, currentPage, pageSize]);
 
-    const totalPages = localGuessedWords ? Math.ceil(localGuessedWords.length / pageSize) : 0;
+    const totalPages = todayHistory?.guessedWords ? Math.ceil(todayHistory.guessedWords.length / pageSize) : 0;
 
     const nextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
@@ -87,8 +87,8 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
     };
 
     const guessedWordPoints = useMemo(() => {
-        return localGuessedWords ? calculateTotalPoints(localGuessedWords) : 0;
-    }, [localGuessedWords]);
+        return todayHistory?.guessedWords ? calculateTotalPoints(todayHistory.guessedWords) : 0;
+    }, [todayHistory?.guessedWords]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
@@ -113,14 +113,14 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
     }, []);
 
     useEffect(() => {
-        if (localGuessedWords && localPoints) {
-            updateSpiderClass(localPoints, totalPoints);
+        if (todayHistory?.guessedWords && todayHistory.totalUserPoints) {
+            updateSpiderClass(todayHistory.totalUserPoints, totalPoints);
         }
-    }, [localGuessedWords, localPoints, totalPoints]);
+    }, [todayHistory, totalPoints]);
 
     useEffect(() => {
         setCurrentPage(0);
-    }, [localGuessedWords, isHorizontal]);
+    }, [todayHistory?.guessedWords, isHorizontal]);
 
 
 

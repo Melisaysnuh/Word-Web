@@ -9,26 +9,26 @@ import Daylist from '../types/Daylist';
 import { generateRandomIndices } from '../utilities/shuffle-utility';
 
 interface GameComponentProps {
-    setLocalGuessedWords: React.Dispatch<React.SetStateAction<WordObj[]>>;
-    localGuessedWords: WordObj[];
-    localPoints: number;
-    setLocalPoints: React.Dispatch<React.SetStateAction<number>>;
+    todayHistory: HistoryI | null;
     user: UserI | null;
     setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
+    setTodayHistory: React.Dispatch<React.SetStateAction<HistoryI | null>>;
 }
-const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, localGuessedWords, setLocalPoints, localPoints, user, setUser}) => {
+const GameComponent: React.FC<GameComponentProps> = ({ todayHistory, user, setUser, setTodayHistory }) => {
     const [dailyLetters, setDailyLetters] = useState<string[]>([]);
     const [guess, setGuess] = useState('');
     const [formStatus, setFormStatus] = useState({ success: 'none', message: '' });
-    const [ history, setHistory ] = useState<HistoryI>();
+    const [localGuessedWords, setLocalGuessedWords] = useState<WordObj[]>([]);
+    const [localPoints, setLocalPoints] = useState(0)
+
     const inputRef = useRef<HTMLInputElement>(null);
 
 
     useEffect(() => {
-        if (history && history.guessedWords) {
-            // User is logged in, sync local state with user history
-            setLocalGuessedWords(history.guessedWords);
-            setLocalPoints(history.totalUserPoints);
+        if (todayHistory && todayHistory.guessedWords) {
+            setLocalGuessedWords(todayHistory.guessedWords);
+            setLocalPoints(todayHistory.totalUserPoints)
+
         } else {
             // No user — try to load from localStorage (if using)
             const savedWords = JSON.parse(localStorage.getItem('localGuessedWords') || '[]');
@@ -36,24 +36,23 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
             setLocalGuessedWords(savedWords);
             setLocalPoints(savedPoints);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [history]);
+
+    }, [todayHistory]);
 
 
     // reload for non users
     useEffect(() => {
-        if (!history) {
+        if (!todayHistory) {
             localStorage.setItem('localGuessedWords', JSON.stringify(localGuessedWords));
             localStorage.setItem('localPoints', localPoints.toString());
         }
-    }, [localGuessedWords, localPoints, history]);
+    }, [localGuessedWords, localPoints, todayHistory]);
 
 
 
     async function fetchDailyList () {
         try {
             const data = await getDailyListService();
-            console.log('data is', data)
 
             if (data) {
                 const list: Daylist = data.list;
@@ -117,7 +116,7 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
 
         if (word.length < 4) {
             setFormStatus({ success: 'fail', message: 'Words must be at least four letters.' });
-        } else if (localGuessedWords && localGuessedWords?.some((element: WordObj) => element.word.toUpperCase() === word) ||history && history.guessedWords && history.guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
+        } else if (localGuessedWords && localGuessedWords?.some((element: WordObj) => element.word.toUpperCase() === word) || todayHistory && todayHistory.guessedWords && todayHistory.guessedWords.some((element: WordObj) => element.word.toUpperCase() === word)) {
             console.warn('word found already')
             setFormStatus({ success: 'fail', message: 'Word already found.' });
         } else if (!word.includes(dailyLetters[0].toUpperCase())) {
@@ -131,24 +130,24 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
                     const resWord = res.guessedWord as WordObj;
                     if (resWord) {
 
-                        if (history) {
-                            const updatedGuessedWords = [...history.guessedWords, resWord];
-                            const updatedPoints = history.totalUserPoints + (resWord.points || 0);
-                            const updatedHistory: HistoryI = {
-                                ...history,
+                        if (todayHistory) {
+                            const updatedGuessedWords = [...todayHistory.guessedWords, resWord];
+                            const updatedPoints = todayHistory.totalUserPoints + (resWord.points || 0);
+                            const updatedtodayHistory: HistoryI = {
+                                ...todayHistory,
                                 guessedWords: updatedGuessedWords,
                                 totalUserPoints: updatedPoints,
                             };
 
-                            setHistory(updatedHistory);
+                            setTodayHistory(updatedtodayHistory);
 
 
                             setUser((prevUser) => {
                                 if (!prevUser || !prevUser.history) return prevUser;
 
 
-                                const updatedUserHistory = [updatedHistory, ...prevUser.history.slice(1)];
-                                return { ...prevUser, history: updatedUserHistory };
+                                const updatedUsertodayHistory = [updatedtodayHistory, ...prevUser.history.slice(1)];
+                                return { ...prevUser, history: updatedUsertodayHistory };
                             });
                             console.log('updating')
                             setLocalGuessedWords(updatedGuessedWords);
@@ -164,7 +163,7 @@ const GameComponent: React.FC<GameComponentProps> = ({setLocalGuessedWords, loca
                             const updatedPoints = localPoints + (resWord.points || 0);
                             setLocalPoints(updatedPoints);
                             setFormStatus({ success: 'pass', message: `${resWord.word} is a valid word!` });
-               }
+                        }
                     }
                 } else {
                     setFormStatus({ success: 'fail', message: `${guess} is not valid` });

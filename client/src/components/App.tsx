@@ -6,8 +6,8 @@ import LoginComponent from './login-component'
 import UserComponent from './user-component'
 import { logout, isTokenExpired } from '../services/auth-service'
 import {  useEffect, useState } from 'react'
-import WordObj from '../types/WordObj'
-import { UserI } from '../types/User'
+import { HistoryI, UserI } from '../types/User'
+import { format} from 'date-fns';
 
 
 
@@ -17,15 +17,42 @@ function App () {
   const [loginModal, setLoginModal] = useState<boolean>(false);
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [userModal, setUserModal] = useState<boolean>(false);
-      const [localGuessedWords, setLocalGuessedWords] = useState<WordObj[]>([]);
-      const [localPoints, setLocalPoints] = useState(0);
+  const [todayHistory, setTodayHistory] = useState<null | HistoryI>(null);
 
   useEffect(() => {
+    const todayId = format(new Date(), "yyyy_MM_dd");
+    const blankHistory = {
+      daylist_id: todayId,
+      guessedWords: [],
+      totalUserPoints: 0,
+      level: 'Daddy Long-Legs'
+    }
     if (!user || isTokenExpired()) {
       handleLogOut();
       setLoginModal(true);
+      setTodayHistory(blankHistory)
       }
-  }, [user]);
+      else {
+        if (user.history) {
+          const existing: HistoryI | undefined = user.history.find(h => h.daylist_id === todayId);
+          if (!existing || existing === undefined) {
+            const updatedUser = {
+              ...user,
+              history: [...user.history, blankHistory]
+            };
+            setUser(updatedUser);
+            setTodayHistory(blankHistory)
+          }
+          else  {
+            const existing = user.history.find(h => h.daylist_id === todayId);
+            const today = existing as HistoryI
+            setTodayHistory(today);
+          }
+
+
+      }
+  }
+}, [user]);
 
   const handleLoginClick = () => {
     setLoginModal(true)
@@ -63,10 +90,10 @@ function App () {
           </div>}
               </nav>
         <div className='subhead'>
-          <GameComponent
-          localGuessedWords={localGuessedWords} setLocalGuessedWords={setLocalGuessedWords} localPoints={localPoints} setLocalPoints={setLocalPoints} user={user} setUser={setUser}
+          <GameComponent  todayHistory={todayHistory} setTodayHistory={setTodayHistory}
+          user={user} setUser={setUser}
           />
-          <WordListComponent localGuessedWords={localGuessedWords}  localPoints={localPoints}
+          <WordListComponent todayHistory={todayHistory}
 />
 
         </div>

@@ -13,7 +13,7 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal, user }) => {
 
     const [message, setMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+    const [selectedHistory, setSelectedHistory] = useState<HistoryI>();
 
     const formattedDate = format(selectedDate, "yyyy_MM_dd");
     const todayFormatted = format(new Date(), "yyyy_MM_dd");
