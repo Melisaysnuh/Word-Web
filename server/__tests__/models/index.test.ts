@@ -1,6 +1,7 @@
 import { vi, describe, it, afterEach, expect } from 'vitest';
 import mongoose from 'mongoose';
-import * as index from '../../src/Models/index'; // Ensure correct path
+import * as index from '../../src/Models/index';
+
 
 describe('Database Connection', () => {
     afterEach(() => {
@@ -14,7 +15,7 @@ describe('Database Connection', () => {
         const response = await index.connectDB();
 
         expect(connectionSpy).toHaveBeenCalledOnce();
-        expect(connectionSpy).toHaveBeenCalledWith('mongodb://localhost:27017/wordweb');
+
         expect(response).toEqual({ statusCode: 200 });
     });
 

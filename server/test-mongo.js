@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
 const url = process.env.DATABASE_URL;
-console.log('url is', url)
+
 
 
 mongoose

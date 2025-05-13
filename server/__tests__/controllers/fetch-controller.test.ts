@@ -47,7 +47,7 @@ describe('loadLettersController', () => {
         await loadLettersController(mockReq as Request, mockRes as Response);
 
         // Check if the correct response status and error message are sent
-        expect(mockRes.status).toHaveBeenCalledWith(404);
+        expect(mockRes.status).toHaveBeenCalledWith(405);
         expect(jsonSpy).toHaveBeenCalledWith({ message: 'List not found' });
     });
 

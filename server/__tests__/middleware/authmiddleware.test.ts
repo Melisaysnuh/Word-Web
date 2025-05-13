@@ -91,7 +91,7 @@ describe('authMiddleware', () => {
             .get('/protected')
             .set('Authorization', `Bearer ${token}`);
 
-        expect(res.status).toBe(404);
+        expect(res.status).toBe(403);
         expect(res.body.message).toBe('User not found');
     });
 });

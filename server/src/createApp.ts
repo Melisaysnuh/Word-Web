@@ -39,11 +39,9 @@ export function createApp (args: any) {
 
     app.use(cors({
         origin: function (origin, callback) {
-            console.log('origin is', origin)
             if (!origin) {
                 callback(null, true);
             } else if (allowedOrigins.includes(origin)) {
-                console.log('origin whitelisted');
                 callback(null, true);
             } else {
                 console.warn(`Blocked CORS origin: ${origin}`);

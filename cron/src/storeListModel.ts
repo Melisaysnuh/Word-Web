@@ -23,7 +23,6 @@ async function storeListModel (): Promise<Daylist | null> {
         const result = await finalConstructor();
         if (result) {
             const createdList = await dayModel.create(result) as unknown as Daylist;
-            console.log('Successfully created list:', createdList);
             return createdList;
         } else {
             console.error('Could not get day list from service');

@@ -1,8 +1,13 @@
 import request from 'supertest';
 import { vi, describe, it, beforeEach,  expect } from 'vitest';
+
+
 import {app} from '../src/index.js'
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 dotenv.config()
+
+
 
 
 import * as fetchController from '../src/controllers/fetch-controller.js';
@@ -10,9 +15,9 @@ import * as submitController from '../src/controllers/submit-controller.js';
 import * as authController from '../src/controllers/auth-controller.js';
 import * as authMiddleware from '../src/middleware/authMiddleware.js';
 
-import jwt from 'jsonwebtoken';
-const JWT_SECRET = process.env.JWT_SECRET;
-const mockUserPayload = { _id: '681afd4095336fa277cac5e4', email: 'test@gamil.com' };
+
+const JWT_SECRET = process.env.JWT_SECRET as string;
+const mockUserPayload = { _id:'681afd4095336fa277cac5e4', email: 'test@gamil.com', password: 'Test12345!' };
 const mockToken = jwt.sign(mockUserPayload, JWT_SECRET, { expiresIn: '1h' });
 const mockWord = {
 
@@ -51,7 +56,7 @@ describe('Express API Endpoints', () => {
 
         //expect(response.status).toBe(200);
 
-        expect(response.body).toEqual({});
+    expect(response.body).toEqual({ valid: false });
         // todo fix once you move routes
         expect(spy).toHaveBeenCalledTimes(0);
     });
@@ -75,17 +80,15 @@ describe('Express API Endpoints', () => {
     });
 
     it('should return 200 when logging in on POST /auth/login', async () => {
-     //   const spy = vi.spyOn(authController, 'loginController');
 
-       const response = await request(app).post('/auth/login').send({
-            username: 'test@gamil.com',
-            password: 'Test12345!',
-        });
+        ;
 
-        expect(response.status).toBe(404);
-        //expect(response.body).toHaveProperty('token', 'mock-token');
+       const response = await request(app).post('/auth/login').send(mockUserPayload);
 
-      //  expect(spy).toHaveBeenCalledTimes(1);
+        expect(response.status).toBe(200);
+        expect(response.body).toHaveProperty('token');
+
+
     });
 
     it('should return 201 when registering on POST /auth/register', async () => {

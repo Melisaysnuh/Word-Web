@@ -53,8 +53,7 @@ export const registerController = async (req: Request, res: Response): Promise<v
            jwtSecret,
            { expiresIn: '48h' }
        );
-       console.log(`user ${user.firstName} registered`)
-       res.status(201).json({
+             res.status(201).json({
            user: user,
            message: `${user.firstName} was successfully registered`,
            token

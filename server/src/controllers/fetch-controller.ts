@@ -2,10 +2,8 @@ import { Request, Response } from 'express';
 import { fetchListModel } from '../Models/ListModel.js';
 
 export async function loadLettersController (req: Request, res:Response) {
-console.log('in controller')
     try {
         const list = await fetchListModel();
-        console.log(list)
         if (list) {
 
             res.status(200).json({
