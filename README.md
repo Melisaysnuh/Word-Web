@@ -1,7 +1,10 @@
 
 
 # Word Web
-![ScreenShot](/client/public/Screenshot.png)
+Play Word Web now!
+https://word-web-fe-production.up.railway.app/
+
+[![ScreenShot](/client/public/Screenshot.png)](https://word-web-fe-production.up.railway.app/)
 
 
 **Description**:
