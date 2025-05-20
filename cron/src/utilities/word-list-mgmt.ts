@@ -7,11 +7,12 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // all functions that interact with word list
+// done: converted to python
 export const getArray = async (num: number, num2: number) => {
     const mainWordArray = fs.readFileSync(WORDS, 'utf8').split('\n').filter((word: string) => word.length >= num && word.length <= num2);
     return mainWordArray
 }
-
+// done: converted to Python
 export const validateWord = async (word: string): Promise<boolean | null> => {
     const url = process.env.WEBSTER_API_URL;
     if (url) {
@@ -56,6 +57,7 @@ export const validateWord = async (word: string): Promise<boolean | null> => {
 
 
 }
+// done: converted to python
 export const removeInvalidWord = async (wordToRemove: string): Promise<void> => {
     try {
 
@@ -76,6 +78,7 @@ export const removeInvalidWord = async (wordToRemove: string): Promise<void> => 
 
 
 // Recursive function to select a random word, and check that it has 7 unique letters and is valid. Makes entire service async
+//done: converted to python
 export async function getRandomWord () {
     try {
         const longArray = await getArray(7, 7);
@@ -97,6 +100,7 @@ export async function getRandomWord () {
     }
 }
 
+// done: converted to python
 export async function validWordArray (list: string[]) {
     try {
         const validWords = [];

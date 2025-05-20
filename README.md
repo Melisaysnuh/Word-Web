@@ -8,10 +8,10 @@
  Word Web is a free daily word game where the goal is to find anagrams for a group of seven letters.
 
  *How to play:*
-Find English words with at least 4 letters that are anagrams. Each day will have at least 1 pangram, or word with all seven letters. All words in the list must have the center letter.
+Find English words with at least 4 letters that are anagrams. Each day will have at least 1 isogram, or word with all seven letters. All words in the list must have the center letter.
 
 *Scoring*
-Four-letter words are worth one point each, five-or-more-letter words are worth one point per letter. Any pangram is worth its letters + seven bonus points.
+Four-letter words are worth one point each, five-or-more-letter words are worth one point per letter. Any isogram is worth its letters + seven bonus points.
 
 
 
@@ -28,7 +28,7 @@ Before setting up the project, ensure you have the following installed:
 # Project Name
 
 **Description**:
-Word web is a game for word lovers and puzzle-heads. See how many different words you can make using a 7-letter Pangram. Get extra points if you guess the pangram, and become a BLACK WIDOW!
+Word web is a game for word lovers and puzzle-heads. See how many different words you can make using a 7-letter isogram. Get extra points if you guess the isogram, and become a BLACK WIDOW!
 
 ---
 

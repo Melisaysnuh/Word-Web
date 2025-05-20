@@ -156,7 +156,7 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, set
                         <div className="scroll-container">
                             <ul>
                                 {paginatedWords.map((obj: WordObj) => (
-                                    <li className={obj.pangram ? 'pangram' : 'normal'} key={obj.word}>
+                                    <li className={obj.isogram ? 'isogram' : 'normal'} key={obj.word}>
                                         {obj.word}
                                     </li>
                                 ))}

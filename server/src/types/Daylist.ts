@@ -4,7 +4,7 @@ export interface Daylist {
 
         daylist_id: string;
         _id?: string;
-        pangrams: string[];
+        isograms: string[];
         centerLetter: string;
         letters: string[];
         validWords: WordObj[];

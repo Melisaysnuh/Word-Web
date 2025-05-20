@@ -1,17 +1,18 @@
-export function calculatePoints (thisWord: string, pangramsList: string[]) {
+// DONE: converted to python
+export function calculatePoints (thisWord: string, isogramsList: string[]) {
     if (thisWord.length < 5) {
         return {
             word: thisWord,
             points: 1,
-            pangram: false
+            isogram: false
 
         }
     }
-    else if (pangramsList.includes(thisWord)) {
+    else if (isogramsList.includes(thisWord)) {
         return {
             word: thisWord,
             points: thisWord.length + 7,
-            pangram: true
+            isogram: true
 
         }
     }
@@ -19,12 +20,12 @@ export function calculatePoints (thisWord: string, pangramsList: string[]) {
         return {
             word: thisWord,
             points: thisWord.length,
-            pangram: false
+            isogram: false
 
         }
     }
 }
-
+// DONE: converted to python
 export function centerFilter (list: string[], letter: string): string[] {
     const finalAnagrams: string[] = [];
     list.forEach((word: string) => {
@@ -35,14 +36,16 @@ export function centerFilter (list: string[], letter: string): string[] {
     return finalAnagrams;
 
 }
+
+// DONE: converted to python
 export function generateAnagrams (word: string, array: string[]) {
     const regex1 = new RegExp(`^[${word}]+$`);
     const anagrams: string[] = array.filter((word: string) => regex1.test(word));
     return anagrams;
 
 }
-
-export async function getCenter (validWordAnagrams: string[], uniqueArray: string[]) {
+// DONE: converted to python
+export function getCenter (validWordAnagrams: string[], uniqueArray: string[]) {
     let center = '';
     for (let i = 0; i < uniqueArray.length; i++) {
         center = uniqueArray[i];
@@ -55,7 +58,7 @@ export async function getCenter (validWordAnagrams: string[], uniqueArray: strin
     return center;
 }
 
-export function pangrams (wordList: string[], letterList: string[]) {
+export function isograms (wordList: string[], letterList: string[]) {
     const reg1 = `(?=.*`;
     const reg2 = `)`;
     const reg3 = letterList.join('')
@@ -63,6 +66,6 @@ export function pangrams (wordList: string[], letterList: string[]) {
 
 
     const regex = new RegExp(`^${regconstruct}[${reg3}]+$`)
-    const pangrams: string[] = wordList.filter((word: string) => regex.test(word));
-    return pangrams;
+    const isograms: string[] = wordList.filter((word: string) => regex.test(word));
+    return isograms;
 }

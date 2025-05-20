@@ -5,13 +5,13 @@ import { dayModel } from './index.js';
 export interface WordObj {
     word: string;
     points: number;
-    pangram: boolean;
+    isogram: boolean;
 }
 
 export interface Daylist {
     daylist_id: string;
     _id?: string;
-    pangrams: string[];
+    isograms: string[];
     centerLetter: string;
     letters: string[];
     validWords: WordObj[];

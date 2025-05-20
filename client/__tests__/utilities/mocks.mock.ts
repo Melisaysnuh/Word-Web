@@ -39,25 +39,25 @@ export const wordListMock = [
     {
         "word": "door",
         "points": 1,
-        "pangram": false
+        "isogram": false
     },
     {
         "word": "doth",
         "points": 1,
-        "pangram": false
+        "isogram": false
     },
     {
         "word": "dough",
         "points": 5,
-        "pangram": false
+        "isogram": false
     },
     {
         "word": "dour",
         "points": 1,
-        "pangram": false
+        "isogram": false
     },
     {
         "word": "drought",
         "points": 14,
-        "pangram": true
+        "isogram": true
     }]

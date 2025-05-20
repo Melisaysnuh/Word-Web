@@ -39,11 +39,11 @@ export async function connectDB () {
 const daySchema = new Schema ({
     daylist_id: { type: String, unique: true },
     centerLetter: String,
-    pangrams: Array,
+    isograms: Array,
     totalPoints: Number,
     letters: Array,
     validWords: Array,
-    sessions: Array
+
 });
 
 export const dayModel = mongoose.model('word-web', daySchema);
