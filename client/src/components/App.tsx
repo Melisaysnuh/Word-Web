@@ -21,6 +21,7 @@ function App () {
 
   useEffect(() => {
     const todayId = format(new Date(), "yyyy_MM_dd");
+    console.log(`In app.tsx, today is ${todayId}`)
     const blankHistory = {
       daylist_id: todayId,
       guessedWords: [],

@@ -20,6 +20,7 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal, user, todayHistory }
     const todayFormatted = format(new Date(), "yyyy_MM_dd");
 
     useEffect(() => {
+        console.log(`In user-component.tsx, formattedDate is ${formattedDate} and todayFormatted is ${todayFormatted}`)
         if (user && user.history) {
             const historyForSelectedDate = user.history.find(
                 (h) => h.daylist_id === formattedDate
