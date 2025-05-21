@@ -5,7 +5,7 @@ import { ParsedQs } from 'qs';
 export default function registerRoute (registerController: RequestHandler<{}, any, any, ParsedQs, Record<string, any>>) {
     const router = express.Router();
 
-    router.post('/r', registerController);
+    router.post('/', registerController);
     return router;
 };
 
