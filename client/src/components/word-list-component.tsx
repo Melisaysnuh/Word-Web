@@ -4,6 +4,7 @@ import {  useEffect, useState, useMemo } from 'react';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
 import { HistoryI, UserI } from '../types/User';
+import gsap from 'gsap';
 
 interface WordListComponentProps {
 todayHistory: HistoryI | null;
@@ -29,7 +30,11 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, set
     const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
     const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
     const verticalPoints = "20,8 20,58 20,108 20,158 20,208 20,258 20,308 20,358 20,408";
-    const horizontalPoints = "8,20 58,20 108,20 158,20 208,20 258,20 308,20 358,20 408,20";
+    const dotSpacing = 40; // adjust this value for more or less space between dots
+    const horizontalPoints = spiderLevels
+        .map((_, i) => `${i * dotSpacing},20`)
+        .join(" ");
+
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPoints, setTotalPoints] = useState(0);
 
@@ -98,6 +103,12 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, set
         if (spider) {
             setSpiderClass(spider.className);
             setSpiderName(spider.name);
+            if (spiderName === 'Black Widow') {
+
+
+                    gsap.fromTo(".spiderweb", { opacity: 0 }, { opacity: 1, duration: 1 });
+
+            }
             setUser((prevUser) => {
                 if (!prevUser || !prevUser.history) return prevUser;
 
@@ -141,15 +152,18 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, set
                 <div className='statusmess'><span className='status'>Status: </span>{spiderName}</div>
                 <div id='word-list-container'>
                     <div className='progress-bar-container'>
-                        <img alt='progress spider' id='prog-spider' className={spiderClass} src='./placeholder-spider.svg'></img>
-                        <svg id='prog-line' height={isHorizontal ? 50 : 450} width={isHorizontal ? 300 : 50}>
-                            <polyline className="dotted-line" points={isHorizontal ? horizontalPoints : verticalPoints} />
-                            <marker id="circle-marker" markerWidth="6" markerHeight="6" refX="3" refY="3">
-                                <circle className="foreground" cx="3" cy="3" r="2" />
-                            </marker>
-                        </svg>
-                        <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
+                        <img alt='progress spider' id='prog-spider' className={spiderClass} src='./placeholder-spider.svg' />
+                        <div className="spider-line-wrapper">
+                            <svg id='prog-line' height={isHorizontal ? 50 : 450} width={isHorizontal ? '100%' : 50}>
+                                <polyline className="dotted-line" points={isHorizontal ? horizontalPoints : verticalPoints} />
+                                <marker id="circle-marker" markerWidth={isHorizontal ? 4 : 6} markerHeight={isHorizontal ? 4 : 6} refX={isHorizontal ? 2 : 3} refY={isHorizontal ? 2 : 3}>
+                                    <circle className="foreground" cx={isHorizontal ? 2 : 3} cy={isHorizontal ? 2 : 3} r={isHorizontal ? 1 : 2} />
+                                </marker>
+                            </svg>
+                            <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
+                        </div>
                     </div>
+
 
                     <div id='word-list'>
                         {currentPage !== 0 ? <button className="scroll-btn left" onClick={prevPage} disabled={currentPage === 0}>◀</button> : null}

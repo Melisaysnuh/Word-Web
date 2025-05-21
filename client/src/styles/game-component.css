@@ -184,20 +184,44 @@ align-items: center;
 
 
 .block {
-  width: 95%;
-    background: rgba(24, 10, 55, 0);
+  width: 90vw;
+  max-height: 460px;
+
+  border-radius: 20px;
+  overflow: hidden;
+
 
   }
 
+  .message {
+
+    font-size: 0.8em;
+    height: 1.5vh;
+    margin: 5% auto;
+
+  }
+  .fail, .pass {
+    visibility: visible;
+    font-size: 1rem;
+    font-family: 'Nunito';
+
+  }
+  .pass {
+     color: #b3aaff;
+    font-weight:400;
+  }
+
+
+
 #game-container {
-  margin-top: 20px;
-  margin-bottom: 10px;
-  height: 65%;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  height: 70vh;
 
 }
 #spiderweb {
 position: absolute;
-margin-top: 35%;
+margin-top: 8px;
   width: 100%;
   max-width: 600px;
   z-index: 1;
@@ -205,21 +229,18 @@ margin-top: 35%;
 
 
 }
-#button-holder {
-  width: 100%;
-}
+
 
 .text-input {
   width: fit-content;
-
   max-width: 100%;
-  height: 10%;
+  height: 60px;
   text-align: center;
   z-index: 3;
  border: 0;
   font-family: 'Nunito';
   font-weight:400;
-  font-size: 2.6rem;
+  font-size: 2rem;
   background: none;
   color: orange;
   border: none;
@@ -228,6 +249,34 @@ margin-top: 35%;
 
 
 }
+.gameholder {
+  width: 100%;
+    z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(18, 16px);
+  grid-template-rows: repeat(36, 8px);
+  justify-content: center;
+align-items: center;
+}
 
+.hex-button {
+width: 75px;
+height: 75px;
+  background-color: #e7e7e7;
+  color: black;
+  font-weight: 700;
+ clip-path: polygon(
+    25% 6.7%,
+    75% 6.7%,
+    100% 50%,
+    75% 93.3%,
+    25% 93.3%,
+    0% 50%
+  );
+  font-size: 1.8em;
+  text-align: center;
+  font-family: 'Averia Libre';
+
+}
 
 }
