@@ -31,8 +31,8 @@ export function createApp (args: any) {
 
     const allowedOrigins = [
         'https://word-web-fe-production.up.railway.app',
-        'http://wordwebs.de',
-        'https://wordwebs.de',
+        'http://www.wordwebs.de',
+        'https://www.wordwebs.de',
         'http://localhost:5173' // if your domain works over https too
     ];
 
