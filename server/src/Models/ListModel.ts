@@ -1,11 +1,12 @@
 import { dayModel } from "./index.js"
 import { Daylist } from "../types/Daylist.js";
 import { format } from 'date-fns';
-const now = format(new Date(), "yyyy_MM_dd");
+
 
 
 
 export async function fetchListModel () {
+    const now = format(new Date(), "yyyy_MM_dd");
     try {
         const list: Daylist | null = await dayModel.findOne({
             daylist_id: now
