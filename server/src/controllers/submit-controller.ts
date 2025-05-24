@@ -111,10 +111,12 @@ const {_id} = decoded
             const dayEntry = user.history.find(entry => entry.daylist_id === currentDaylistId);
 
             if (!dayEntry) {
+
+                const fallback = 4;
                 const dayEntry: HistoryI = {
                     daylist_id: now,
                     guessedWords: [validatedWord],
-                    totalUserPoints: validatedWord.points,
+                    totalUserPoints: validatedWord.points || fallback,
                     level: 'Daddy Long-Legs'
                 };
                 user.history.push(dayEntry);
@@ -124,8 +126,9 @@ const {_id} = decoded
                 const alreadyGuessed = dayEntry.guessedWords.some(w => w.word === validatedWord.word);
 
                 if (!alreadyGuessed) {
+                    const fallback = 4;
                     dayEntry.guessedWords.push(validatedWord);
-                    dayEntry.totalUserPoints += validatedWord.points;
+                    dayEntry.totalUserPoints += validatedWord.points || fallback;
                 }
             }
 
