@@ -3,10 +3,12 @@ import '../styles/word-list-component.css';
 import {  useEffect, useState, useMemo } from 'react';
 import { calculateTotalPoints } from '../utilities/points-utility';
 import { getDailyListService } from '../services/list-service';
+import { HistoryI, UserI } from '../types/User';
+import gsap from 'gsap';
 
 interface WordListComponentProps {
-    localGuessedWords: WordObj[];
-    localPoints: number;
+todayHistory: HistoryI | null;
+setUser: React.Dispatch<React.SetStateAction<UserI | null>>;
 }
 const spiderLevels = [
     { threshold: 0.01, className: 'prog-spider-class-0', name: 'Daddy Long-Legs' },
@@ -23,12 +25,16 @@ const spiderLevels = [
 
 
 
-const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords, localPoints }) => {
+const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, setUser}) => {
     const [spiderClass, setSpiderClass] = useState(spiderLevels[0].className);
     const [spiderName, setSpiderName] = useState(spiderLevels[0].name);
     const [isHorizontal, setIsHorizontal] = useState(window.innerWidth <= 480);
     const verticalPoints = "20,8 20,58 20,108 20,158 20,208 20,258 20,308 20,358 20,408";
-    const horizontalPoints = "8,20 58,20 108,20 158,20 208,20 258,20 308,20 358,20 408,20";
+    const dotSpacing = 40; // adjust this value for more or less space between dots
+    const horizontalPoints = spiderLevels
+        .map((_, i) => `${i * dotSpacing},20`)
+        .join(" ");
+
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPoints, setTotalPoints] = useState(0);
 
@@ -36,13 +42,13 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
     const pageSize = isHorizontal ? 18 : 60;
 
     const paginatedWords = useMemo(() => {
-        if (!localGuessedWords) return [];
+        if (!todayHistory) return [];
         const start = currentPage * pageSize;
         const end = start + pageSize;
-        return localGuessedWords.slice(start, end).sort((a, b) => a.word.localeCompare(b.word));
-    }, [localGuessedWords, currentPage, pageSize]);
+        return todayHistory.guessedWords.slice(start, end).sort((a, b) => a.word.localeCompare(b.word));
+    }, [todayHistory, currentPage, pageSize]);
 
-    const totalPages = localGuessedWords ? Math.ceil(localGuessedWords.length / pageSize) : 0;
+    const totalPages = todayHistory?.guessedWords ? Math.ceil(todayHistory.guessedWords.length / pageSize) : 0;
 
     const nextPage = () => {
         setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1));
@@ -87,8 +93,8 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
     };
 
     const guessedWordPoints = useMemo(() => {
-        return localGuessedWords ? calculateTotalPoints(localGuessedWords) : 0;
-    }, [localGuessedWords]);
+        return todayHistory?.guessedWords ? calculateTotalPoints(todayHistory.guessedWords) : 0;
+    }, [todayHistory?.guessedWords]);
 
     const updateSpiderClass = (points: number, total: number) => {
 
@@ -97,6 +103,19 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
         if (spider) {
             setSpiderClass(spider.className);
             setSpiderName(spider.name);
+            if (spiderName === 'Black Widow') {
+
+
+                    gsap.fromTo(".spiderweb", { opacity: 0 }, { opacity: 1, duration: 1 });
+
+            }
+            setUser((prevUser) => {
+                if (!prevUser || !prevUser.history) return prevUser;
+
+
+
+                return { ...prevUser, level: spider.name };
+            });
         }
     };
 
@@ -113,14 +132,15 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
     }, []);
 
     useEffect(() => {
-        if (localGuessedWords && localPoints) {
-            updateSpiderClass(localPoints, totalPoints);
+        if (todayHistory?.guessedWords && todayHistory.totalUserPoints) {
+            updateSpiderClass(todayHistory.totalUserPoints, totalPoints);
         }
-    }, [localGuessedWords, localPoints, totalPoints]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [todayHistory, totalPoints, spiderClass]);
 
     useEffect(() => {
         setCurrentPage(0);
-    }, [localGuessedWords, isHorizontal]);
+    }, [todayHistory?.guessedWords, isHorizontal]);
 
 
 
@@ -132,23 +152,34 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ localGuessedWords
                 <div className='statusmess'><span className='status'>Status: </span>{spiderName}</div>
                 <div id='word-list-container'>
                     <div className='progress-bar-container'>
-                        <img alt='progress spider' id='prog-spider' className={spiderClass} src='./placeholder-spider.svg'></img>
-                        <svg id='prog-line' height={isHorizontal ? 50 : 450} width={isHorizontal ? 300 : 50}>
-                            <polyline className="dotted-line" points={isHorizontal ? horizontalPoints : verticalPoints} />
-                            <marker id="circle-marker" markerWidth="6" markerHeight="6" refX="3" refY="3">
-                                <circle className="foreground" cx="3" cy="3" r="2" />
-                            </marker>
-                        </svg>
-                        <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
+                        <img alt='progress spider' id='prog-spider' className={spiderClass} src='./placeholder-spider.svg' />
+                        <div className="spider-line-wrapper">
+                            <svg id='prog-line' height={isHorizontal ? 50 : 450} width={isHorizontal ? '100%' : 50}>
+                                <polyline className="dotted-line" points={isHorizontal ? horizontalPoints : verticalPoints} />
+                                <marker id="circle-marker" markerWidth={isHorizontal ? 4 : 6} markerHeight={isHorizontal ? 4 : 6} refX={isHorizontal ? 2 : 3} refY={isHorizontal ? 2 : 3}>
+                                    <circle className="foreground" cx={isHorizontal ? 2 : 3} cy={isHorizontal ? 2 : 3} r={isHorizontal ? 1 : 2} />
+                                </marker>
+                            </svg>
+                            <span className='pointspan'>{guessedWordPoints} of {totalPoints} points</span>
+                        </div>
                     </div>
+
 
                     <div id='word-list'>
                         {currentPage !== 0 ? <button className="scroll-btn left" onClick={prevPage} disabled={currentPage === 0}>◀</button> : null}
                         <div className="scroll-container">
                             <ul>
                                 {paginatedWords.map((obj: WordObj) => (
-                                    <li className={obj.pangram ? 'pangram' : 'normal'} key={obj.word}>
-                                        {obj.word}
+                                    <li
+                                        className={obj.isogram ? 'isogram' : 'normal'}
+                                        key={obj.word}
+                                    >
+                                        <div className="tooltip">
+                                            {obj.word}
+                                            {obj.definition && (
+                                                <span className="tooltiptext">{obj.definition}</span>
+                                            )}
+                                        </div>
                                     </li>
                                 ))}
                             </ul>

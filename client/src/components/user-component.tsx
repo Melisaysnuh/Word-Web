@@ -7,23 +7,27 @@ import { HistoryI, UserI } from '../types/User';
 interface UserProps {
     setUserModal: (view: boolean) => void;
     user: UserI | null;
+    todayHistory: HistoryI | null
 }
 
-const UserComponent: React.FC<UserProps> = ({ setUserModal, user }) => {
+const UserComponent: React.FC<UserProps> = ({ setUserModal, user, todayHistory }) => {
 
     const [message, setMessage] = useState("");
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedHistory, setSelectedHistory] = useState<HistoryI>(); // Store the history for the selected date
+    const [selectedHistory, setSelectedHistory] = useState<HistoryI | null>(todayHistory);
 
     const formattedDate = format(selectedDate, "yyyy_MM_dd");
     const todayFormatted = format(new Date(), "yyyy_MM_dd");
 
     useEffect(() => {
+        console.log(`In user-component.tsx, formattedDate is ${formattedDate} and todayFormatted is ${todayFormatted}`)
         if (user && user.history) {
             const historyForSelectedDate = user.history.find(
                 (h) => h.daylist_id === formattedDate
             );
-            setSelectedHistory(historyForSelectedDate); // Store the selected day's history
+            if (historyForSelectedDate) {
+                setSelectedHistory(historyForSelectedDate);
+            }
         }
     }, [selectedDate, formattedDate, user]); // Dependencies: update when selectedDate, user, or formattedDate changes
 

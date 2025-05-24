@@ -1,5 +1,5 @@
 import {Daylist} from '../storeListModel.js'
-import { generateAnagrams, getCenter, centerFilter, pangrams, calculatePoints } from './utilities.js';
+import { generateAnagrams, getCenter, centerFilter, isograms, calculatePoints } from './utilities.js';
 import { getArray, getRandomWord, validWordArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';
 const now = format(new Date(), "yyyy_MM_dd");
@@ -13,6 +13,7 @@ export default async function finalConstructor (): Promise<Daylist | null> {
         if (word) {
             const letterArray = word.split('');
             const uniqueArray = letterArray.filter((value, index, array) => array.indexOf(value) === index);
+
             const anagrams = generateAnagrams(word, mainWordArray);
             const validWordAnagrams = await validWordArray(anagrams);
             if (validWordAnagrams) {
@@ -21,14 +22,14 @@ export default async function finalConstructor (): Promise<Daylist | null> {
 
                     const newAnagrams = centerFilter(validWordAnagrams, center);
                     if (newAnagrams) {
-                        const todaysPangrams = pangrams(newAnagrams, uniqueArray);
+                        const todaysisograms = isograms(newAnagrams, uniqueArray);
                         const anagramObjList = newAnagrams.map((word: string) => {
-                            return calculatePoints(word, todaysPangrams)
+                            return calculatePoints(word, todaysisograms)
                         });
                         return {
                             daylist_id: now,
                             centerLetter: center,
-                            pangrams: todaysPangrams,
+                            isograms: todaysisograms,
                             letters: uniqueArray,
                             validWords: anagramObjList,
 

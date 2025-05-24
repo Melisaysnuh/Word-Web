@@ -162195,10 +162195,10 @@ panging
 pangless
 pangolin
 pangolins
-pangram
-pangrammatist
-pangrammatists
-pangrams
+isogram
+isogrammatist
+isogrammatists
+isograms
 pangs
 panhandle
 panhandled

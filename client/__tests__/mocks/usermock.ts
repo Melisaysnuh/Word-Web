@@ -9,7 +9,7 @@ export const mockUser: UserI = {
         {
             daylist_id: '2025_03_19',
             guessedWords: [
-                { word: 'door', points: 1, pangram: false }
+                { word: 'door', points: 1, isogram: false }
             ],
             totalUserPoints: 1,
             level: 'Daddy Long-Legs',
@@ -17,7 +17,7 @@ export const mockUser: UserI = {
         {
             daylist_id: '2025_03_20',
             guessedWords: [
-                { word: 'schlump', points: 14, pangram: true }
+                { word: 'schlump', points: 14, isogram: true }
             ],
             totalUserPoints: 14,
             level: 'Daddy Long-Legs',

@@ -4,7 +4,7 @@ export const mockApiResponse = {
     },
     "id": "2025_03_20",
         "centerLetter": "s",
-            "pangrams": [
+            "isograms": [
                 "schlump"
             ],
                 "letters": [
@@ -20,122 +20,122 @@ export const mockApiResponse = {
                         {
                             "word": "cusp",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "cuss",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "hush",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "lush",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "mumps",
                             "points": 5,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "mush",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "muss",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "plus",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "plush",
                             "points": 5,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "push",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "puss",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "schlump",
                             "points": 14,
-                            "pangram": true
+                            "isogram": true
                         },
                         {
                             "word": "schuss",
                             "points": 6,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "scull",
                             "points": 5,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "scum",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "scup",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "shul",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "shush",
                             "points": 5,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "slum",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "slump",
                             "points": 5,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "slush",
                             "points": 5,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "such",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "sump",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         },
                         {
                             "word": "suss",
                             "points": 1,
-                            "pangram": false
+                            "isogram": false
                         }
                     ],
                         "sessions": [],

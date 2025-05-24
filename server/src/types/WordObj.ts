@@ -1,7 +1,8 @@
 export interface WordObj {
 
     word: string;
-    points: number;
-    pangram: boolean;
+    points?: number;
+    isogram?: boolean;
+    definition?: string[] | null
 
 }
