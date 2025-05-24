@@ -6,6 +6,7 @@ export interface Daylist {
         _id?: string;
         isograms: string[];
         centerLetter: string;
+        total_points?: Number | null;
         letters: string[];
         validWords: WordObj[];
 

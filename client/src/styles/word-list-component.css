@@ -217,8 +217,8 @@ align-items: center;
 }
 /* Horizontal layout for spider levels */
 .prog-spider-class-0 { left: 0%; top: auto; bottom: auto; }
-.prog-spider-class-1 { left: 10%; top: auto; bottom: auto; }
-.prog-spider-class-2 { left: 20%; top: auto; bottom: auto; }
+.prog-spider-class-1 { left: 9%; top: auto; bottom: auto; }
+.prog-spider-class-2 { left: 18%; top: auto; bottom: auto; }
 .prog-spider-class-3 { left: 30%; top: auto; bottom: auto; }
 .prog-spider-class-4 { left: 40%; top: auto; bottom: auto; }
 .prog-spider-class-5 { left: 50%; top: auto; bottom: auto; }
@@ -257,4 +257,32 @@ align-items: center;
     font-size: 0.8rem;
 
   }
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: help;
+}
+
+.tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* adjust depending on layout */
+  left: 50%;
+  margin-left: -100px; /* half of width to center */
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.85rem;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
 }
