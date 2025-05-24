@@ -37,6 +37,12 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, set
 
     const [currentPage, setCurrentPage] = useState(0);
     const [totalPoints, setTotalPoints] = useState(0);
+    const [activeWord, setActiveWord] = useState<string | null>(null);
+
+    const handleWordClick = (word: string) => {
+        setActiveWord((prev) => (prev === word ? null : word));
+    };
+
 
 
     const pageSize = isHorizontal ? 18 : 60;
@@ -173,11 +179,14 @@ const WordListComponent: React.FC<WordListComponentProps> = ({ todayHistory, set
                                     <li
                                         className={obj.isogram ? 'isogram' : 'normal'}
                                         key={obj.word}
+                                        onClick={() => handleWordClick(obj.word)}
                                     >
-                                        <div className="tooltip">
+                                        <div className="word-container">
                                             {obj.word}
-                                            {obj.definition && (
-                                                <span className="tooltiptext">{obj.definition}</span>
+                                            {activeWord === obj.word && obj.definition && (
+                                                <div className="mobile-definition">
+                                                    {obj.definition}
+                                                </div>
                                             )}
                                         </div>
                                     </li>

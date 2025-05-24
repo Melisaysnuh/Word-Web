@@ -286,3 +286,19 @@ align-items: center;
   visibility: visible;
   opacity: 1;
 }
+
+.word-container {
+  position: relative;
+  display: inline-block;
+}
+
+.mobile-definition {
+  margin-top: 4px;
+  padding: 6px 10px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  max-width: 220px;
+  word-wrap: break-word;
+}
