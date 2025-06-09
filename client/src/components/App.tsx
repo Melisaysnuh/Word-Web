@@ -4,10 +4,11 @@ import WordListComponent from './word-list-component'
 import RegisterComponent from './register-component'
 import LoginComponent from './login-component'
 import UserComponent from './user-component'
-import { logout, isTokenExpired } from '../services/auth-service'
+import { logout, isTokenExpired, getStoredUser, refreshUserData } from '../services/auth-service'
 import {  useEffect, useState } from 'react'
 import { HistoryI, UserI } from '../types/User'
 import { format} from 'date-fns';
+import WelcomeComponent from './welcome-component'
 
 
 
@@ -18,42 +19,48 @@ function App () {
   const [registerModal, setRegisterModal] = useState<boolean>(false);
   const [userModal, setUserModal] = useState<boolean>(false);
   const [todayHistory, setTodayHistory] = useState<null | HistoryI>(null);
+  const [welcomeModal, setWelcomeModal]= useState<boolean>()
 
   useEffect(() => {
+    const storedUser = getStoredUser();
+
+    if (storedUser && !isTokenExpired()) {
+      setUser(storedUser);
+      setWelcomeModal(false)
+    } else {
+      logout(); // Clear any expired/invalid tokens
+      setLoginModal(true);
+      setWelcomeModal(true)
+
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!user) return;
+
     const todayId = format(new Date(), "yyyy_II");
-    console.log(`In app.tsx, today is ${todayId}`)
-    const blankHistory = {
+    const blankHistory: HistoryI = {
       daylist_id: todayId,
       guessedWords: [],
       totalUserPoints: 0,
-      level: 'Daddy Long-Legs'
+      level: 'Daddy Long-Legs',
+    };
+
+    const existing = user.history?.find(h => h.daylist_id === todayId);
+    if (existing) {
+      setTodayHistory(existing);
+    } else {
+      const updatedUser = {
+        ...user,
+        history: [...(user.history || []), blankHistory],
+      };
+      // where should this go logically to sync?
+      refreshUserData()
+      setUser(updatedUser);
+      setWelcomeModal(false)
+      setTodayHistory(blankHistory);
     }
-    if (!user || isTokenExpired()) {
-      handleLogOut();
-      setLoginModal(true);
-      setTodayHistory(blankHistory)
-      }
-      else {
-        if (user.history) {
-          const existing: HistoryI | undefined = user.history.find(h => h.daylist_id === todayId);
-          if (!existing || existing === undefined) {
-            const updatedUser = {
-              ...user,
-              history: [...user.history, blankHistory]
-            };
-            setUser(updatedUser);
-            setTodayHistory(blankHistory)
-          }
-          else  {
-            const existing = user.history.find(h => h.daylist_id === todayId);
-            const today = existing as HistoryI
-            setTodayHistory(today);
-          }
-
-
-      }
-  }
-}, [user]);
+  }, [user]);
 
   const handleLoginClick = () => {
     setLoginModal(true)
@@ -64,6 +71,8 @@ function App () {
   const handleLogOut = () => {
     logout();
     setUser(null)
+    setTodayHistory(null)
+
 
   }
   const handleUserToggle =()=> {
@@ -78,6 +87,10 @@ function App () {
  />}
       {userModal && <UserComponent user={user} todayHistory={todayHistory}
       setUserModal={setUserModal}
+
+ />}
+      {welcomeModal && <WelcomeComponent
+      setWelcomeModal={setWelcomeModal}
 
  />}
       {loginModal && <LoginComponent setUser={setUser}

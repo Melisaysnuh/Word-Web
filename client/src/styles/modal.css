@@ -14,6 +14,17 @@ min-height: 359px;
   border-radius: 20px;
 
 }
+.welcome-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+
+  .p {
+    font-family: robo;
+  }
+}
 .modal-container {
   display: flex;
   flex-direction: column;
@@ -25,7 +36,7 @@ min-height: 359px;
   background: radial-gradient(#381d75, #180a37);
   min-width: 359px;
   max-width: 500px;
-  max-height: 400px;
+  max-height: automatic;
 min-height: 359px;
   border-radius: 20px;
 
@@ -52,7 +63,20 @@ input {
 
 
 }
-label, modal-title {
+p {
+  font-family: "nunito";
+}
+h2 {
+  font-family: 'Averia Libre';
+ font-size: 1.6rem;
+ text-shadow: 20%;
+ padding: 2%;
+ text-align: center;
+ width: 100%;
+ color: orange;
+ font-weight: 500;
+}
+label, h3, modal-title {
    font-family: 'Averia Libre';
   font-size: 1.1rem;
   text-shadow: 20%;
@@ -63,6 +87,7 @@ label, modal-title {
   font-weight: 500;
 }
 .btn {
+  font-family: "Averia Libre";
  position: relative;
  top: 0px;
  left: 40%;
@@ -74,7 +99,7 @@ label, modal-title {
   cursor: pointer; /* Mouse pointer on hover */
 }
 .modal-close-btn {
-
+  font-family: "Averia Libre";
   background-color: rgba(24, 10, 55, 0);
   border: none;
   color: orange;
