@@ -78,6 +78,9 @@ function App () {
   const handleUserToggle =()=> {
     setUserModal(!userModal)
   }
+  const handleWelcomeToggle =()=>{
+    setWelcomeModal(!welcomeModal)
+  }
 
   return (
     <>
@@ -97,6 +100,7 @@ function App () {
       setLoginModal={setLoginModal}
 />}  <div className='main-container'>
         <nav className='navigation'><img id="logo" src='/logo.svg' alt='word-web-logo' />
+        <button className='other-button' onClick={handleWelcomeToggle}>How to Play</button>
           {user ? <div onClick={handleUserToggle}>Hello, {user.firstName} <button
             className='other-button' data-testid='logOut' onClick={handleLogOut}>Log Out</button></div> : <div className='user-panel'><button className='other-button' data-testid='logIn'
             onClick={handleLoginClick}>Log in</button><button
