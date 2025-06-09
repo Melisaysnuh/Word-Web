@@ -16,8 +16,8 @@ const UserComponent: React.FC<UserProps> = ({ setUserModal, user, todayHistory }
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedHistory, setSelectedHistory] = useState<HistoryI | null>(todayHistory);
 
-    const formattedDate = format(selectedDate, "yyyy_MM_dd");
-    const todayFormatted = format(new Date(), "yyyy_MM_dd");
+    const formattedDate = format(selectedDate, "yyyy_II");
+    const todayFormatted = format(new Date(), "yyyy_II");
 
     useEffect(() => {
         console.log(`In user-component.tsx, formattedDate is ${formattedDate} and todayFormatted is ${todayFormatted}`)

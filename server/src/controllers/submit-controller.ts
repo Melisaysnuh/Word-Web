@@ -9,7 +9,7 @@ import SubmitWordResponse from '../types/SubmitWordResponse.js';
 import { dayModel } from '../Models/index.js';
 import { format } from 'date-fns';
 
-const now = format(new Date(), "yyyy_MM_dd");
+const now = format(new Date(), "yyyy_II");
 
 
 if (process.env.NODE_ENV !== 'production') {

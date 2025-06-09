@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 
 
 export async function fetchListModel () {
-    const now = format(new Date(), "yyyy_MM_dd");
+    const now = format(new Date(), "yyyy_II");
     try {
         const list: Daylist | null = await dayModel.findOne({
             daylist_id: now
