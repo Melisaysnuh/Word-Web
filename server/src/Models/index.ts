@@ -7,6 +7,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const url = process.env.DATABASE_URL;
+console.log(`url is ${url}`)
 
 export async function connectDB () {
    if (url) {

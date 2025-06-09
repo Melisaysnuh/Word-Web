@@ -2,7 +2,7 @@ import {Daylist} from '../storeListModel.js'
 import { generateAnagrams, getCenter, centerFilter, isograms, calculatePoints } from './utilities.js';
 import { getArray, getRandomWord, validWordArray } from './word-list-mgmt.js';
 import { format } from 'date-fns';
-const now = format(new Date(), "yyyy_MM_dd");
+const now = format(new Date(), "yyyy_II");
 
 
 // *CONSTRUCT OUR LIST AND EXPORT

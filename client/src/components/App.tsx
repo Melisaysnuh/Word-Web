@@ -20,7 +20,7 @@ function App () {
   const [todayHistory, setTodayHistory] = useState<null | HistoryI>(null);
 
   useEffect(() => {
-    const todayId = format(new Date(), "yyyy_MM_dd");
+    const todayId = format(new Date(), "yyyy_II");
     console.log(`In app.tsx, today is ${todayId}`)
     const blankHistory = {
       daylist_id: todayId,

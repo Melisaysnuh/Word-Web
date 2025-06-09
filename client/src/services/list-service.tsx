@@ -27,7 +27,7 @@ removeCachedListFromStorage()
 
 
 export const getDailyListService = async () => {
-    const now = format(new Date(), "yyyy_MM_dd").toString();
+    const now = format(new Date(), "yyyy_II").toString();
     console.log(`In list-service.tsx, now is ${now}`)
 
     const cachedDailyList = getCachedListFromStorage();
